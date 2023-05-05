@@ -225,61 +225,369 @@
             "nodes": [
                 {
                     "key": 0,
-                    "title": "Stretch Blow Molder",
-                    "status": "Success",
+                    "title": "Abschieber",
                     "attributes": [
                         {
                             "label": "Technical Availability",
-                            "value": "92,59%"
+                            "value": "%"
                         }
                     ]
                 },{
                     "key": 1,
-                    "title": "Filler",
-                    "status": "Warning",
+                    "title": "Füller",
                     "attributes": [
                         {
                             "label": "Technical Availability",
-                            "value": "81,81%"
+                            "value": "%"
                         }
                     ]
                 },{
                     "key": 2,
-                    "title": "Labeller",
-                    "status": "Error",
+                    "title": "Dosendeckelzufuhr",
                     "attributes": [
                         {
                             "label": "Technical Availability",
-                            "value": "59,06%"
+                            "value": "%"
                         }
                     ]
                 },{
                     "key": 3,
-                    "title": "Non-returnable Packer",
-                    "status": "Success",
+                    "title": "Variopac",
                     "attributes": [
                         {
                             "label": "Technical Availability",
-                            "value": "92,39%"
+                            "value": "%"
                         }
                     ]
                 },{
                     "key": 4,
-                    "title": "Palettizer",
-                    "status": "Success",
+                    "title": "Paker Packer",
                     "attributes": [
                         {
                             "label": "Technical Availability",
-                            "value": "94,14%"
+                            "value": "%"
                         }
                     ]
                 },
-            ],
+            ],{
+                    "key": 5,
+                    "title": "Belader",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "%"
+                        }
+                    ]
+                },{
+                    "key": 6,
+                    "title": "TBB-EG01",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "%"
+                        }
+                    ]
+                },{
+                    "key": 7,
+                    "title": "TBB-EG02",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "%"
+                        }
+                    ]
+                },{
+                    "key": 8,
+                    "title": "TBB-EG03",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "%"
+                        }
+                    ]
+                },{
+                    "key": 9,
+                    "title": "TBB-EG04",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "%"
+                        }
+                    ]
+                },{
+                    "key": 10,
+                    "title": "TBB-EG05",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "%"
+                        }
+                    ]
+                },{
+                    "key": 11,
+                    "title": "TBB-EG06",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "%"
+                        }
+                    ]
+                },
+                {
+                    "key": 12,
+                    "title": "TBB-EG07  ",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "%"
+                        }
+                    ]
+                },{
+                    "key": 13,
+                    "title": "TBG-EG01",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "%"
+                        }
+                    ]
+                },{
+                    "key": 14,
+                    "title": "TBG-EG02",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "%"
+                        }
+                    ]
+                },{
+                    "key": 15,
+                    "title": "TBG-EG03",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "%"
+                        }
+                    ]
+                },{
+                    "key": 16,
+                    "title": "TBG-EG04",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "%"
+                        }
+                    ]
+                },{
+                    "key": 17,
+                    "title": "TBP-IN-EG01",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "%"
+                        }
+                    ]
+                },{
+                    "key": 18,
+                    "title": "TBP-IN-EG02",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "%"
+                        }
+                    ]
+                },{
+                    "key": 19,
+                    "title": "TBP-OUT-EG01",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "%"
+                        }
+                    ]
+                },{
+                    "key": 20,
+                    "title": "TBP-OUT-EG02",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "%"
+                        }
+                    ]
+                },{
+                    "key": 21,
+                    "title": "TBP-OUT-EG03",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "%"
+                        }
+                    ]
+                },{
+                    "key": 22,
+                    "title": "TBP-OUT-EG04",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "%"
+                        }
+                    ]
+                },{
+                    "key": 23,
+                    "title": "TBP-OUT-EG05",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "%"
+                        }
+                    ]
+                },{
+                    "key": 24,
+                    "title": "TBP-OUT-EG06",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "%"
+                        }
+                    ]
+                },{
+                    "key": 25,
+                    "title": "Extern-Abgabe Palette Belader voll",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "%"
+                        }
+                    ]
+                },{
+                    "key": 26,
+                    "title": "Extern-Aufgabe Palette Belader leer",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "%"
+                        }
+                    ]
+                },{
+                    "key": 27,
+                    "title": "Extern-Aufgabe Vollpalette",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "%"
+                        }
+                    ]
+                },{
+                    "key": 28,
+                    "title": "Extern-Aufgabe Vollpalette",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "%"
+                        }
+                    ]
+                },{
+                    "key": 29,
+                    "title": "Extern-Abgabe Palette Belader defekt",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "%"
+                        }
+                    ]
+                },{
+                    "key": 30,
+                    "title": "EXTERN06",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "%"
+                        }
+                    ]
+                },{
+                    "key": 31,
+                    "title": "EXTERN07",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "%"
+                        }
+                    ]
+                },{
+                    "key": 32,
+                    "title": "EXTERN08",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "%"
+                        }
+                    ]
+                },{
+                    "key": 33,
+                    "title": "EXTERN09",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "%"
+                        }
+                    ]
+                },{
+                    "key": 34,
+                    "title": "EXTERN010",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "%"
+                        }
+                    ]
+                },{
+                    "key": 35,
+                    "title": "EXTERN011",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "%"
+                        }
+                    ]
+                },
+  
+          
             "lines": [
                 {"from": 0, "to": 1},
                 {"from": 1, "to": 2},
                 {"from": 2, "to": 3},
-                {"from": 3, "to": 4}
+                {"from": 3, "to": 4},
+                {"from": 4, "to": 5},
+                {"from": 5, "to": 6},
+                {"from": 6, "to": 7},
+                {"from": 7, "to": 8},
+                {"from": 8, "to": 9},
+                {"from": 9, "to": 10},
+                {"from": 10, "to": 11},
+                {"from": 11, "to": 12},
+                {"from": 12, "to": 13},
+                {"from": 13, "to": 14},
+                {"from": 14, "to": 15},
+                {"from": 15, "to": 16},
+                {"from": 16, "to": 17},
+                {"from": 17, "to": 18},
+                {"from": 18, "to": 19},
+                {"from": 19, "to": 20},
+                {"from": 20, "to": 21},
+                {"from": 21, "to": 22},
+                {"from": 22, "to": 23},
+                {"from": 23, "to": 24},
+                {"from": 24, "to": 25},
+                {"from": 25, "to": 26},
+                {"from": 26, "to": 27},
+                {"from": 27, "to": 28},
+                {"from": 28, "to": 29},
+                {"from": 29, "to": 30},
+                {"from": 30, "to": 31},
+                {"from": 31, "to": 32},
+                {"from": 32, "to": 33},
+                {"from": 33, "to": 34},
+                {"from": 34, "to": 35},
             ]
         }];
         var that_ = that;
@@ -296,7 +604,10 @@
             console.log("--First Time --");
         
             let div0 = document.createElement('div');
-            div0.innerHTML = '<?xml version="1.0"?><script id="oView_UpStream' + widgetName + '" name="oView_' + widgetName + '" type="sapui5/xmlview"><mvc:View controllerName="myView.Template" xmlns="sap.suite.ui.commons.networkgraph" xmlns:layout="sap.suite.ui.commons.networkgraph.layout" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns:l="sap.ui.layout"><l:FixFlex><l:fixContent><m:FlexBox fitContainer="true" renderType="Bare" wrap="Wrap"><m:items><Graph  enableWheelZoom="true"  nodes="{' + widgetName + '>/nodes}" lines="{' + widgetName + '>/lines}" groups="{' + widgetName + '>/groups}" id="graph_' + widgetName + '" orientation="LeftRight"> <layoutData> <m:FlexItemData/> </layoutData> <layoutAlgorithm> <layout:LayeredLayout mergeEdges="{settings>mergeEdges}" nodePlacement="{settings>nodePlacement}" nodeSpacing="{settings>nodeSpacing}" lineSpacingFactor="{settings>lineSpacingFactor}"> </layout:LayeredLayout> </layoutAlgorithm> <statuses><Status key="CustomKrones" title="Standard" backgroundColor="#0060AD" borderColor="sapUiContentShadowColor" hoverBorderColor="sapUiContentShadowColor"/></statuses> <nodes> <Node key="{' + widgetName +'>key}"  title="{' + widgetName + '>title}" icon="{' + widgetName + '>icon}" group="{' + widgetName + '>group}" attributes="{' + widgetName + '>attributes}"  shape="Box" status="{'+ widgetName + '>status}" x="{' + widgetName + '>x}"  y="{' + widgetName + '>y}" showDetailButton="false" width="auto" maxWidth="500"> <attributes> <ElementAttribute label="{' + widgetName + '>label}" value="{' + widgetName + '>value}"/> </attributes> </Node> </nodes> <lines> <Line from="{' + widgetName + '>from}" to="{' + widgetName + '>to}" status="{' + widgetName + '>status}" arrowOrientation="ParentOf" arrowPosition="Middle" press="linePress"></Line> </lines> <groups> <Group key="{' + widgetName + '>key}" title="{' + widgetName + '>title}"></Group> </groups> </Graph></m:items></m:FlexBox></l:fixContent></l:FixFlex> </mvc:View></script>';
+            div0.innerHTML = '
+            <?xml version="1.0"?>
+            <script id="oView_UpStream' + widgetName + '" name="oView_' + widgetName + '" type="sapui5/xmlview"><mvc:View controllerName="myView.Template" mlns="sap.suite.ui.commons.networkgraph" xmlns:layout="sap.suite.ui.commons.networkgraph.layout" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns:l="sap.ui.layout">
+            <l:FixFlex><l:fixContent><m:FlexBox fitContainer="true" renderType="Bare" wrap="Wrap"><m:items><Graph  enableWheelZoom="true"  nodes="{' + widgetName + '>/nodes}" lines="{' + widgetName + '>/lines}" groups="{' + widgetName + '>/groups}" id="graph_' + widgetName + '" orientation="LeftRight"> <layoutData> <m:FlexItemData/> </layoutData> <layoutAlgorithm> <layout:LayeredLayout mergeEdges="{settings>mergeEdges}" nodePlacement="{settings>nodePlacement}" nodeSpacing="{settings>nodeSpacing}" lineSpacingFactor="{settings>lineSpacingFactor}"> </layout:LayeredLayout> </layoutAlgorithm> <statuses><Status key="CustomKrones" title="Standard" backgroundColor="#0060AD" borderColor="sapUiContentShadowColor" hoverBorderColor="sapUiContentShadowColor"/></statuses> <nodes> <Node key="{' + widgetName +'>key}"  title="{' + widgetName + '>title}" icon="{' + widgetName + '>icon}" group="{' + widgetName + '>group}" attributes="{' + widgetName + '>attributes}"  shape="Box" status="{'+ widgetName + '>status}" x="{' + widgetName + '>x}"  y="{' + widgetName + '>y}" showDetailButton="false" width="auto" maxWidth="500"> <attributes> <ElementAttribute label="{' + widgetName + '>label}" value="{' + widgetName + '>value}"/> </attributes> </Node> </nodes> <lines> <Line from="{' + widgetName + '>from}" to="{' + widgetName + '>to}" status="{' + widgetName + '>status}" arrowOrientation="ParentOf" arrowPosition="Middle" press="linePress"></Line> </lines> <groups> <Group key="{' + widgetName + '>key}" title="{' + widgetName + '>title}"></Group> </groups> </Graph></m:items></m:FlexBox></l:fixContent></l:FixFlex> </mvc:View></script>';
 
 
             if(that._firstConnection === 1){
