@@ -1,0 +1,37 @@
+{
+  "id": "sac.mock.network.graph",
+  "version": "0.0.1",
+  "name": "mockNetworkGraph",
+  "description": "mockNetworkGraph",
+  "newInstancePrefix": "mockNetworkGraph",
+  "icon": "",
+  "vendor": "Jonas Hecht",
+  "eula": "",
+  "license": "",
+  "imports": [],
+  "webcomponents": [
+    {
+      "kind": "main",
+      "tag": "sac-mock-network-graph",
+      "url": "https://joni31reus.github.io/JonasHecht/NetworkGraphMockUpwebcomponent.js",
+      "integrity": "",
+      "ignoreIntegrity": true
+    }
+  ],
+  "properties": {
+  },
+  "methods": {
+    "setDataSource": {
+      "description": "Set new Data Source for Network Graph",
+      "parameters":[
+        {
+          "name": "value",
+          "type": "ResultSet[]",
+          "description": "New Data Source"
+        }
+      ]
+    }    
+  },
+  "events": {
+  }
+}
