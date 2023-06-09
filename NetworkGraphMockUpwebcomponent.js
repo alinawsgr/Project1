@@ -224,63 +224,829 @@
         that.data = [{
             "nodes": [
                 {
-                    "key": 0,
-                    "title": "Stretch Blow Molder",
-                    "status": "Success",
-                    "attributes": [
-                        {
-                            "label": "Technical Availability",
-                            "value": "92,59%"
-                        }
-                    ]
-                },{
-                    "key": 1,
-                    "title": "Filler",
-                    "status": "Warning",
-                    "attributes": [
-                        {
-                            "label": "Technical Availability",
-                            "value": "81,81%"
-                        }
-                    ]
-                },{
-                    "key": 2,
-                    "title": "Labeller",
-                    "status": "Error",
-                    "attributes": [
-                        {
-                            "label": "Technical Availability",
-                            "value": "59,06%"
-                        }
-                    ]
-                },{
-                    "key": 3,
-                    "title": "Non-returnable Packer",
-                    "status": "Success",
-                    "attributes": [
-                        {
-                            "label": "Technical Availability",
-                            "value": "92,39%"
-                        }
-                    ]
-                },{
-                    "key": 4,
-                    "title": "Palettizer",
-                    "status": "Success",
-                    "attributes": [
-                        {
-                            "label": "Technical Availability",
-                            "value": "94,14%"
-                        }
-                    ]
+                  key: 0,
+                  title: "Abschieber",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
                 },
-            ],
-            "lines": [
-                {"from": 0, "to": 1},
-                {"from": 1, "to": 2},
-                {"from": 2, "to": 3},
-                {"from": 3, "to": 4}
+                {
+                  key: 1,
+                  title: "Füller",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 2,
+                  title: "Entlader",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 3,
+                  title: "Auspacker",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 4,
+                  title: "Sekamat",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 5,
+                  title: "Waschmaschine",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 6,
+                  title: "Linatronic",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 7,
+                  title: "Etikettiermaschine",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 8,
+                  title: "Varioline",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 9,
+                  title: "Belader-rechts",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 10,
+                  title: "Belader-links",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 11,
+                  title: "Gebindewascher",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 12,
+                  title: "Abschrauber",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 13,
+                  title: "TBB-EG01",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 14,
+                  title: "TBB-EG02",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 15,
+                  title: "TBB-EG03",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 16,
+                  title: "TBB-EG04",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 17,
+                  title: "TBB-EG05",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 18,
+                  title: "TBB-EG06",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 19,
+                  title: "TBB-EG07",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 20,
+                  title: "TBB-EG08",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 21,
+                  title: "TBB-EG09",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 22,
+                  title: "TBB-EG10",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 23,
+                  title: "TBB-EG11",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 24,
+                  title: "TBB-EG12",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 25,
+                  title: "TBB-EG13",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 26,
+                  title: "TBB-EG14",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 27,
+                  title: "TBB-EG15",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 28,
+                  title: "TBB-EG16",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 29,
+                  title: "TBB-EG17",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 30,
+                  title: "TBB-EG18",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 31,
+                  title: "TBB-EG19",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 32,
+                  title: "TBB-EG20",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 33,
+                  title: "TBB-EG21",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 34,
+                  title: "TBB-EG22",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 35,
+                  title: "TBB-EG23",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 36,
+                  title: "TBB-EG24",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 37,
+                  title: "TBB-EG25",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 38,
+                  title: "TBB-EG26",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 39,
+                  title: "TBG-EG01",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 40,
+                  title: "TBG-EG02",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 41,
+                  title: "TBG-EG03",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 42,
+                  title: "TBG-EG04",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 43,
+                  title: "TBG-EG05",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 44,
+                  title: "TBG-EG06",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 45,
+                  title: "TBG-EG07",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 46,
+                  title: "TBG-EG08",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 47,
+                  title: "TBG-EG09",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 48,
+                  title: "TBG-EG10",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 49,
+                  title: "TBG-EG11",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 50,
+                  title: "TBG-EG12",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 51,
+                  title: "TBG-EG13",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 52,
+                  title: "TBG-EG14",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 53,
+                  title: "TBG-EG15",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 54,
+                  title: "TBP1-EG01",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 55,
+                  title: "TBP1-EG02",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 56,
+                  title: "TBP1-EG03",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 57,
+                  title: "TBP1-EG04",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 58,
+                  title: "TBP1-EG05",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 59,
+                  title: "TBP1-EG06",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 60,
+                  title: "TBP1-EG07",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 61,
+                  title: "TBP1-EG08",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 62,
+                  title: "TBP2-EG",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 63,
+                  title: "EXTERN01",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 64,
+                  title: "EXTERN02",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 65,
+                  title: "Extern-Aufgabe PAL",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 66,
+                  title: "Extern-Abgabe PAL",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 67,
+                  title: "EXTERN05",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 68,
+                  title: "EXTERN06",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 69,
+                  title: "EXTERN07",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 70,
+                  title: "EXTERN08",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 71,
+                  title: "EXTERN09",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 72,
+                  title: "EXTERN10",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 73,
+                  title: "EXTERN11",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                
+              ],
+            
+          "lines": [
+              {"from": 0, "to": 16},
+              {"from": 1, "to": 39},
+              {"from": 1, "to": 55},
+              {"from": 2, "to": 13},
+              {"from": 2, "to": 42},
+              {"from": 3, "to": 4},
+              {"from": 4, "to": 29},
+              {"from": 5, "to": 31},
+              {"from": 6, "to": 32},
+              {"from": 6, "to": 33},
+              {"from": 7, "to": 36},
+              {"from": 8, "to": 45},
+              {"from": 9, "to": 60},
+              {"from": 10, "to": 60},
+              {"from": 11, "to": 12},
+              {"from": 12, "to": 13},
+              {"from": 13, "to": 14},
+              {"from": 14, "to": 15},
+              {"from": 15, "to": 16},
+              {"from": 16, "to": 17},
+              {"from": 17, "to": 18},
+              {"from": 18, "to": 19},
+              {"from": 19, "to": 20},
+              {"from": 20, "to": 21},
+              {"from": 21, "to": 22},
+              {"from": 22, "to": 23},
+              {"from": 23, "to": 24},
+              {"from": 24, "to": 25},
+              {"from": 25, "to": 26},
+              {"from": 26, "to": 27},
+              {"from": 27, "to": 28},
+              {"from": 28, "to": 29},
+              {"from": 29, "to": 30},
+              {"from": 30, "to": 31},
+              {"from": 31, "to": 32},
+              {"from": 32, "to": 33},
+              {"from": 33, "to": 34},
+              {"from": 34, "to": 35},
+              {"from": 35, "to": 36},
+              {"from": 35, "to": 36},
+              {"from": 36, "to": 37},
+              {"from": 37, "to": 38},
+              {"from": 38, "to": 39},
+              {"from": 39, "to": 40},
+              {"from": 40, "to": 41},
+              {"from": 41, "to": 42},
+              {"from": 42, "to": 43},
+              {"from": 43, "to": 44},
+              {"from": 44, "to": 45},
+              {"from": 45, "to": 46},
+              {"from": 46, "to": 47},
+              {"from": 47, "to": 48},
+              {"from": 48, "to": 49},
+              {"from": 49, "to": 50},
+              {"from": 50, "to": 51},
+              {"from": 51, "to": 52},
+              {"from": 52, "to": 53},
+              {"from": 53, "to": 54},
+              {"from": 54, "to": 55},
+              {"from": 55, "to": 56},
+              {"from": 56, "to": 57},
+              {"from": 57, "to": 58},
+              {"from": 58, "to": 59},
+              {"from": 59, "to": 60},
+              {"from": 60, "to": 61},
+              {"from": 61, "to": 62},
+              {"from": 62, "to": 63},
+              {"from": 63, "to": 64},
+              {"from": 64, "to": 65},
+              {"from": 65, "to": 66},
+              {"from": 66, "to": 67},
+              {"from": 67, "to": 68},
+              {"from": 68, "to": 69},
+              {"from": 69, "to": 70},
+              {"from": 70, "to": 71},
+              {"from": 71, "to": 72},
+              {"from": 72, "to": 73}
+         
             ]
+    
         }];
         var that_ = that;
 
