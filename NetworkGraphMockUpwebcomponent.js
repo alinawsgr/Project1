@@ -744,16 +744,6 @@
                   ]
                 },
                 {
-                  key: 52,
-                  title: "TBG-EG14",
-                  attributes: [
-                    {
-                      label: "Technical Availability",
-                      value: "%"
-                    }
-                  ]
-                },
-                {
                   key: 53,
                   title: "TBG-EG15",
                   attributes: [
