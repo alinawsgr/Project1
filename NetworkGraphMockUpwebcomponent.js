@@ -235,16 +235,6 @@
                 },
                 {
                   key: 1,
-                  title: "Füller",
-                  attributes: [
-                    {
-                      label: "Technical Availability",
-                      value: "%"
-                    }
-                  ]
-                },
-                {
-                  key: 2,
                   title: "Entlader",
                   attributes: [
                     {
@@ -254,7 +244,7 @@
                   ]
                 },
                 {
-                  key: 3,
+                  key: 2,
                   title: "Auspacker",
                   attributes: [
                     {
@@ -264,7 +254,7 @@
                   ]
                 },
                 {
-                  key: 4,
+                  key: 3,
                   title: "Sekamat",
                   attributes: [
                     {
@@ -274,7 +264,7 @@
                   ]
                 },
                 {
-                  key: 5,
+                  key: 4,
                   title: "Waschmaschine",
                   attributes: [
                     {
@@ -284,8 +274,18 @@
                   ]
                 },
                 {
-                  key: 6,
+                  key: 5,
                   title: "Linatronic",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 6,
+                  title: "Füller",
                   attributes: [
                     {
                       label: "Technical Availability",
