@@ -231,8 +231,12 @@
                       label: "Technical Availability",
                       value: "%"
                     }
-                  ]
-                },
+                  ],
+                  position:{
+                      top: "100px",
+                      left:"100px"
+                    }
+                  },
                 {
                   key: 1,
                   title: "Entlader",
