@@ -295,12 +295,15 @@
                 {
                   key: 6,
                   title: "Füller",
+                  "x": 100,
+			      "y": 100,
                   attributes: [
                     {
                       label: "Technical Availability",
                       value: "%"
                     }
                   ]
+                    
                 },
                 {
                   key: 7,
