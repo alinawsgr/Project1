@@ -233,8 +233,8 @@
                     }
                   ],
                   position:{
-                      top: "100px",
-                      left:"100px"
+                      top: "10px",
+                      left:"10px"
                     }
                   },
                 {
@@ -245,7 +245,12 @@
                       label: "Technical Availability",
                       value: "%"
                     }
-                  ]
+                  ],
+                      position:{
+                      top: "100px",
+                      left:"100px"
+                    }
+                  },
                 },
                 {
                   key: 2,
