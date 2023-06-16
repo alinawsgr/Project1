@@ -295,8 +295,8 @@
                 {
                   key: 6,
                   title: "Füller",
-                  "x": 100,
-			      "y": 100,
+                  "x": 1000,
+		  "y": 250,
                   attributes: [
                     {
                       label: "Technical Availability",
