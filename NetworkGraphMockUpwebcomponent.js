@@ -226,8 +226,8 @@
                 {
                   key: 0,
                   title: "Abschieber",
-		  "x": 100,
-		  "y": 0,
+		  "x": 600,
+		  "y": 50,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -239,7 +239,7 @@
                   key: 1,
                   title: "Entlader",
 	          "x": 1000,
-		  "y": 250,
+		  "y": 100,
                   attributes: [
                     {
                       label: "Technical Availability",
