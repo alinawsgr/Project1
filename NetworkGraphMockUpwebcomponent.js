@@ -258,17 +258,6 @@
                     }
                   ]
                 },
-	     
-              ,{
-                  key: 3,
-                  title: "Sekamat",
-                  attributes: [
-                    {
-                      label: "Technical Availability",
-                      value: "%"
-                    }
-                  ]
-                },
                 {
                   key: 4,
                   title: "Waschmaschine",
