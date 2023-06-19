@@ -238,10 +238,13 @@
                 {
                   key: 1,
                   title: "Entlader",
+	          "x": 1000,
+		  "y": 250,
                   attributes: [
                     {
                       label: "Technical Availability",
-                      value: "%"
+                      value: "%",
+		      
                     }
                   ]
                   } 
