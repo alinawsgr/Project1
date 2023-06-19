@@ -878,7 +878,87 @@
                       value: "%"
                     }
                   ]
+                },{
+                  key: 66,
+                  title: "Extern-Abgabe PAL",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 67,
+                  title: "EXTERN05",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 68,
+                  title: "EXTERN06",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 69,
+                  title: "EXTERN07",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 70,
+                  title: "EXTERN08",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 71,
+                  title: "EXTERN09",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 72,
+                  title: "EXTERN10",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 73,
+                  title: "EXTERN11",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
                 }
+		    
 	           ],
             
           "lines": [
@@ -952,9 +1032,9 @@
               {"from": 62, "to": 0},
               {"from": 63, "to": 64},
               {"from": 64, "to": 62},
-              {"from": 65, "to": 53}
+              {"from": 65, "to": 53},
+              {"from": 66, "to": 67}
             ]
-    
         }];
         var that_ = that;
 
