@@ -226,8 +226,8 @@
                 {
                   key: 0,
                   title: "Abschieber",
-		  "x": 600,
-		  "y": 50,
+		  "x": 700,
+		  "y": 0,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -252,6 +252,18 @@
                   title: "Auspacker",
 		  "x": 500,
 		  "y": 100,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+	      {
+                  key: 11,
+                  title: "Gebindewascher",
+		  "x": 500,
+		  "y": 200,
                   attributes: [
                     {
                       label: "Technical Availability",
