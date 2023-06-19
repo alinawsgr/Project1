@@ -238,7 +238,7 @@
                 {
                   key: 1,
                   title: "Entlader",
-	          "x": 1000,
+	          "x": 300,
 		  "y": 100,
                   attributes: [
                     {
@@ -247,11 +247,25 @@
 		      
                     }
                   ]
-                  } 
+                  },
+	        {
+                  key: 2,
+                  title: "Auspacker",
+		  "x": 500,
+		  "y": 100,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                }
               ],
             
           "lines": [
-              {"from": 0, "to": 1}]
+              {"from": 0, "to": 1},
+	      {"from": 1, "to": 2},
+	  ]
     
         }];
         var that_ = that;
