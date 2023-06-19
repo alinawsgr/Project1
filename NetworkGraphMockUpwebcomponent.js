@@ -238,7 +238,8 @@
                 {
                   key: 1,
                   title: "Entlader",
-	          
+	          "x": 200,
+		  "y": 100,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -263,7 +264,7 @@
                   key: 11,
                   title: "Gebindewascher",
 		  "x": 500,
-		  "y": 200,
+		  "y": 300,
                   attributes: [
                     {
                       label: "Technical Availability",
