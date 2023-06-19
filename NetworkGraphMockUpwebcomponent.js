@@ -333,6 +333,7 @@
                             this_.getView().setModel(this_.oModelSettings, "settings");
 
                             this_.oGraph = this_.byId("graph_" + widgetName);
+			    this_.oGraph.setLayoutAlgorithm(new NoopLayout));
                             //this_.oGraph._fZoomLevel = 0.75;
                         }
                     });
