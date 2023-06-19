@@ -271,12 +271,22 @@
                       value: "%"
                     }
                   ]
+                },
+	     {
+                  key: 42,
+                  title: "TBG-EG04",
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
                 }
               ],
             
           "lines": [
-              {"from": 0, "to": 1},
 	      {"from": 1, "to": 2},
+	      {"from": 2, "to": 42}
 	  ]
     
         }];
