@@ -344,6 +344,8 @@
                 {
                   key: 11,
                   title: "Gebindewascher",
+		  "x": 1400,
+		  "y": 625,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -664,6 +666,8 @@
                 {
                   key: 43,
                   title: "TBG-EG05",
+		  "x": 1400,
+		  "y": 825,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -674,6 +678,8 @@
                 {
                   key: 44,
                   title: "TBG-EG06",
+		  "x": 1400,
+		  "y": 1025,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -766,6 +772,8 @@
                 {
                   key: 53,
                   title: "TBG-EG15",
+		  "x": 1400,
+		  "y": 1225,
                   attributes: [
                     {
                       label: "Technical Availability",
