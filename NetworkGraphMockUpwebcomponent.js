@@ -262,7 +262,7 @@
                   key: 4,
                   title: "Waschmaschine",
 		  "x": 3400,
-		  "y": 1400,
+		  "y": 225,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -356,6 +356,8 @@
                 {
                   key: 12,
                   title: "Abschrauber",
+		  "x": 3000,
+		  "y": 625,
                   attributes: [
                     {
                       label: "Technical Availability",
