@@ -594,7 +594,7 @@
                 {
                   key: 32,
                   title: "TBB-EG20",
-		  "x": 3900,
+		  "x": 3100,
 		  "y": 1225,
                   attributes: [
                     {
@@ -642,7 +642,7 @@
                 {
                   key: 36,
                   title: "TBB-EG24",
-		  "x": 3700,
+		  "x": 3300,
 		  "y": 2025,
                   attributes: [
                     {
@@ -654,7 +654,7 @@
                 {
                   key: 37,
                   title: "TBB-EG25",
-		  "x": 3900,
+		  "x": 3100,
 		  "y": 1625,
                   attributes: [
                     {
@@ -666,7 +666,7 @@
                 {
                   key: 38,
                   title: "TBB-EG26",
-		  "x": 3900,
+		  "x": 3100,
 		  "y": 2025,
                   attributes: [
                     {
