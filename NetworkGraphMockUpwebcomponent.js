@@ -226,6 +226,8 @@
                 {
                   key: 0,
                   title: "Abschieber",
+		  "x": 1800,
+		  "y": 125,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -404,6 +406,8 @@
                 {
                   key: 16,
                   title: "TBB-EG04",
+		  "x": 2200,
+		  "y": 125,
                   attributes: [
                     {
                       label: "Technical Availability",
