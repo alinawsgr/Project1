@@ -332,6 +332,8 @@
                 {
                   key: 10,
                   title: "Belader-links",
+		  "x": 50,
+		  "y": 350,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -774,6 +776,8 @@
                 {
                   key: 55,
                   title: "TBP1-EG02",
+		  "x": 50,
+		  "y": 75,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -784,6 +788,8 @@
                 {
                   key: 56,
                   title: "TBP1-EG03",
+		  "x": 50,
+		  "y": 125,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -794,6 +800,8 @@
                 {
                   key: 57,
                   title: "TBP1-EG04",
+		  "x": 50,
+		  "y": 175,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -804,6 +812,8 @@
                 {
                   key: 58,
                   title: "TBP1-EG05",
+		  "x": 50,
+		  "y": 225,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -814,6 +824,8 @@
                 {
                   key: 59,
                   title: "TBP1-EG06",
+		  "x": 50,
+		  "y": 275,
                   attributes: [
                     {
                       label: "Technical Availability",
