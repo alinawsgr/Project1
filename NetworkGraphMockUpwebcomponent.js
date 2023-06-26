@@ -261,8 +261,8 @@
                 {
                   key: 4,
                   title: "Waschmaschine",
-		  "x": 1000,
-		  "y": 137,
+		  "x": 3400,
+		  "y": 1400,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -366,6 +366,8 @@
                 {
                   key: 13,
                   title: "TBB-EG01",
+		  "x": 1600,
+		  "y": 1400,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -376,6 +378,8 @@
                 {
                   key: 14,
                   title: "TBB-EG02",
+		  "x": 1800,
+		  "y": 1400,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -386,6 +390,8 @@
                 {
                   key: 15,
                   title: "TBB-EG03",
+		  "x": 2000,
+		  "y": 1400,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -406,6 +412,8 @@
                 {
                   key: 17,
                   title: "TBB-EG05",
+		  "x": 2200,
+		  "y": 1400,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -416,6 +424,8 @@
                 {
                   key: 18,
                   title: "TBB-EG06",
+		  "x": 2400,
+		  "y": 1400,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -426,6 +436,8 @@
                 {
                   key: 19,
                   title: "TBB-EG07",
+		  "x": 2600,
+		  "y": 1400,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -466,6 +478,8 @@
                 {
                   key: 23,
                   title: "TBB-EG11",
+		  "x": 1800,
+		  "y": 625,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -476,6 +490,8 @@
                 {
                   key: 24,
                   title: "TBB-EG12",
+		  "x": 2800,
+		  "y": 1400,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -486,6 +502,8 @@
                 {
                   key: 25,
                   title: "TBB-EG13",
+		  "x": 2800,
+		  "y": 1200,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -496,6 +514,8 @@
                 {
                   key: 26,
                   title: "TBB-EG14",
+		  "x": 3200,
+		  "y": 1200,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -506,6 +526,8 @@
                 {
                   key: 27,
                   title: "TBB-EG15",
+		  "x": 3000,
+		  "y": 1400,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -516,6 +538,8 @@
                 {
                   key: 28,
                   title: "TBB-EG16",
+		  "x": 3200,
+		  "y": 1400,
                   attributes: [
                     {
                       label: "Technical Availability",
