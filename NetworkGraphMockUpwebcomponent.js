@@ -973,7 +973,7 @@
                   key: 64,
                   title: "Carbo",
 		  "x": 3900,
-		  "y": 1900 ,
+		  "y": 1100 ,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -985,7 +985,7 @@
                   key: 65,
                   title: "KZE",
 		  "x": 4200,
-		  "y": 1700 ,
+		  "y": 1000 ,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -997,7 +997,7 @@
                   key: 66,
                   title: "Mixer",
 		  "x": 4000,
-		  "y": 1325 ,
+		  "y": 1300 ,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -1009,7 +1009,7 @@
                   key: 67,
                   title: "CIP",
 		  "x": 4000,
-		  "y": 1125 ,
+		  "y": 1500 ,
                   attributes: [
                     {
                       label: "Technical Availability",
