@@ -263,7 +263,7 @@
                 {
                   key: 4,
                   title: "Waschmaschine",
-		  "x": 3400,
+		  "x": 3500,
 		  "y": 225,
                   attributes: [
                     {
@@ -275,6 +275,8 @@
                 {
                   key: 5,
                   title: "Linatronic",
+		  "x": 3500,
+		  "y": 825,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -285,8 +287,8 @@
                 {
                   key: 6,
                   title: "Füller",
-                  "x": 1000,
-		  "y": 350,
+                  "x": 3500,
+		  "y": 1225,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -298,8 +300,8 @@
                 {
                   key: 7,
                   title: "Etikettiermaschine",
-		  "x": 1000,
-		  "y": 500,
+		  "x": 3500,
+		  "y": 2025,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -556,6 +558,8 @@
                 {
                   key: 29,
                   title: "TBB-EG17",
+		  "x": 3500,
+		  "y": 425,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -566,6 +570,8 @@
                 {
                   key: 30,
                   title: "TBB-EG18",
+		  "x": 3500,
+		  "y": 625,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -576,6 +582,8 @@
                 {
                   key: 31,
                   title: "TBB-EG19",
+		  "x": 3500,
+		  "y": 1025,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -586,6 +594,8 @@
                 {
                   key: 32,
                   title: "TBB-EG20",
+		  "x": 3900,
+		  "y": 1225,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -596,6 +606,8 @@
                 {
                   key: 33,
                   title: "TBB-EG21",
+		  "x": 3500,
+		  "y": 1425,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -606,6 +618,8 @@
                 {
                   key: 34,
                   title: "TBB-EG22",
+		  "x": 3500,
+		  "y": 1625,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -616,6 +630,8 @@
                 {
                   key: 35,
                   title: "TBB-EG23",
+		  "x": 3500,
+		  "y": 1825,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -626,6 +642,8 @@
                 {
                   key: 36,
                   title: "TBB-EG24",
+		  "x": 3700,
+		  "y": 2025,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -636,6 +654,8 @@
                 {
                   key: 37,
                   title: "TBB-EG25",
+		  "x": 3900,
+		  "y": 1625,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -646,6 +666,8 @@
                 {
                   key: 38,
                   title: "TBB-EG26",
+		  "x": 3900,
+		  "y": 2025,
                   attributes: [
                     {
                       label: "Technical Availability",
