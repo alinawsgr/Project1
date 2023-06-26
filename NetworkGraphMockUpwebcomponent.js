@@ -858,8 +858,8 @@
                 {
                   key: 55,
                   title: "TBP1-EG02",
-		  "x": 1800,
-		  "y": 25,
+		  "x": 400,
+		  "y": 425,
                   attributes: [
                     {
                       label: "Technical Availability",
