@@ -764,8 +764,8 @@
                 {
                   key: 54,
                   title: "TBP1-EG01",
-		  "x": 0,
-		  "y": 200,
+		  "x": 200,
+		  "y": 225,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -836,8 +836,8 @@
                 {
                   key: 60,
                   title: "TBP1-EG07",
-		  "x": 1625,
-	          "y": 200,
+		  "x": 200,
+	          "y": 1625,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -848,6 +848,8 @@
                 {
                   key: 61,
                   title: "TBP1-EG08",
+		  "x": 0,
+		  "y": 1625,
                   attributes: [
                     {
                       label: "Technical Availability",
