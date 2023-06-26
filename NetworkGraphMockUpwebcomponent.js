@@ -969,6 +969,54 @@
                     }
                   ]
                 }, 
+		  {
+                  key: 64,
+                  title: "Carbo",
+		  "x": 3900,
+		  "y": 1900 ,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                }, 
+		  {
+                  key: 65,
+                  title: "KZE",
+		  "x": 4200,
+		  "y": 1700 ,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                }, 
+		  {
+                  key: 65,
+                  title: "CIP",
+		  "x": 4000,
+		  "y": 1325 ,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+		  {
+                  key: 66,
+                  title: "CIP",
+		  "x": 4000,
+		  "y": 1125 ,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
 	           ],
             
           "lines": [
