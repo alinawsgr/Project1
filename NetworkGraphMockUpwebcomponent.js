@@ -852,8 +852,8 @@
                 {
                   key: 54,
                   title: "TBP1-EG01",
-		  "x": 1400,
-		  "y": 125,
+		  "x": 200,
+		  "y": 225,
                   attributes: [
                     {
                       label: "Technical Availability",
