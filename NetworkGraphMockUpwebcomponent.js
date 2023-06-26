@@ -320,8 +320,8 @@
                 {
                   key: 9,
                   title: "Belader-rechts",
-		  "x": 200,
-		  "y": 1425,
+		  "x": 50,
+		  "y": 1625,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -333,7 +333,7 @@
                   key: 10,
                   title: "Belader-links",
 		  "x": 50,
-		  "y": 350,
+		  "y": 1425,
                   attributes: [
                     {
                       label: "Technical Availability",
