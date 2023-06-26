@@ -718,6 +718,8 @@
                 {
                   key: 48,
                   title: "TBG-EG10",
+		  "x": 800,
+		  "y": 1625,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -728,6 +730,8 @@
                 {
                   key: 49,
                   title: "TBG-EG11",
+		  "x": 600,
+		  "y": 1625,
                   attributes: [
                     {
                       label: "Technical Availability",
