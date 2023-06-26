@@ -236,7 +236,7 @@
                 {
                   key: 1,
                   title: "Entlader",
-	          "x": 50,
+	          "x": 400,
 		  "y": 25,
                   attributes: [
                     {
@@ -320,7 +320,7 @@
                 {
                   key: 9,
                   title: "Belader-rechts",
-		  "x": 50,
+		  "x": 400,
 		  "y": 1625,
                   attributes: [
                     {
@@ -332,7 +332,7 @@
                 {
                   key: 10,
                   title: "Belader-links",
-		  "x": 50,
+		  "x": 400,
 		  "y": 1425,
                   attributes: [
                     {
@@ -776,7 +776,7 @@
                 {
                   key: 55,
                   title: "TBP1-EG02",
-		  "x": 50,
+		  "x": 400,
 		  "y": 425,
                   attributes: [
                     {
@@ -788,7 +788,7 @@
                 {
                   key: 56,
                   title: "TBP1-EG03",
-		  "x": 50,
+		  "x": 400,
 		  "y": 625,
                   attributes: [
                     {
@@ -800,7 +800,7 @@
                 {
                   key: 57,
                   title: "TBP1-EG04",
-		  "x": 50,
+		  "x": 400,
 		  "y": 825,
                   attributes: [
                     {
@@ -812,7 +812,7 @@
                 {
                   key: 58,
                   title: "TBP1-EG05",
-		  "x": 50,
+		  "x": 400,
 		  "y": 1025,
                   attributes: [
                     {
@@ -824,7 +824,7 @@
                 {
                   key: 59,
                   title: "TBP1-EG06",
-		  "x": 50,
+		  "x": 400,
 		  "y": 1225,
                   attributes: [
                     {
