@@ -948,6 +948,8 @@
                 {
                   key: 62,
                   title: "TBP2-EG",
+		  "x": 1800,
+		  "y": 0,
                   attributes: [
                     {
                       label: "Technical Availability",
