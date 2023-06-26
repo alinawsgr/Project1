@@ -957,6 +957,18 @@
                     }
                   ]
                 },   
+		  {
+                  key: 63,
+                  title: "TBP1-EG",
+		  "x": 1600,
+		  "y": 125 ,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                }, 
 	           ],
             
           "lines": [
