@@ -236,8 +236,8 @@
                 {
                   key: 1,
                   title: "Entlader",
-	          "x": 10,
-		  "y": 137,
+	          "x": 50,
+		  "y": 25,
                   attributes: [
                     {
                       label: "Technical Availability",
