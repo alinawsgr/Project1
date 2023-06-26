@@ -308,8 +308,8 @@
                 {
                   key: 8,
                   title: "Varioline",
-		  "x": 500,
-		  "y": 500,
+		  "x": 1400,
+		  "y": 1425,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -684,6 +684,8 @@
                 {
                   key: 45,
                   title: "TBG-EG07",
+		  "x": 1200,
+		  "y": 1425,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -704,6 +706,8 @@
                 {
                   key: 47,
                   title: "TBG-EG09",
+		  "x": 1000,
+		  "y": 1425,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -734,6 +738,8 @@
                 {
                   key: 50,
                   title: "TBG-EG12",
+		  "x": 800,
+		  "y": 1425,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -744,6 +750,8 @@
                 {
                   key: 51,
                   title: "TBG-EG13",
+		  "x": 600,
+		  "y": 1425,
                   attributes: [
                     {
                       label: "Technical Availability",
