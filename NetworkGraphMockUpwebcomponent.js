@@ -702,6 +702,8 @@
                 {
                   key: 46,
                   title: "TBG-EG08",
+		  "x": 1000,
+		  "y": 825,
                   attributes: [
                     {
                       label: "Technical Availability",
