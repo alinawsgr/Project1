@@ -456,6 +456,8 @@
                 {
                   key: 20,
                   title: "TBB-EG08",
+		  "x": 2800,
+		  "y": 75,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -466,6 +468,8 @@
                 {
                   key: 21,
                   title: "TBB-EG09",
+		  "x": 2800,
+		  "y": 125,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -476,6 +480,8 @@
                 {
                   key: 22,
                   title: "TBB-EG10",
+		  "x": 2800,
+		  "y": 175,
                   attributes: [
                     {
                       label: "Technical Availability",
