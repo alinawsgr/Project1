@@ -321,7 +321,7 @@
                   key: 9,
                   title: "Belader-rechts",
 		  "x": 200,
-		  "y": 500,
+		  "y": 1425,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -765,7 +765,7 @@
                   key: 54,
                   title: "TBP1-EG01",
 		  "x": 0,
-		  "y": 25,
+		  "y": 225,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -777,7 +777,7 @@
                   key: 55,
                   title: "TBP1-EG02",
 		  "x": 50,
-		  "y": 75,
+		  "y": 425,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -789,7 +789,7 @@
                   key: 56,
                   title: "TBP1-EG03",
 		  "x": 50,
-		  "y": 125,
+		  "y": 625,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -801,7 +801,7 @@
                   key: 57,
                   title: "TBP1-EG04",
 		  "x": 50,
-		  "y": 175,
+		  "y": 825,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -813,7 +813,7 @@
                   key: 58,
                   title: "TBP1-EG05",
 		  "x": 50,
-		  "y": 225,
+		  "y": 1025,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -825,7 +825,7 @@
                   key: 59,
                   title: "TBP1-EG06",
 		  "x": 50,
-		  "y": 275,
+		  "y": 1225,
                   attributes: [
                     {
                       label: "Technical Availability",
