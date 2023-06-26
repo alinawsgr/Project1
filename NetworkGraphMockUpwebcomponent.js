@@ -994,8 +994,8 @@
                   ]
                 }, 
 		  {
-                  key: 65,
-                  title: "CIP",
+                  key: 66,
+                  title: "Mixer",
 		  "x": 4000,
 		  "y": 1325 ,
                   attributes: [
@@ -1006,7 +1006,7 @@
                   ]
                 },
 		  {
-                  key: 66,
+                  key: 67,
                   title: "CIP",
 		  "x": 4000,
 		  "y": 1125 ,
@@ -1087,6 +1087,11 @@
               {"from": 59, "to": 10},
               {"from": 60, "to": 61},
               {"from": 62, "to": 0},
+	      {"from": 63, "to": 0},
+	      {"from": 64, "to": 6},
+	      {"from": 66, "to": 6},
+	      {"from": 65, "to": 64},
+	      {"from": 65, "to": 66},
             ]
         }];
         var that_ = that;
