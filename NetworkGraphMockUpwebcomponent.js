@@ -249,8 +249,8 @@
 	        {
                   key: 2,
                   title: "Auspacker",
-		  "x": 500,
-		  "y": 137,
+		  "x": 1400,
+		  "y": 225,
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -656,6 +656,8 @@
                 {
                   key: 42,
                   title: "TBG-EG04",
+		  "x": 1400,
+		  "y": 425,
                   attributes: [
                     {
                       label: "Technical Availability",
