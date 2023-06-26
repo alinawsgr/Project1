@@ -236,7 +236,7 @@
                 {
                   key: 1,
                   title: "Entlader",
-	          "x": 50,
+	          "x": 10,
 		  "y": 137,
                   attributes: [
                     {
