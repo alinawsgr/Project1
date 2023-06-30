@@ -217,7 +217,7 @@
         }
 
     }
-    customElements.define("sac-mock-network-graph", MockUpNetworkGraph);
+    customElements.define("sac-mock-network-graph-processflow", Graph);
 
     // UTILS
     function loadthis(that) {
