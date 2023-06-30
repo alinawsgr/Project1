@@ -12,7 +12,7 @@
     </style>      
     `;
 
-    class MockUpNetworkGraph extends HTMLElement {
+    class Graph extends HTMLElement {
 
         constructor() {
             super();
