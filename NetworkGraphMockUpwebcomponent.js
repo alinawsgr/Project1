@@ -241,6 +241,7 @@
                   title: "Entlader",
 	          "x": 400,
 		  "y": 225,
+		  "status": "Error",
                   attributes: [
                     {
                       label: "Technical Availability",
@@ -254,6 +255,7 @@
                   title: "Auspacker",
 		  "x": 1400,
 		  "y": 225,
+		  "status": "Warning",
                   attributes: [
                     {
                       label: "Technical Availability",
