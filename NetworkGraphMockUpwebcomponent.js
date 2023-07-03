@@ -228,6 +228,7 @@
                   title: "Abschieber",
 		  "x": 1800,
 		  "y": 125,
+                  icon: "sap-icon://circle-task",
                   attributes: [
                     {
                       label: "Technical Availability",
