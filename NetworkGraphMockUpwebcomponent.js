@@ -228,7 +228,7 @@
                   title: "Abschieber",
 		  "x": 1800,
 		  "y": 125,
-		  "status": "Success"
+		  "status": "Success",
                   attributes: [
                     {
                       label: "Technical Availability",
