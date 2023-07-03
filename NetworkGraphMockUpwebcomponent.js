@@ -39,7 +39,7 @@
             });
 
             this._firstConnection = 0;
-            this.data = [];
+            this.data1 = [];
             this.oModel = null;
             this.sSelDisplayOption = "Upstream";
         }
@@ -221,7 +221,7 @@
 
     // UTILS
     function loadthis(that) {
-        that.data = [{
+        that.data1 = [{
             "nodes": [
                 {
                   key: 0,
@@ -1158,7 +1158,7 @@
 
                             that._firstConnection = 1;
 
-                            var oModel = new JSONModel(that.data[0]);
+                            var oModel = new JSONModel(that.data1[0]);
                             
                             oModel.setSizeLimit(Number.MAX_SAFE_INTEGER);
 
