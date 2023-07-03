@@ -1096,7 +1096,7 @@
       }];
       var that_ = that;
 
-      widgetName = "mockNetworkGraph_1";
+      widgetName = "mockNetworkGraph_2";
       console.log("widgetName:" + widgetName);
       if (typeof widgetName === "undefined") {
           widgetName = that._export_settings.title.split("|")[0];
