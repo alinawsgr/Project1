@@ -12,7 +12,7 @@
     </style>      
     `;
 
-    class MockUpNetworkGraph extends HTMLElement {
+    class MockUpNetworkGraphV04 extends HTMLElement {
 
         constructor() {
             super();
@@ -217,7 +217,7 @@
         }
 
     }
-    customElements.define("sac-mock-network-graph", MockUpNetworkGraph);
+    customElements.define("sac-mock-network-graph-V04", MockUpNetworkGraphV04);
 
     // UTILS
     function loadthis(that) {
