@@ -217,7 +217,7 @@
         }
 
     }
-    customElements.define("sac-mock-network-graph", MockUpNetworkGraphV04);
+    customElements.define("sac-mock-network-graphV04", MockUpNetworkGraphV04);
 
     // UTILS
     function loadthis(that) {
@@ -1221,4 +1221,3 @@
         });
     }
 })();
-
