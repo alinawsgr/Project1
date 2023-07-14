@@ -1,0 +1,40 @@
+function calculateNodePositions(startX, startY, endX, endY, nodeCount, nodeWidth, nodeHeight) {
+  var gap = (endY - startY) / (nodeCount + 1); // Berechnung des vertikalen Abstands
+  var nodePositions = [];
+  for (var i = 1; i <= nodeCount; i++) {
+    var x = startX; // x-Koordinate ist konstant, da senkrecht unterhalb des Startpunkts
+    var y = startY + (gap * i); // Berechnung der y-Koordinate
+    nodePositions.push({ x: x, y: y }); // Hinzufügen der Knotenposition zur Liste
+  }
+  return nodePositions;
+}
+ console.log(calculateNodePositions(3500, 225, 3500, 2025, 8, 250, 350));
+
+
+const startPoint = [0, 0];
+const endPoint = [4, 4];
+const excelData = [
+  ["A", "B", "C", "D", "E"],
+  [0, 0, 0, 0, 1],
+  [0, 0, 0, 1, 0],
+  [1, 0, 0, 1, 0],
+  [0, 0, 0, 0, 0],
+  [0, 0, 1, 0, 0]
+];
+
+// finds 
+function findDestinations(row, col, excelData) {
+  const destinations = [];
+
+  // Suche nach 1 in der Spalte ab der aktuellen Zeile
+  for (let i = row + 1; i < excelData.length; i++) {
+    if (excelData[i][col] === 1) {
+      destinations.push([i, col]);
+    }
+  }
+
+  return destinations;
+}
+
+
+console.log(findDestinations(0,3, excelData))
