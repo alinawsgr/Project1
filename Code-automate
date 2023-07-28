@@ -1,4 +1,85 @@
-function calculateNodePositions(startX, startY, endX, endY, nodeCount, nodeWidth, nodeHeight) {
+
+//////////////////////////////// VORBEREITUNG /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// festzulegende und fixe Variablen 
+// Größe Platzhalter
+const nodeWith = 350;
+const nodeHeight = 250;
+// fixe Positionen
+var xEntladerPosition = 1400;
+var yEntladerPosition = 1500;
+
+// Liest das csv-file ein und wandelt es in eine matrix um
+const fs = require('fs');
+function readCSV(filePath) {
+    const csvData = fs.readFileSync(filePath, 'utf-8');
+    const rows = csvData.trim().split('\n');
+    const matrix = [];
+    for (let i = 0; i < rows.length; i++) {
+      const columns = rows[i].split(';');
+      const updatedColumns = [];
+      for (let j = 0; j < columns.length; j++) {
+        const value = columns[j].trim() === '' ? '0' : columns[j].trim();
+        updatedColumns.push(value);
+      }
+      matrix.push(updatedColumns);
+    }
+    return matrix;
+  }
+  
+// Verarbeitet Matrix zu Key-Value Objekt mit x und y Positionen
+// Zugriff auf Inhalte der Matrix -> Zeilen: matrix[i], Spalten: matrix.map(row => row[i]).slice(x);
+matrix =readCSV('C:\\Alina\\Arbeit\\Greaph\\Excel-alscsv.csv');
+const maschinen = matrix.map(row => row[4]).slice(2);
+const xfixPositions = matrix.map(row => row[1]).slice(2);
+const yfixPositions = matrix.map(row => row[2]).slice(2);
+const keyvaluepositions = {'Entlader': { x: xEntladerPosition, y: yEntladerPosition, Quelle:"", Senke:"" }};
+for (let i = 0; i < maschinen.length; i++) {
+  const name = maschinen[i];
+  if (name === 'Entlader') {
+    keyvaluepositions[name] = { x: xEntladerPosition, y: yEntladerPosition, Quelle:"", Senke:"" };
+  } else {
+    keyvaluepositions[name] = { x: 0, y: 0, Quelle:"", Senke:"" };
+  }
+}
+//console.log(keyvaluepositions);
+
+
+
+
+
+
+/////////////////////////////////////////////////// FUNKTIONEN /////////////////////////////////////////////////////////////////////////
+// Funktion, die positionnen und Abhängigkeiten von fixen Maschinen berechnet
+
+function calculatedependencies(matrix, keyvaluepositions) {
+
+    for (let i = 0; i < xfixPositions.length; i++) {
+      if (xfixPositions[i] === 'Entlader') {
+          keyvaluepositions[maschinen[i]].x = keyvaluepositions['Entlader'].x;
+      }else if (xfixPositions[i] === 'Ettikettiermaschine'){
+        keyvaluepositions[maschinen[i]].x = keyvaluepositions['Ettiketiermaschine'].x;
+      }
+    }
+    for (let i = 0; i < yfixPositions.length; i++) {
+        if (yfixPositions[i] === 'Entlader') {
+          keyvaluepositions[maschinen[i]].y = keyvaluepositions['Entlader'].y;
+        }else if (yfixPositions[i] === 'Waschmaschine'){
+            keyvaluepositions[maschinen[i]].x = keyvaluepositions['Waschmaschine'].y;
+        }else if (yfixPositions[i] === 'Auspacker'){
+            keyvaluepositions[maschinen[i]].x = keyvaluepositions['Auspacker'].y;
+        }
+      }
+      return keyvaluepositions;
+  }
+
+calculatedependencies(matrix,keyvaluepositions);
+//console.log(calculatedependencies(matrix,keyvaluepositions));
+//console.log(matrix.map(row => row[8]).slice(1))
+
+
+// Funktion, die die Node Positions berechnet
+function calculateNodePositions(startX, startY, endX, endY, nodeCount, nodeWith, nodeHeight) {
   var gap = (endY - startY) / (nodeCount + 1); // Berechnung des vertikalen Abstands
   var nodePositions = [];
   for (var i = 1; i <= nodeCount; i++) {
@@ -8,33 +89,49 @@ function calculateNodePositions(startX, startY, endX, endY, nodeCount, nodeWidth
   }
   return nodePositions;
 }
- console.log(calculateNodePositions(3500, 225, 3500, 2025, 8, 250, 350));
+//console.log(calculateNodePositions(xEntladerPosition,yEntladerPosition,1400,3000,8));
+ 
 
 
-const startPoint = [0, 0];
-const endPoint = [4, 4];
-const excelData = [
-  ["A", "B", "C", "D", "E"],
-  [0, 0, 0, 0, 1],
-  [0, 0, 0, 1, 0],
-  [1, 0, 0, 1, 0],
-  [0, 0, 0, 0, 0],
-  [0, 0, 1, 0, 0]
-];
 
-// finds 
-function findDestinations(row, col, excelData) {
-  const destinations = [];
 
-  // Suche nach 1 in der Spalte ab der aktuellen Zeile
-  for (let i = row + 1; i < excelData.length; i++) {
-    if (excelData[i][col] === 1) {
-      destinations.push([i, col]);
+// Funktion, die die nächsten Maschinen ausgehend von Start-Maschine berechnet
+function iterateMatrix(matrix, inputString) {
+    const columnNames = []; // Liste für Spaltennamen, in denen eine 1 steht
+    // Finde die Zeile, die den Input-String enthält
+    const row = matrix.find(row => row.includes(inputString));
+  
+    if (!row) {
+      console.log("Der Input-String wurde nicht gefunden.");
+      return columnNames;
     }
+    const columnIndex = row.indexOf(inputString);
+    const startRow = matrix.indexOf(row);
+    for (let currentRow = startRow; currentRow < matrix.length; currentRow++) {
+      // Überprüfe, ob die Spalte in der aktuellen Zeile eine 1 enthält
+      if (matrix[currentRow][columnIndex] === '1') { // Beachte: Vergleich mit '1' als String
+        // Finde den Spaltennamen für diese Spalte
+        const columnName = matrix.map(row => row[4]).slice(2);
+        columnNames.push(columnName);
+        // Springe zur nächsten Spalte mit 1 in derselben Zeile
+        let nextColumnIndex = columnIndex + 1;
+        while (nextColumnIndex < matrix[currentRow].length && matrix[currentRow][nextColumnIndex] !== '1') {
+          nextColumnIndex++;
+        }
+        // Wenn keine weitere Spalte mit 1 in derselben Zeile gefunden wurde, springe zur nächsten Zeile
+        if (nextColumnIndex === matrix[currentRow].length) {
+          nextColumnIndex = row.indexOf('1', nextColumnIndex); // Finde den nächsten Spaltenindex mit 1 in der Ausgangszeile
+          if (nextColumnIndex === -1) {
+            break; // Keine weiteren Spalten mit 1 gefunden, beende die Schleife
+          }
+          currentRow = startRow - 1; // Setze die aktuelle Zeile auf die Ausgangszeile minus 1, da die Schleife die Zeile erhöht
+        }
+        columnIndex = nextColumnIndex; // Aktualisiere den Spaltenindex
+      }
+    }
+    return columnNames;
   }
-
-  return destinations;
-}
-
-
-console.log(findDestinations(0,3, excelData))
+  
+  
+  console.log(iterateMatrix(matrix,"Entlader"));
+ 
