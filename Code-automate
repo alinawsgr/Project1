@@ -30,16 +30,27 @@ function readCSV(filePath) {
 // Verarbeitet Matrix zu Key-Value Objekt mit x und y Positionen
 // Zugriff auf Inhalte der Matrix -> Zeilen: matrix[i], Spalten: matrix.map(row => row[i]).slice(x);
 matrix =readCSV('C:\\Alina\\Arbeit\\Greaph\\Excel-alscsv.csv');
+//
 const maschinen = matrix.map(row => row[4]).slice(2);
 const xfixPositions = matrix.map(row => row[1]).slice(2);
 const yfixPositions = matrix.map(row => row[2]).slice(2);
-const keyvaluepositions = {'Entlader': { x: xEntladerPosition, y: yEntladerPosition, Quelle:"", Senke:"" }};
+
+const fixemaschinen = matrix.slice(2).map(row => row[3]);
+const fixmachinesstring = [];
+for (let i = 0; i < fixemaschinen.length; i++) {
+  if (fixemaschinen[i] != 0) {
+    fixmachinesstring.push(maschinen[i]);
+  }
+}
+
+console.log(fixmachinesstring);
+const keyvaluepositions = [];
 for (let i = 0; i < maschinen.length; i++) {
   const name = maschinen[i];
   if (name === 'Entlader') {
     keyvaluepositions[name] = { x: xEntladerPosition, y: yEntladerPosition, Quelle:"", Senke:"" };
   } else {
-    keyvaluepositions[name] = { x: 0, y: 0, Quelle:"", Senke:"" };
+    keyvaluepositions[name] = { x: 0, y: 0, Quelle1:"", Senke1:"" };
   }
 }
 //console.log(keyvaluepositions);
@@ -54,20 +65,20 @@ for (let i = 0; i < maschinen.length; i++) {
 
 function calculatedependencies(matrix, keyvaluepositions) {
 
-    for (let i = 0; i < xfixPositions.length; i++) {
-      if (xfixPositions[i] === 'Entlader') {
-          keyvaluepositions[maschinen[i]].x = keyvaluepositions['Entlader'].x;
-      }else if (xfixPositions[i] === 'Ettikettiermaschine'){
-        keyvaluepositions[maschinen[i]].x = keyvaluepositions['Ettiketiermaschine'].x;
+    for (let i = 0; i < yfixPositions.length; i++) {
+      if (yfixPositions[i] === 'Entlader') {
+          keyvaluepositions[maschinen[i]].y = keyvaluepositions['Entlader'].y;
+      }else if (yfixPositions[i] === 'Ettikettiermaschine'){
+        keyvaluepositions[maschinen[i]].y = keyvaluepositions['Ettiketiermaschine'].y;
       }
     }
-    for (let i = 0; i < yfixPositions.length; i++) {
-        if (yfixPositions[i] === 'Entlader') {
-          keyvaluepositions[maschinen[i]].y = keyvaluepositions['Entlader'].y;
-        }else if (yfixPositions[i] === 'Waschmaschine'){
-            keyvaluepositions[maschinen[i]].x = keyvaluepositions['Waschmaschine'].y;
-        }else if (yfixPositions[i] === 'Auspacker'){
-            keyvaluepositions[maschinen[i]].x = keyvaluepositions['Auspacker'].y;
+    for (let i = 0; i < xfixPositions.length; i++) {
+        if (xfixPositions[i] === 'Entlader') {
+          keyvaluepositions[maschinen[i]].x = keyvaluepositions['Entlader'].x;
+        }else if (xfixPositions[i] === 'Waschmaschine'){
+            keyvaluepositions[maschinen[i]].x = keyvaluepositions['Waschmaschine'].x;
+        }else if (xfixPositions[i] === 'Auspacker'){
+            keyvaluepositions[maschinen[i]].x = keyvaluepositions['Auspacker'].x;
         }
       }
       return keyvaluepositions;
@@ -75,7 +86,143 @@ function calculatedependencies(matrix, keyvaluepositions) {
 
 calculatedependencies(matrix,keyvaluepositions);
 //console.log(calculatedependencies(matrix,keyvaluepositions));
-//console.log(matrix.map(row => row[8]).slice(1))
+
+
+
+/// Funktion, die Senke in das Key-Value Objekt einträgt
+const newMatrix = matrix.map(row => row.slice(8));
+    newMatrix.splice(0,2);
+function findAndStoreSenken(newMatrix, maschinen, keyvaluepositions) {
+    for (let i = 0; i < newMatrix[0].length; i++) {
+        const senken1Liste = [];
+        const senken3Liste = [];
+        const senken2Liste = [];
+        const senken4Liste = [];
+        const senken101Liste = [];
+            for (let j = 0; j < newMatrix[i].length; j++) {
+              if (newMatrix[i][j] == 1) {
+                senken1Liste.push(maschinen[j]);
+              }
+              if (newMatrix[i][j] == 3) {
+                senken3Liste.push(maschinen[j]);
+              }
+              if (newMatrix[i][j] == 2) {
+                senken2Liste.push(maschinen[j]);
+              }
+              if (newMatrix[i][j] == 4) {
+                senken4Liste.push(maschinen[j]);
+              }
+              if (newMatrix[i][j] == 101) {
+                senken101Liste.push(maschinen[j]);
+              }
+            }
+
+          
+            var maschinex = maschinen[i];
+            keyvaluepositions[maschinex].Senke1 = senken1Liste;
+            keyvaluepositions[maschinex].Senke2 = senken2Liste;
+            keyvaluepositions[maschinex].Senke3 = senken3Liste;
+            keyvaluepositions[maschinex].Senke4 = senken4Liste;
+            keyvaluepositions[maschinex].Senke101 = senken101Liste;
+          }
+        
+    for (let a=0; a<newMatrix[0].length; a++){
+      const quellen1Liste = [];
+      const quellen2Liste = [];
+      const quellen3Liste = [];
+      const quellen4Liste = [];
+      const quellen101Liste = [];
+      for (let b = 0; b< newMatrix.length; b++){
+        if (newMatrix[b][a] == 1){
+          quellen1Liste.push(maschinen[b])
+        }
+        else if (newMatrix[b][a] == 3){
+          quellen3Liste.push(maschinen[b]);
+        }
+        else if (newMatrix[b][a] == 2){
+            quellen2Liste.push(maschinen[b]);
+        }
+        else if (newMatrix[b][a] == 4){
+            quellen4Liste.push(maschinen[b]);
+        }
+        else if (newMatrix[b][a] == 101){
+            quellen101Liste.push(maschinen[b]);
+        }
+
+      }
+      var maschinex = maschinen[a];
+      keyvaluepositions[maschinex].Quelle1 = quellen1Liste;
+      keyvaluepositions[maschinex].Quelle2 = quellen2Liste;
+      keyvaluepositions[maschinex].Quelle3 = quellen3Liste;
+      keyvaluepositions[maschinex].Quelle4 = quellen4Liste;
+      keyvaluepositions[maschinex].Quelle101 = quellen101Liste;
+    }
+    return keyvaluepositions;
+    }     
+findAndStoreSenken(newMatrix,maschinen,keyvaluepositions);
+//console.log(keyvaluepositions);
+
+// Kalkuliert die Pfade
+function findPaths(machineName, keyvaluepositions, senkeProperty) {
+  const paths = [];
+  const machine = keyvaluepositions[machineName];
+
+  if (!machine) {
+    return paths;
+  }
+
+  const path = [machineName];
+
+  if (machine[senkeProperty].length > 0) {
+    const nextMachineName = machine[senkeProperty][0];
+    const nextPaths = findPaths(nextMachineName, keyvaluepositions, senkeProperty);
+
+    for (const nextPath of nextPaths) {
+      paths.push([...path, ...nextPath]);
+    }
+  } else {
+    paths.push(path);
+  }
+
+  return paths;
+}
+
+// Bestimme für jedes Gewicht die Pfade 
+// rote Pfeile
+const pathsFromEntpackerSenke1 = findPaths("Entlader", keyvaluepositions, "Senke1");
+//console.log(pathsFromEntpackerSenke1);
+
+
+// gelbe Pfeile
+const pathsFromEntpackerSenke2 = findPaths("Entlader", keyvaluepositions,"Senke2" );
+const pathsFromAuspackerSenke2 = findPaths("Auspacker", keyvaluepositions, "Senke2");
+// andere -> wo ist hier der Start?
+const pathsSenke3 = findPaths("", keyvaluepositions, "Senke3");
+const pathsSenke4 = findPaths("", keyvaluepositions, "Senke4");
+const pathsSenke101 = findPaths("", keyvaluepositions, "Senke101");
+
+// Funktion, die die Koordinaten basierend auf den Pfaden berechnet
+function setYValuesFromEntlader(path, keyvaluepositions) {
+    const entladerMachine = keyvaluepositions.Entlader;
+    const entladerY = entladerMachine.y;
+  
+    for (const machineName of path[0]) {
+      if (keyvaluepositions.hasOwnProperty(machineName)) {
+        keyvaluepositions[machineName].y = entladerY;
+      }
+    }
+  
+    return keyvaluepositions;
+  }
+  
+const updatedKeyvaluepositions = setYValuesFromEntlader(pathsFromEntpackerSenke1, keyvaluepositions);
+//console.log(updatedKeyvaluepositions);
+//console.log(pathsFromEntpackerSenke1);
+  
+
+
+
+
 
 
 // Funktion, die die Node Positions berechnet
@@ -90,7 +237,16 @@ function calculateNodePositions(startX, startY, endX, endY, nodeCount, nodeWith,
   return nodePositions;
 }
 //console.log(calculateNodePositions(xEntladerPosition,yEntladerPosition,1400,3000,8));
- 
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -133,5 +289,5 @@ function iterateMatrix(matrix, inputString) {
   }
   
   
-  console.log(iterateMatrix(matrix,"Entlader"));
+  //console.log(iterateMatrix(matrix,"Entlader"));
  
