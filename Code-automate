@@ -48,6 +48,7 @@ const keyvaluepositions = [];
 for (let i = 0; i < maschinen.length; i++) {
   const name = maschinen[i];
   if (name === 'Entlader') {
+
     keyvaluepositions[name] = { x: xEntladerPosition, y: yEntladerPosition, Quelle:"", Senke:"" };
   } else {
     keyvaluepositions[name] = { x: 0, y: 0, Quelle1:"", Senke1:"" };
@@ -95,7 +96,7 @@ function findAndStoreSenkenQuellen(newMatrix,maschinen,keyvaluepositions){
             for (let j = 0; j < newMatrix[i].length; j++) {
               if (newMatrix[i][j] == 1) {
                 senken1Liste.push(maschinen[j]);
-              }
+              } 
               if (newMatrix[i][j] == 3) {
                 senken3Liste.push(maschinen[j]);
               }
@@ -153,16 +154,16 @@ findAndStoreSenkenQuellen(newMatrix,maschinen,keyvaluepositions);
 
 
 // Kalkuliert die Pfade abhängig von der Gewichtung
-function findPaths(machineName, keyvaluepositions, senkeProperty) {
+function findPaths(machineName, keyvaluepositions, property) {
   const paths = [];
   const machine = keyvaluepositions[machineName];
   if (!machine) {
     return paths;
   }
   const path = [machineName];
-  if (machine[senkeProperty].length > 0) {
-    const nextMachineName = machine[senkeProperty][0];
-    const nextPaths = findPaths(nextMachineName, keyvaluepositions, senkeProperty);
+  if (machine[property].length > 0) {
+    const nextMachineName = machine[property][0];
+    const nextPaths = findPaths(nextMachineName, keyvaluepositions, property);
 
     for (const nextPath of nextPaths) {
       paths.push([...path, ...nextPath]);
@@ -179,7 +180,6 @@ const indexAfterWaschmaschine = path1.indexOf("Waschmaschine") + 1;
 const path1_hor_r = path1.slice(0, indexAfterWaschmaschine);
 //const path1_senkr_u
 //const path1_hor_l 
-
 // gelbe Pfeile
 const path2_Entlader = findPaths("Entlader", keyvaluepositions,"Senke2" );
 const path2_Auspacker = findPaths("Auspacker", keyvaluepositions, "Senke2");
@@ -188,36 +188,9 @@ const path3 = findPaths("", keyvaluepositions, "Senke3");
 const path4 = findPaths("", keyvaluepositions, "Senke4");
 const path101 = findPaths("", keyvaluepositions, "Senke101");
 
-
-// Funktion, die die Koordinaten basierend auf den Pfaden berechnet (gelb)
-function setYValuesFromEntlader(path, keyvaluepositions) {
-    
-    const entladerY = keyvaluepositions.Entlader.y;
-    const waschmaschineY = keyvaluepositions.Waschmaschine.y;
   
-    for (const machineName of path[0]) {
-      if (machineName === "Waschmaschine") {
-        continue;
-      }
-      if (keyvaluepositions.hasOwnProperty(machineName)) {
-        keyvaluepositions[machineName].y = entladerY;
-      }
-      keyvaluepositions.Waschmaschine.y = waschmaschineY;
-
-     
-    }
-  
-    return keyvaluepositions;
-  }
-  
-//const updatedKeyvaluepositions = setYValuesFromEntlader(pathsFromEntpackerSenke1, keyvaluepositions);
-//console.log(updatedKeyvaluepositions);
-  
-
-
-// neuer Versuch
-// Funktion, die die Node Positions berechnet
-function calcpositionshor_r (path, width, height){
+// Funktionen, die die Node Positions nach Richtungen berechnet
+function calcpositionshor_r (path, width){
   const firstMachine = path[0][0];
   for (let i = 0; i < path[0].length; i++) {
     const machineName = path[0][i];
@@ -228,7 +201,7 @@ function calcpositionshor_r (path, width, height){
   }
   return keyvaluepositions;
 }
-function calcpositionshor_l (path, width, height){
+function calcpositionshor_l (path, width){
   const firstMachine = path[0][0];
   for (let i = 0; i < path[0].length; i++) {
     const machineName = path[0][i];
@@ -240,7 +213,7 @@ function calcpositionshor_l (path, width, height){
   return keyvaluepositions;
 }
 
-function calcpositionssenkr_u(path, width, height) {
+function calcpositionssenkr_u(path, height) {
     const firstMachine = path[0][0];
     for (let i = 0; i < path[0].length; i++) {
       const machineName = path[0][i];
@@ -254,19 +227,24 @@ function calcpositionssenkr_u(path, width, height) {
     return keyvaluepositions;
   }
 
-
-//function calcpositionssenkr_o (path, width, height){}
-
-function calcpositionshor_l (path, width, height){
-  for (machineName of path[0]){
-    keyvaluepositions[machineName].y = keyvaluepositions[machineName].x - width;
+function calcpositionssenkr_o (path, height){
+  const firstMachine = path[0][0];
+  for (let i = 0; i < path[0].length; i++) {
+    const machineName = path[0][i];
+    const currentMachine = keyvaluepositions[machineName];
+    const yOffset = i * height;
+    currentMachine.x = keyvaluepositions[firstMachine].x;
+    currentMachine.y = keyvaluepositions[firstMachine].y + yOffset;
   }
+  return keyvaluepositions;
 }
 
 
+
+//Codebereich, der die Pfade schrittweise positioniert
 calcpositionssenkr_u(path2_Auspacker);
 calcpositionssenkr_u(path2_Entlader);
-//console.log(calcpositionshor_r(path1,nodeWith,nodeHeight));
+calcpositionshor_r(path1,nodeWith,nodeHeight);
 console.log(path1_hor_r);
 
 
@@ -277,6 +255,31 @@ console.log(path1_hor_r);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// frühere Ansätze 
 
 
 // Funktion, die die Node Positions berechnet
@@ -291,19 +294,6 @@ function calculateNodePositions(startX, startY, endX, endY, nodeCount, nodeWith,
   return nodePositions;
 }
 //console.log(calculateNodePositions(xEntladerPosition,yEntladerPosition,1400,3000,8));
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Funktion, die die nächsten Maschinen ausgehend von Start-Maschine berechnet
 function iterateMatrix(matrix, inputString) {
