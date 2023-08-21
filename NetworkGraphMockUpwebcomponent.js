@@ -536,7 +536,7 @@ for (let i = 0; i < newMatrix.length; i++) {
     // UTILS
     function loadthis(that) {
         that.data = [{
-            data,lines
+            [data],[lines]
             
         }];
         var that_ = that;
