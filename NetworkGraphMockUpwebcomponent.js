@@ -219,1836 +219,326 @@
     }
     customElements.define("sac-mock-network-graph", MockUpNetworkGraph);
 
+    /////////////////////////////// VORBEREITUNG /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// festzulegende und fixe Variablen 
+// Größe Platzhalter
+const nodeWith = 350;
+const nodeHeight = 250;
+// fixe Positionen
+var xEntladerPosition = 1400;
+var yEntladerPosition = 1500;
+var directionChange = ['Waschmaschine', 'Etikettiermaschine']  // speichert die Maschinen, wo Richtungswechsel stattfindet
+
+// Liest das csv-file ein und wandelt es in eine matrix um
+const fs = require('fs');
+function readCSV(filePath) {
+    const csvData = fs.readFileSync(filePath, 'utf-8');
+    const rows = csvData.trim().split('\n');
+    const matrix = [];
+    for (let i = 0; i < rows.length; i++) {
+      const columns = rows[i].split(';');
+      const updatedColumns = [];
+      for (let j = 0; j < columns.length; j++) {
+        const value = columns[j].trim() === '' ? '0' : columns[j].trim();
+        updatedColumns.push(value);
+      }
+      matrix.push(updatedColumns);
+    }
+    return matrix;
+  }
+  
+// Verarbeitet Matrix zu Key-Value Objekt mit x und y Positionen
+// Zugriff auf Inhalte der Matrix -> Zeilen: matrix[i], Spalten: matrix.map(row => row[i]).slice(x);
+matrix =readCSV('C:\\Users\\k0940095\\OneDrive - Krones AG\\SAC\\Linie - GraphExcel-alscsv.csv');
+// enthält alle Maschinen-Namen
+const maschinen = matrix.map(row => row[4]).slice(2);
+// enthalten fixe Positionen und Abhängigkeiten
+const xfixPositions = matrix.map(row => row[1]).slice(2);
+const yfixPositions = matrix.map(row => row[2]).slice(2);
+// enthalten fixe Maschinen
+const fixemaschinen = matrix.slice(2).map(row => row[3]);
+const fixmachinesstring = [];
+for (let i = 0; i < fixemaschinen.length; i++) {
+  if (fixemaschinen[i] != 0) {
+    fixmachinesstring.push(maschinen[i]);
+  }
+}
+// Key-Value Objekt, das alle Koordinaten der einzelnen Maschinen beinhaltet
+const keyvaluepositions = [];
+for (let i = 0; i < maschinen.length; i++) {
+  const name = maschinen[i];
+  if (name === 'Entlader') {
+
+    keyvaluepositions[name] = { x: xEntladerPosition, y: yEntladerPosition, Quelle:"", Senke:"" };
+  } else {
+    keyvaluepositions[name] = { x: 0, y: 0, Quelle1:"", Senke1:"" };
+  }
+}
+
+
+
+/////////////////////////////////////////////////// FUNKTIONEN /////////////////////////////////////////////////////////////////////////
+
+// Funktion, die positionnen und Abhängigkeiten von fixen Maschinen berechnet
+function calculatedependencies(matrix, keyvaluepositions) {
+    for (let i = 0; i < yfixPositions.length; i++) {
+      if (yfixPositions[i] === 'Entlader') {
+          keyvaluepositions[maschinen[i]].y = keyvaluepositions['Entlader'].y;
+      }else if (yfixPositions[i] === 'Ettikettiermaschine'){
+        keyvaluepositions[maschinen[i]].y = keyvaluepositions['Ettiketiermaschine'].y;
+      }
+    }
+    for (let i = 0; i < xfixPositions.length; i++) {
+        if (xfixPositions[i] === 'Entlader') {
+          keyvaluepositions[maschinen[i]].x = keyvaluepositions['Entlader'].x;
+        }else if (xfixPositions[i] === 'Waschmaschine'){
+            keyvaluepositions[maschinen[i]].x = keyvaluepositions['Waschmaschine'].x;
+        }else if (xfixPositions[i] === 'Auspacker'){
+            keyvaluepositions[maschinen[i]].x = keyvaluepositions['Auspacker'].x;
+        }
+      }
+      return keyvaluepositions;
+  }
+
+calculatedependencies(matrix,keyvaluepositions);
+
+
+/// Funktion, die Senke in das Key-Value Objekt einträgt
+const newMatrix = matrix.map(row => row.slice(8));
+newMatrix.splice(0,2);
+function findAndStoreSenkenQuellen(newMatrix,maschinen,keyvaluepositions){
+    for (let i = 0; i < newMatrix[0].length; i++) {
+        const senken1Liste = [];
+        const senken3Liste = [];
+        const senken2Liste = [];
+        const senken4Liste = [];
+        const senken101Liste = [];
+            for (let j = 0; j < newMatrix[i].length; j++) {
+              if (newMatrix[i][j] == 1) {
+                senken1Liste.push(maschinen[j]);
+              } 
+              if (newMatrix[i][j] == 3) {
+                senken3Liste.push(maschinen[j]);
+              }
+              if (newMatrix[i][j] == 2) {
+                senken2Liste.push(maschinen[j]);
+              }
+              if (newMatrix[i][j] == 4) {
+                senken4Liste.push(maschinen[j]);
+              }
+              if (newMatrix[i][j] == 101) {
+                senken101Liste.push(maschinen[j]);
+              }
+            }
+            var maschinex = maschinen[i];
+            keyvaluepositions[maschinex].Senke1 = senken1Liste;
+            keyvaluepositions[maschinex].Senke2 = senken2Liste;
+            keyvaluepositions[maschinex].Senke3 = senken3Liste;
+            keyvaluepositions[maschinex].Senke4 = senken4Liste;
+            keyvaluepositions[maschinex].Senke101 = senken101Liste;
+          }   
+    for (let a=0; a<newMatrix[0].length; a++){
+      const quellen1Liste = [];
+      const quellen2Liste = [];
+      const quellen3Liste = [];
+      const quellen4Liste = [];
+      const quellen101Liste = [];
+      for (let b = 0; b< newMatrix.length; b++){
+        if (newMatrix[b][a] == 1){
+          quellen1Liste.push(maschinen[b])
+        }
+        else if (newMatrix[b][a] == 3){
+          quellen3Liste.push(maschinen[b]);
+        }
+        else if (newMatrix[b][a] == 2){
+            quellen2Liste.push(maschinen[b]);
+        }
+        else if (newMatrix[b][a] == 4){
+            quellen4Liste.push(maschinen[b]);
+        }
+        else if (newMatrix[b][a] == 101){
+            quellen101Liste.push(maschinen[b]);
+        }
+      }
+      var maschinex = maschinen[a];
+      keyvaluepositions[maschinex].Quelle1 = quellen1Liste;
+      keyvaluepositions[maschinex].Quelle2 = quellen2Liste;
+      keyvaluepositions[maschinex].Quelle3 = quellen3Liste;
+      keyvaluepositions[maschinex].Quelle4 = quellen4Liste;
+      keyvaluepositions[maschinex].Quelle101 = quellen101Liste;
+    }
+    return keyvaluepositions;
+    }     
+findAndStoreSenkenQuellen(newMatrix,maschinen,keyvaluepositions);
+
+
+
+// Kalkuliert die Pfade abhängig von der Gewichtung
+function findPaths(machineName, keyvaluepositions, property) {
+  const paths = [];
+  const machine = keyvaluepositions[machineName];
+  if (!machine) {
+    return paths;
+  }
+  const path = [machineName];
+  if (machine[property].length > 0) {
+    const nextMachineName = machine[property][0];
+    const nextPaths = findPaths(nextMachineName, keyvaluepositions, property);
+
+    for (const nextPath of nextPaths) {
+      paths.push([...path, ...nextPath]);
+    }
+  } else {
+    paths.push(path);
+  }
+  return paths;
+}
+
+
+
+  
+// Funktionen, die die Node Positions nach Richtungen berechnet
+function calcpositionshor_r (path, width){
+  const firstMachine = path[0];
+  for (let i = 0; i < path.length; i++) {
+    const machineName = path[i];
+    const currentMachine = keyvaluepositions[machineName];
+    const xOffset = i * width;
+    currentMachine.y = keyvaluepositions[firstMachine].y;
+    currentMachine.x = keyvaluepositions[firstMachine].x + xOffset;
+  }
+}
+
+function calcpositionshor_l (path, width){
+  const firstMachine = path[0];
+  for (let i = 0; i < path.length; i++) {
+    const machineName = path[i];
+    const currentMachine = keyvaluepositions[machineName];
+    const xOffset = i * width;
+    currentMachine.y = keyvaluepositions[firstMachine].y;
+    currentMachine.x = keyvaluepositions[firstMachine].x - xOffset;
+  }
+}
+
+function calcpositionssenkr_u(path, height) {
+    const firstMachine = path[0];
+    for (let i = 0; i < path.length; i++) {
+      const machineName = path[i];
+      const currentMachine = keyvaluepositions[machineName];
+      const yOffset = i * height;
+      // Setze den x-Wert der aktuellen Maschine auf den x-Wert der ersten Maschine (fixe Maschine)
+      currentMachine.x = keyvaluepositions[firstMachine].x;
+      // Setze den y-Wert der aktuellen Maschine entsprechend dem yOffset
+      currentMachine.y = keyvaluepositions[firstMachine].y + yOffset;
+    }
+  }
+
+function calcpositionssenkr_o (path, height){
+  const firstMachine = path[0];
+  for (let i = 0; i < path.length; i++) {
+    const machineName = path[i];
+    const currentMachine = keyvaluepositions[machineName];
+    const yOffset = i * height;
+    currentMachine.x = keyvaluepositions[firstMachine].x;
+    currentMachine.y = keyvaluepositions[firstMachine].y + yOffset;
+  }
+}
+
+
+
+
+// Bestimme für Hauptlinie die Pfade inklusive Aufteilung in Teilpfade
+// rote Pfeile
+const path1 = findPaths("Entlader", keyvaluepositions, "Senke1");
+innerPath1 = path1[0]; 
+const path1_hor_r = innerPath1.slice(0, innerPath1.indexOf(directionChange[0])+1);
+const path1_senkr_u = innerPath1.slice(innerPath1.indexOf(directionChange[0]), innerPath1.indexOf(directionChange[1]) + 1);
+const path1_hor_l = innerPath1.slice(innerPath1.indexOf(directionChange[1]), innerPath1.length);
+calcpositionshor_r(path1_hor_r, nodeWith);
+calcpositionssenkr_u(path1_senkr_u, nodeHeight);
+calcpositionshor_l(path1_hor_l, nodeWith);
+
+// Bestimme auf Basis der Hauptlinie die restlichen Pfade
+// gelbe Pfeile
+const path2_Entlader = findPaths("Entlader", keyvaluepositions,"Senke2" )[0];
+const path2_Auspacker = findPaths("Auspacker", keyvaluepositions, "Senke2")[0];
+
+function calcpositionssenkr_u_2(path){
+  const firstMachine = path[0];
+  const lastMachine = path[path.length-1];
+  const pathLength =path.length -2;
+    for (let i = 1; i < path.length -2; i++) {
+      const machineName = path[i];
+      const currentMachine = keyvaluepositions[machineName];
+      const diff = keyvaluepositions[lastMachine].y - keyvaluepositions[firstMachine].y;
+      const diffspace = diff / pathLength;
+      const yOffset = i * diffspace;
+      // Setze den x-Wert der aktuellen Maschine auf den x-Wert der ersten Maschine (fixe Maschine)
+      currentMachine.x = keyvaluepositions[firstMachine].x;
+      // Setze den y-Wert der aktuellen Maschine entsprechend dem yOffset
+      currentMachine.y = keyvaluepositions[firstMachine].y + yOffset;
+    }
+}
+
+
+calcpositionssenkr_u_2(path2_Entlader)
+calcpositionssenkr_u_2(path2_Auspacker)
+console.log(path2_Auspacker)
+
+
+
+
+// Key-Value Objekt in Ausgabeformat umwandeln
+// Maschinen und Positionen
+const data = {
+  nodes: []
+};
+
+for (const machineName in keyvaluepositions) {
+  if (keyvaluepositions.hasOwnProperty(machineName)) {
+    const machine = keyvaluepositions[machineName];
+    const node = {
+      key: data.nodes.length,
+      title: machineName,
+      x: machine.x,
+      y: machine.y,
+      attributes: [
+        {
+          label: "Technical Availability",
+          value: "%"
+        }
+      ]
+    };
+    //console.log(JSON.stringify(node, null, 2) + ','); // Ausgabe des aktuellen Knotens mit Komma
+    data.nodes.push(node);
+  }
+}
+
+//console.log(JSON.stringify(data, null, 2)); // Ausgabe des gesamten Datenobjekts
+
+// Verbindungen zwischen den Maschinen 
+const lines = [];
+
+for (let i = 0; i < newMatrix.length; i++) {
+  const row = newMatrix[i];
+
+  for (let j = 0; j < row.length; j++) {
+    if (row[j] !== '0') {
+      lines.push({ "from": i, "to": j });
+    }
+  }
+}
+//console.log(lines);
+
+    
+
     // UTILS
     function loadthis(that) {
         that.data = [{
-            "nodes": [
-                {
-
-                    "key": 0,
-              
-                    "title": "Abschieber",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 1,
-              
-                    "title": "Entlader",
-              
-                    "x": 1400,
-              
-                    "y": 1500,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 2,
-              
-                    "title": "Auspacker",
-              
-                    "x": 2800,
-              
-                    "y": 1500,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 3,
-              
-                    "title": "Sekamat",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 4,
-              
-                    "title": "Waschmaschine",
-              
-                    "x": 6300,
-              
-                    "y": 1500,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 5,
-              
-                    "title": "Linatronic",
-              
-                    "x": 6300,
-              
-                    "y": 2250,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 6,
-              
-                    "title": "Füller",
-              
-                    "x": 6300,
-              
-                    "y": 2750,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 7,
-              
-                    "title": "Etikettiermaschine",
-              
-                    "x": 6300,
-              
-                    "y": 3750,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 8,
-              
-                    "title": "Varioline",
-              
-                    "x": 5250,
-              
-                    "y": 3750,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 9,
-              
-                    "title": "Belader-rechts",
-              
-                    "x": 3500,
-              
-                    "y": 3750,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 10,
-              
-                    "title": "Belader-links",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 11,
-              
-                    "title": "Gebindewascher",
-              
-                    "x": 2800,
-              
-                    "y": 2400,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 12,
-              
-                    "title": "Abschrauber",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 13,
-              
-                    "title": "TBB-EG01",
-              
-                    "x": 3150,
-              
-                    "y": 1500,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 14,
-              
-                    "title": "TBB-EG02",
-              
-                    "x": 3500,
-              
-                    "y": 1500,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 15,
-              
-                    "title": "TBB-EG03",
-              
-                    "x": 3850,
-              
-                    "y": 1500,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 16,
-              
-                    "title": "TBB-EG04",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 17,
-              
-                    "title": "TBB-EG05",
-              
-                    "x": 4200,
-              
-                    "y": 1500,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 18,
-              
-                    "title": "TBB-EG06",
-              
-                    "x": 4550,
-              
-                    "y": 1500,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 19,
-              
-                    "title": "TBB-EG07",
-              
-                    "x": 4900,
-              
-                    "y": 1500,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 20,
-              
-                    "title": "TBB-EG08",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 21,
-              
-                    "title": "TBB-EG09",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 22,
-              
-                    "title": "TBB-EG10",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 23,
-              
-                    "title": "TBB-EG11",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 24,
-              
-                    "title": "TBB-EG12",
-              
-                    "x": 5250,
-              
-                    "y": 1500,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 25,
-              
-                    "title": "TBB-EG13",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 26,
-              
-                    "title": "TBB-EG14",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 27,
-              
-                    "title": "TBB-EG15",
-              
-                    "x": 5600,
-              
-                    "y": 1500,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 28,
-              
-                    "title": "TBB-EG16",
-              
-                    "x": 5950,
-              
-                    "y": 1500,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 29,
-              
-                    "title": "TBB-EG17",
-              
-                    "x": 6300,
-              
-                    "y": 1750,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 30,
-              
-                    "title": "TBB-EG18",
-              
-                    "x": 6300,
-              
-                    "y": 2000,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 31,
-              
-                    "title": "TBB-EG19",
-              
-                    "x": 6300,
-              
-                    "y": 2500,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 32,
-              
-                    "title": "TBB-EG20",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 33,
-              
-                    "title": "TBB-EG21",
-              
-                    "x": 6300,
-              
-                    "y": 3000,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 34,
-              
-                    "title": "TBB-EG22",
-              
-                    "x": 6300,
-              
-                    "y": 3250,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 35,
-              
-                    "title": "TBB-EG23",
-              
-                    "x": 6300,
-              
-                    "y": 3500,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 36,
-              
-                    "title": "TBB-EG24",
-              
-                    "x": 5950,
-              
-                    "y": 3750,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 37,
-              
-                    "title": "TBB-EG25",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 38,
-              
-                    "title": "TBB-EG26",
-              
-                    "x": 5600,
-              
-                    "y": 3750,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 39,
-              
-                    "title": "TBG-EG01",
-              
-                    "x": 1750,
-              
-                    "y": 1500,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 40,
-              
-                    "title": "TBG-EG02",
-              
-                    "x": 2100,
-              
-                    "y": 1500,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 41,
-              
-                    "title": "TBG-EG03",
-              
-                    "x": 2450,
-              
-                    "y": 1500,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 42,
-              
-                    "title": "TBG-EG04",
-              
-                    "x": 2800,
-              
-                    "y": 1950,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 43,
-              
-                    "title": "TBG-EG05",
-              
-                    "x": 2800,
-              
-                    "y": 2850,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 44,
-              
-                    "title": "TBG-EG06",
-              
-                    "x": 2800,
-              
-                    "y": 3300,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 45,
-              
-                    "title": "TBG-EG07",
-              
-                    "x": 4900,
-              
-                    "y": 3750,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 46,
-              
-                    "title": "TBG-EG08",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 47,
-              
-                    "title": "TBG-EG09",
-              
-                    "x": 4550,
-              
-                    "y": 3750,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 48,
-              
-                    "title": "TBG-EG10",
-              
-                    "x": 4200,
-              
-                    "y": 3750,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 49,
-              
-                    "title": "TBG-EG11",
-              
-                    "x": 3850,
-              
-                    "y": 3750,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 50,
-              
-                    "title": "TBG-EG12",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 51,
-              
-                    "title": "TBG-EG13",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 52,
-              
-                    "title": "TBG-EG14",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 53,
-              
-                    "title": "TBG-EG15",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 54,
-              
-                    "title": "TBP1-EG01",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 55,
-              
-                    "title": "TBP1-EG02",
-              
-                    "x": 1400,
-              
-                    "y": 1950,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 56,
-              
-                    "title": "TBP1-EG03",
-              
-                    "x": 1400,
-              
-                    "y": 2400,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 57,
-              
-                    "title": "TBP1-EG04",
-              
-                    "x": 1400,
-              
-                    "y": 2850,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 58,
-              
-                    "title": "TBP1-EG05",
-              
-                    "x": 1400,
-              
-                    "y": 3300,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 59,
-              
-                    "title": "TBP1-EG06",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 60,
-              
-                    "title": "TBP1-EG07",
-              
-                    "x": 3150,
-              
-                    "y": 3750,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 61,
-              
-                    "title": "TBP1-EG08",
-              
-                    "x": 2800,
-              
-                    "y": 3750,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 62,
-              
-                    "title": "TBP2-EG",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 63,
-              
-                    "title": "EXTERN01",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 64,
-              
-                    "title": "EXTERN02",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 65,
-              
-                    "title": "Extern-Aufgabe PAL",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 66,
-              
-                    "title": "Extern-Abgabe PAL",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 67,
-              
-                    "title": "EXTERN05",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 68,
-              
-                    "title": "EXTERN06",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 69,
-              
-                    "title": "EXTERN07",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 70,
-              
-                    "title": "EXTERN08",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 71,
-              
-                    "title": "EXTERN09",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 72,
-              
-                    "title": "EXTERN10",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  },
-              
-                  {
-              
-                    "key": 73,
-              
-                    "title": "EXTERN11",
-              
-                    "x": 0,
-              
-                    "y": 0,
-              
-                    "attributes": [
-              
-                      {
-              
-                        "label": "Technical Availability",
-              
-                        "value": "%"
-              
-                      }
-              
-                    ]
-              
-                  }
-	           ],
+            "nodes": [data],
+            "lines": [lines]
             
-          "lines": [
-            { from: 0, to: 16 },  { from: 1, to: 39 },  { from: 1, to: 55 },
-
-            { from: 2, to: 13 },  { from: 2, to: 42 },  { from: 4, to: 29 },
-          
-            { from: 5, to: 31 },  { from: 6, to: 32 },  { from: 6, to: 33 },
-          
-            { from: 7, to: 36 },  { from: 8, to: 45 },  { from: 9, to: 60 },
-          
-            { from: 10, to: 60 }, { from: 11, to: 43 }, { from: 12, to: 26 },
-          
-            { from: 13, to: 14 }, { from: 14, to: 15 }, { from: 14, to: 23 },
-          
-            { from: 15, to: 17 }, { from: 16, to: 17 }, { from: 17, to: 18 },
-          
-            { from: 18, to: 19 }, { from: 19, to: 20 }, { from: 19, to: 21 },
-          
-            { from: 19, to: 22 }, { from: 19, to: 24 }, { from: 23, to: 34 },
-          
-            { from: 24, to: 25 }, { from: 24, to: 27 }, { from: 25, to: 12 },
-          
-            { from: 26, to: 28 }, { from: 27, to: 28 }, { from: 28, to: 4 },
-          
-            { from: 29, to: 30 }, { from: 30, to: 5 },  { from: 31, to: 6 },
-          
-            { from: 33, to: 34 }, { from: 34, to: 35 }, { from: 34, to: 37 },
-          
-            { from: 35, to: 7 },  { from: 36, to: 38 }, { from: 38, to: 8 },
-          
-            { from: 39, to: 40 }, { from: 40, to: 41 }, { from: 41, to: 2 },
-          
-            { from: 42, to: 11 }, { from: 43, to: 44 }, { from: 43, to: 46 },
-          
-            { from: 44, to: 53 }, { from: 45, to: 47 }, { from: 46, to: 47 },
-          
-            { from: 47, to: 48 }, { from: 47, to: 50 }, { from: 48, to: 49 },
-          
-            { from: 49, to: 9 },  { from: 50, to: 51 }, { from: 51, to: 10 },
-          
-            { from: 53, to: 8 },  { from: 54, to: 1 },  { from: 55, to: 56 },
-          
-            { from: 56, to: 57 }, { from: 57, to: 58 }, { from: 58, to: 59 },
-          
-            { from: 59, to: 9 },  { from: 59, to: 10 }, { from: 60, to: 61 },
-          
-            { from: 61, to: 66 }, { from: 63, to: 0 },  { from: 64, to: 62 },
-          
-            { from: 65, to: 54 },
-            ]
         }];
         var that_ = that;
 
