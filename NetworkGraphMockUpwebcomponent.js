@@ -534,7 +534,7 @@ for (let j = 0; j < row.length; j++) {
   
 
   // UTILS
-  function loadthis(that) {
+  function loadthis(that, datam, lines) {
       that.data = [{"nodes":[that.datam], "lines": [that.linesm]
       }];
       var that_ = that;
