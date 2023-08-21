@@ -518,14 +518,14 @@ if (keyvaluepositions.hasOwnProperty(machineName)) {
 //console.log(JSON.stringify(data, null, 2)); // Ausgabe des gesamten Datenobjekts
 
 // Verbindungen zwischen den Maschinen 
-const lines = [];
+const linesm = [];
 
 for (let i = 0; i < newMatrix.length; i++) {
 const row = newMatrix[i];
 
 for (let j = 0; j < row.length; j++) {
   if (row[j] !== '0') {
-    lines.push({ "from": i, "to": j });
+    linesm.push({ "from": i, "to": j });
   }
 }
 }
@@ -535,7 +535,7 @@ for (let j = 0; j < row.length; j++) {
 
   // UTILS
   function loadthis(that) {
-      that.data = [{"nodes":[that.datam], "lines": [that.lines]
+      that.data = [{"nodes":[that.datam], "lines": [that.linesm]
       }];
       var that_ = that;
 
