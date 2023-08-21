@@ -2001,78 +2001,53 @@
 	           ],
             
           "lines": [
-              {"from": 0, "to": 16},
-	      {"from": 0, "to": 62},
-              {"from": 1, "to": 39},
-              {"from": 1, "to": 55},
-              {"from": 2, "to": 13},
-              {"from": 2, "to": 42},
-              {"from": 4, "to": 29},
-              {"from": 5, "to": 31},
-              {"from": 6, "to": 32},
-              {"from": 6, "to": 33},
-              {"from": 7, "to": 36},
-              {"from": 8, "to": 45},
-              {"from": 9, "to": 60},
-              {"from": 11, "to": 43},
-              {"from": 12, "to": 26},
-              {"from": 13, "to": 14},
-              {"from": 14, "to": 15},
-              {"from": 14, "to": 23},
-              {"from": 15, "to": 17},
-              {"from": 17, "to": 18},
-              {"from": 16, "to": 17},
-              {"from": 18, "to": 19},
-              {"from": 19, "to": 20},
-              {"from": 19, "to": 21},
-              {"from": 19, "to": 22},
-              {"from": 19, "to": 24},              
-              {"from": 23, "to": 34},
-              {"from": 24, "to": 25},
-              {"from": 24, "to": 27},
-              {"from": 25, "to": 12},
-              {"from": 26, "to": 28},
-              {"from": 27, "to": 28},
-              {"from": 28, "to": 4},
-              {"from": 29, "to": 30},
-              {"from": 30, "to": 5},
-              {"from": 31, "to": 6},
-              {"from": 33, "to": 34},
-              {"from": 34, "to": 35},
-              {"from": 34, "to": 37},
-              {"from": 35, "to": 7},
-              {"from": 36, "to": 38},
-	      {"from": 37, "to": 38},
-              {"from": 38, "to": 8},
-              {"from": 39, "to": 40},
-              {"from": 40, "to": 41},
-              {"from": 41, "to": 2},
-              {"from": 42, "to": 11},
-              {"from": 43, "to": 44},
-              {"from": 43, "to": 46},
-              {"from": 44, "to": 53},
-              {"from": 45, "to": 47},
-              {"from": 46, "to": 47},
-              {"from": 47, "to": 48},
-              {"from": 47, "to": 50},
-              {"from": 48, "to": 49},
-              {"from": 49, "to": 9},
-              {"from": 50, "to": 51},
-              {"from": 51, "to": 10},
-              {"from": 53, "to": 8},
-              {"from": 54, "to": 1},
-              {"from": 55, "to": 56},
-              {"from": 56, "to": 57},
-              {"from": 57, "to": 58},
-              {"from": 58, "to": 59},
-              {"from": 59, "to": 9},
-              {"from": 59, "to": 10},
-              {"from": 60, "to": 61},
-	      {"from": 63, "to": 0},
-	      {"from": 64, "to": 6},
-	      {"from": 66, "to": 6},
-	      {"from": 65, "to": 64},
-	      {"from": 65, "to": 66},
+            { from: 0, to: 16 },  { from: 1, to: 39 },  { from: 1, to: 55 },
+
+            { from: 2, to: 13 },  { from: 2, to: 42 },  { from: 4, to: 29 },
+          
+            { from: 5, to: 31 },  { from: 6, to: 32 },  { from: 6, to: 33 },
+          
+            { from: 7, to: 36 },  { from: 8, to: 45 },  { from: 9, to: 60 },
+          
+            { from: 10, to: 60 }, { from: 11, to: 43 }, { from: 12, to: 26 },
+          
+            { from: 13, to: 14 }, { from: 14, to: 15 }, { from: 14, to: 23 },
+          
+            { from: 15, to: 17 }, { from: 16, to: 17 }, { from: 17, to: 18 },
+          
+            { from: 18, to: 19 }, { from: 19, to: 20 }, { from: 19, to: 21 },
+          
+            { from: 19, to: 22 }, { from: 19, to: 24 }, { from: 23, to: 34 },
+          
+            { from: 24, to: 25 }, { from: 24, to: 27 }, { from: 25, to: 12 },
+          
+            { from: 26, to: 28 }, { from: 27, to: 28 }, { from: 28, to: 4 },
+          
+            { from: 29, to: 30 }, { from: 30, to: 5 },  { from: 31, to: 6 },
+          
+            { from: 33, to: 34 }, { from: 34, to: 35 }, { from: 34, to: 37 },
+          
+            { from: 35, to: 7 },  { from: 36, to: 38 }, { from: 38, to: 8 },
+          
+            { from: 39, to: 40 }, { from: 40, to: 41 }, { from: 41, to: 2 },
+          
+            { from: 42, to: 11 }, { from: 43, to: 44 }, { from: 43, to: 46 },
+          
+            { from: 44, to: 53 }, { from: 45, to: 47 }, { from: 46, to: 47 },
+          
+            { from: 47, to: 48 }, { from: 47, to: 50 }, { from: 48, to: 49 },
+          
+            { from: 49, to: 9 },  { from: 50, to: 51 }, { from: 51, to: 10 },
+          
+            { from: 53, to: 8 },  { from: 54, to: 1 },  { from: 55, to: 56 },
+          
+            { from: 56, to: 57 }, { from: 57, to: 58 }, { from: 58, to: 59 },
+          
+            { from: 59, to: 9 },  { from: 59, to: 10 }, { from: 60, to: 61 },
+          
+            { from: 61, to: 66 }, { from: 63, to: 0 },  { from: 64, to: 62 },
+          
+            { from: 65, to: 54 },
             ]
         }];
         var that_ = that;
