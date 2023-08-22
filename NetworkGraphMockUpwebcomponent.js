@@ -235,7 +235,7 @@
   // Liest das csv-file ein und wandelt es in eine matrix um
   const fs = require('fs');
   function readCSV(filePath) {
-    const csvData = fs.writeFileSync(filePath, 'utf-8');
+    const csvData = fs.readFileSync(filePath, 'utf-8');
     const rows = csvData.trim().split('\n');
     const matrix = [];
     for (let i = 0; i < rows.length; i++) {
