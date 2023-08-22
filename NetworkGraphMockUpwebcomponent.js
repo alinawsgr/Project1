@@ -484,8 +484,8 @@
   }
 
 
-  calcpositionssenkr_u_2(path2_Entlader)
-  calcpositionssenkr_u_2(path2_Auspacker)
+  calcpositionssenkr_u_2(path2_Entlader);
+  calcpositionssenkr_u_2(path2_Auspacker);
   
 
 
