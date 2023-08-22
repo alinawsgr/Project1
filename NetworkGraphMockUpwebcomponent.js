@@ -533,7 +533,7 @@
 
   // UTILS
   function loadthis(that) {
-      that.data = [{datam, "lines": [linesm]
+      that.data = [{datam, "lines": linesm
       }];
       var that_ = that;
 
