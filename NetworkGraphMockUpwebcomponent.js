@@ -252,7 +252,7 @@
 
   // Verarbeitet Matrix zu Key-Value Objekt mit x und y Positionen
   // Zugriff auf Inhalte der Matrix -> Zeilen: matrix[i], Spalten: matrix.map(row => row[i]).slice(x);
-  matrix =readCSV('C:\\Users\\k0940095\\OneDrive - Krones AG\\SAC\\Linie - GraphExcel-alscsv.csv');
+  matrix =readCSV('C:\\Users\\k0940095\\OneDrive - Krones AG\\SAC\\Linie - Graph\\Excel-alscsv.csv');
   // enthält alle Maschinen-Namen
   const maschinen = matrix.map(row => row[4]).slice(2);
   // enthalten fixe Positionen und Abhängigkeiten
