@@ -218,320 +218,320 @@
 
   }
   customElements.define("sac-mock-network-graph", MockUpNetworkGraph);
+  
+
+  
 
   /////////////////////////////// VORBEREITUNG /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // festzulegende und fixe Variablen 
+  // Größe Platzhalter
+  const nodeWith = 350;
+  const nodeHeight = 250;
+  // fixe Positionen
+  var xEntladerPosition = 1400;
+  var yEntladerPosition = 1500;
+  var directionChange = ['Waschmaschine', 'Etikettiermaschine']  // speichert die Maschinen, wo Richtungswechsel stattfindet
 
-// festzulegende und fixe Variablen 
-// Größe Platzhalter
-const nodeWith = 350;
-const nodeHeight = 250;
-// fixe Positionen
-var xEntladerPosition = 1400;
-var yEntladerPosition = 1500;
-var directionChange = ['Waschmaschine', 'Etikettiermaschine']  // speichert die Maschinen, wo Richtungswechsel stattfindet
-
-// Liest das csv-file ein und wandelt es in eine matrix um
-const fs = require('fs');
-function readCSV(filePath) {
-  const csvData = fs.readFileSync(filePath, 'utf-8');
-  const rows = csvData.trim().split('\n');
-  const matrix = [];
-  for (let i = 0; i < rows.length; i++) {
-    const columns = rows[i].split(';');
-    const updatedColumns = [];
-    for (let j = 0; j < columns.length; j++) {
-      const value = columns[j].trim() === '' ? '0' : columns[j].trim();
-      updatedColumns.push(value);
-    }
-    matrix.push(updatedColumns);
-  }
-  return matrix;
-}
-
-// Verarbeitet Matrix zu Key-Value Objekt mit x und y Positionen
-// Zugriff auf Inhalte der Matrix -> Zeilen: matrix[i], Spalten: matrix.map(row => row[i]).slice(x);
-matrix =readCSV('C:\\Users\\k0940095\\OneDrive - Krones AG\\SAC\\Linie - GraphExcel-alscsv.csv');
-// enthält alle Maschinen-Namen
-const maschinen = matrix.map(row => row[4]).slice(2);
-// enthalten fixe Positionen und Abhängigkeiten
-const xfixPositions = matrix.map(row => row[1]).slice(2);
-const yfixPositions = matrix.map(row => row[2]).slice(2);
-// enthalten fixe Maschinen
-const fixemaschinen = matrix.slice(2).map(row => row[3]);
-const fixmachinesstring = [];
-for (let i = 0; i < fixemaschinen.length; i++) {
-if (fixemaschinen[i] != 0) {
-  fixmachinesstring.push(maschinen[i]);
-}
-}
-// Key-Value Objekt, das alle Koordinaten der einzelnen Maschinen beinhaltet
-const keyvaluepositions = [];
-for (let i = 0; i < maschinen.length; i++) {
-const name = maschinen[i];
-if (name === 'Entlader') {
-
-  keyvaluepositions[name] = { x: xEntladerPosition, y: yEntladerPosition, Quelle:"", Senke:"" };
-} else {
-  keyvaluepositions[name] = { x: 0, y: 0, Quelle1:"", Senke1:"" };
-}
-}
-
-
-
-/////////////////////////////////////////////////// FUNKTIONEN /////////////////////////////////////////////////////////////////////////
-
-// Funktion, die positionnen und Abhängigkeiten von fixen Maschinen berechnet
-function calculatedependencies(matrix, keyvaluepositions) {
-  for (let i = 0; i < yfixPositions.length; i++) {
-    if (yfixPositions[i] === 'Entlader') {
-        keyvaluepositions[maschinen[i]].y = keyvaluepositions['Entlader'].y;
-    }else if (yfixPositions[i] === 'Ettikettiermaschine'){
-      keyvaluepositions[maschinen[i]].y = keyvaluepositions['Ettiketiermaschine'].y;
-    }
-  }
-  for (let i = 0; i < xfixPositions.length; i++) {
-      if (xfixPositions[i] === 'Entlader') {
-        keyvaluepositions[maschinen[i]].x = keyvaluepositions['Entlader'].x;
-      }else if (xfixPositions[i] === 'Waschmaschine'){
-          keyvaluepositions[maschinen[i]].x = keyvaluepositions['Waschmaschine'].x;
-      }else if (xfixPositions[i] === 'Auspacker'){
-          keyvaluepositions[maschinen[i]].x = keyvaluepositions['Auspacker'].x;
+  // Liest das csv-file ein und wandelt es in eine matrix um
+  const fs = require('fs');
+  function readCSV(filePath) {
+    const csvData = fs.readFileSync(filePath, 'utf-8');
+    const rows = csvData.trim().split('\n');
+    const matrix = [];
+    for (let i = 0; i < rows.length; i++) {
+      const columns = rows[i].split(';');
+      const updatedColumns = [];
+      for (let j = 0; j < columns.length; j++) {
+        const value = columns[j].trim() === '' ? '0' : columns[j].trim();
+        updatedColumns.push(value);
       }
+      matrix.push(updatedColumns);
+    }
+    return matrix;
+  }
+
+  // Verarbeitet Matrix zu Key-Value Objekt mit x und y Positionen
+  // Zugriff auf Inhalte der Matrix -> Zeilen: matrix[i], Spalten: matrix.map(row => row[i]).slice(x);
+  matrix =readCSV('C:\\Users\\k0940095\\OneDrive - Krones AG\\SAC\\Linie - GraphExcel-alscsv.csv');
+  // enthält alle Maschinen-Namen
+  const maschinen = matrix.map(row => row[4]).slice(2);
+  // enthalten fixe Positionen und Abhängigkeiten
+  const xfixPositions = matrix.map(row => row[1]).slice(2);
+  const yfixPositions = matrix.map(row => row[2]).slice(2);
+  // enthalten fixe Maschinen
+  const fixemaschinen = matrix.slice(2).map(row => row[3]);
+  const fixmachinesstring = [];
+  for (let i = 0; i < fixemaschinen.length; i++) {
+  if (fixemaschinen[i] != 0) {
+  fixmachinesstring.push(maschinen[i]);
+  }
+  }
+  // Key-Value Objekt, das alle Koordinaten der einzelnen Maschinen beinhaltet
+  const keyvaluepositions = [];
+  for (let i = 0; i < maschinen.length; i++) {
+  const name = maschinen[i];
+  if (name === 'Entlader') {
+
+    keyvaluepositions[name] = { x: xEntladerPosition, y: yEntladerPosition, Quelle:"", Senke:"" };
+  } else {
+    keyvaluepositions[name] = { x: 0, y: 0, Quelle1:"", Senke1:"" };
+  }
+  }
+
+
+
+  /////////////////////////////////////////////////// FUNKTIONEN /////////////////////////////////////////////////////////////////////////
+
+  // Funktion, die positionnen und Abhängigkeiten von fixen Maschinen berechnet
+  function calculatedependencies(matrix, keyvaluepositions) {
+    for (let i = 0; i < yfixPositions.length; i++) {
+      if (yfixPositions[i] === 'Entlader') {
+          keyvaluepositions[maschinen[i]].y = keyvaluepositions['Entlader'].y;
+      }else if (yfixPositions[i] === 'Ettikettiermaschine'){
+        keyvaluepositions[maschinen[i]].y = keyvaluepositions['Ettiketiermaschine'].y;
+      }
+    }
+    for (let i = 0; i < xfixPositions.length; i++) {
+        if (xfixPositions[i] === 'Entlader') {
+          keyvaluepositions[maschinen[i]].x = keyvaluepositions['Entlader'].x;
+        }else if (xfixPositions[i] === 'Waschmaschine'){
+            keyvaluepositions[maschinen[i]].x = keyvaluepositions['Waschmaschine'].x;
+        }else if (xfixPositions[i] === 'Auspacker'){
+            keyvaluepositions[maschinen[i]].x = keyvaluepositions['Auspacker'].x;
+        }
+    }
+      return keyvaluepositions;
+  }
+
+  calculatedependencies(matrix,keyvaluepositions);
+
+
+  /// Funktion, die Senke in das Key-Value Objekt einträgt
+  const newMatrix = matrix.map(row => row.slice(8));
+  newMatrix.splice(0,2);
+  function findAndStoreSenkenQuellen(newMatrix,maschinen,keyvaluepositions){
+    for (let i = 0; i < newMatrix[0].length; i++) {
+        const senken1Liste = [];
+        const senken3Liste = [];
+        const senken2Liste = [];
+        const senken4Liste = [];
+        const senken101Liste = [];
+            for (let j = 0; j < newMatrix[i].length; j++) {
+              if (newMatrix[i][j] == 1) {
+                senken1Liste.push(maschinen[j]);
+              } 
+              if (newMatrix[i][j] == 3) {
+                senken3Liste.push(maschinen[j]);
+              }
+              if (newMatrix[i][j] == 2) {
+                senken2Liste.push(maschinen[j]);
+              }
+              if (newMatrix[i][j] == 4) {
+                senken4Liste.push(maschinen[j]);
+              }
+              if (newMatrix[i][j] == 101) {
+                senken101Liste.push(maschinen[j]);
+              }
+            }
+            var maschinex = maschinen[i];
+            keyvaluepositions[maschinex].Senke1 = senken1Liste;
+            keyvaluepositions[maschinex].Senke2 = senken2Liste;
+            keyvaluepositions[maschinex].Senke3 = senken3Liste;
+            keyvaluepositions[maschinex].Senke4 = senken4Liste;
+            keyvaluepositions[maschinex].Senke101 = senken101Liste;
+          }   
+    for (let a=0; a<newMatrix[0].length; a++){
+      const quellen1Liste = [];
+      const quellen2Liste = [];
+      const quellen3Liste = [];
+      const quellen4Liste = [];
+      const quellen101Liste = [];
+      for (let b = 0; b< newMatrix.length; b++){
+        if (newMatrix[b][a] == 1){
+          quellen1Liste.push(maschinen[b])
+        }
+        else if (newMatrix[b][a] == 3){
+          quellen3Liste.push(maschinen[b]);
+        }
+        else if (newMatrix[b][a] == 2){
+          quellen2Liste.push(maschinen[b]);
+        }
+        else if (newMatrix[b][a] == 4){
+          quellen4Liste.push(maschinen[b]);
+        }
+        else if (newMatrix[b][a] == 101){
+          quellen101Liste.push(maschinen[b]);
+        }
+      }
+      var maschinex = maschinen[a];
+      keyvaluepositions[maschinex].Quelle1 = quellen1Liste;
+      keyvaluepositions[maschinex].Quelle2 = quellen2Liste;
+      keyvaluepositions[maschinex].Quelle3 = quellen3Liste;
+      keyvaluepositions[maschinex].Quelle4 = quellen4Liste;
+      keyvaluepositions[maschinex].Quelle101 = quellen101Liste;
     }
     return keyvaluepositions;
-}
+    }     
+  findAndStoreSenkenQuellen(newMatrix,maschinen,keyvaluepositions);
 
-calculatedependencies(matrix,keyvaluepositions);
 
 
-/// Funktion, die Senke in das Key-Value Objekt einträgt
-const newMatrix = matrix.map(row => row.slice(8));
-newMatrix.splice(0,2);
-function findAndStoreSenkenQuellen(newMatrix,maschinen,keyvaluepositions){
-  for (let i = 0; i < newMatrix[0].length; i++) {
-      const senken1Liste = [];
-      const senken3Liste = [];
-      const senken2Liste = [];
-      const senken4Liste = [];
-      const senken101Liste = [];
-          for (let j = 0; j < newMatrix[i].length; j++) {
-            if (newMatrix[i][j] == 1) {
-              senken1Liste.push(maschinen[j]);
-            } 
-            if (newMatrix[i][j] == 3) {
-              senken3Liste.push(maschinen[j]);
-            }
-            if (newMatrix[i][j] == 2) {
-              senken2Liste.push(maschinen[j]);
-            }
-            if (newMatrix[i][j] == 4) {
-              senken4Liste.push(maschinen[j]);
-            }
-            if (newMatrix[i][j] == 101) {
-              senken101Liste.push(maschinen[j]);
-            }
-          }
-          var maschinex = maschinen[i];
-          keyvaluepositions[maschinex].Senke1 = senken1Liste;
-          keyvaluepositions[maschinex].Senke2 = senken2Liste;
-          keyvaluepositions[maschinex].Senke3 = senken3Liste;
-          keyvaluepositions[maschinex].Senke4 = senken4Liste;
-          keyvaluepositions[maschinex].Senke101 = senken101Liste;
-        }   
-  for (let a=0; a<newMatrix[0].length; a++){
-    const quellen1Liste = [];
-    const quellen2Liste = [];
-    const quellen3Liste = [];
-    const quellen4Liste = [];
-    const quellen101Liste = [];
-    for (let b = 0; b< newMatrix.length; b++){
-      if (newMatrix[b][a] == 1){
-        quellen1Liste.push(maschinen[b])
-      }
-      else if (newMatrix[b][a] == 3){
-        quellen3Liste.push(maschinen[b]);
-      }
-      else if (newMatrix[b][a] == 2){
-          quellen2Liste.push(maschinen[b]);
-      }
-      else if (newMatrix[b][a] == 4){
-          quellen4Liste.push(maschinen[b]);
-      }
-      else if (newMatrix[b][a] == 101){
-          quellen101Liste.push(maschinen[b]);
-      }
+  // Kalkuliert die Pfade abhängig von der Gewichtung
+  function findPaths(machineName, keyvaluepositions, property) {
+  const paths = [];
+  const machine = keyvaluepositions[machineName];
+  if (!machine) {
+    return paths;
+  }
+  const path = [machineName];
+  if (machine[property].length > 0) {
+    const nextMachineName = machine[property][0];
+    const nextPaths = findPaths(nextMachineName, keyvaluepositions, property);
+
+    for (const nextPath of nextPaths) {
+      paths.push([...path, ...nextPath]);
     }
-    var maschinex = maschinen[a];
-    keyvaluepositions[maschinex].Quelle1 = quellen1Liste;
-    keyvaluepositions[maschinex].Quelle2 = quellen2Liste;
-    keyvaluepositions[maschinex].Quelle3 = quellen3Liste;
-    keyvaluepositions[maschinex].Quelle4 = quellen4Liste;
-    keyvaluepositions[maschinex].Quelle101 = quellen101Liste;
+  } else {
+    paths.push(path);
   }
-  return keyvaluepositions;
-  }     
-findAndStoreSenkenQuellen(newMatrix,maschinen,keyvaluepositions);
-
-
-
-// Kalkuliert die Pfade abhängig von der Gewichtung
-function findPaths(machineName, keyvaluepositions, property) {
-const paths = [];
-const machine = keyvaluepositions[machineName];
-if (!machine) {
   return paths;
-}
-const path = [machineName];
-if (machine[property].length > 0) {
-  const nextMachineName = machine[property][0];
-  const nextPaths = findPaths(nextMachineName, keyvaluepositions, property);
-
-  for (const nextPath of nextPaths) {
-    paths.push([...path, ...nextPath]);
   }
-} else {
-  paths.push(path);
-}
-return paths;
-}
 
 
 
 
-// Funktionen, die die Node Positions nach Richtungen berechnet
-function calcpositionshor_r (path, width){
-const firstMachine = path[0];
-for (let i = 0; i < path.length; i++) {
-  const machineName = path[i];
-  const currentMachine = keyvaluepositions[machineName];
-  const xOffset = i * width;
-  currentMachine.y = keyvaluepositions[firstMachine].y;
-  currentMachine.x = keyvaluepositions[firstMachine].x + xOffset;
-}
-}
-
-function calcpositionshor_l (path, width){
-const firstMachine = path[0];
-for (let i = 0; i < path.length; i++) {
-  const machineName = path[i];
-  const currentMachine = keyvaluepositions[machineName];
-  const xOffset = i * width;
-  currentMachine.y = keyvaluepositions[firstMachine].y;
-  currentMachine.x = keyvaluepositions[firstMachine].x - xOffset;
-}
-}
-
-function calcpositionssenkr_u(path, height) {
+  // Funktionen, die die Node Positions nach Richtungen berechnet
+  function calcpositionshor_r (path, width){
   const firstMachine = path[0];
   for (let i = 0; i < path.length; i++) {
     const machineName = path[i];
     const currentMachine = keyvaluepositions[machineName];
-    const yOffset = i * height;
-    // Setze den x-Wert der aktuellen Maschine auf den x-Wert der ersten Maschine (fixe Maschine)
-    currentMachine.x = keyvaluepositions[firstMachine].x;
-    // Setze den y-Wert der aktuellen Maschine entsprechend dem yOffset
-    currentMachine.y = keyvaluepositions[firstMachine].y + yOffset;
+    const xOffset = i * width;
+    currentMachine.y = keyvaluepositions[firstMachine].y;
+    currentMachine.x = keyvaluepositions[firstMachine].x + xOffset;
   }
-}
+  }
 
-function calcpositionssenkr_o (path, height){
-const firstMachine = path[0];
-for (let i = 0; i < path.length; i++) {
-  const machineName = path[i];
-  const currentMachine = keyvaluepositions[machineName];
-  const yOffset = i * height;
-  currentMachine.x = keyvaluepositions[firstMachine].x;
-  currentMachine.y = keyvaluepositions[firstMachine].y + yOffset;
-}
-}
-
-
-
-
-// Bestimme für Hauptlinie die Pfade inklusive Aufteilung in Teilpfade
-// rote Pfeile
-const path1 = findPaths("Entlader", keyvaluepositions, "Senke1");
-innerPath1 = path1[0]; 
-const path1_hor_r = innerPath1.slice(0, innerPath1.indexOf(directionChange[0])+1);
-const path1_senkr_u = innerPath1.slice(innerPath1.indexOf(directionChange[0]), innerPath1.indexOf(directionChange[1]) + 1);
-const path1_hor_l = innerPath1.slice(innerPath1.indexOf(directionChange[1]), innerPath1.length);
-calcpositionshor_r(path1_hor_r, nodeWith);
-calcpositionssenkr_u(path1_senkr_u, nodeHeight);
-calcpositionshor_l(path1_hor_l, nodeWith);
-
-// Bestimme auf Basis der Hauptlinie die restlichen Pfade
-// gelbe Pfeile
-const path2_Entlader = findPaths("Entlader", keyvaluepositions,"Senke2" )[0];
-const path2_Auspacker = findPaths("Auspacker", keyvaluepositions, "Senke2")[0];
-
-function calcpositionssenkr_u_2(path){
-const firstMachine = path[0];
-const lastMachine = path[path.length-1];
-const pathLength =path.length -2;
-  for (let i = 1; i < path.length -2; i++) {
+  function calcpositionshor_l (path, width){
+  const firstMachine = path[0];
+  for (let i = 0; i < path.length; i++) {
     const machineName = path[i];
     const currentMachine = keyvaluepositions[machineName];
-    const diff = keyvaluepositions[lastMachine].y - keyvaluepositions[firstMachine].y;
-    const diffspace = diff / pathLength;
-    const yOffset = i * diffspace;
-    // Setze den x-Wert der aktuellen Maschine auf den x-Wert der ersten Maschine (fixe Maschine)
-    currentMachine.x = keyvaluepositions[firstMachine].x;
-    // Setze den y-Wert der aktuellen Maschine entsprechend dem yOffset
-    currentMachine.y = keyvaluepositions[firstMachine].y + yOffset;
+    const xOffset = i * width;
+    currentMachine.y = keyvaluepositions[firstMachine].y;
+    currentMachine.x = keyvaluepositions[firstMachine].x - xOffset;
   }
-}
-
-
-calcpositionssenkr_u_2(path2_Entlader)
-calcpositionssenkr_u_2(path2_Auspacker)
-console.log(path2_Auspacker)
-
-
-
-
-// Key-Value Objekt in Ausgabeformat umwandeln
-// Maschinen und Positionen
-const datam = {
-nodes: []
-};
-
-for (const machineName in keyvaluepositions) {
-if (keyvaluepositions.hasOwnProperty(machineName)) {
-  const machine = keyvaluepositions[machineName];
-  const node = {
-    key: data.nodes.length,
-    title: machineName,
-    x: machine.x,
-    y: machine.y,
-    attributes: [
-      {
-        label: "Technical Availability",
-        value: "%"
-      }
-    ]
-  };
-  //console.log(JSON.stringify(node, null, 2) + ','); // Ausgabe des aktuellen Knotens mit Komma
-  datam.nodes.push(node);
-}
-}
-
-//console.log(JSON.stringify(data, null, 2)); // Ausgabe des gesamten Datenobjekts
-
-// Verbindungen zwischen den Maschinen 
-const linesm = [];
-
-for (let i = 0; i < newMatrix.length; i++) {
-const row = newMatrix[i];
-
-for (let j = 0; j < row.length; j++) {
-  if (row[j] !== '0') {
-    linesm.push({ "from": i, "to": j });
   }
-}
-}
-//console.log(lines);
 
+  function calcpositionssenkr_u(path, height) {
+    const firstMachine = path[0];
+    for (let i = 0; i < path.length; i++) {
+      const machineName = path[i];
+      const currentMachine = keyvaluepositions[machineName];
+      const yOffset = i * height;
+      // Setze den x-Wert der aktuellen Maschine auf den x-Wert der ersten Maschine (fixe Maschine)
+      currentMachine.x = keyvaluepositions[firstMachine].x;
+      // Setze den y-Wert der aktuellen Maschine entsprechend dem yOffset
+      currentMachine.y = keyvaluepositions[firstMachine].y + yOffset;
+    }
+  }
+
+  function calcpositionssenkr_o (path, height){
+    const firstMachine = path[0];
+    for (let i = 0; i < path.length; i++) {
+      const machineName = path[i];
+      const currentMachine = keyvaluepositions[machineName];
+      const yOffset = i * height;
+      currentMachine.x = keyvaluepositions[firstMachine].x;
+      currentMachine.y = keyvaluepositions[firstMachine].y + yOffset;
+    }
+  }
+
+
+
+
+  // Bestimme für Hauptlinie die Pfade inklusive Aufteilung in Teilpfade
+  // rote Pfeile
+  const path1 = findPaths("Entlader", keyvaluepositions, "Senke1");
+  innerPath1 = path1[0]; 
+  const path1_hor_r = innerPath1.slice(0, innerPath1.indexOf(directionChange[0])+1);
+  const path1_senkr_u = innerPath1.slice(innerPath1.indexOf(directionChange[0]), innerPath1.indexOf(directionChange[1]) + 1);
+  const path1_hor_l = innerPath1.slice(innerPath1.indexOf(directionChange[1]), innerPath1.length);
+  calcpositionshor_r(path1_hor_r, nodeWith);
+  calcpositionssenkr_u(path1_senkr_u, nodeHeight);
+  calcpositionshor_l(path1_hor_l, nodeWith);
+
+  // Bestimme auf Basis der Hauptlinie die restlichen Pfade
+  // gelbe Pfeile
+  const path2_Entlader = findPaths("Entlader", keyvaluepositions,"Senke2" )[0];
+  const path2_Auspacker = findPaths("Auspacker", keyvaluepositions, "Senke2")[0];
+
+  function calcpositionssenkr_u_2(path){
+    const firstMachine = path[0];
+    const lastMachine = path[path.length-1];
+    const pathLength =path.length -2;
+    for (let i = 1; i < path.length -2; i++) {
+       const machineName = path[i];
+       const currentMachine = keyvaluepositions[machineName];
+       const diff = keyvaluepositions[lastMachine].y - keyvaluepositions[firstMachine].y;
+       const diffspace = diff / pathLength;
+       const yOffset = i * diffspace;
+      // Setze den x-Wert der aktuellen Maschine auf den x-Wert der ersten Maschine (fixe Maschine)
+      currentMachine.x = keyvaluepositions[firstMachine].x;
+      // Setze den y-Wert der aktuellen Maschine entsprechend dem yOffset
+      currentMachine.y = keyvaluepositions[firstMachine].y + yOffset;
+    }
+  }
+
+
+  calcpositionssenkr_u_2(path2_Entlader)
+  calcpositionssenkr_u_2(path2_Auspacker)
   
+
+
+
+  // Key-Value Objekt in Ausgabeformat umwandeln
+  // Maschinen und Positionen
+  const datam = {
+  nodes: []
+  };
+
+  for (const machineName in keyvaluepositions) {
+    if (keyvaluepositions.hasOwnProperty(machineName)) {
+      const machine = keyvaluepositions[machineName];
+      const node = {
+        key: datam.nodes.length,
+        title: machineName,
+        x: machine.x,
+        y: machine.y,
+        attributes: [
+          {
+            label: "Technical Availability",
+            value: "%"
+          }
+        ]
+      };
+      //console.log(JSON.stringify(node, null, 2) + ','); // Ausgabe des aktuellen Knotens mit Komma
+      datam.nodes.push(node);
+    }
+  }
+
+  //console.log(JSON.stringify(data, null, 2)); // Ausgabe des gesamten Datenobjekts
+
+  // Verbindungen zwischen den Maschinen 
+  linesm = [];
+
+  for (let i = 0; i < newMatrix.length; i++) {
+    const row = newMatrix[i];
+    for (let j = 0; j < row.length; j++) {
+      if (row[j] !== '0') {
+        linesm.push({ "from": i, "to": j });
+      }
+    }
+  }
+  //console.log(lines);
+
+
 
   // UTILS
   function loadthis(that, datam, lines) {
