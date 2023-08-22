@@ -1,661 +1,1220 @@
 (function() {
-  let _shadowRoot;
-  let _id;
+    let _shadowRoot;
+    let _id;
 
-  let div;
-  let widgetName;
-  var Ar = [];
+    let div;
+    let widgetName;
+    var Ar = [];
 
-  let tmpl = document.createElement("template");
-  tmpl.innerHTML = `
-  <style>
-  </style>      
-  `;
+    let tmpl = document.createElement("template");
+    tmpl.innerHTML = `
+    <style>
+    </style>      
+    `;
 
-  class MockUpNetworkGraph extends HTMLElement {
+    class MockUpNetworkGraph extends HTMLElement {
 
-      constructor() {
-          super();
+        constructor() {
+            super();
 
-          _shadowRoot = this.attachShadow({
-              mode: "open"
-          });
-          _shadowRoot.appendChild(tmpl.content.cloneNode(true));
+            _shadowRoot = this.attachShadow({
+                mode: "open"
+            });
+            _shadowRoot.appendChild(tmpl.content.cloneNode(true));
 
-          _id = createGuid();
+            _id = createGuid();
 
-          //_shadowRoot.querySelector("#oView").id = "oView";
+            //_shadowRoot.querySelector("#oView").id = "oView";
 
-          this._export_settings = {};
-          this._export_settings.title = "";
-          this._export_settings.subtitle = "";
-          this._export_settings.icon = "";
-          this._export_settings.unit = "";
-          this._export_settings.footer = "";
+            this._export_settings = {};
+            this._export_settings.title = "";
+            this._export_settings.subtitle = "";
+            this._export_settings.icon = "";
+            this._export_settings.unit = "";
+            this._export_settings.footer = "";
 
-          this.addEventListener("click", event => {
-              console.log('click');
+            this.addEventListener("click", event => {
+                console.log('click');
 
-          });
+            });
 
-          this._firstConnection = 0;
-          this.data = [];
-          this.oModel = null;
-          this.sSelDisplayOption = "Upstream";
-      }
-
-      //Get Table Data into Custom Widget Function
-      async setDataSource(source) {
-
-          //this.data = [];
-          /*this.data.push({
-              nodes: nodes,
-              lines: lines
-          });*/
-          
-          var that = this;
-          //loadthis(that, "Upstream");
-      }
-
-      connectedCallback() {
-
-          loadthis(this);
-          try {
-              if (window.commonApp) {
-                  let outlineContainer = commonApp.getShell().findElements(true, ele => ele.hasStyleClass && ele.hasStyleClass("sapAppBuildingOutline"))[0]; // sId: "__container0"
-
-                  if (outlineContainer && outlineContainer.getReactProps) {
-                      let parseReactState = state => {
-                          let components = {};
-
-                          let globalState = state.globalState;
-                          let instances = globalState.instances;
-                          let app = instances.app["[{\"app\":\"MAIN_APPLICATION\"}]"];
-                          let names = app.names;
-
-                          for (let key in names) {
-                              let name = names[key];
-
-                              let obj = JSON.parse(key).pop();
-                              let type = Object.keys(obj)[0];
-                              let id = obj[type];
-
-                              components[id] = {
-                                  type: type,
-                                  name: name
-                              };
-                          }
-
-                          for (let componentId in components) {
-                              let component = components[componentId];
-                          }
-
-                          let metadata = JSON.stringify({
-                              components: components,
-                              vars: app.globalVars
-                          });
-
-                          if (metadata != this.metadata) {
-                              this.metadata = metadata;
-
-                              this.dispatchEvent(new CustomEvent("propertiesChanged", {
-                                  detail: {
-                                      properties: {
-                                          metadata: metadata
-                                      }
-                                  }
-                              }));
-                          }
-                      };
-
-                      let subscribeReactStore = store => {
-                          this._subscription = store.subscribe({
-                              effect: state => {
-                                  parseReactState(state);
-                                  return {
-                                      result: 1
-                                  };
-                              }
-                          });
-                      };
-
-                      let props = outlineContainer.getReactProps();
-                      if (props) {
-                          subscribeReactStore(props.store);
-                      } else {
-                          let oldRenderReactComponent = outlineContainer.renderReactComponent;
-                          outlineContainer.renderReactComponent = e => {
-                              let props = outlineContainer.getReactProps();
-                              subscribeReactStore(props.store);
-
-                              oldRenderReactComponent.call(outlineContainer, e);
-                          }
-                      }
-                  }
-              }
-          } catch (e) {}
-      }
-
-      disconnectedCallback() {
-          if (this._subscription) { // react store subscription
-              this._subscription();
-              this._subscription = null;
-          }
-      }
-
-      onCustomWidgetBeforeUpdate(changedProperties) {
-          if ("designMode" in changedProperties) {
-              this._designMode = changedProperties["designMode"];
-          }
-      }
-
-      onCustomWidgetAfterUpdate(changedProperties) {
-          console.log(changedProperties);
-          var that = this;
-          //loadthis(that);
-      }
-
-      _renderExportButton() {
-          let components = this.metadata ? JSON.parse(this.metadata)["components"] : {};
-          console.log("_renderExportButton-components");
-          console.log(components);
-          console.log("end");
-      }
-
-      _firePropertiesChanged() {
-          this.title = "FD";
-          this.dispatchEvent(new CustomEvent("propertiesChanged", {
-              detail: {
-                  properties: {
-                      title: this.title
-                  }
-              }
-          }));
-      }
-
-      // SETTINGS
-      get title() {
-          return this._export_settings.title;
-      }
-      set title(value) {
-          console.log("setTitle:" + value);
-          this._export_settings.title = value;
-      }
-
-      get subtitle() {
-          return this._export_settings.subtitle;
-      }
-      set subtitle(value) {
-          this._export_settings.subtitle = value;
-      }
-
-      get icon() {
-          return this._export_settings.icon;
-      }
-      set icon(value) {
-          this._export_settings.icon = value;
-      }
-
-      get unit() {
-          return this._export_settings.unit;
-      }
-      set unit(value) {
-          this._export_settings.unit = value;
-      }
-
-      get footer() {
-          return this._export_settings.footer;
-      }
-      set footer(value) {
-          this._export_settings.footer = value;
-      }
-
-      attributeChangedCallback(name, oldValue, newValue) {
-          if (oldValue != newValue) {
-              this[name] = newValue;
-          }
-      }
-
-  }
-  customElements.define("sac-mock-network-graph", MockUpNetworkGraph);
-  
-
-  
-
-  /////////////////////////////// VORBEREITUNG /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  // festzulegende und fixe Variablen 
-  // Größe Platzhalter
-  const nodeWith = 350;
-  const nodeHeight = 250;
-  // fixe Positionen
-  var xEntladerPosition = 1400;
-  var yEntladerPosition = 1500;
-  var directionChange = ['Waschmaschine', 'Etikettiermaschine']  // speichert die Maschinen, wo Richtungswechsel stattfindet
-
-  // Liest das csv-file ein und wandelt es in eine matrix um
-  const fs = require('fs');
-  function readCSV(filePath) {
-    const csvData = fs.writeFileSync(filePath, 'utf-8');
-    const rows = csvData.trim().split('\n');
-    const matrix = [];
-    for (let i = 0; i < rows.length; i++) {
-      const columns = rows[i].split(';');
-      const updatedColumns = [];
-      for (let j = 0; j < columns.length; j++) {
-        const value = columns[j].trim() === '' ? '0' : columns[j].trim();
-        updatedColumns.push(value);
-      }
-      matrix.push(updatedColumns);
-    }
-    return matrix;
-  }
-
-  // Verarbeitet Matrix zu Key-Value Objekt mit x und y Positionen
-  // Zugriff auf Inhalte der Matrix -> Zeilen: matrix[i], Spalten: matrix.map(row => row[i]).slice(x);
-  matrix =readCSV('C:\\Users\\k0940095\\OneDrive - Krones AG\\SAC\\Linie - Graph\\Excel-alscsv.csv');
-  // enthält alle Maschinen-Namen
-  const maschinen = matrix.map(row => row[4]).slice(2);
-  // enthalten fixe Positionen und Abhängigkeiten
-  const xfixPositions = matrix.map(row => row[1]).slice(2);
-  const yfixPositions = matrix.map(row => row[2]).slice(2);
-  // enthalten fixe Maschinen
-  const fixemaschinen = matrix.slice(2).map(row => row[3]);
-  const fixmachinesstring = [];
-  for (let i = 0; i < fixemaschinen.length; i++) {
-  if (fixemaschinen[i] != 0) {
-  fixmachinesstring.push(maschinen[i]);
-  }
-  }
-  // Key-Value Objekt, das alle Koordinaten der einzelnen Maschinen beinhaltet
-  const keyvaluepositions = [];
-  for (let i = 0; i < maschinen.length; i++) {
-  const name = maschinen[i];
-  if (name === 'Entlader') {
-
-    keyvaluepositions[name] = { x: xEntladerPosition, y: yEntladerPosition, Quelle:"", Senke:"" };
-  } else {
-    keyvaluepositions[name] = { x: 0, y: 0, Quelle1:"", Senke1:"" };
-  }
-  }
-
-
-
-  /////////////////////////////////////////////////// FUNKTIONEN /////////////////////////////////////////////////////////////////////////
-
-  // Funktion, die positionnen und Abhängigkeiten von fixen Maschinen berechnet
-  function calculatedependencies(matrix, keyvaluepositions) {
-    for (let i = 0; i < yfixPositions.length; i++) {
-      if (yfixPositions[i] === 'Entlader') {
-          keyvaluepositions[maschinen[i]].y = keyvaluepositions['Entlader'].y;
-      }else if (yfixPositions[i] === 'Ettikettiermaschine'){
-        keyvaluepositions[maschinen[i]].y = keyvaluepositions['Ettiketiermaschine'].y;
-      }
-    }
-    for (let i = 0; i < xfixPositions.length; i++) {
-        if (xfixPositions[i] === 'Entlader') {
-          keyvaluepositions[maschinen[i]].x = keyvaluepositions['Entlader'].x;
-        }else if (xfixPositions[i] === 'Waschmaschine'){
-            keyvaluepositions[maschinen[i]].x = keyvaluepositions['Waschmaschine'].x;
-        }else if (xfixPositions[i] === 'Auspacker'){
-            keyvaluepositions[maschinen[i]].x = keyvaluepositions['Auspacker'].x;
+            this._firstConnection = 0;
+            this.data = [];
+            this.oModel = null;
+            this.sSelDisplayOption = "Upstream";
         }
-    }
-      return keyvaluepositions;
-  }
 
-  calculatedependencies(matrix,keyvaluepositions);
+        //Get Table Data into Custom Widget Function
+        async setDataSource(source) {
 
+            //this.data = [];
+            /*this.data.push({
+                nodes: nodes,
+                lines: lines
+            });*/
+            
+            var that = this;
+            //loadthis(that, "Upstream");
+        }
 
-  /// Funktion, die Senke in das Key-Value Objekt einträgt
-  const newMatrix = matrix.map(row => row.slice(8));
-  newMatrix.splice(0,2);
-  function findAndStoreSenkenQuellen(newMatrix,maschinen,keyvaluepositions){
-    for (let i = 0; i < newMatrix[0].length; i++) {
-        const senken1Liste = [];
-        const senken3Liste = [];
-        const senken2Liste = [];
-        const senken4Liste = [];
-        const senken101Liste = [];
-            for (let j = 0; j < newMatrix[i].length; j++) {
-              if (newMatrix[i][j] == 1) {
-                senken1Liste.push(maschinen[j]);
-              } 
-              if (newMatrix[i][j] == 3) {
-                senken3Liste.push(maschinen[j]);
-              }
-              if (newMatrix[i][j] == 2) {
-                senken2Liste.push(maschinen[j]);
-              }
-              if (newMatrix[i][j] == 4) {
-                senken4Liste.push(maschinen[j]);
-              }
-              if (newMatrix[i][j] == 101) {
-                senken101Liste.push(maschinen[j]);
-              }
+        connectedCallback() {
+
+            loadthis(this);
+            try {
+                if (window.commonApp) {
+                    let outlineContainer = commonApp.getShell().findElements(true, ele => ele.hasStyleClass && ele.hasStyleClass("sapAppBuildingOutline"))[0]; // sId: "__container0"
+
+                    if (outlineContainer && outlineContainer.getReactProps) {
+                        let parseReactState = state => {
+                            let components = {};
+
+                            let globalState = state.globalState;
+                            let instances = globalState.instances;
+                            let app = instances.app["[{\"app\":\"MAIN_APPLICATION\"}]"];
+                            let names = app.names;
+
+                            for (let key in names) {
+                                let name = names[key];
+
+                                let obj = JSON.parse(key).pop();
+                                let type = Object.keys(obj)[0];
+                                let id = obj[type];
+
+                                components[id] = {
+                                    type: type,
+                                    name: name
+                                };
+                            }
+
+                            for (let componentId in components) {
+                                let component = components[componentId];
+                            }
+
+                            let metadata = JSON.stringify({
+                                components: components,
+                                vars: app.globalVars
+                            });
+
+                            if (metadata != this.metadata) {
+                                this.metadata = metadata;
+
+                                this.dispatchEvent(new CustomEvent("propertiesChanged", {
+                                    detail: {
+                                        properties: {
+                                            metadata: metadata
+                                        }
+                                    }
+                                }));
+                            }
+                        };
+
+                        let subscribeReactStore = store => {
+                            this._subscription = store.subscribe({
+                                effect: state => {
+                                    parseReactState(state);
+                                    return {
+                                        result: 1
+                                    };
+                                }
+                            });
+                        };
+
+                        let props = outlineContainer.getReactProps();
+                        if (props) {
+                            subscribeReactStore(props.store);
+                        } else {
+                            let oldRenderReactComponent = outlineContainer.renderReactComponent;
+                            outlineContainer.renderReactComponent = e => {
+                                let props = outlineContainer.getReactProps();
+                                subscribeReactStore(props.store);
+
+                                oldRenderReactComponent.call(outlineContainer, e);
+                            }
+                        }
+                    }
+                }
+            } catch (e) {}
+        }
+
+        disconnectedCallback() {
+            if (this._subscription) { // react store subscription
+                this._subscription();
+                this._subscription = null;
             }
-            var maschinex = maschinen[i];
-            keyvaluepositions[maschinex].Senke1 = senken1Liste;
-            keyvaluepositions[maschinex].Senke2 = senken2Liste;
-            keyvaluepositions[maschinex].Senke3 = senken3Liste;
-            keyvaluepositions[maschinex].Senke4 = senken4Liste;
-            keyvaluepositions[maschinex].Senke101 = senken101Liste;
-          }   
-    for (let a=0; a<newMatrix[0].length; a++){
-      const quellen1Liste = [];
-      const quellen2Liste = [];
-      const quellen3Liste = [];
-      const quellen4Liste = [];
-      const quellen101Liste = [];
-      for (let b = 0; b< newMatrix.length; b++){
-        if (newMatrix[b][a] == 1){
-          quellen1Liste.push(maschinen[b])
         }
-        else if (newMatrix[b][a] == 3){
-          quellen3Liste.push(maschinen[b]);
+
+        onCustomWidgetBeforeUpdate(changedProperties) {
+            if ("designMode" in changedProperties) {
+                this._designMode = changedProperties["designMode"];
+            }
         }
-        else if (newMatrix[b][a] == 2){
-          quellen2Liste.push(maschinen[b]);
+
+        onCustomWidgetAfterUpdate(changedProperties) {
+            console.log(changedProperties);
+            var that = this;
+            //loadthis(that);
         }
-        else if (newMatrix[b][a] == 4){
-          quellen4Liste.push(maschinen[b]);
+
+        _renderExportButton() {
+            let components = this.metadata ? JSON.parse(this.metadata)["components"] : {};
+            console.log("_renderExportButton-components");
+            console.log(components);
+            console.log("end");
         }
-        else if (newMatrix[b][a] == 101){
-          quellen101Liste.push(maschinen[b]);
+
+        _firePropertiesChanged() {
+            this.title = "FD";
+            this.dispatchEvent(new CustomEvent("propertiesChanged", {
+                detail: {
+                    properties: {
+                        title: this.title
+                    }
+                }
+            }));
         }
-      }
-      var maschinex = maschinen[a];
-      keyvaluepositions[maschinex].Quelle1 = quellen1Liste;
-      keyvaluepositions[maschinex].Quelle2 = quellen2Liste;
-      keyvaluepositions[maschinex].Quelle3 = quellen3Liste;
-      keyvaluepositions[maschinex].Quelle4 = quellen4Liste;
-      keyvaluepositions[maschinex].Quelle101 = quellen101Liste;
+
+        // SETTINGS
+        get title() {
+            return this._export_settings.title;
+        }
+        set title(value) {
+            console.log("setTitle:" + value);
+            this._export_settings.title = value;
+        }
+
+        get subtitle() {
+            return this._export_settings.subtitle;
+        }
+        set subtitle(value) {
+            this._export_settings.subtitle = value;
+        }
+
+        get icon() {
+            return this._export_settings.icon;
+        }
+        set icon(value) {
+            this._export_settings.icon = value;
+        }
+
+        get unit() {
+            return this._export_settings.unit;
+        }
+        set unit(value) {
+            this._export_settings.unit = value;
+        }
+
+        get footer() {
+            return this._export_settings.footer;
+        }
+        set footer(value) {
+            this._export_settings.footer = value;
+        }
+
+        attributeChangedCallback(name, oldValue, newValue) {
+            if (oldValue != newValue) {
+                this[name] = newValue;
+            }
+        }
+
     }
-    return keyvaluepositions;
-    }     
-  findAndStoreSenkenQuellen(newMatrix,maschinen,keyvaluepositions);
+    customElements.define("sac-mock-network-graph", MockUpNetworkGraph);
+
+    // UTILS
+    function loadthis(that) {
+        that.data = [{
+            "nodes": [
+                {
+                  key: 0,
+                  title: "Abschieber",
+		  "x": 1800,
+		  "y": 125,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                  },
+                {
+                  key: 1,
+                  title: "Entlader",
+	          "x": 400,
+		  "y": 225,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%",
+		      
+                    }
+                  ]
+                  },
+	        {
+                  key: 2,
+                  title: "Auspacker",
+		  "x": 1400,
+		  "y": 225,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 4,
+                  title: "Waschmaschine",
+		  "x": 3500,
+		  "y": 225,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 5,
+                  title: "Linatronic",
+		  "x": 3500,
+		  "y": 825,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 6,
+                  title: "Füller",
+                  "x": 3500,
+		  "y": 1225,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                    
+                },
+                {
+                  key: 7,
+                  title: "Etikettiermaschine",
+		  "x": 3500,
+		  "y": 2025,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 8,
+                  title: "Varioline",
+		  "x": 1400,
+		  "y": 1425,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 9,
+                  title: "Belader-rechts",
+		  "x": 400,
+		  "y": 1625,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 10,
+                  title: "Belader-links",
+		  "x": 400,
+		  "y": 1425,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 11,
+                  title: "Gebindewascher",
+		  "x": 1400,
+		  "y": 625,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 12,
+                  title: "Abschrauber",
+		  "x": 3000,
+		  "y": 625,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 13,
+                  title: "TBB-EG01",
+		  "x": 1600,
+		  "y": 225,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 14,
+                  title: "TBB-EG02",
+		  "x": 1800,
+		  "y": 225,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 15,
+                  title: "TBB-EG03",
+		  "x": 2000,
+		  "y": 225,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 16,
+                  title: "TBB-EG04",
+		  "x": 2200,
+		  "y": 125,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 17,
+                  title: "TBB-EG05",
+		  "x": 2200,
+		  "y": 225,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 18,
+                  title: "TBB-EG06",
+		  "x": 2400,
+		  "y": 225,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 19,
+                  title: "TBB-EG07",
+		  "x": 2600,
+		  "y": 225,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 20,
+                  title: "TBB-EG08",
+		  "x": 2800,
+		  "y": 0,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 21,
+                  title: "TBB-EG09",
+		  "x": 2800,
+		  "y": 75,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 22,
+                  title: "TBB-EG10",
+		  "x": 2800,
+		  "y": 150,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 23,
+                  title: "TBB-EG11",
+		  "x": 1800,
+		  "y": 425,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 24,
+                  title: "TBB-EG12",
+		  "x": 2800,
+		  "y": 225,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 25,
+                  title: "TBB-EG13",
+		  "x": 2800,
+		  "y": 425,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 26,
+                  title: "TBB-EG14",
+		  "x": 3200,
+		  "y": 425,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 27,
+                  title: "TBB-EG15",
+		  "x": 3000,
+		  "y": 225,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 28,
+                  title: "TBB-EG16",
+		  "x": 3200,
+		  "y": 225,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 29,
+                  title: "TBB-EG17",
+		  "x": 3500,
+		  "y": 425,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 30,
+                  title: "TBB-EG18",
+		  "x": 3500,
+		  "y": 625,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 31,
+                  title: "TBB-EG19",
+		  "x": 3500,
+		  "y": 1025,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 32,
+                  title: "TBB-EG20",
+		  "x": 3100,
+		  "y": 1225,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 33,
+                  title: "TBB-EG21",
+		  "x": 3500,
+		  "y": 1425,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 34,
+                  title: "TBB-EG22",
+		  "x": 3500,
+		  "y": 1625,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 35,
+                  title: "TBB-EG23",
+		  "x": 3500,
+		  "y": 1825,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 36,
+                  title: "TBB-EG24",
+		  "x": 3300,
+		  "y": 2025,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 37,
+                  title: "TBB-EG25",
+		  "x": 3100,
+		  "y": 1625,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 38,
+                  title: "TBB-EG26",
+		  "x": 3100,
+		  "y": 2025,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 39,
+                  title: "TBG-EG01",
+		  "x": 650,
+		  "y": 225,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 40,
+                  title: "TBG-EG02",
+		  "x": 900,
+		  "y": 225,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 41,
+                  title: "TBG-EG03",
+		  "x": 1150,
+		  "y": 225,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 42,
+                  title: "TBG-EG04",
+		  "x": 1400,
+		  "y": 425,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 43,
+                  title: "TBG-EG05",
+		  "x": 1400,
+		  "y": 825,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 44,
+                  title: "TBG-EG06",
+		  "x": 1400,
+		  "y": 1025,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 45,
+                  title: "TBG-EG07",
+		  "x": 1200,
+		  "y": 1425,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 46,
+                  title: "TBG-EG08",
+		  "x": 1000,
+		  "y": 825,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 47,
+                  title: "TBG-EG09",
+		  "x": 1000,
+		  "y": 1425,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 48,
+                  title: "TBG-EG10",
+		  "x": 800,
+		  "y": 1625,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 49,
+                  title: "TBG-EG11",
+		  "x": 600,
+		  "y": 1625,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 50,
+                  title: "TBG-EG12",
+		  "x": 800,
+		  "y": 1425,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 51,
+                  title: "TBG-EG13",
+		  "x": 600,
+		  "y": 1425,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 53,
+                  title: "TBG-EG15",
+		  "x": 1400,
+		  "y": 1225,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 54,
+                  title: "TBP1-EG01",
+		  "x": 200,
+		  "y": 225,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 55,
+                  title: "TBP1-EG02",
+		  "x": 400,
+		  "y": 425,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 56,
+                  title: "TBP1-EG03",
+		  "x": 400,
+		  "y": 625,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 57,
+                  title: "TBP1-EG04",
+		  "x": 400,
+		  "y": 825,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 58,
+                  title: "TBP1-EG05",
+		  "x": 400,
+		  "y": 1025,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 59,
+                  title: "TBP1-EG06",
+		  "x": 400,
+		  "y": 1225,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 60,
+                  title: "TBP1-EG07",
+		  "x": 200,
+	          "y": 1625,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 61,
+                  title: "TBP1-EG08",
+		  "x": 0,
+		  "y": 1625,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+                {
+                  key: 62,
+                  title: "TBP2-EG",
+		  "x": 1800,
+		  "y": 0,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },   
+		  {
+                  key: 63,
+                  title: "TBP1-EG",
+		  "x": 1600,
+		  "y": 125 ,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                }, 
+		  {
+                  key: 64,
+                  title: "Carbo",
+		  "x": 3900,
+		  "y": 1100 ,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                }, 
+		  {
+                  key: 65,
+                  title: "KZE",
+		  "x": 4200,
+		  "y": 1000 ,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                }, 
+		  {
+                  key: 66,
+                  title: "Mixer",
+		  "x": 4000,
+		  "y": 1300 ,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+		  {
+                  key: 67,
+                  title: "CIP",
+		  "x": 4000,
+		  "y": 1500 ,
+                  attributes: [
+                    {
+                      label: "Technical Availability",
+                      value: "%"
+                    }
+                  ]
+                },
+	           ],
+            
+          "lines": [
+              {"from": 0, "to": 16},
+	      {"from": 0, "to": 62},
+              {"from": 1, "to": 39},
+              {"from": 1, "to": 55},
+              {"from": 2, "to": 13},
+              {"from": 2, "to": 42},
+              {"from": 4, "to": 29},
+              {"from": 5, "to": 31},
+              {"from": 6, "to": 32},
+              {"from": 6, "to": 33},
+              {"from": 7, "to": 36},
+              {"from": 8, "to": 45},
+              {"from": 9, "to": 60},
+              {"from": 11, "to": 43},
+              {"from": 12, "to": 26},
+              {"from": 13, "to": 14},
+              {"from": 14, "to": 15},
+              {"from": 14, "to": 23},
+              {"from": 15, "to": 17},
+              {"from": 17, "to": 18},
+              {"from": 16, "to": 17},
+              {"from": 18, "to": 19},
+              {"from": 19, "to": 20},
+              {"from": 19, "to": 21},
+              {"from": 19, "to": 22},
+              {"from": 19, "to": 24},              
+              {"from": 23, "to": 34},
+              {"from": 24, "to": 25},
+              {"from": 24, "to": 27},
+              {"from": 25, "to": 12},
+              {"from": 26, "to": 28},
+              {"from": 27, "to": 28},
+              {"from": 28, "to": 4},
+              {"from": 29, "to": 30},
+              {"from": 30, "to": 5},
+              {"from": 31, "to": 6},
+              {"from": 33, "to": 34},
+              {"from": 34, "to": 35},
+              {"from": 34, "to": 37},
+              {"from": 35, "to": 7},
+              {"from": 36, "to": 38},
+	      {"from": 37, "to": 38},
+              {"from": 38, "to": 8},
+              {"from": 39, "to": 40},
+              {"from": 40, "to": 41},
+              {"from": 41, "to": 2},
+              {"from": 42, "to": 11},
+              {"from": 43, "to": 44},
+              {"from": 43, "to": 46},
+              {"from": 44, "to": 53},
+              {"from": 45, "to": 47},
+              {"from": 46, "to": 47},
+              {"from": 47, "to": 48},
+              {"from": 47, "to": 50},
+              {"from": 48, "to": 49},
+              {"from": 49, "to": 9},
+              {"from": 50, "to": 51},
+              {"from": 51, "to": 10},
+              {"from": 53, "to": 8},
+              {"from": 54, "to": 1},
+              {"from": 55, "to": 56},
+              {"from": 56, "to": 57},
+              {"from": 57, "to": 58},
+              {"from": 58, "to": 59},
+              {"from": 59, "to": 9},
+              {"from": 59, "to": 10},
+              {"from": 60, "to": 61},
+	      {"from": 63, "to": 0},
+	      {"from": 64, "to": 6},
+	      {"from": 66, "to": 6},
+	      {"from": 65, "to": 64},
+	      {"from": 65, "to": 66},
+            ]
+        }];
+        var that_ = that;
+
+        widgetName = "mockNetworkGraph_1";
+        console.log("widgetName:" + widgetName);
+        if (typeof widgetName === "undefined") {
+            widgetName = that._export_settings.title.split("|")[0];
+            console.log("widgetName_:" + widgetName);
+        }
+
+        div = document.createElement('div');
+        div.slot = "content_" + widgetName;
+            console.log("--First Time --");
+        
+            let div0 = document.createElement('div');
+            div0.innerHTML = '<?xml version="1.0"?><script id="oView_UpStream' + widgetName + '" name="oView_' + widgetName + '" type="sapui5/xmlview"><mvc:View controllerName="myView.Template" xmlns="sap.suite.ui.commons.networkgraph" xmlns:layout="sap.suite.ui.commons.networkgraph.layout" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns:l="sap.ui.layout" height="100%">><l:FixFlex><l:fixContent><m:FlexBox fitContainer="true" renderType="Bare" wrap="Wrap"><m:SegmentedButton selectionChange="changeData"><m:items><m:SegmentedButtonItem text="Ebene 1" key="data"/><m:SegmentedButtonItem text="Ebene 2" key="nodata"/><m:SegmentedButtonItem text="Ebene 3" key="nodata3"/></m:items></m:SegmentedButton><m:items><Graph  enableWheelZoom="true" height="200%" width="200%" nodes="{' + widgetName + '>/nodes}" lines="{' + widgetName + '>/lines}" groups="{' + widgetName + '>/groups}" id="graph_' + widgetName + '" > <statuses><Status key="CustomKrones" title="Standard" backgroundColor="#0060AD" borderColor="sapUiContentShadowColor" hoverBorderColor="sapUiContentShadowColor"/></statuses> <nodes> <Node key="{' + widgetName +'>key}"  title="{' + widgetName + '>title}" icon="{' + widgetName + '>icon}" group="{' + widgetName + '>group}"  attributes="{' + widgetName + '>attributes}"  shape="Box" status="{'+ widgetName + '>status}" x="{' + widgetName + '>x}"  y="{' + widgetName + '>y}" showDetailButton="false" width="auto" maxWidth="500"> <attributes> <ElementAttribute label="{' + widgetName + '>label}" value="{' + widgetName + '>value}"/> </attributes> </Node> </nodes> <lines> <Line from="{' + widgetName + '>from}" to="{' + widgetName + '>to}" status="{' + widgetName + '>status}" arrowOrientation="ParentOf" arrowPosition="Middle" press="linePress"></Line> </lines> <groups> <Group key="{' + widgetName + '>key}" title="{' + widgetName + '>title}"></Group> </groups> </Graph></m:items></m:FlexBox></l:fixContent></l:FixFlex> </mvc:View></script>';
 
 
+            if(that._firstConnection === 1){
+                _shadowRoot.removeChild(_shadowRoot.lastChild);
+                _shadowRoot.removeChild(_shadowRoot.lastChild);
+                _shadowRoot.appendChild(div0);
+            }else{
+                _shadowRoot.appendChild(div0);
+            }
 
-  // Kalkuliert die Pfade abhängig von der Gewichtung
-  function findPaths(machineName, keyvaluepositions, property) {
-  const paths = [];
-  const machine = keyvaluepositions[machineName];
-  if (!machine) {
-    return paths;
-  }
-  const path = [machineName];
-  if (machine[property].length > 0) {
-    const nextMachineName = machine[property][0];
-    const nextPaths = findPaths(nextMachineName, keyvaluepositions, property);
+            let div1 = document.createElement('div');
+            div1.innerHTML = '<div id="ui5_content_' + widgetName + '" name="ui5_content_' + widgetName + '"><slot name="content_' + widgetName + '"></slot></div>';
 
-    for (const nextPath of nextPaths) {
-      paths.push([...path, ...nextPath]);
+            _shadowRoot.appendChild(div1);
+
+            if(that_.childElementCount > 0){
+                that_.removeChild(that_.firstChild);
+            }
+
+            that_.appendChild(div);
+
+            var mapcanvas_divstr = _shadowRoot.getElementById('oView_UpStream' + widgetName);
+
+            Ar = [];
+            Ar.push({
+                'id': widgetName,
+                'div': mapcanvas_divstr
+            });
+            console.log(Ar);
+        //that_._renderExportButton();
+
+        sap.ui.getCore().attachInit(function() {
+            "use strict";
+
+            //### Controller ###
+            sap.ui.define([
+                "sap/ui/core/mvc/Controller",
+                "sap/ui/model/json/JSONModel",
+                "sap/m/Popover",
+		"sap/suite/ui/commons/networkgraph/layout/NoopLayout"
+            ], function(Controller, JSONModel, Popover,NoopLayout) {
+                "use strict";
+
+                return Controller.extend("myView.Template", {
+                    onInit: function () {
+                        var this_ = this;
+
+                            that._firstConnection = 1;
+
+                            var oModel = new JSONModel(that.data[0]);
+                            
+                            oModel.setSizeLimit(Number.MAX_SAFE_INTEGER);
+
+                            this_.getView().setModel(oModel, that.widgetName);
+
+                            this_.oModelSettings = new JSONModel({
+                                maxIterations: 200,
+                                maxTime: 500,
+                                initialTemperature: 200,
+                                coolDownStep: 1,
+                                mergeEdges: true,
+                            });
+                            
+                            this_.getView().setModel(this_.oModelSettings, "settings");
+
+                            this_.oGraph = this_.byId("graph_" + widgetName);
+			    this_.oGraph.setLayoutAlgorithm(new NoopLayout);
+                            //this_.oGraph._fZoomLevel = 0.75;
+                        }
+                    });
+            });
+
+            console.log("widgetName Final:" + widgetName);
+            var foundIndex = Ar.findIndex(x => x.id == widgetName);
+            var divfinal = Ar[foundIndex].div;
+            console.log(divfinal);
+
+            //### THE APP: place the XMLView somewhere into DOM ###
+            var oView = sap.ui.xmlview({
+                viewContent: jQuery(divfinal).html(),
+            });
+
+            oView.placeAt(div);
+        });
     }
-  } else {
-    paths.push(path);
-  }
-  return paths;
-  }
 
-
-
-
-  // Funktionen, die die Node Positions nach Richtungen berechnet
-  function calcpositionshor_r (path, width){
-  const firstMachine = path[0];
-  for (let i = 0; i < path.length; i++) {
-    const machineName = path[i];
-    const currentMachine = keyvaluepositions[machineName];
-    const xOffset = i * width;
-    currentMachine.y = keyvaluepositions[firstMachine].y;
-    currentMachine.x = keyvaluepositions[firstMachine].x + xOffset;
-  }
-  }
-
-  function calcpositionshor_l (path, width){
-  const firstMachine = path[0];
-  for (let i = 0; i < path.length; i++) {
-    const machineName = path[i];
-    const currentMachine = keyvaluepositions[machineName];
-    const xOffset = i * width;
-    currentMachine.y = keyvaluepositions[firstMachine].y;
-    currentMachine.x = keyvaluepositions[firstMachine].x - xOffset;
-  }
-  }
-
-  function calcpositionssenkr_u(path, height) {
-    const firstMachine = path[0];
-    for (let i = 0; i < path.length; i++) {
-      const machineName = path[i];
-      const currentMachine = keyvaluepositions[machineName];
-      const yOffset = i * height;
-      // Setze den x-Wert der aktuellen Maschine auf den x-Wert der ersten Maschine (fixe Maschine)
-      currentMachine.x = keyvaluepositions[firstMachine].x;
-      // Setze den y-Wert der aktuellen Maschine entsprechend dem yOffset
-      currentMachine.y = keyvaluepositions[firstMachine].y + yOffset;
+    function createGuid() {
+        return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, c => {
+            let r = Math.random() * 16 | 0,
+                v = c === "x" ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
     }
-  }
 
-  function calcpositionssenkr_o (path, height){
-    const firstMachine = path[0];
-    for (let i = 0; i < path.length; i++) {
-      const machineName = path[i];
-      const currentMachine = keyvaluepositions[machineName];
-      const yOffset = i * height;
-      currentMachine.x = keyvaluepositions[firstMachine].x;
-      currentMachine.y = keyvaluepositions[firstMachine].y + yOffset;
+    function loadScript(src, shadowRoot) {
+        return new Promise(function(resolve, reject) {
+            let script = document.createElement('script');
+            script.src = src;
+
+            script.onload = () => {
+                console.log("Load: " + src);
+                resolve(script);
+            }
+            script.onerror = () => reject(new Error(`Script load error for ${src}`));
+
+            shadowRoot.appendChild(script)
+        });
     }
-  }
-
-
-
-
-  // Bestimme für Hauptlinie die Pfade inklusive Aufteilung in Teilpfade
-  // rote Pfeile
-  const path1 = findPaths("Entlader", keyvaluepositions, "Senke1");
-  innerPath1 = path1[0]; 
-  const path1_hor_r = innerPath1.slice(0, innerPath1.indexOf(directionChange[0])+1);
-  const path1_senkr_u = innerPath1.slice(innerPath1.indexOf(directionChange[0]), innerPath1.indexOf(directionChange[1]) + 1);
-  const path1_hor_l = innerPath1.slice(innerPath1.indexOf(directionChange[1]), innerPath1.length);
-  calcpositionshor_r(path1_hor_r, nodeWith);
-  calcpositionssenkr_u(path1_senkr_u, nodeHeight);
-  calcpositionshor_l(path1_hor_l, nodeWith);
-
-  // Bestimme auf Basis der Hauptlinie die restlichen Pfade
-  // gelbe Pfeile
-  const path2_Entlader = findPaths("Entlader", keyvaluepositions,"Senke2" )[0];
-  const path2_Auspacker = findPaths("Auspacker", keyvaluepositions, "Senke2")[0];
-
-  function calcpositionssenkr_u_2(path){
-    const firstMachine = path[0];
-    const lastMachine = path[path.length-1];
-    const pathLength =path.length -2;
-    for (let i = 1; i < path.length -2; i++) {
-       const machineName = path[i];
-       const currentMachine = keyvaluepositions[machineName];
-       const diff = keyvaluepositions[lastMachine].y - keyvaluepositions[firstMachine].y;
-       const diffspace = diff / pathLength;
-       const yOffset = i * diffspace;
-      // Setze den x-Wert der aktuellen Maschine auf den x-Wert der ersten Maschine (fixe Maschine)
-      currentMachine.x = keyvaluepositions[firstMachine].x;
-      // Setze den y-Wert der aktuellen Maschine entsprechend dem yOffset
-      currentMachine.y = keyvaluepositions[firstMachine].y + yOffset;
-    }
-  }
-
-
-  calcpositionssenkr_u_2(path2_Entlader);
-  calcpositionssenkr_u_2(path2_Auspacker);
-  
-
-
-
-  // Key-Value Objekt in Ausgabeformat umwandeln
-  // Maschinen und Positionen
-  datam = [];
-
-  for (const machineName in keyvaluepositions) {
-    if (keyvaluepositions.hasOwnProperty(machineName)) {
-      const machine = keyvaluepositions[machineName];
-      const node = {
-        key: datam.nodes.length,
-        title: machineName,
-        x: machine.x,
-        y: machine.y,
-        attributes: [
-          {
-            label: "Technical Availability",
-            value: "%"
-          }
-        ]
-      };
-      //console.log(JSON.stringify(node, null, 2) + ','); // Ausgabe des aktuellen Knotens mit Komma
-      datam.nodes.push(node);
-    }
-  }
-
-  //console.log(JSON.stringify(data, null, 2)); // Ausgabe des gesamten Datenobjekts
-
-  // Verbindungen zwischen den Maschinen 
-  linesm = [];
-
-  for (let i = 0; i < newMatrix.length; i++) {
-    const row = newMatrix[i];
-    for (let j = 0; j < row.length; j++) {
-      if (row[j] !== '0') {
-        linesm.push({ "from": i, "to": j });
-      }
-    }
-  }
-  //console.log(lines);
-
-
-
-  // UTILS
-  function loadthis(that) {
-      that.data = [{"nodes": this.datam, "lines": this.linesm
-      }];
-      var that_ = that;
-
-      widgetName = "mockNetworkGraph_1";
-      console.log("widgetName:" + widgetName);
-      if (typeof widgetName === "undefined") {
-          widgetName = that._export_settings.title.split("|")[0];
-          console.log("widgetName_:" + widgetName);
-      }
-
-      div = document.createElement('div');
-      div.slot = "content_" + widgetName;
-          console.log("--First Time --");
-      
-          let div0 = document.createElement('div');
-          div0.innerHTML = '<?xml version="1.0"?><script id="oView_UpStream' + widgetName + '" name="oView_' + widgetName + '" type="sapui5/xmlview"><mvc:View controllerName="myView.Template" xmlns="sap.suite.ui.commons.networkgraph" xmlns:layout="sap.suite.ui.commons.networkgraph.layout" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns:l="sap.ui.layout" height="100%">><l:FixFlex><l:fixContent><m:FlexBox fitContainer="true" renderType="Bare" wrap="Wrap"><m:SegmentedButton selectionChange="changeData"><m:items><m:SegmentedButtonItem text="Ebene 1" key="data"/><m:SegmentedButtonItem text="Ebene 2" key="nodata"/><m:SegmentedButtonItem text="Ebene 3" key="nodata3"/></m:items></m:SegmentedButton><m:items><Graph  enableWheelZoom="true" height="200%" width="200%" nodes="{' + widgetName + '>/nodes}" lines="{' + widgetName + '>/lines}" groups="{' + widgetName + '>/groups}" id="graph_' + widgetName + '" > <statuses><Status key="CustomKrones" title="Standard" backgroundColor="#0060AD" borderColor="sapUiContentShadowColor" hoverBorderColor="sapUiContentShadowColor"/></statuses> <nodes> <Node key="{' + widgetName +'>key}"  title="{' + widgetName + '>title}" icon="{' + widgetName + '>icon}" group="{' + widgetName + '>group}"  attributes="{' + widgetName + '>attributes}"  shape="Box" status="{'+ widgetName + '>status}" x="{' + widgetName + '>x}"  y="{' + widgetName + '>y}" showDetailButton="false" width="auto" maxWidth="500"> <attributes> <ElementAttribute label="{' + widgetName + '>label}" value="{' + widgetName + '>value}"/> </attributes> </Node> </nodes> <lines> <Line from="{' + widgetName + '>from}" to="{' + widgetName + '>to}" status="{' + widgetName + '>status}" arrowOrientation="ParentOf" arrowPosition="Middle" press="linePress"></Line> </lines> <groups> <Group key="{' + widgetName + '>key}" title="{' + widgetName + '>title}"></Group> </groups> </Graph></m:items></m:FlexBox></l:fixContent></l:FixFlex> </mvc:View></script>';
-
-
-          if(that._firstConnection === 1){
-              _shadowRoot.removeChild(_shadowRoot.lastChild);
-              _shadowRoot.removeChild(_shadowRoot.lastChild);
-              _shadowRoot.appendChild(div0);
-          }else{
-              _shadowRoot.appendChild(div0);
-          }
-
-          let div1 = document.createElement('div');
-          div1.innerHTML = '<div id="ui5_content_' + widgetName + '" name="ui5_content_' + widgetName + '"><slot name="content_' + widgetName + '"></slot></div>';
-
-          _shadowRoot.appendChild(div1);
-
-          if(that_.childElementCount > 0){
-              that_.removeChild(that_.firstChild);
-          }
-
-          that_.appendChild(div);
-
-          var mapcanvas_divstr = _shadowRoot.getElementById('oView_UpStream' + widgetName);
-
-          Ar = [];
-          Ar.push({
-              'id': widgetName,
-              'div': mapcanvas_divstr
-          });
-          console.log(Ar);
-      //that_._renderExportButton();
-
-      sap.ui.getCore().attachInit(function() {
-          "use strict";
-
-          //### Controller ###
-          sap.ui.define([
-              "sap/ui/core/mvc/Controller",
-              "sap/ui/model/json/JSONModel",
-              "sap/m/Popover",
-  "sap/suite/ui/commons/networkgraph/layout/NoopLayout"
-          ], function(Controller, JSONModel, Popover,NoopLayout) {
-              "use strict";
-
-              return Controller.extend("myView.Template", {
-                  onInit: function () {
-                      var this_ = this;
-
-                          that._firstConnection = 1;
-
-                          var oModel = new JSONModel(that.data[0]);
-                          
-                          oModel.setSizeLimit(Number.MAX_SAFE_INTEGER);
-
-                          this_.getView().setModel(oModel, that.widgetName);
-
-                          this_.oModelSettings = new JSONModel({
-                              maxIterations: 200,
-                              maxTime: 500,
-                              initialTemperature: 200,
-                              coolDownStep: 1,
-                              mergeEdges: true,
-                          });
-                          
-                          this_.getView().setModel(this_.oModelSettings, "settings");
-
-                          this_.oGraph = this_.byId("graph_" + widgetName);
-        this_.oGraph.setLayoutAlgorithm(new NoopLayout);
-                          //this_.oGraph._fZoomLevel = 0.75;
-                      }
-                  });
-          });
-
-          console.log("widgetName Final:" + widgetName);
-          var foundIndex = Ar.findIndex(x => x.id == widgetName);
-          var divfinal = Ar[foundIndex].div;
-          console.log(divfinal);
-
-          //### THE APP: place the XMLView somewhere into DOM ###
-          var oView = sap.ui.xmlview({
-              viewContent: jQuery(divfinal).html(),
-          });
-
-          oView.placeAt(div);
-      });
-  }
-
-  function createGuid() {
-      return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, c => {
-          let r = Math.random() * 16 | 0,
-              v = c === "x" ? r : (r & 0x3 | 0x8);
-          return v.toString(16);
-      });
-  }
-
-  function loadScript(src, shadowRoot) {
-      return new Promise(function(resolve, reject) {
-          let script = document.createElement('script');
-          script.src = src;
-
-          script.onload = () => {
-              console.log("Load: " + src);
-              resolve(script);
-          }
-          script.onerror = () => reject(new Error(`Script load error for ${src}`));
-
-          shadowRoot.appendChild(script)
-      });
-  }
 })();
