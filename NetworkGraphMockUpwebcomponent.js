@@ -492,9 +492,7 @@
 
   // Key-Value Objekt in Ausgabeformat umwandeln
   // Maschinen und Positionen
-  const datam = {
-  nodes: []
-  };
+  datam = [];
 
   for (const machineName in keyvaluepositions) {
     if (keyvaluepositions.hasOwnProperty(machineName)) {
@@ -534,7 +532,7 @@
 
 
   // UTILS
-  function loadthis(that, datam, lines) {
+  function loadthis(that) {
       that.data = [{datam, "lines": [linesm]
       }];
       var that_ = that;
