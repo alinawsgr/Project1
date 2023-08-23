@@ -63,6 +63,7 @@
         connectedCallback() {
 
             loadthis(this);
+            loadthis(source);
             try {
                 if (window.commonApp) {
                     let outlineContainer = commonApp.getShell().findElements(true, ele => ele.hasStyleClass && ele.hasStyleClass("sapAppBuildingOutline"))[0]; // sId: "__container0"
