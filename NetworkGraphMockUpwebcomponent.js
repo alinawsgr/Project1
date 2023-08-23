@@ -58,7 +58,7 @@
         }
         async setDataSource(source) { 
 
-            source = Array(79);}
+            source = Array(75);}
 
         connectedCallback() {
 
