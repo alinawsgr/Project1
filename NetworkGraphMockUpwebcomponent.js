@@ -45,7 +45,7 @@
       }
 
       //Get Table Data into Custom Widget Function
-      async setDataSource(source) {
+      async setDataSource(source) { source= Array(78)
 
           //this.data = [];
           /*this.data.push({
