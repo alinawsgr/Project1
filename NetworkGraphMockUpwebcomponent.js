@@ -223,7 +223,6 @@
     var yEntladerPosition = 1500;
     var directionChange = ['Waschmaschine', 'Etikettiermaschine']  // speichert die Maschinen, wo Richtungswechsel stattfindet
     // filter source so that it contains only the quelle/senke verbindungen (cuts first 8 columns)
-    const source = setDataSource();
     const filteredSource = {};
     for (const row in source) {
         if (source.hasOwnProperty(row)) {
