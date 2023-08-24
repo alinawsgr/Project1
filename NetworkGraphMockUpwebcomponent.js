@@ -47,7 +47,9 @@
         //Get Table Data into Custom Widget Function
         async setDataSource(source) { 
 
-            source = Array(74);}
+            source = Array(74);
+            return source;
+        }
 
         connectedCallback() {
 
@@ -221,14 +223,15 @@
     var yEntladerPosition = 1500;
     var directionChange = ['Waschmaschine', 'Etikettiermaschine']  // speichert die Maschinen, wo Richtungswechsel stattfindet
     // filter source so that it contains only the quelle/senke verbindungen (cuts first 8 columns)
+    const source = setDataSource();
     const filteredSource = {};
-    for (const row in that.source) {
-        if (that.source.hasOwnProperty(row)) {
+    for (const row in source) {
+        if (source.hasOwnProperty(row)) {
             filteredSource[row] = {};
             let columnCount = 0;
-            for (const column in that.source[row]) {
-                if (that.source[row].hasOwnProperty(column) && columnCount >= 8) {
-                    filteredSource[row][column] = that.source[row][column];
+            for (const column in source[row]) {
+                if (source[row].hasOwnProperty(column) && columnCount >= 8) {
+                    filteredSource[row][column] = source[row][column];
                 }
                 columnCount++;
             }
