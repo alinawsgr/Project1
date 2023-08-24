@@ -222,7 +222,7 @@
     var directionChange = ['Waschmaschine', 'Etikettiermaschine']  // speichert die Maschinen, wo Richtungswechsel stattfindet
     // filter source so that it contains only the quelle/senke verbindungen (cuts first 8 columns)
     const filteredSource = {};
-    for (const row in source) {
+    for (const row in that.source) {
         if (source.hasOwnProperty(row)) {
             filteredSource[row] = {};
             let columnCount = 0;
