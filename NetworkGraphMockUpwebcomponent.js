@@ -211,6 +211,31 @@
     }
     customElements.define("sac-mock-network-graph", MockUpNetworkGraph);
 
+    /////////////////////////////// VORBEREITUNG /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // festzulegende und fixe Variablen 
+    // Größe Platzhalter
+    const nodeWith = 350;
+    const nodeHeight = 250;
+    // fixe Positionen
+    var xEntladerPosition = 1400;
+    var yEntladerPosition = 1500;
+    var directionChange = ['Waschmaschine', 'Etikettiermaschine']  // speichert die Maschinen, wo Richtungswechsel stattfindet
+    // filter source so that it contains only the quelle/senke verbindungen (cuts first 8 columns)
+    const filteredSource = {};
+    for (const row in source) {
+        if (source.hasOwnProperty(row)) {
+            filteredSource[row] = {};
+            let columnCount = 0;
+            for (const column in source[row]) {
+                if (source[row].hasOwnProperty(column) && columnCount >= 8) {
+                    filteredSource[row][column] = source[row][column];
+                }
+                columnCount++;
+            }
+        }
+    }
+
+
     // UTILS
     function loadthis(that) {
         that.data = [{
