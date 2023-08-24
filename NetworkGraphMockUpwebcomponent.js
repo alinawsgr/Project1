@@ -47,17 +47,6 @@
         //Get Table Data into Custom Widget Function
         async setDataSource(source) { 
 
-                                     var that = this;
-
-            //this.data = [];
-            /*this.data.push({
-                nodes: nodes,
-                lines: lines
-            });*/
-            //loadthis(that, "Upstream");
-        }
-        async setDataSource(source) { 
-
             source = Array(74);}
 
         connectedCallback() {
