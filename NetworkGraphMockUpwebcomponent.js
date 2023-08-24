@@ -223,12 +223,12 @@
     // filter source so that it contains only the quelle/senke verbindungen (cuts first 8 columns)
     const filteredSource = {};
     for (const row in that.source) {
-        if (source.hasOwnProperty(row)) {
+        if (that.source.hasOwnProperty(row)) {
             filteredSource[row] = {};
             let columnCount = 0;
-            for (const column in source[row]) {
-                if (source[row].hasOwnProperty(column) && columnCount >= 8) {
-                    filteredSource[row][column] = source[row][column];
+            for (const column in that.source[row]) {
+                if (that.source[row].hasOwnProperty(column) && columnCount >= 8) {
+                    filteredSource[row][column] = that.source[row][column];
                 }
                 columnCount++;
             }
