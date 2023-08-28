@@ -229,17 +229,21 @@
     var directionChange = ['Waschmaschine', 'Etikettiermaschine']  // speichert die Maschinen, wo Richtungswechsel stattfindet
     // filter source so that it contains only the quelle/senke verbindungen (cuts first 8 columns)
     // Extrahiere die gewünschten Werte aus den Datenobjekten und erstelle die Matrix
-    const matrix1 = matrix.map(item => {
-    const row = [];
-      
-    for (const key in item) {
+    const matrix1 = [];
+
+    for (let i = 0; i < matrix.length; i++) {
+      const row = [];
+      const dataObject = matrix[i];
+    
+      for (const key in dataObject) {
         if (key !== '@MeasureDimension') {
-            row.push(item[key].id || null);
+          const value = dataObject[key].id || null;
+          row.push(value);
         }
+      }
+    
+      matrix1.push(row);
     }
-    return row;
-    });
-      
     
       
 
