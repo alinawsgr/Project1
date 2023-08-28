@@ -231,7 +231,7 @@
     const xmlData = `...`; // Deine XML-ähnlichen Daten hier einfügen
 
     // Splitte die XML-Daten in Zeilen
-     const lines = matrix.trim().split('\n');
+    const lines = matrix.trim().split('\n');
 
     // Initialisiere die Matrix
     const matrix1 = [];
