@@ -49,7 +49,18 @@
 
             source = Array(74);
             matrix = source;
+             //Erstelle leere Matrix
+        var matrix1 = [];
+        for (const i in matrix) {
+            const rowData = matrix[i];
+            const rowMatrix = [];
+            for (const j in matrix) {
+                const entryDescription = matrix[j].description;
+                rowMatrix.push(entryDescription);
+            }
+            matrix1.push(rowMatrix);
         }
+    }
 
         
 
@@ -228,20 +239,7 @@
     var yEntladerPosition = 1500;
     var directionChange = ['Waschmaschine', 'Etikettiermaschine']  // speichert die Maschinen, wo Richtungswechsel stattfindet
     
-    //Erstelle leere Matrix
-    var matrix1 = [];
-    for (const i in matrix) {
-        const rowData = matrix[i];
-        const rowMatrix = [];
-      
-        for (const j in matrix) {
-          const entryDescription = matrix[j].description;
-          rowMatrix.push(entryDescription);
-        }
-      
-        matrix.push(rowMatrix);
-      }
-      
+   
 
 
     
