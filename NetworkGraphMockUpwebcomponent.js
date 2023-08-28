@@ -48,8 +48,11 @@
         async setDataSource(source) { 
 
             source = Array(74);
-            return source;
+            matrix = source;
         }
+
+        
+
 
         connectedCallback() {
 
@@ -213,6 +216,9 @@
     }
     customElements.define("sac-mock-network-graph", MockUpNetworkGraph);
 
+    let matrix;
+    setDataSource(matrix);
+
     /////////////////////////////// VORBEREITUNG /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // festzulegende und fixe Variablen 
     // Größe Platzhalter
@@ -224,12 +230,12 @@
     var directionChange = ['Waschmaschine', 'Etikettiermaschine']  // speichert die Maschinen, wo Richtungswechsel stattfindet
     // filter source so that it contains only the quelle/senke verbindungen (cuts first 8 columns)
     const filteredSource = {};
-    const row1 = source[1];
-    for (const row in source) {
-        if (source.hasOwnProperty(row)) {
+    const row1 = matrix[1];
+    for (const row in matrix) {
+        if (matrix.hasOwnProperty(row)) {
             filteredSource[row] = {};
             let columnCount = 0;
-            for (const column in source[row]) {
+            for (const column in matrix[row]) {
                 if (source[row].hasOwnProperty(column) && columnCount >= 8) {
                     filteredSource[row][column] = source[row][column];
                 }
