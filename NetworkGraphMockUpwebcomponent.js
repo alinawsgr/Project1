@@ -231,17 +231,24 @@
     // Extrahiere die gewünschten Werte aus den Datenobjekten und erstelle die Matrix
     const matrix1 = [];
 
-    for (let i = 0; i < matrix.length; i++) {
-      const row = [];
-      const dataObject = matrix[i];
+    // Füge die Spaltenüberschriften hinzu (EQM_Typ, X, y, ...)
+    const headers = [];
+    for (const key in matrix[0]) {
+      if (key !== '@MeasureDimension') {
+        headers.push(key);
+      }
+    }
+    matrix1.push(headers);
     
-      for (const key in dataObject) {
+    // Füge die Zeilendaten hinzu
+    for (const item of matrix) {
+      const row = [];
+      for (const key in item) {
         if (key !== '@MeasureDimension') {
-          const value = dataObject[key].id || null;
+          const value = item[key].id || null;
           row.push(value);
         }
       }
-    
       matrix1.push(row);
     }
     
