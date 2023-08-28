@@ -49,9 +49,11 @@
 
             source = Array(74);
 
-            const keysToRemove = ['y', 'X', 'EQM_Typ'];
-            keysToRemove.forEach(key => delete source[key]);
 
+            const keysToRemove = ['y', 'X', 'EQM_Typ'];
+            for(let i in source){
+                keysToRemove.forEach(key => delete source[i].key);
+            }
             matrix = source;
         }
 
