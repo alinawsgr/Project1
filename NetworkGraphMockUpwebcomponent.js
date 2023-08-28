@@ -228,19 +228,36 @@
     var yEntladerPosition = 1500;
     var directionChange = ['Waschmaschine', 'Etikettiermaschine']  // speichert die Maschinen, wo Richtungswechsel stattfindet
     // filter source so that it contains only the quelle/senke verbindungen (cuts first 8 columns)
-    const filteredSource = {};
-    for (const row in matrix) {
-        if (matrix.hasOwnProperty(row)) {
-            filteredSource[row] = {};
-            let columnCount = 0;
-            for (const column in matrix[row]) {
-                if (source[row].hasOwnProperty(column) && columnCount >= 8) {
-                    filteredSource[row][column] = source[row][column];
-                }
-                columnCount++;
-            }
+    const xmlData = `...`; // Deine XML-ähnlichen Daten hier einfügen
+
+    // Splitte die XML-Daten in Zeilen
+     const lines = matrix.trim().split('\n');
+
+    // Initialisiere die Matrix
+    const matrix1 = [];
+
+    // Gehe durch jede Zeile
+    for (let i = 0; i < lines.length; i++) {
+        // Überspringe leere Zeilen
+        if (lines[i].trim() === '') {
+            continue;
+        }
+
+    // Extrahiere die Werte aus der Zeile
+    const values = lines[i].split(':');
+    const rowData = {};
+
+    for (let j = 0; j < values.length; j++) {
+        const parts = values[j].trim().split(':');
+        const key = parts[0].trim();
+        const value = parts[1].trim();
+        if (key !== '@MeasureDimension') {
+            rowData[key] = value;
         }
     }
+    // Füge die Zeile zur Matrix hinzu
+    matrix1.push(rowData);
+}
 
 
     // UTILS
