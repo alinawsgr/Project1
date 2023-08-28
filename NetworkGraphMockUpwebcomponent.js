@@ -48,6 +48,10 @@
         async setDataSource(source) { 
 
             source = Array(74);
+
+            const keysToRemove = ['y', 'X', 'EQM_Typ'];
+            keysToRemove.forEach(key => delete source[key]);
+
             matrix = source;
         }
 
