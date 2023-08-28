@@ -228,33 +228,45 @@
     var yEntladerPosition = 1500;
     var directionChange = ['Waschmaschine', 'Etikettiermaschine']  // speichert die Maschinen, wo Richtungswechsel stattfindet
     // filter source so that it contains only the quelle/senke verbindungen (cuts first 8 columns)
-    // Extrahiere die gewünschten Werte aus den Datenobjekten und erstelle die Matrix
-    const matrix1 = [];
+    const fs = require('fs');
 
-    // Füge die Spaltenüberschriften hinzu (EQM_Typ, X, y, ...)
-    const headers = [];
-    for (const key in matrix[0]) {
-      if (key !== '@MeasureDimension') {
-        headers.push(key);
-      }
-    }
-    matrix1.push(headers);
+    // Erstelle ein DOMParser-Objekt
+    const parser = new DOMParser();
     
-    // Füge die Zeilendaten hinzu
-    for (const item of matrix) {
-      const row = [];
-      for (const key in item) {
-        if (key !== '@MeasureDimension') {
-          const value = item[key].id || null;
-          row.push(value);
+    // Parse die XML-Daten
+    const xmlDoc = parser.parseFromString(matrix, 'text/xml');
+    
+    // Extrahiere die Entry-Elemente
+    const entryElements = xmlDoc.getElementsByTagName('Entry');
+    
+    const numRows = 74;
+    const numCols = 78;
+    
+    const matrix1 = new Array(numRows).fill(null).map(() => new Array(numCols).fill(null));
+    
+    for (let rowIndex = 0; rowIndex < numRows; rowIndex++) {
+      const entryElement = entryElements[rowIndex];
+      if (!entryElement) break;
+    
+      const dataElements = entryElement.childNodes;
+    
+      let colIndex = 0;
+      for (let i = 0; i < dataElements.length; i++) {
+        const dataElement = dataElements[i];
+    
+        if (dataElement.nodeType === Node.ELEMENT_NODE) {
+          const key = dataElement.nodeName;
+          if (key !== '@MeasureDimension') {
+            const valueElement = dataElement.childNodes[0];
+            const value = valueElement ? valueElement.textContent.trim() : "(Null)";
+            matrix1[rowIndex][colIndex] = value;
+            colIndex++;
+          }
         }
       }
-      matrix1.push(row);
     }
     
-      
-
-
+    
     // UTILS
     function loadthis(that) {
         that.data = [{
