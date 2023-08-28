@@ -227,45 +227,23 @@
     var xEntladerPosition = 1400;
     var yEntladerPosition = 1500;
     var directionChange = ['Waschmaschine', 'Etikettiermaschine']  // speichert die Maschinen, wo Richtungswechsel stattfindet
-    // filter source so that it contains only the quelle/senke verbindungen (cuts first 8 columns)
-    const fs = require('fs');
-
-    // Erstelle ein DOMParser-Objekt
-    const parser = new DOMParser();
     
-    // Parse die XML-Daten
-    const xmlDoc = parser.parseFromString(matrix, 'text/xml');
-    
-    // Extrahiere die Entry-Elemente
-    const entryElements = xmlDoc.getElementsByTagName('Entry');
-    
-    const numRows = 74;
-    const numCols = 78;
-    
-    const matrix1 = new Array(numRows).fill(null).map(() => new Array(numCols).fill(null));
-    
-    for (let rowIndex = 0; rowIndex < numRows; rowIndex++) {
-      const entryElement = entryElements[rowIndex];
-      if (!entryElement) break;
-    
-      const dataElements = entryElement.childNodes;
-    
-      let colIndex = 0;
-      for (let i = 0; i < dataElements.length; i++) {
-        const dataElement = dataElements[i];
-    
-        if (dataElement.nodeType === Node.ELEMENT_NODE) {
-          const key = dataElement.nodeName;
-          if (key !== '@MeasureDimension') {
-            const valueElement = dataElement.childNodes[0];
-            const value = valueElement ? valueElement.textContent.trim() : "(Null)";
-            matrix1[rowIndex][colIndex] = value;
-            colIndex++;
-          }
+    //Erstelle leere Matrix
+    var matrix1 = [];
+    for (const i in matrix) {
+        const rowData = matrix[i];
+        const rowMatrix = [];
+      
+        for (const j in matrix) {
+          const entryDescription = matrix[j].description;
+          rowMatrix.push(entryDescription);
         }
+      
+        matrix.push(rowMatrix);
       }
-    }
-    
+      
+
+
     
     // UTILS
     function loadthis(that) {
