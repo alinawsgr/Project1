@@ -46,11 +46,13 @@
 
         //Get Table Data into Custom Widget Function
         async setDataSource(source) { 
+            var Machines = [],
+                Final = [];
 
             source = Array(74);
             // get all machines
             for(i = 0; i < source.length; i++){
-                a.push({Machine: source[i].Quelle_.id.replace(" ", "-")})
+                Machines.push({Machine: source[i].Quelle_.id.replace(" ", "-")})
             }
 
             // transform source
@@ -73,6 +75,8 @@
                     }
                 }
             }
+
+            console.log(Final);
         }
 
         connectedCallback() {
