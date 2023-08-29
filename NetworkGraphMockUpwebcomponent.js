@@ -58,44 +58,41 @@
             // transform source xml into a less complex structure 
             for(i = 0; i < source.length; i++){
 
-                for(j = 0; j < Machines.length; j++){
-            
-                    if(Machines[j].Machine in source[i]){
-            
-                        if(Machines[j].Machine[1] !== undefined){
-            
-                            if(source[i][Machines[j]].Machine.id !== "@NullMember" && source[i][Machines[j]].Machine.id !== ""){
-            
-                                Final.push(
-            
-                                    {
-            
-                                        Parent_Machine: source[i].Quelle_.id,
-            
-                                        X: source[i].X.id,
-            
-                                        Y: source[i].y.id,
+    for(j = 0; j < Machines.length; j++){
 
-                                        //fixMachines: source[i].fixe_Maschine.id,
-            
-                                        ID: source[i][Machines[j]].Machine.id,
-            
-                                        Children_Machine: Machines[j].Machine
-            
-                                    }
-            
-                                )
-            
-                            }
-            
+        if(Machines[j].Machine.replaceAll("-", "_") in source[i]){
+
+            if(Machines[j].Machine.split("-")[1] !== undefined){
+
+                if(source[i][Machines[j].Machine].id !== "@NullMember" && source[i][Machines[j].Machine].id !== ""){
+
+                    Final.push(
+
+                        {
+
+                            Parent_Machine: source[i].Quelle_.id,
+
+                            X: source[i].X.id,
+
+                            Y: source[i].y.id,
+
+                            ID: source[i][Machines[j].Machine.replaceAll("-", "_")].id,
+
+                            Children_Machine: Machines[j].Machine
+
                         }
-            
-                    }
-            
+
+                    )
+
                 }
-            
+
             }
-            console.log(Final);
+
+        }
+
+    }
+
+}
         }
 
         connectedCallback() {
@@ -477,3 +474,4 @@
         });
     }
 })();
+
