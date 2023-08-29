@@ -73,7 +73,8 @@
                     }
                 }
             }
-            matrix = source;     
+            matrix = Array(74);
+            matrix = source;  
         }
 
         connectedCallback() {
