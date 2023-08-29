@@ -46,22 +46,22 @@
 
         //Get Table Data into Custom Widget Function
         async setDataSource(source) { 
-            var Machines = [],
-                Final = [];
+            var machines = [], // contains names of existing machines
+                t_source = []; // contains the transformed xml-structure
 
             source = Array(74);
-            // get all machines
+            // get all machines -> Machines contains all existing machines
             for(i = 0; i < source.length; i++){
-                Machines.push({Machine: source[i].Quelle_.id.replace(" ", "-")})
+                machines.push({Machine: source[i].Quelle_.id.replace(" ", "-")})
             }
 
-            // transform source
+            // transform source xml into a less complex structure 
             for(i = 0; i < source.length; i++){
                 for(j = 0; j < Machines.length; j++){
                     if(Machines[j].Machine.replaceAll("-", "_") in source[i]){
                         if(Machines[j].Machine.split("-")[1] !== undefined){
                             if(source[i][Machines[j].Machine.replaceAll("-", "_")].id !== "@NullMember" && source[i][Machines[j].Machine.replaceAll("-", "_")].id !== ""){
-                                Final.push(
+                                t_source.push(
                                     {
                                         Parent_Machine: source[i].Quelle_.id,
                                         X: source[i].X.id,
@@ -76,7 +76,7 @@
                 }
             }
 
-            console.log(Final);
+            console.log(t_source);
         }
 
         connectedCallback() {
@@ -241,31 +241,27 @@
     }
     customElements.define("sac-mock-network-graph", MockUpNetworkGraph);
 
-    let matrix;
+   
 
-    /////////////////////////////// VORBEREITUNG /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // festzulegende und fixe Variablen 
-    // Größe Platzhalter
+    // fix variables that have to be declared in the beginning
+    // size of the space between the machine nodes
     const nodeWith = 350;
     const nodeHeight = 250;
-    // fixe Positionen
+    // fix position of "Entlader"
     var xEntladerPosition = 1400;
     var yEntladerPosition = 1500;
-    var directionChange = ['Waschmaschine', 'Etikettiermaschine']  // speichert die Maschinen, wo Richtungswechsel stattfindet
+    // direction changes in the graph (in this case of the main line)
+    var directionChange = ['Waschmaschine', 'Etikettiermaschine']
+    // get fixed machines
     
-    //Erstelle leere Matrix
-    var matrix1 = [];
-    for (const i in matrix) {
-        const rowData = matrix[i];
-        const rowMatrix = [];
-      
-        for (const j in matrix) {
-          const entryDescription = matrix[j].description;
-          rowMatrix.push(entryDescription);
-        }
-      
-        matrix.push(rowMatrix);
-      }
+    //////////////////////////////////////////////////////// MAIN FUNCTION ///////////////////////////////////////////////////////////////////////////////////////////////
+    // contains functions, that calculates the coordinates and connections for each machine in the input data (input: xml data)
+    function setCoordinates(source, Final){ 
+
+    }
+
+    
+
       
 
 
