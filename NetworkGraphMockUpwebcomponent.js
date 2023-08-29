@@ -46,8 +46,8 @@
 
         //Get Table Data into Custom Widget Function
         async setDataSource(source) { 
-            var Machines = [], // contains names of existing machines
-                t_source = []; // contains the transformed xml-structure
+            var Machines = []; // contains names of existing machines
+            var Final = []; // contains the transformed xml-structure
 
             source = Array(74);
             // get all machines -> Machines contains all existing machines
@@ -57,27 +57,44 @@
 
             // transform source xml into a less complex structure 
             for(i = 0; i < source.length; i++){
-                for(j = 0; j < Machines.length; j++){
-                    if(Machines[j].Machine.replaceAll("-", "_") in source[i]){
-                        if(Machines[j].Machine.split("-")[1] !== undefined){
-                            if(source[i][Machines[j].Machine.replaceAll("-", "_")].id !== "@NullMember" && source[i][Machines[j].Machine.replaceAll("-", "_")].id !== ""){
-                                t_source.push(
-                                    {
-                                        Parent_Machine: source[i].Quelle_.id,
-                                        X: source[i].X.id,
-                                        Y: source[i].Y.id,
-                                        fixMachines: Machines[i].fixe_Maschinen.id,
-                                        ID: source[i][Machines[j].Machine.replaceAll("-", "_")].id,
-                                        Children_Machine: Machines[j].Machine
-                                    }
-                                )
-                            }
-                        }
-                    }
-                }
-            }
 
-            console.log(t_source);
+                for(j = 0; j < Machines.length; j++){
+            
+                    if(Machines[j].Machine.replaceAll("-", "_") in source[i]){
+            
+                        if(Machines[j].Machine.split("-")[1] !== undefined){
+            
+                            if(source[i][Machines[j].Machine.replaceAll("-", "_")].id !== "@NullMember" && source[i][Machines[j].Machine.replaceAll("-", "_")].id !== ""){
+            
+                                Final.push(
+            
+                                    {
+            
+                                        Parent_Machine: source[i].Quelle_.id,
+            
+                                        X: source[i].X.id,
+            
+                                        Y: source[i].y.id,
+
+                                        fixMachines: source[i].fixe_Maschine.id,
+            
+                                        ID: source[i][Machines[j].Machine.replaceAll("-", "_")].id,
+            
+                                        Children_Machine: Machines[j].Machine
+            
+                                    }
+            
+                                )
+            
+                            }
+            
+                        }
+            
+                    }
+            
+                }
+            
+            }
         }
 
         connectedCallback() {
