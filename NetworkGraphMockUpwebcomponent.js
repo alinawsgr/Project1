@@ -95,6 +95,7 @@
                 }
             
             }
+            console.log(Final);
         }
 
         connectedCallback() {
