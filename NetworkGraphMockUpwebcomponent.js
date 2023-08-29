@@ -64,7 +64,7 @@
             
                         if(Machines[j].Machine[1] !== undefined){
             
-                            if(source[i][Machines[j].Machine].id !== "@NullMember" && source[i][Machines[j].Machine].id !== ""){
+                            if(source[i][Machines[j]].Machine.id !== "@NullMember" && source[i][Machines[j]].Machine.id !== ""){
             
                                 Final.push(
             
@@ -78,7 +78,7 @@
 
                                         //fixMachines: source[i].fixe_Maschine.id,
             
-                                        ID: source[i][Machines[j].Machine].id,
+                                        ID: source[i][Machines[j]].Machine.id,
             
                                         Children_Machine: Machines[j].Machine
             
