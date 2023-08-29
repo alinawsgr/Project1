@@ -46,13 +46,13 @@
 
         //Get Table Data into Custom Widget Function
         async setDataSource(source) { 
-            var machines = [], // contains names of existing machines
+            var Machines = [], // contains names of existing machines
                 t_source = []; // contains the transformed xml-structure
 
             source = Array(74);
             // get all machines -> Machines contains all existing machines
             for(i = 0; i < source.length; i++){
-                machines.push({Machine: source[i].Quelle_.id.replace(" ", "-")})
+                Machines.push({Machine: source[i].Quelle_.id.replace(" ", "-")})
             }
 
             // transform source xml into a less complex structure 
@@ -253,7 +253,11 @@
     // direction changes in the graph (in this case of the main line)
     var directionChange = ['Waschmaschine', 'Etikettiermaschine']
     // get fixed machines
-    
+    for (let i = 0; i < t_source.length; i++) {
+        if (fixemaschinen[i] != 0) {
+          fixmachinesstring.push(maschinen[i]);
+        }
+      }
     //////////////////////////////////////////////////////// MAIN FUNCTION ///////////////////////////////////////////////////////////////////////////////////////////////
     // contains functions, that calculates the coordinates and connections for each machine in the input data (input: xml data)
     function setCoordinates(source, Final){ 
