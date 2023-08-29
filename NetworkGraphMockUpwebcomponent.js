@@ -73,7 +73,7 @@
                     }
                 }
             }
-            matrix = Array(74);
+            var matrix =[];
             matrix = source;  
         }
 
