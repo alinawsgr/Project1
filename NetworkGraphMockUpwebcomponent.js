@@ -47,7 +47,7 @@
         //Get Table Data into Custom Widget Function
         async setDataSource(source) { 
             var Machines = []; // contains names of existing machines
-            var Final = []; // contains the transformed xml-structure
+            var t_source = []; // contains the transformed xml-structure
 
             source = Array(74);
             // get all machines -> Machines contains all existing machines
@@ -57,43 +57,25 @@
 
             // transform source xml into a less complex structure 
             for(i = 0; i < source.length; i++){
-
-    for(j = 0; j < Machines.length; j++){
-
-        if(Machines[j].Machine in source[i]){
-
-            if(Machines[j].Machine[1] !== undefined){
-
-                if(source[i][Machines[j].Machine].id !== "@NullMember" && source[i][Machines[j].Machine].id !== ""){
-
-                    Final.push(
-
-                        {
-
-                            Parent_Machine: source[i].Quelle_.id,
-
-                            X: source[i].X.id,
-
-                            Y: source[i].Y.id,
-
-                            ID: source[i][Machines[j].Machine].id,
-
-                            Children_Machine: Machines[j].Machine
-
+                for(j = 0; j < Machines.length; j++){
+                    if(Machines[j].Machine in source[i]){
+                        if(Machines[j].Machine[1] !== undefined){
+                            if(source[i][Machines[j].Machine].id !== "@NullMember" && source[i][Machines[j].Machine].id !== ""){
+                                t_source.push( {
+                                    Parent_Machine: source[i].Quelle_.id,
+                                    X: source[i].X.id,
+                                    Y: source[i].Y.id,
+                                    Fix_Machines: source[i].fixe_Maschine.id,
+                                    ID: source[i][Machines[j].Machine].id,
+                                    Children_Machine: Machines[j].Machine
+                                }
+                                )
+                            }
                         }
-
-                    )
-
+                    }
                 }
-
+                console.log(t_source)
             }
-
-        }
-
-    }
-    console.log(Final);
-
-}
         }
 
         connectedCallback() {
@@ -269,15 +251,61 @@
     var yEntladerPosition = 1500;
     // direction changes in the graph (in this case of the main line)
     var directionChange = ['Waschmaschine', 'Etikettiermaschine']
-    // get fixed machines
-    for (let i = 0; i < t_source.length; i++) {
-        if (fixemaschinen[i] != 0) {
-          fixmachinesstring.push(maschinen[i]);
-        }
-      }
+    
+    
     //////////////////////////////////////////////////////// MAIN FUNCTION ///////////////////////////////////////////////////////////////////////////////////////////////
     // contains functions, that calculates the coordinates and connections for each machine in the input data (input: xml data)
-    function setCoordinates(source, Final){ 
+    function setCoordinates(source, Final){
+        source[1].X.id = xEntladerPosition;
+        source[1].Y.id = yEntladerPosition;
+        /*
+        // get fix machines
+        var fixmachinesstring = [];
+        for (let i = 0; i < t_source.length; i++) {
+            for (let j= 0; j<Machines.length; j++){
+                if (t_source[i][Machines[j].Machine].fixe_Maschinen.id != 0) {
+                fixmachinesstring.push(source[i].);
+            }
+        }
+        // get all machines 
+        for (let i=0; i < t_source.length; i++){
+        if()
+        }
+        function calculatedependencies(source) {
+            for (let i = 0; i < t_source.length; i++) {
+                for (let j= 0; j<Machines.length; j++){
+                    // iterates through the fix machines from column Fixe_Maschinen
+                    for (let a=0; a<fixmachinesstring.length; a++){
+                        // calculates dependencies to the fix machines in the columns X and Y
+                        if (fixmachinesstring[a].contains(source[i][Machines[j].Machine].X)){
+                            source[i][Machines[j].Machine].X.id = source[1].X.id;
+
+
+
+                         }
+                }
+
+                }
+              if (t === 'Entlader') {
+                  keyvaluepositions[maschinen[i]].y = keyvaluepositions['Entlader'].y;
+              }else if (yfixPositions[i] === 'Ettikettiermaschine'){
+                keyvaluepositions[maschinen[i]].y = keyvaluepositions['Ettiketiermaschine'].y;
+              }
+            }
+            for (let i = 0; i < xfixPositions.length; i++) {
+                if (xfixPositions[i] === 'Entlader') {
+                  keyvaluepositions[maschinen[i]].x = keyvaluepositions['Entlader'].x;
+                }else if (xfixPositions[i] === 'Waschmaschine'){
+                    keyvaluepositions[maschinen[i]].x = keyvaluepositions['Waschmaschine'].x;
+                }else if (xfixPositions[i] === 'Auspacker'){
+                    keyvaluepositions[maschinen[i]].x = keyvaluepositions['Auspacker'].x;
+                }
+              }
+              return keyvaluepositions;
+          } */
+        
+        calculatedependencies(matrix,keyvaluepositions); 
+
 
     }
 
