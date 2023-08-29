@@ -65,7 +65,8 @@
                                     {
                                         Parent_Machine: source[i].Quelle_.id,
                                         X: source[i].X.id,
-                                        Y: source[i].y.id,
+                                        Y: source[i].Y.id,
+                                        fixMachines: Machines[i].fixe_Maschinen.id,
                                         ID: source[i][Machines[j].Machine.replaceAll("-", "_")].id,
                                         Children_Machine: Machines[j].Machine
                                     }
