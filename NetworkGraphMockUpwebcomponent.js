@@ -302,9 +302,9 @@
                 }
               }
               return keyvaluepositions;
-          } */
+          } 
         
-        calculatedependencies(matrix,keyvaluepositions); 
+        calculatedependencies(matrix,keyvaluepositions); */
 
 
     }
@@ -503,3 +503,4 @@
         });
     }
 })();
+
