@@ -60,11 +60,11 @@
 
                 for(j = 0; j < Machines.length; j++){
             
-                    if(Machines[j].Machine.replaceAll("-", "_") in source[i]){
+                    if(Machines[j].Machine in source[i]){
             
-                        if(Machines[j].Machine.split("-")[1] !== undefined){
+                        if(Machines[j].Machine[1] !== undefined){
             
-                            if(source[i][Machines[j].Machine.replaceAll("-", "_")].id !== "@NullMember" && source[i][Machines[j].Machine.replaceAll("-", "_")].id !== ""){
+                            if(source[i][Machines[j].Machine].id !== "@NullMember" && source[i][Machines[j].Machine].id !== ""){
             
                                 Final.push(
             
@@ -78,7 +78,7 @@
 
                                         //fixMachines: source[i].fixe_Maschine.id,
             
-                                        ID: source[i][Machines[j].Machine.replaceAll("-", "_")].id,
+                                        ID: source[i][Machines[j].Machine].id,
             
                                         Children_Machine: Machines[j].Machine
             
