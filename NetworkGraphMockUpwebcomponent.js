@@ -72,7 +72,8 @@
                         }
                     }
                 }
-            }     
+            }
+            matrix = source;     
         }
 
         connectedCallback() {
