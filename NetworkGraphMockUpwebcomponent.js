@@ -76,7 +76,7 @@
             
                                         Y: source[i].y.id,
 
-                                        fixMachines: source[i].fixe_Maschine.id,
+                                        //fixMachines: source[i].fixe_Maschine.id,
             
                                         ID: source[i][Machines[j].Machine.replaceAll("-", "_")].id,
             
