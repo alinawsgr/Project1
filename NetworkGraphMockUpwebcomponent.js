@@ -74,8 +74,9 @@
                         }
                     }
                 }
-                console.log(t_source)
+                
             }
+            console.log(t_source)
         }
 
         connectedCallback() {
@@ -255,57 +256,109 @@
     
     //////////////////////////////////////////////////////// MAIN FUNCTION ///////////////////////////////////////////////////////////////////////////////////////////////
     // contains functions, that calculates the coordinates and connections for each machine in the input data (input: xml data)
-    function setCoordinates(source, Final){
-        source[1].X.id = xEntladerPosition;
-        source[1].Y.id = yEntladerPosition;
-        /*
-        // get fix machines
+    function setCoordinates(t_source, source){
+        // write fix Entlader Positions into t_source as a base machine
+        for (let i = 0; i < t_source.length; i++) {
+            if (t_source[i].Parent_Machine === 'Entlader'){
+                t_source[i].X = xEntladerPosition;
+                t_source[i].Y = yEntladerPosition;
+            }
+        }
+        // get only fix machines in string format
         var fixmachinesstring = [];
         for (let i = 0; i < t_source.length; i++) {
-            for (let j= 0; j<Machines.length; j++){
-                if (t_source[i][Machines[j].Machine].fixe_Maschinen.id != 0) {
-                fixmachinesstring.push(source[i].);
+            if (t_source[i].Fix_Machines != '@NullMember') {
+                fixmachinesstring.push(t_source[i].Parent_Machine);
             }
         }
-        // get all machines 
+        // get all existing machines in string format
+        var allmachinesstring = [];
         for (let i=0; i < t_source.length; i++){
-        if()
+            allmachinesstring.push(t_source[i].Parent_Machine)
         }
-        function calculatedependencies(source) {
+        // function, that calculates the position dependencies from fix machines and sets their coordinates based on that
+        function calculatedependencies(t_source) {
             for (let i = 0; i < t_source.length; i++) {
-                for (let j= 0; j<Machines.length; j++){
-                    // iterates through the fix machines from column Fixe_Maschinen
-                    for (let a=0; a<fixmachinesstring.length; a++){
-                        // calculates dependencies to the fix machines in the columns X and Y
-                        if (fixmachinesstring[a].contains(source[i][Machines[j].Machine].X)){
-                            source[i][Machines[j].Machine].X.id = source[1].X.id;
+                // iterates through the fix machines from column Fixe_Maschinen
+                for (let a=0; a<fixmachinesstring.length; a++){
+                    // calculates dependencies to the fix machines in the columns X and Y
+                    if (fixmachinesstring[a].contains(t_source[i].X)){
+                        for (let j=0; allmachinesstring.length; j++){
+                            // find the position/ row of the fix machine in t_source
+                            if (fixmachinesstring[a] == allmachinesstring[j]){
+                                t_source[i].X = t_source[j].X;
+                            }
+                        }
+                    }
+                    if (fixmachinesstring[a].contains(t_source[i].Y)){
+                        for (let j=0; allmachinesstring.length; j++){
+                            // find the position/ row of the fix machine in t_source
+                            if (fixmachinesstring[a] == allmachinesstring[j]){
+                                t_source[i].Y = t_source[j].Y;
+                            }
+                        }
+                    }
 
-
-
-                         }
-                }
-
-                }
-              if (t === 'Entlader') {
-                  keyvaluepositions[maschinen[i]].y = keyvaluepositions['Entlader'].y;
-              }else if (yfixPositions[i] === 'Ettikettiermaschine'){
-                keyvaluepositions[maschinen[i]].y = keyvaluepositions['Ettiketiermaschine'].y;
-              }
+                } 
             }
-            for (let i = 0; i < xfixPositions.length; i++) {
-                if (xfixPositions[i] === 'Entlader') {
-                  keyvaluepositions[maschinen[i]].x = keyvaluepositions['Entlader'].x;
-                }else if (xfixPositions[i] === 'Waschmaschine'){
-                    keyvaluepositions[maschinen[i]].x = keyvaluepositions['Waschmaschine'].x;
-                }else if (xfixPositions[i] === 'Auspacker'){
-                    keyvaluepositions[maschinen[i]].x = keyvaluepositions['Auspacker'].x;
-                }
-              }
-              return keyvaluepositions;
-          } 
-        
-        calculatedependencies(matrix,keyvaluepositions); */
+        }
+        calculatedependencies(t_source);
 
+        // calculates all paths in the graph regarding their value/priority
+        function findPaths(t_source){
+            // calculates the row of the start machine, from where the paths start
+            var startMachine = ['Entlader']; // nicht optimal -> sollte man besser in Excel fix vorgeben wo der genaue Startpunkt ist
+            // path1 contains all connections with value 1 -> Hauptlinie
+            var path1 = [];
+            // define "Entlader" as the start Position for the path
+            for (let i=0; i<t_source.length; i++){
+                if (t_source[i].Parent_Machine == 'Entlader'){
+                    startMachine = t_source[i];
+                }
+            }
+            // 
+            for (let i=0; i<t_source.length; i++){
+                if(t_source[i].Parent_Machine = startMachine.Children_Machine){
+                    path1.push(t_source[i].Parent_Machine)
+                    startMachine = t_source[i]
+                }
+            }
+        
+        }
+
+
+        // function that calculates paths for each connection value (1,2,3,...) -> start findPaths()
+        // red 
+        // yellow
+        // rest
+
+
+
+        // functions that calculate the coordinates for each direction
+        function calcpositionshor_r (path,t_source){
+            
+          }
+
+          function calcpositionshor_l (path,t_source){
+            
+          }
+          
+          function calcpositionssenkr_u(path,t_source) {
+             
+            }
+          
+          function calcpositionssenkr_o (path,t_source){
+           
+          }
+
+
+          // function that transform p_source data into input format for graph 
+          
+
+            
+
+            
+            
 
     }
 
@@ -503,4 +556,3 @@
         });
     }
 })();
-
