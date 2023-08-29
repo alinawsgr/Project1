@@ -48,17 +48,32 @@
         async setDataSource(source) { 
 
             source = Array(74);
-
-
-            const keysToRemove = ['y', 'X', 'EQM_Typ'];
-            for(let i in source){
-                keysToRemove.forEach(key => delete source[i].key);
+            // get all machines
+            for(i = 0; i < source.length; i++){
+                a.push({Machine: source[i].Quelle_.id.replace(" ", "-")})
             }
-            matrix = source;
+
+            // transform source
+            for(i = 0; i < source.length; i++){
+                for(j = 0; j < Machines.length; j++){
+                    if(Machines[j].Machine.replaceAll("-", "_") in source[i]){
+                        if(Machines[j].Machine.split("-")[1] !== undefined){
+                            if(source[i][Machines[j].Machine.replaceAll("-", "_")].id !== "@NullMember" && source[i][Machines[j].Machine.replaceAll("-", "_")].id !== ""){
+                                Final.push(
+                                    {
+                                        Parent_Machine: source[i].Quelle_.id,
+                                        X: source[i].X.id,
+                                        Y: source[i].y.id,
+                                        ID: source[i][Machines[j].Machine.replaceAll("-", "_")].id,
+                                        Children_Machine: Machines[j].Machine
+                                    }
+                                )
+                            }
+                        }
+                    }
+                }
+            }     
         }
-
-        
-
 
         connectedCallback() {
 
