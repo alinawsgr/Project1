@@ -73,8 +73,6 @@
                     }
                 }
             }
-            var matrix =[];
-            matrix = source;  
         }
 
         connectedCallback() {
