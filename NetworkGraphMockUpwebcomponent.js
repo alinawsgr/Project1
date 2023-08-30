@@ -248,10 +248,10 @@
     const nodeWith = 350;
     const nodeHeight = 250;
     // fix position of "Entlader"
-    var xEntladerPosition = 1400;
-    var yEntladerPosition = 1500;
+    let xEntladerPosition = 1400;
+    let yEntladerPosition = 1500;
     // direction changes in the graph (in this case of the main line)
-    var directionChange = ['Waschmaschine', 'Etikettiermaschine']
+    let directionChange = ['Waschmaschine', 'Etikettiermaschine']
     
     
     //////////////////////////////////////////////////////// MAIN FUNCTION ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -265,17 +265,34 @@
             }
         }
         // get only fix machines in string format
-        var fixmachinesstring = [];
+        let fixmachinesstring = [];
         for (let i = 0; i < t_source.length; i++) {
             if (t_source[i].Fix_Machines != '@NullMember') {
                 fixmachinesstring.push(t_source[i].Parent_Machine);
             }
         }
         // get all existing machines in string format
-        var allmachinesstring = [];
+        let allmachinesstring = [];
         for (let i=0; i < t_source.length; i++){
-            allmachinesstring.push(t_source[i].Parent_Machine)
+            allmachinesstring.push(t_source[i].Parent_Machine);
         }
+        // get all existing connection values
+        let allconnectionvalues = [];
+        let allconnectionvalues_a = [];
+        for (let i=0; i<t_source.length; i++){
+            allconnectionvalues_a.push(t_source[i].ID);
+        }
+        for (let j=0; j<allconnectionvalues_a.length; j++){
+            for (let a=0; a<allconnectionvalues.length; a++){
+                if(allconnectionvalues_a[j] != allconnectionvalues[a]){
+                    allconnectionvalues.push(allconnectionvalues[j])
+                }
+            }
+            }
+        console.log(allconnectionvalues); // ['3', '1', '1', '2', '4', '1', '1', '10', '1', '3', '1', '1', '20', '20', '20', '1', '10', '1', '4', '4', '1', '1', '1', '1', '1', '10', '1', '1', '1', '1', '1', '2', '3', '2', '1', '3', '1', '4', '1', '4', '2', '2', '2', '2', '2', '1', '1', '2', '1', '2', '1', '2', '1', '20', '1', '1', '1', '1', '101', '1', '1', '1', '2', '2', '4', '1', '4', '3']
+        
+    
+
         // function, that calculates the position dependencies from fix machines and sets their coordinates based on that
         function calculatedependencies(t_source) {
             for (let i = 0; i < t_source.length; i++) {
@@ -304,27 +321,29 @@
         }
         calculatedependencies(t_source);
 
-        // calculates all paths in the graph regarding their value/priority
-        function findPaths(t_source){
+        // calculates all paths in the graph regarding their value/priority (path priority must be given as an input and as a string in the format: 'number')
+        function findPaths(t_source, priority){
             // calculates the row of the start machine, from where the paths start
             var startMachine = ['Entlader']; // nicht optimal -> sollte man besser in Excel fix vorgeben wo der genaue Startpunkt ist
             // path1 contains all connections with value 1 -> Hauptlinie
             var path1 = [];
             // define "Entlader" as the start Position for the path
             for (let i=0; i<t_source.length; i++){
-                if (t_source[i].Parent_Machine == 'Entlader'){
-                    startMachine = t_source[i];
+                if (t_source[i].ID === priority){
+                    if (t_source[i].Parent_Machine == 'Entlader'){
+                        startMachine = t_source[i];
+                    }
                 }
             }
             // 
             for (let i=0; i<t_source.length; i++){
-                if(t_source[i].Parent_Machine = startMachine.Children_Machine){
-                    path1.push(t_source[i].Parent_Machine)
-                    startMachine = t_source[i]
+                if (t_source[i]  === priority){
+                    if(t_source[i].Parent_Machine = startMachine.Children_Machine){
+                        path1.push(t_source[i].Parent_Machine)
+                        startMachine = t_source[i]
+                    }
                 }
             }
-        
-        }
 
 
         // function that calculates paths for each connection value (1,2,3,...) -> start findPaths()
