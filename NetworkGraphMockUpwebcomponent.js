@@ -285,7 +285,7 @@
         for (let j=0; j<allconnectionvalues_a.length; j++){
             for (let a=0; a<allconnectionvalues.length; a++){
                 if(allconnectionvalues_a[j] != allconnectionvalues[a]){
-                    allconnectionvalues.push(allconnectionvalues[j])
+                    allconnectionvalues.push(allconnectionvalues_a[j]);
                 }
             }
             }
@@ -326,7 +326,7 @@
             // calculates the row of the start machine, from where the paths start
             var startMachine = ['Entlader']; // nicht optimal -> sollte man besser in Excel fix vorgeben wo der genaue Startpunkt ist
             // path1 contains all connections with value 1 -> Hauptlinie
-            var path1 = [];
+            var path = [];
             // define "Entlader" as the start Position for the path
             for (let i=0; i<t_source.length; i++){
                 if (t_source[i].ID === priority){
@@ -339,17 +339,29 @@
             for (let i=0; i<t_source.length; i++){
                 if (t_source[i]  === priority){
                     if(t_source[i].Parent_Machine = startMachine.Children_Machine){
-                        path1.push(t_source[i].Parent_Machine)
+                        path.push(t_source[i].Parent_Machine)
                         startMachine = t_source[i]
                     }
                 }
             }
+            return path;
+        }
 
 
         // function that calculates paths for each connection value (1,2,3,...) -> start findPaths()
+        // hier ist noch etwas manueller workaround
         // red 
+        let path1 = [];
+        path1 = findPaths(t_source, '1');
         // yellow
+        let path2 = [];
+        path2 = findPaths(t_source, '2');
         // rest
+        let path3 = [];
+        let path4 = [];
+        let path10 = [];
+        let path20 = [];
+        let path101 = [];
 
 
 
@@ -379,7 +391,7 @@
             
             
 
-    }
+        }
 
     
 
