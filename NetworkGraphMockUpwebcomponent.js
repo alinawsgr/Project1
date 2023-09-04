@@ -245,7 +245,7 @@
 
     // fix variables that have to be declared in the beginning
     // size of the space between the machine nodes
-    const nodeWith = 350;
+    const nodeWidth = 350;
     const nodeHeight = 250;
     // fix position of "Entlader"
     let xEntladerPosition = 1400;
@@ -353,50 +353,152 @@
         // red 
         let path1 = [];
         path1 = findPaths(t_source, '1');
+        // cut the path in direction changes
+        let path1_hor_r = innerPath1.slice(0, innerPath1.indexOf(directionChange[0])+1);
+        let path1_senkr_u = innerPath1.slice(innerPath1.indexOf(directionChange[0]), innerPath1.indexOf(directionChange[1]) + 1);
+        let path1_hor_l = innerPath1.slice(innerPath1.indexOf(directionChange[1]), innerPath1.length);
         // yellow
         let path2 = [];
         path2 = findPaths(t_source, '2');
         // rest
         let path3 = [];
+        path3 = findPaths(t_source, '3');
         let path4 = [];
+        path4 = findPaths(t_source, '4');
         let path10 = [];
+        path10 = findPaths(t_source, '10');
         let path20 = [];
+        path20 = findPaths(t_source, '20');
         let path101 = [];
+        path101 = findPaths(t_source, '101');
 
 
 
         // functions that calculate the coordinates for each direction
-        function calcpositionshor_r (path,t_source){
-            
-          }
+        function calcpositionshor_r (path, t_source, nodeWidth){
+            let firstMachineSource = [];
+            let firstMachineX = [];
+            let firstMachineY = []
+            for (let i=0; i<path.length; i++){
+                let xOffset = i * nodeWidth;
+                let firstMachine = path[i];
+                for(let j=0; t_source.length; j++){
+                    if (t_source[j].Parent_Machine == firstMachine){
+                        firstMachineSource = t_source[j];
+                        firstMachineX = firstMachineSource.X;
+                        firstMachineY = firstMachineSource.Y;
+                    }
+                }
+                for (let a=0; a<t_source.length; a++){
+                    if (t_source[a].Parent_Machine == firstMachine){
+                        let currentMachine = t_source[a];
+                        currentMachine.X = firstMachineX + xOffset;
+                        currentMachine.Y = firstMachineY;
+                    }
+                }
 
-          function calcpositionshor_l (path,t_source){
-            
-          }
-          
-          function calcpositionssenkr_u(path,t_source) {
-             
+                }
             }
           
-          function calcpositionssenkr_o (path,t_source){
+
+
+
+
+
+          function calcpositionshor_l (path,t_source, nodeWidth){
+            let firstMachineSource = [];
+            let firstMachineX = [];
+            let firstMachineY = []
+            for (let i=0; i<path.length; i++){
+                let xOffset = i * nodeWidth;
+                let firstMachine = path[i];
+                for(let j=0; t_source.length; j++){
+                    if (t_source[j].Parent_Machine == firstMachine){
+                        firstMachineSource = t_source[j];
+                        firstMachineX = firstMachineSource.X;
+                        firstMachineY = firstMachineSource.Y;
+                    }
+                }
+                for (let a=0; a<t_source.length; a++){
+                    if (t_source[a].Parent_Machine == firstMachine){
+                        let currentMachine = t_source[a];
+                        currentMachine.X = firstMachineX - xOffset;
+                        currentMachine.Y = firstMachineY;
+                    }
+                }
+
+                }
+            
+          }
+          
+          function calcpositionssenkr_u(path,t_source, nodeHeight) {
+            let firstMachineSource = [];
+            let firstMachineX = [];
+            let firstMachineY = []
+            for (let i=0; i<path.length; i++){
+                let yOffset = i * nodeHeight;
+                let firstMachine = path[i];
+                for(let j=0; t_source.length; j++){
+                    if (t_source[j].Parent_Machine == firstMachine){
+                        firstMachineSource = t_source[j];
+                        firstMachineX = firstMachineSource.X;
+                        firstMachineY = firstMachineSource.Y;
+                    }
+                }
+                for (let a=0; a<t_source.length; a++){
+                    if (t_source[a].Parent_Machine == firstMachine){
+                        let currentMachine = t_source[a];
+                        currentMachine.X = firstMachineX;
+                        currentMachine.Y = firstMachineY - yOffset;
+                    }
+                }
+
+                }
+
+            }
+          
+          function calcpositionssenkr_o (path,t_source, nodeHeight){
+            let firstMachineSource = [];
+            let firstMachineX = [];
+            let firstMachineY = []
+            for (let i=0; i<path.length; i++){
+                let yOffset = i * nodeHeight;
+                let firstMachine = path[i];
+                for(let j=0; t_source.length; j++){
+                    if (t_source[j].Parent_Machine == firstMachine){
+                        firstMachineSource = t_source[j];
+                        firstMachineX = firstMachineSource.X;
+                        firstMachineY = firstMachineSource.Y;
+                    }
+                }
+                for (let a=0; a<t_source.length; a++){
+                    if (t_source[a].Parent_Machine == firstMachine){
+                        let currentMachine = t_source[a];
+                        currentMachine.X = firstMachineX;
+                        currentMachine.Y = firstMachineY + yOffset;
+                    }
+                }
+
+                }
            
           }
 
-
-          // function that transform p_source data into input format for graph 
-          
-
-            
-
-            
-            
-
+        // calculates all paths and the positions of all machines
+        // 1
+        calcpositionshor_r(path1_hor_r, t_source, nodeWidth);
+        calcpositionssenkr_u(path1_senkr_u, t_source, nodeWidth);
+        calcpositionshor_l (path1,t_source,nodeHeight);
+        // 2
+        calcpositionssenkr_u(path2,t_source,nodeHeight);
+        // others...
         }
 
-    
 
-      
 
+
+
+          // function that transform p_source data into input format for graph 
+                 
 
     
     // UTILS
