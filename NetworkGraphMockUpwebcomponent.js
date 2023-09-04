@@ -373,7 +373,6 @@
         path101 = findPaths(t_source, '101');
 
 
-
         // functions that calculate the coordinates for each direction
         function calcpositionshor_r (path, t_source, nodeWidth){
             let firstMachineSource = [];
@@ -400,11 +399,6 @@
                 }
             }
           
-
-
-
-
-
           function calcpositionshor_l (path,t_source, nodeWidth){
             let firstMachineSource = [];
             let firstMachineX = [];
@@ -487,7 +481,7 @@
         // 1
         calcpositionshor_r(path1_hor_r, t_source, nodeWidth);
         calcpositionssenkr_u(path1_senkr_u, t_source, nodeWidth);
-        calcpositionshor_l (path1,t_source,nodeHeight);
+        calcpositionshor_l (path1_hor_l,t_source,nodeHeight);
         // 2
         calcpositionssenkr_u(path2,t_source,nodeHeight);
         // others...
