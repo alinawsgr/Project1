@@ -49,7 +49,7 @@
             var Machines = []; // contains names of existing machines
             var t_source = []; // contains the transformed xml-structure
 
-            source = Array(74);
+            //source = Array(74);
             // get all machines -> Machines contains all existing machines
             for(i = 0; i < source.length; i++){
                 Machines.push({Machine: source[i].Quelle_.id.replace(" ", "-")})
@@ -265,14 +265,14 @@
                 t_source[i].Y = yEntladerPosition;
             }
         }
-        // get only fix machines in string format
+        // get only fix machines in string format -> doppelte maschinen in liste (['Entlader', 'Entlader', 'Auspacker', 'Auspacker', 'Waschmaschine', 'F�ller', 'F�ller', 'Etikettiermaschine', 'Varioline', 'Belader_rechts'])
         let fixmachinesstring = [];
         for (let i = 0; i < t_source.length; i++) {
             if (t_source[i].Fix_Machines != '@NullMember') {
                 fixmachinesstring.push(t_source[i].Parent_Machine);
             }
         }
-        // get all existing machines in string format
+        // get all existing machines in string format -> ['Abschieber', 'Linatronic', 'Belader_links', 'Gebindewascher', 'Abschrauber', 'TBB_EG01', 'TBB_EG02', 'TBB_EG02', 'TBB_EG03', 'TBB_EG04', 'TBB_EG05', 'TBB_EG06', 'TBB_EG07', 'TBB_EG07', 'TBB_EG07', 'TBB_EG07', 'TBB_EG11', 'TBB_EG12', 'TBB_EG12', 'TBB_EG14', 'TBB_EG15', 'TBB_EG16', 'TBB_EG17', 'TBB_EG18', 'TBB_EG21', 'TBB_EG22', 'TBB_EG22', 'TBB_EG24', 'TBB_EG26', 'TBG_EG01', 'TBG_EG02', 'TBG_EG05', 'TBG_EG05', 'TBG_EG06', 'TBG_EG07', 'TBG_EG08', 'TBG_EG09', 'TBG_EG09', 'TBG_EG10', 'TBG_EG12', 'TBG_EG15', 'TBP1_EG02', 'TBP1_EG03', 'TBP1_EG04', 'TBP1_EG05', 'TBP1_EG07', 'Extern_Aufgabe_PAL', 'TBG_EG04', 'Entlader', 'Entlader', 'Auspacker', 'Auspacker', 'Waschmaschine', 'F�ller', 'F�ller', 'Etikettiermaschine', 'Varioline', 'Belader_rechts', 'TBP1_EG08', 'TBB_EG23', 'TBP1_EG01', 'TBG_EG11', 'TBP1_EG06', 'TBP1_EG06', 'TBG_EG13', 'TBG_EG03', 'TBB_EG13', 'EXTERN01']
         let allmachinesstring = [];
         for (let i=0; i < t_source.length; i++){
             allmachinesstring.push(t_source[i].Parent_Machine);
@@ -281,7 +281,7 @@
         let allconnectionvalues = [];
         let allconnectionvalues_a = [];
         for (let i=0; i<t_source.length; i++){
-            allconnectionvalues_a.push(t_source[i].ID);
+            allconnectionvalues_a.push(t_source[i].ID);   // ['3', '1', '1', '2', '4', '1', '1', '10', '1', '3', '1', '1', '20', '20', '20', '1', '10', '1', '4', '4', '1', '1', '1', '1', '1', '10', '1', '1', '1', '1', '1', '2', '3', '2', '1', '3', '1', '4', '1', '4', '2', '2', '2', '2', '2', '1', '1', '2', '1', '2', '1', '2', '1', '20', '1', '1', '1', '1', '101', '1', '1', '1', '2', '2', '4', '1', '4', '3']
         }
         for (let j=0; j<allconnectionvalues_a.length; j++){
             for (let a=0; a<allconnectionvalues.length; a++){
@@ -291,7 +291,7 @@
             }
             }
         console.log(allconnectionvalues); // ['3', '1', '1', '2', '4', '1', '1', '10', '1', '3', '1', '1', '20', '20', '20', '1', '10', '1', '4', '4', '1', '1', '1', '1', '1', '10', '1', '1', '1', '1', '1', '2', '3', '2', '1', '3', '1', '4', '1', '4', '2', '2', '2', '2', '2', '1', '1', '2', '1', '2', '1', '2', '1', '20', '1', '1', '1', '1', '101', '1', '1', '1', '2', '2', '4', '1', '4', '3']
-        
+        // fehler: hier aktuell []
     
 
         // function, that calculates the position dependencies from fix machines and sets their coordinates based on that
@@ -300,7 +300,7 @@
                 // iterates through the fix machines from column Fixe_Maschinen
                 for (let a=0; a<fixmachinesstring.length; a++){
                     // calculates dependencies to the fix machines in the columns X and Y
-                    if (fixmachinesstring[a].contains(t_source[i].X)){
+                    if (fixmachinesstring[a] == t_source[i].X){ //contains ist ein problem
                         for (let j=0; allmachinesstring.length; j++){
                             // find the position/ row of the fix machine in t_source
                             if (fixmachinesstring[a] == allmachinesstring[j]){
@@ -308,7 +308,7 @@
                             }
                         }
                     }
-                    if (fixmachinesstring[a].contains(t_source[i].Y)){
+                    if (fixmachinesstring[a] == t_source[i].Y){
                         for (let j=0; allmachinesstring.length; j++){
                             // find the position/ row of the fix machine in t_source
                             if (fixmachinesstring[a] == allmachinesstring[j]){
