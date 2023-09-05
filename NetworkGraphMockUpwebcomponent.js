@@ -331,7 +331,7 @@
             // define "Entlader" as the start Position for the path
             for (let i=0; i<t_source.length; i++){
                 if (t_source[i].ID === priority){
-                    if (t_source[i].Parent_Machine == 'Entlader'){
+                    if (t_source[i].Parent_Machine === 'Entlader'){
                         startMachine = t_source[i];
                     }
                 }
@@ -408,14 +408,14 @@
                 let xOffset = i * nodeWidth;
                 let firstMachine = path[i];
                 for(let j=0; t_source.length; j++){
-                    if (t_source[j].Parent_Machine == firstMachine){
+                    if (t_source[j].Parent_Machine === firstMachine){
                         firstMachineSource = t_source[j];
                         firstMachineX = firstMachineSource.X;
                         firstMachineY = firstMachineSource.Y;
                     }
                 }
                 for (let a=0; a<t_source.length; a++){
-                    if (t_source[a].Parent_Machine == firstMachine){
+                    if (t_source[a].Parent_Machine === firstMachine){
                         let currentMachine = t_source[a];
                         currentMachine.X = firstMachineX - xOffset;
                         currentMachine.Y = firstMachineY;
@@ -434,14 +434,14 @@
                 let yOffset = i * nodeHeight;
                 let firstMachine = path[i];
                 for(let j=0; t_source.length; j++){
-                    if (t_source[j].Parent_Machine == firstMachine){
+                    if (t_source[j].Parent_Machine === firstMachine){
                         firstMachineSource = t_source[j];
                         firstMachineX = firstMachineSource.X;
                         firstMachineY = firstMachineSource.Y;
                     }
                 }
                 for (let a=0; a<t_source.length; a++){
-                    if (t_source[a].Parent_Machine == firstMachine){
+                    if (t_source[a].Parent_Machine === firstMachine){
                         let currentMachine = t_source[a];
                         currentMachine.X = firstMachineX;
                         currentMachine.Y = firstMachineY - yOffset;
@@ -460,14 +460,14 @@
                 let yOffset = i * nodeHeight;
                 let firstMachine = path[i];
                 for(let j=0; t_source.length; j++){
-                    if (t_source[j].Parent_Machine == firstMachine){
+                    if (t_source[j].Parent_Machine === firstMachine){
                         firstMachineSource = t_source[j];
                         firstMachineX = firstMachineSource.X;
                         firstMachineY = firstMachineSource.Y;
                     }
                 }
                 for (let a=0; a<t_source.length; a++){
-                    if (t_source[a].Parent_Machine == firstMachine){
+                    if (t_source[a].Parent_Machine === firstMachine){
                         let currentMachine = t_source[a];
                         currentMachine.X = firstMachineX;
                         currentMachine.Y = firstMachineY + yOffset;
@@ -481,10 +481,10 @@
         // calculates all paths and the positions of all machines
         // 1
         calcpositionshor_r(path1_hor_r, t_source, nodeWidth);
-        calcpositionssenkr_u(path1_senkr_u, t_source, nodeWidth);
-        calcpositionshor_l (path1_hor_l,t_source,nodeHeight);
+        calcpositionssenkr_u(path1_senkr_u, t_source, nodeHeight);
+        calcpositionshor_l (path1_hor_l,t_source,nodeWidth);
         // 2
-        calcpositionssenkr_u(path2,t_source,nodeHeight);
+        //calcpositionssenkr_u(path2,t_source,nodeHeight);
         // others...
         }
         
