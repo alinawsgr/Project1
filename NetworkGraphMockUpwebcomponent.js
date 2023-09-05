@@ -352,7 +352,7 @@
         // function that calculates paths for each connection value (1,2,3,...) -> start findPaths()
         // hier ist noch etwas manueller workaround
         // red 
-        let path1 = ['Entlader', 'Linatronic',"Waschmaschine"];
+        let path1 = ["Entlader", "Linatronic","Waschmaschine"];
         //path1 = findPaths(t_source, '1');
         // cut the path in direction changes
         let path1_hor_r = path1.slice(0, path1.indexOf(directionChange[0])+1);
@@ -383,14 +383,14 @@
                 let xOffset = i * nodeWidth;
                 let firstMachine = path[i];
                 for(let j=0; t_source.length; j++){
-                    if (t_source[j].Parent_Machine == firstMachine){
+                    if (t_source[j].Parent_Machine === firstMachine){
                         firstMachineSource = t_source[j];
                         firstMachineX = firstMachineSource.X;
                         firstMachineY = firstMachineSource.Y;
                     }
                 }
                 for (let a=0; a<t_source.length; a++){
-                    if (t_source[a].Parent_Machine == firstMachine){
+                    if (t_source[a].Parent_Machine === firstMachine){
                         let currentMachine = t_source[a];
                         currentMachine.X = firstMachineX + xOffset;
                         currentMachine.Y = firstMachineY;
