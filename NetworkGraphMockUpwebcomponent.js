@@ -361,6 +361,7 @@
         // yellow
         let path2 = [];
         path2 = findPaths(t_source, '2');
+        console.log(path2);
         // rest
         let path3 = [];
         //path3 = findPaths(t_source, '3');
@@ -382,7 +383,7 @@
             for (let i=0; i<path.length; i++){
                 let xOffset = i * nodeWidth;
                 let firstMachine = path[i];
-                for(let j=0; t_source.length; j++){
+                for(let j=0; j<t_source.length; j++){
                     if (t_source[j].Parent_Machine === firstMachine){
                         firstMachineSource = t_source[j];
                         firstMachineX = firstMachineSource.X;
@@ -407,7 +408,7 @@
             for (let i=0; i<path.length; i++){
                 let xOffset = i * nodeWidth;
                 let firstMachine = path[i];
-                for(let j=0; t_source.length; j++){
+                for(let j=0; j<t_source.length; j++){
                     if (t_source[j].Parent_Machine === firstMachine){
                         firstMachineSource = t_source[j];
                         firstMachineX = firstMachineSource.X;
@@ -433,7 +434,7 @@
             for (let i=0; i<path.length; i++){
                 let yOffset = i * nodeHeight;
                 let firstMachine = path[i];
-                for(let j=0; t_source.length; j++){
+                for(let j=0; j<t_source.length; j++){
                     if (t_source[j].Parent_Machine === firstMachine){
                         firstMachineSource = t_source[j];
                         firstMachineX = firstMachineSource.X;
@@ -459,7 +460,7 @@
             for (let i=0; i<path.length; i++){
                 let yOffset = i * nodeHeight;
                 let firstMachine = path[i];
-                for(let j=0; t_source.length; j++){
+                for(let j=0; j<t_source.length; j++){
                     if (t_source[j].Parent_Machine === firstMachine){
                         firstMachineSource = t_source[j];
                         firstMachineX = firstMachineSource.X;
