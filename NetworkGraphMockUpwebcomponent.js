@@ -352,8 +352,7 @@
         // function that calculates paths for each connection value (1,2,3,...) -> start findPaths()
         // hier ist noch etwas manueller workaround
         // red 
-        let path1 = ['Entlader', 'Linatronic','Waschmaschine', 'Linatronic','Etikettiermaschine', 'Varioline'];
-        //path1 = findPaths(t_source, '1');
+        let path1 = findPaths(t_source, '1');
         // cut the path in direction changes
         let path1_hor_r = path1.slice(0, path1.indexOf(directionChange[0])+1);
         let path1_senkr_u = path1.slice(path1.indexOf(directionChange[0]), path1.indexOf(directionChange[1]) + 1);
