@@ -358,9 +358,9 @@
         let path1_senkr_u = path1.slice(path1.indexOf(directionChange[0]), path1.indexOf(directionChange[1]) + 1);
         let path1_hor_l = path1.slice(path1.indexOf(directionChange[1]), path1.length);
         // yellow
-        let path2 = [];
-        path2 = findPaths(t_source, '2');
-        console.log(path2);
+        //let path2 = [];
+        //path2 = findPaths(t_source, '2');
+        //console.log(path2);
         // rest
         let path3 = [];
         //path3 = findPaths(t_source, '3');
@@ -685,3 +685,5 @@
         });
     }
 })();
+
+                                        
