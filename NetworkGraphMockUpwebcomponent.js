@@ -383,7 +383,7 @@
                 let xOffset = i * nodeWidth;
                 let firstMachine = path[i];
                 for(let j=0; t_source.length; j++){
-                    if (t_source[j].Parent_Machine === 'Entlader'){
+                    if (t_source[j].Parent_Machine === firstMachine){
                         firstMachineSource = t_source[j];
                         firstMachineX = firstMachineSource.X;
                         firstMachineY = firstMachineSource.Y;
