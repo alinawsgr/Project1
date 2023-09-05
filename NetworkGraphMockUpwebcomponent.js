@@ -352,26 +352,26 @@
         // function that calculates paths for each connection value (1,2,3,...) -> start findPaths()
         // hier ist noch etwas manueller workaround
         // red 
-        let path1 = [];
-        path1 = findPaths(t_source, '1');
+        let path1 = ['Entlader', 'Linatronic',"Waschmaschine"];
+        //path1 = findPaths(t_source, '1');
         // cut the path in direction changes
-        let path1_hor_r = innerPath1.slice(0, innerPath1.indexOf(directionChange[0])+1);
-        let path1_senkr_u = innerPath1.slice(innerPath1.indexOf(directionChange[0]), innerPath1.indexOf(directionChange[1]) + 1);
-        let path1_hor_l = innerPath1.slice(innerPath1.indexOf(directionChange[1]), innerPath1.length);
+        let path1_hor_r = path1.slice(0, path1.indexOf(directionChange[0])+1);
+        let path1_senkr_u = path1.slice(path1.indexOf(directionChange[0]), path1.indexOf(directionChange[1]) + 1);
+        let path1_hor_l = path1.slice(path1.indexOf(directionChange[1]), path1.length);
         // yellow
         let path2 = [];
-        path2 = findPaths(t_source, '2');
+        //path2 = findPaths(t_source, '2');
         // rest
         let path3 = [];
-        path3 = findPaths(t_source, '3');
+        //path3 = findPaths(t_source, '3');
         let path4 = [];
-        path4 = findPaths(t_source, '4');
+        //path4 = findPaths(t_source, '4');
         let path10 = [];
-        path10 = findPaths(t_source, '10');
+        //path10 = findPaths(t_source, '10');
         let path20 = [];
-        path20 = findPaths(t_source, '20');
+        //path20 = findPaths(t_source, '20');
         let path101 = [];
-        path101 = findPaths(t_source, '101');
+        //path101 = findPaths(t_source, '101');
 
 
         // functions that calculate the coordinates for each direction
