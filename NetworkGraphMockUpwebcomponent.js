@@ -294,7 +294,7 @@
         // fehler: hier aktuell []
     
 
-        /* function, that calculates the position dependencies from fix machines and sets their coordinates based on that
+        /*function, that calculates the position dependencies from fix machines and sets their coordinates based on that
         function calculatedependencies(t_source) {
             for (let i = 0; i < t_source.length; i++) {
                 // iterates through the fix machines from column Fixe_Maschinen
@@ -352,7 +352,7 @@
         // function that calculates paths for each connection value (1,2,3,...) -> start findPaths()
         // hier ist noch etwas manueller workaround
         // red 
-        let path1 = ['Entlader', 'Linatronic','Waschmaschine'];
+        let path1 = ['Entlader', 'Linatronic','Waschmaschine', 'Linatronic','Etikettiermaschine', 'Varioline'];
         //path1 = findPaths(t_source, '1');
         // cut the path in direction changes
         let path1_hor_r = path1.slice(0, path1.indexOf(directionChange[0])+1);
