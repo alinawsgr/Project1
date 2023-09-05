@@ -294,7 +294,7 @@
         // fehler: hier aktuell []
     
 
-        // function, that calculates the position dependencies from fix machines and sets their coordinates based on that
+        /* function, that calculates the position dependencies from fix machines and sets their coordinates based on that
         function calculatedependencies(t_source) {
             for (let i = 0; i < t_source.length; i++) {
                 // iterates through the fix machines from column Fixe_Maschinen
@@ -320,14 +320,14 @@
                 } 
             }
         }
-        calculatedependencies(t_source);
+        calculatedependencies(t_source); */
 
         // calculates all paths in the graph regarding their value/priority (path priority must be given as an input and as a string in the format: 'number')
         function findPaths(t_source, priority){
             // calculates the row of the start machine, from where the paths start
-            var startMachine = ['Entlader']; // nicht optimal -> sollte man besser in Excel fix vorgeben wo der genaue Startpunkt ist
+            let startMachine = ['Entlader']; // nicht optimal -> sollte man besser in Excel fix vorgeben wo der genaue Startpunkt ist
             // path1 contains all connections with value 1 -> Hauptlinie
-            var path = [];
+            let path = [];
             // define "Entlader" as the start Position for the path
             for (let i=0; i<t_source.length; i++){
                 if (t_source[i].ID === priority){
