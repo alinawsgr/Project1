@@ -354,9 +354,9 @@
         // red 
         let path1 = findPaths(t_source, '1');
         // cut the path in direction changes
-        let path1_hor_r = path1.slice(0, path1.indexOf(directionChange[0]));
-        let path1_senkr_u = path1.slice(path1.indexOf(directionChange[0]), path1.indexOf(directionChange[1]) + 1);
-        let path1_hor_l = path1.slice(path1.indexOf(directionChange[1]), path1.length);
+        let path1_hor_r = path1.slice(0, (path1.indexOf(directionChange[0])+1));
+        let path1_senkr_u = path1.slice((path1.indexOf(directionChange[0])), (path1.indexOf(directionChange[1]) + 1));
+        let path1_hor_l = path1.slice((path1.indexOf(directionChange[1])),( path1.length));
         // yellow
         let path2 = [];
         //path2 = findPaths(t_source, '2');
@@ -686,4 +686,3 @@
         });
     }
 })();
-
