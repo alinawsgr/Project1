@@ -383,7 +383,7 @@
                 let xOffset = i * nodeWidth;
                 let firstMachine = path[i];
                 for(let j=0; j<t_source.length; j++){
-                    if ((t_source[j].Parent_Machine) === (firstMachine && t_source[j].ID === priority)){
+                    if ((t_source[j].Parent_Machine === firstMachine) && (t_source[j].ID === priority)){
                         firstMachineSource = t_source[j];
                         firstMachineX = firstMachineSource.X;
                         firstMachineY = firstMachineSource.Y;
