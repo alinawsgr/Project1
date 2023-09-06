@@ -399,7 +399,7 @@
                     if ((t_source[a].Parent_Machine === firstMachine) && (t_source[a].ID === priority)){
                         let currentMachine = t_source[a];
                         currentMachine.X = firstMachineX + xOffset;
-                        currentMachine.Y = firstMachineY + firstMachineY;
+                        currentMachine.Y = firstMachineY + yOffset;
                     }
                 }
 
@@ -487,6 +487,7 @@
         // calculates all paths and the positions of all machines
         // 1
         calcpositionshor_r(path1_hor_r, t_source, nodeWidth, '1');
+        console.log(path1_hor_r);
         //calcpositionssenkr_u(path1_senkr_u, t_source, nodeHeight,'1');
         //calcpositionshor_l (path1_hor_l,t_source,nodeWidth,'1');
         // 2
