@@ -345,13 +345,19 @@
             // calculate all other machines with the same priority
             for (let j=0; j<t_source.length; j++){
                 if (t_source[j].ID  === priority){
+                    console.log('a');
                     if(t_source[j].Parent_Machine === 'Entlader'){
+                        console.log('b');
                         path.push(t_source[j].Parent_Machine);
+                        console.log('c');
                         //startMachine = t_source[j].Children_Machine;
                     }
                     for (a=0; a<path.length;a++){
+                        console.log('d');
                         if(t_source[j].Parent_Machine === path[a]){
+                            console.log('e');
                             path.push(t_source[j].Children_Machine);
+                            console.log('f');
                     }
                 }
                 }
