@@ -332,37 +332,25 @@
             // calculates the row of the start machine, from where the paths start
             // path1 contains all connections with value 1 -> Hauptlinie
             let path = [];
-            // define "Entlader" as the start Position for the path
-            /*function catchStart (){
-                var startPosition = 0;
-                for (let i=0; i<t_source.length; i++){
-                    if (t_source[i].ID === priority){
-                        if (t_source[i].Parent_Machine === 'Entlader'){
-                            i = startPosition;
-                        }
+            /* define "Entlader" as the start Position for the path
+            var startPosition = 0;
+            for (let i=0; i<t_source.length; i++){
+                if (t_source[i].ID === priority){
+                    if (t_source[i].Parent_Machine === 'Entlader'){
+                        i = startPosition;
                     }
                 }
-                return startPosition;
-            }
-            var posStart = catchStart(); */
-
-
+            } */
+            
             // calculate all other machines with the same priority
             for (let j=0; j<t_source.length; j++){
                 if (t_source[j].ID  === priority){
-                    if(t_source[j].Parent_Machine === startPoints[0]){
+                    if(t_source[j].Parent_Machine === 'Entlader'){
                         path.push(t_source[j].Parent_Machine);
-                        break;
                         //startMachine = t_source[j].Children_Machine;
                     }
-                    break;
-                    
-                }
-                if (t_source[j].ID === priority){
-                    for (let a=0; a<path.length; a++){
-                        if(t_source[j].Parent_Machine === path[a]){
-                            path.push(t_source[j].Children_Machine);
-                        }
+                    if(t_source[j].Parent_Machine === path[a]){
+                        path.push(t_source[j].Children_Machine);
                     }
                 }
             }
@@ -709,4 +697,3 @@
         });
     }
 })();
-
