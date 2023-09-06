@@ -394,7 +394,7 @@
                     if ((t_source[a].Parent_Machine === firstMachine) && (t_source[a].ID === priority)){
                         let currentMachine = t_source[a];
                         currentMachine.X = firstMachineX + xOffset;
-                        currentMachine.Y = firstMachineY + yOffset;
+                        currentMachine.Y = firstMachineY + firstMachineY;
                     }
                 }
 
