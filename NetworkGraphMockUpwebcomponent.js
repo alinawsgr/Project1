@@ -65,7 +65,6 @@
                                     Parent_Machine: source[i].Quelle_.id,
                                     X: source[i].X.id,
                                     Y: source[i].Y.id,
-                                    Fix_Machines: source[i].fixe_Maschine.id,
                                     ID: source[i][Machines[j].Machine].id,
                                     Children_Machine: Machines[j].Machine
                                 }
