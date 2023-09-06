@@ -336,7 +336,7 @@
                     }
                 }
             }
-            // 
+            // calculate all other machines with the same priority
             for (let j=0; j<t_source.length; j++){
                 if (t_source[j].ID  === priority){
                     if(t_source[j].Parent_Machine = startMachine.Children_Machine){
@@ -359,19 +359,19 @@
         let path1_hor_l = path1.slice(path1.indexOf(directionChange[1]), path1.length);
         // yellow
         let path2 = [];
-        path2 = findPaths(t_source, '2');
+        //path2 = findPaths(t_source, '2');
         //console.log(path2);
         // rest
         let path3 = [];
-        path3 = findPaths(t_source, '3');
+        //path3 = findPaths(t_source, '3');
         let path4 = [];
-        path4 = findPaths(t_source, '4');
+        //path4 = findPaths(t_source, '4');
         let path10 = [];
-        path10 = findPaths(t_source, '10');
+        //path10 = findPaths(t_source, '10');
         let path20 = [];
-        path20 = findPaths(t_source, '20');
+        //path20 = findPaths(t_source, '20');
         let path101 = [];
-        path101 = findPaths(t_source, '101');
+        //path101 = findPaths(t_source, '101');
 
 
         // functions that calculate the coordinates for each direction
@@ -484,7 +484,7 @@
         calcpositionssenkr_u(path1_senkr_u, t_source, nodeHeight);
         calcpositionshor_l (path1_hor_l,t_source,nodeWidth);
         // 2
-        calcpositionssenkr_u(path2,t_source,nodeHeight);
+        //calcpositionssenkr_u(path2,t_source,nodeHeight);
         // others...
         }
         
