@@ -252,6 +252,7 @@
     let yEntladerPosition = 1500;
     // direction changes in the graph (in this case of the main line)
     let directionChange = ['Waschmaschine', 'Etikettiermaschine']
+    let startPoints = ['Entlader'];
     
     
     //////////////////////////////////////////////////////// MAIN FUNCTION ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -329,7 +330,6 @@
         // calculates all paths in the graph regarding their value/priority (path priority must be given as an input and as a string in the format: 'number')
         function findPaths(t_source, priority){
             // calculates the row of the start machine, from where the paths start
-            let startMachine = 'Entlader'; // nicht optimal -> sollte man besser in Excel fix vorgeben wo der genaue Startpunkt ist
             // path1 contains all connections with value 1 -> Hauptlinie
             let path = [];
             // define "Entlader" as the start Position for the path
@@ -345,14 +345,21 @@
                 return startPosition;
             }
             var posStart = catchStart(); */
-            
+
 
             // calculate all other machines with the same priority
             for (let j=0; j<t_source.length; j++){
                 if (t_source[j].ID  === priority){
-                    if(t_source[j].Parent_Machine === startMachine){
+                    if(t_source[j].Parent_Machine === startPoints[0]){
                         path.push(t_source[j].Parent_Machine);
-                        startMachine = t_source[j].Children_Machine;
+                        //startMachine = t_source[j].Children_Machine;
+                    }
+                }
+                if (t_source[j].ID === priority){
+                    for (let a=0; a<path.length; a++){
+                        if(t_source[j].Parent_Machine === path[a]){
+                            path.push(t_source[j].Children_Machine);
+                        }
                     }
                 }
             }
