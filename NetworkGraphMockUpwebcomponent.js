@@ -290,7 +290,7 @@
                 }
             }
             }
-        console.log(allconnectionvalues); // ['3', '1', '1', '2', '4', '1', '1', '10', '1', '3', '1', '1', '20', '20', '20', '1', '10', '1', '4', '4', '1', '1', '1', '1', '1', '10', '1', '1', '1', '1', '1', '2', '3', '2', '1', '3', '1', '4', '1', '4', '2', '2', '2', '2', '2', '1', '1', '2', '1', '2', '1', '2', '1', '20', '1', '1', '1', '1', '101', '1', '1', '1', '2', '2', '4', '1', '4', '3']
+        console.log(allconnectionvalues); 
         // fehler: hier aktuell []
     
 
@@ -346,6 +346,7 @@
                 }
             }
             return path;
+            console.log(path);
         }
 
 
@@ -353,6 +354,7 @@
         // hier ist noch etwas manueller workaround
         // red 
         let path1 = findPaths(t_source, '1');
+        console.log(path1);
         // cut the path in direction changes
         let path1_hor_r = path1.slice(0, path1.indexOf(directionChange[0])+1);
         let path1_senkr_u = path1.slice(path1.indexOf(directionChange[0]), path1.indexOf(directionChange[1]) + 1);
@@ -685,3 +687,4 @@
         });
     }
 })();
+
