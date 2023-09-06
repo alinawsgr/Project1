@@ -329,24 +329,30 @@
         // calculates all paths in the graph regarding their value/priority (path priority must be given as an input and as a string in the format: 'number')
         function findPaths(t_source, priority){
             // calculates the row of the start machine, from where the paths start
-            let startMachine = ['Entlader']; // nicht optimal -> sollte man besser in Excel fix vorgeben wo der genaue Startpunkt ist
+            let startMachine = 'Entlader'; // nicht optimal -> sollte man besser in Excel fix vorgeben wo der genaue Startpunkt ist
             // path1 contains all connections with value 1 -> Hauptlinie
             let path = [];
             // define "Entlader" as the start Position for the path
-            for (let i=0; i<t_source.length; i++){
-                if (t_source[i].ID === priority){
-                    if (t_source[i].Parent_Machine === 'Entlader'){
-                        startMachine = t_source[i];
-                        break;
+            /*function catchStart (){
+                var startPosition = 0;
+                for (let i=0; i<t_source.length; i++){
+                    if (t_source[i].ID === priority){
+                        if (t_source[i].Parent_Machine === 'Entlader'){
+                            i = startPosition;
+                        }
                     }
                 }
+                return startPosition;
             }
+            var posStart = catchStart(); */
+            
+
             // calculate all other machines with the same priority
             for (let j=0; j<t_source.length; j++){
                 if (t_source[j].ID  === priority){
-                    if(startMachine.Children_Machine = t_source[j].Parent_Machine){
-                        path.push(t_source[j].Parent_Machine)
-                        startMachine = t_source[j]
+                    if(t_source[j].Parent_Machine === startMachine){
+                        path.push(t_source[j].Parent_Machine);
+                        startMachine = t_source[j].Children_Machine;
                     }
                 }
             }
