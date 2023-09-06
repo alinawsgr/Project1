@@ -375,7 +375,7 @@
 
 
         // functions that calculate the coordinates for each direction
-        function calcpositionshor_r (path, t_source, nodeWidth){
+        function calcpositionshor_r (path, t_source, nodeWidth, priority){
             let firstMachineSource = [];
             let firstMachineX = [];
             let firstMachineY = []
@@ -383,14 +383,14 @@
                 let xOffset = i * nodeWidth;
                 let firstMachine = path[i];
                 for(let j=0; j<t_source.length; j++){
-                    if (t_source[j].Parent_Machine === firstMachine){
+                    if (t_source[j].Parent_Machine === firstMachine && t_source[j].ID === priority){
                         firstMachineSource = t_source[j];
                         firstMachineX = firstMachineSource.X;
                         firstMachineY = firstMachineSource.Y;
                     }
                 }
                 for (let a=0; a<t_source.length; a++){
-                    if (t_source[a].Parent_Machine === firstMachine){
+                    if (t_source[a].Parent_Machine === firstMachine && t_source[j].ID === priority){
                         let currentMachine = t_source[a];
                         currentMachine.X = firstMachineX + xOffset;
                         currentMachine.Y = firstMachineY;
@@ -400,7 +400,7 @@
                 }
             }
           
-          function calcpositionshor_l (path,t_source, nodeWidth){
+          function calcpositionshor_l (path,t_source, nodeWidth, priority){
             let firstMachineSource = [];
             let firstMachineX = [];
             let firstMachineY = []
@@ -408,14 +408,14 @@
                 let xOffset = i * nodeWidth;
                 let firstMachine = path[i];
                 for(let j=0; j<t_source.length; j++){
-                    if (t_source[j].Parent_Machine === firstMachine){
+                    if (t_source[j].Parent_Machine === firstMachine && t_source[j].ID === priority){
                         firstMachineSource = t_source[j];
                         firstMachineX = firstMachineSource.X;
                         firstMachineY = firstMachineSource.Y;
                     }
                 }
                 for (let a=0; a<t_source.length; a++){
-                    if (t_source[a].Parent_Machine === firstMachine){
+                    if (t_source[a].Parent_Machine === firstMachine && t_source[j].ID === priority){
                         let currentMachine = t_source[a];
                         currentMachine.X = firstMachineX - xOffset;
                         currentMachine.Y = firstMachineY;
@@ -426,7 +426,7 @@
             
           }
           
-          function calcpositionssenkr_u(path,t_source, nodeHeight) {
+          function calcpositionssenkr_u(path,t_source, nodeHeight, priority) {
             let firstMachineSource = [];
             let firstMachineX = [];
             let firstMachineY = []
@@ -434,14 +434,14 @@
                 let yOffset = i * nodeHeight;
                 let firstMachine = path[i];
                 for(let j=0; j<t_source.length; j++){
-                    if (t_source[j].Parent_Machine === firstMachine){
+                    if (t_source[j].Parent_Machine === firstMachine && t_source[j].ID === priority){
                         firstMachineSource = t_source[j];
                         firstMachineX = firstMachineSource.X;
                         firstMachineY = firstMachineSource.Y;
                     }
                 }
                 for (let a=0; a<t_source.length; a++){
-                    if (t_source[a].Parent_Machine === firstMachine){
+                    if (t_source[a].Parent_Machine === firstMachine && t_source[j].ID === priority){
                         let currentMachine = t_source[a];
                         currentMachine.X = firstMachineX;
                         currentMachine.Y = firstMachineY - yOffset;
@@ -452,7 +452,7 @@
 
             }
           
-          function calcpositionssenkr_o (path,t_source, nodeHeight){
+          function calcpositionssenkr_o (path,t_source, nodeHeight,priority){
             let firstMachineSource = [];
             let firstMachineX = [];
             let firstMachineY = []
@@ -460,14 +460,14 @@
                 let yOffset = i * nodeHeight;
                 let firstMachine = path[i];
                 for(let j=0; j<t_source.length; j++){
-                    if (t_source[j].Parent_Machine === firstMachine){
+                    if (t_source[j].Parent_Machine === firstMachine && t_source[j].ID === priority){
                         firstMachineSource = t_source[j];
                         firstMachineX = firstMachineSource.X;
                         firstMachineY = firstMachineSource.Y;
                     }
                 }
                 for (let a=0; a<t_source.length; a++){
-                    if (t_source[a].Parent_Machine === firstMachine){
+                    if (t_source[a].Parent_Machine === firstMachine && t_source[j].ID === priority){
                         let currentMachine = t_source[a];
                         currentMachine.X = firstMachineX;
                         currentMachine.Y = firstMachineY + yOffset;
