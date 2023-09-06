@@ -383,14 +383,14 @@
                 let xOffset = i * nodeWidth;
                 let firstMachine = path[i];
                 for(let j=0; j<t_source.length; j++){
-                    if (t_source[j].Parent_Machine === firstMachine && t_source[j].ID === priority){
+                    if ((t_source[j].Parent_Machine) === (firstMachine && t_source[j].ID === priority)){
                         firstMachineSource = t_source[j];
                         firstMachineX = firstMachineSource.X;
                         firstMachineY = firstMachineSource.Y;
                     }
                 }
                 for (let a=0; a<t_source.length; a++){
-                    if (t_source[a].Parent_Machine === firstMachine && t_source[a].ID === priority){
+                    if ((t_source[a].Parent_Machine === firstMachine) && (t_source[a].ID === priority)){
                         let currentMachine = t_source[a];
                         currentMachine.X = firstMachineX + xOffset;
                         currentMachine.Y = firstMachineY;
@@ -408,14 +408,14 @@
                 let xOffset = i * nodeWidth;
                 let firstMachine = path[i];
                 for(let j=0; j<t_source.length; j++){
-                    if (t_source[j].Parent_Machine === firstMachine && t_source[j].ID === priority){
+                    if ((t_source[j].Parent_Machine === firstMachine) && (t_source[j].ID === priority)){
                         firstMachineSource = t_source[j];
                         firstMachineX = firstMachineSource.X;
                         firstMachineY = firstMachineSource.Y;
                     }
                 }
                 for (let a=0; a<t_source.length; a++){
-                    if (t_source[a].Parent_Machine === firstMachine && t_source[a].ID === priority){
+                    if ((t_source[a].Parent_Machine === firstMachine) && (t_source[a].ID === priority)){
                         let currentMachine = t_source[a];
                         currentMachine.X = firstMachineX - xOffset;
                         currentMachine.Y = firstMachineY;
@@ -434,14 +434,14 @@
                 let yOffset = i * nodeHeight;
                 let firstMachine = path[i];
                 for(let j=0; j<t_source.length; j++){
-                    if (t_source[j].Parent_Machine === firstMachine && t_source[j].ID === priority){
+                    if ((t_source[j].Parent_Machine === firstMachine) && (t_source[j].ID === priority)){
                         firstMachineSource = t_source[j];
                         firstMachineX = firstMachineSource.X;
                         firstMachineY = firstMachineSource.Y;
                     }
                 }
                 for (let a=0; a<t_source.length; a++){
-                    if (t_source[a].Parent_Machine === firstMachine && t_source[a].ID === priority){
+                    if ((t_source[a].Parent_Machine === firstMachine) && (t_source[a].ID === priority)){
                         let currentMachine = t_source[a];
                         currentMachine.X = firstMachineX;
                         currentMachine.Y = firstMachineY - yOffset;
@@ -460,14 +460,14 @@
                 let yOffset = i * nodeHeight;
                 let firstMachine = path[i];
                 for(let j=0; j<t_source.length; j++){
-                    if (t_source[j].Parent_Machine === firstMachine && t_source[j].ID === priority){
+                    if ((t_source[j].Parent_Machine === firstMachine) && (t_source[j].ID === priority)){
                         firstMachineSource = t_source[j];
                         firstMachineX = firstMachineSource.X;
                         firstMachineY = firstMachineSource.Y;
                     }
                 }
                 for (let a=0; a<t_source.length; a++){
-                    if (t_source[a].Parent_Machine === firstMachine && t_source[a].ID === priority){
+                    if ((t_source[a].Parent_Machine === firstMachine) && (t_source[a].ID === priority)){
                         let currentMachine = t_source[a];
                         currentMachine.X = firstMachineX;
                         currentMachine.Y = firstMachineY + yOffset;
@@ -685,4 +685,3 @@
         });
     }
 })();
-
