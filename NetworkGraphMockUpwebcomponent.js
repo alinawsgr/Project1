@@ -352,8 +352,10 @@
                 if (t_source[j].ID  === priority){
                     if(t_source[j].Parent_Machine === startPoints[0]){
                         path.push(t_source[j].Parent_Machine);
+                        break;
                         //startMachine = t_source[j].Children_Machine;
                     }
+                    
                 }
                 if (t_source[j].ID === priority){
                     for (let a=0; a<path.length; a++){
