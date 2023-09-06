@@ -349,9 +349,11 @@
                         path.push(t_source[j].Parent_Machine);
                         //startMachine = t_source[j].Children_Machine;
                     }
-                    if(t_source[j].Parent_Machine === path[a]){
-                        path.push(t_source[j].Children_Machine);
+                    for (a=0; a<path.length;a++){
+                        if(t_source[j].Parent_Machine === path[a]){
+                            path.push(t_source[j].Children_Machine);
                     }
+                }
                 }
             }
             return path;
