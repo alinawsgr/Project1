@@ -381,6 +381,7 @@
             let firstMachineY = []
             for (let i=0; i<path.length; i++){
                 let xOffset = i * nodeWidth;
+                let yOffset = 0;
                 let firstMachine = path[i];
                 for(let j=0; j<t_source.length; j++){
                     if ((t_source[j].Parent_Machine === firstMachine) && (t_source[j].ID === priority)){
@@ -393,7 +394,7 @@
                     if ((t_source[a].Parent_Machine === firstMachine) && (t_source[a].ID === priority)){
                         let currentMachine = t_source[a];
                         currentMachine.X = firstMachineX + xOffset;
-                        currentMachine.Y = firstMachineY;
+                        currentMachine.Y = firstMachineY + yOffset;
                     }
                 }
 
