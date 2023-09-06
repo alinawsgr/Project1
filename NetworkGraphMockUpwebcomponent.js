@@ -355,6 +355,7 @@
                         break;
                         //startMachine = t_source[j].Children_Machine;
                     }
+                    break;
                     
                 }
                 if (t_source[j].ID === priority){
@@ -708,3 +709,4 @@
         });
     }
 })();
+
