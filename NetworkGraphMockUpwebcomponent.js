@@ -418,18 +418,19 @@
                     if (t_source[i].Parent_Machine === startMachine){
                         startMachine = t_source[i];
                         path.push(startMachine.Parent_Machine);
-                        path.push(startMachine.Children_Machine);                       
+                        path.push(startMachine.Children_Machine);
+                        startMachine= startMachine.Parent_Machine;                     
                     }
                 }
             }
-            
+            /*
             for (let j=1; j<path.length; j++){
                 for (let a=0; a<t_source.length; a++){
                     if(t_source[a].Parent_Machine === path[j].Parent_Machine){
                         path.push(t_source[a].Children_Machine);
                     }
                 }
-            }
+            } */
             return path;
         }
             
