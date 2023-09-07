@@ -423,7 +423,7 @@
                         for (let j=1; j<path.length; j++){
                             currM = [];
                             currM = path[j];
-                            if(t_source[i].Parent_Machine === currM.Children_Machine){
+                            if(t_source[i].Parent_Machine === currM.Parent_Machine){
                                 path.push(t_source[i].Children_Machine);
                         }
 
