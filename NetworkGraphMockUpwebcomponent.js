@@ -357,7 +357,7 @@
                         startMachine = t_source[i];
                     }
                 }
-            }
+            
             // 
             for (let j=0; j<t_source.length; j++){
                 if (t_source[j].ID  === priority){
@@ -367,6 +367,7 @@
                     }
                 }
             }
+        }
             return path;
         }
 
