@@ -374,9 +374,10 @@
                     }
                 }
             }
-        }
+        
             return path;
         }
+        
 
 
         // function that calculates paths for each connection value (1,2,3,...) -> start findPaths()
