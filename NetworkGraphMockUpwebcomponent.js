@@ -328,42 +328,54 @@
         calculatedependencies(t_source); */
 
         // calculates all paths in the graph regarding their value/priority (path priority must be given as an input and as a string in the format: 'number')
-        function findPaths(t_source, priority){
+        /*function findPaths(t_source, priority){
             // calculates the row of the start machine, from where the paths start
             // path1 contains all connections with value 1 -> Hauptlinie
             let path = [];
-            /* define "Entlader" as the start Position for the path
-            var startPosition = 0;
-            for (let i=0; i<t_source.length; i++){
-                if (t_source[i].ID === priority){
-                    if (t_source[i].Parent_Machine === 'Entlader'){
-                        i = startPosition;
-                    }
-                }
-            } */
-            
             // calculate all other machines with the same priority
             for (let j=0; j<t_source.length; j++){
                 if (t_source[j].ID  === priority){
-                    console.log('a');
                     if(t_source[j].Parent_Machine === 'Entlader'){
-                        console.log('b');
                         path.push(t_source[j].Parent_Machine);
-                        console.log('c');
                         //startMachine = t_source[j].Children_Machine;
                     }
-                         for (a=0; a<path.length;a++){
-                            console.log('d');
-                            if(t_source[j].Parent_Machine === path[a]){
-                                console.log('e');
-                                path.push(t_source[j].Children_Machine);
-                                console.log('f');
-                            }
-                        }
+                    for (a=0; a<path.length;a++){
+                        if(t_source[j].Parent_Machine === path[a]){
+                            path.push(t_source[j].Children_Machine);
                     }
                 }
-                return path;
+                }
             }
+            return path;
+        } */
+
+        function findPaths(t_source, priority) {
+            let path = [];
+            
+            // Finde die Startmaschine mit der Priorität "Entlader"
+            const startMachine = t_source.find(machine => machine.ID === priority && machine.Parent_Machine === 'Entlader');
+            
+            if (!startMachine) {
+                return path; // Wenn die Startmaschine nicht gefunden wurde, gibt es keinen Pfad.
+            }
+            
+            // Füge die Startmaschine zum Pfad hinzu
+            path.push(startMachine.Parent_Machine);
+            
+            // Durchlaufe die Hierarchie der Maschinen und füge die Children_Machine zu path hinzu
+            let currentMachine = startMachine;
+            while (currentMachine) {
+                const nextMachine = t_source.find(machine => machine.Parent_Machine === currentMachine.Children_Machine);
+                if (nextMachine) {
+                    path.push(nextMachine.Children_Machine);
+                    currentMachine = nextMachine;
+                } else {
+                    currentMachine = null; // Wenn keine nächste Maschine gefunden wird, beende die Schleife.
+                }
+            }
+            
+            return path;
+        }
 
 
         // function that calculates paths for each connection value (1,2,3,...) -> start findPaths()
