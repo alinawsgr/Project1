@@ -349,7 +349,7 @@
             return path;
         } */
 
-        function calcStart(){
+        function calcStart(priority){
             for (let i=0; i<t_source.length; i++){
                 if (t_source[i].ID === priority){
                     if (t_source[i].Parent_Machine === 'Entlader'){
@@ -365,7 +365,7 @@
             let startMachine = '';
             // define "Entlader" as the start Position for the path
             let start = '';
-            calcStart() = start;
+            calcStart('1') = start;
             console.log(start);
             for (let j=0; j<t_source.length; j++){
                 if (t_source[j].ID  === priority){
