@@ -418,8 +418,7 @@
                     if (t_source[i].Parent_Machine === 'Entlader'){
                         startMachine = t_source[i];
                         path.push(startMachine.Parent_Machine);
-                        path.push(startMachine.Children_Machine);
-                        break;                       
+                        path.push(startMachine.Children_Machine);                       
                     }
                         for (let j=1; j<path.length; j++){
                             currM = [];
