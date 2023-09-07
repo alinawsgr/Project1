@@ -46,8 +46,8 @@
 
         //Get Table Data into Custom Widget Function
         async setDataSource(source) { 
-            var Machines = []; // contains names of existing machines
-            var t_source = []; // contains the transformed xml-structure
+            let Machines = []; // contains names of existing machines
+            let t_source = []; // contains the transformed xml-structure
 
             source = Array(74);
             // get all machines -> Machines contains all existing machines
@@ -348,24 +348,25 @@
             }
             return path;
         } */
+
+        function calcStart(){
+            for (let i=0; i<t_source.length; i++){
+                if (t_source[i].ID === priority){
+                    if (t_source[i].Parent_Machine === 'Entlader'){
+                        startMachine = t_source[i];
+                    }
+                }
+            }
+            return startMachine;
+        }
+
         function findPaths(t_source, priority){
             let path = [];
             let startMachine = '';
             // define "Entlader" as the start Position for the path
-            function calcStart(){
-                for (let i=0; i<t_source.length; i++){
-                    if (t_source[i].ID === priority){
-                        if (t_source[i].Parent_Machine === 'Entlader'){
-                            startMachine = t_source[i];
-                        }
-                    }
-                }
-                return startMachine
-            }
-            
-            // 
             let start = '';
             calcStart() = start;
+            console.log(start);
             for (let j=0; j<t_source.length; j++){
                 if (t_source[j].ID  === priority){
                     if(t_source[j].Parent_Machine = start.Children_Machine){
