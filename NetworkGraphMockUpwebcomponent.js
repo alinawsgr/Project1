@@ -365,7 +365,7 @@
             let startMachine = '';
             // define "Entlader" as the start Position for the path
             let start;
-            calcStart('1') = start;
+            start = calcStart('1');
             console.log(start);
             for (let j=0; j<t_source.length; j++){
                 if (t_source[j].ID  === priority){
