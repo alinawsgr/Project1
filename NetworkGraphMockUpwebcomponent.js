@@ -419,13 +419,13 @@
                         startMachine = t_source[i];
                         path.push(startMachine.Parent_Machine);
                         path.push(startMachine.Children_Machine);
-                        break;                      
+                        break;                       
                     }
-                    for (let j=1; j<path.length; j++){
-                        currM = [];
-                        currM = path[j];
-                        if(t_source[i].Parent_Machine === currM){
-                            path.push(t_source[i].Children_Machine);
+                        for (let j=1; j<path.length; j++){
+                            currM = [];
+                            currM = path[j];
+                            if(t_source[i].Parent_Machine === currM){
+                                path.push(t_source[i].Children_Machine);
                         }
 
 
