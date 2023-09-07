@@ -370,7 +370,7 @@
             for (let j=0; j<t_source.length; j++){
                 if (t_source[j].ID  === priority){
                     if(t_source[j].Parent_Machine = start.Children_Machine){
-                        path.push(t_source[i].Parent_Machine)
+                        path.push(t_source[j].Parent_Machine)
                         startMachine = t_source[i]
                     }
                 }
