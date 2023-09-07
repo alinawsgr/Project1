@@ -350,18 +350,25 @@
         } */
         function findPaths(t_source, priority){
             let path = [];
+            let startMachine = '';
             // define "Entlader" as the start Position for the path
-            for (let i=0; i<t_source.length; i++){
-                if (t_source[i].ID === priority){
-                    if (t_source[i].Parent_Machine === 'Entlader'){
-                        startMachine = t_source[i];
+            function calcStart(){
+                for (let i=0; i<t_source.length; i++){
+                    if (t_source[i].ID === priority){
+                        if (t_source[i].Parent_Machine === 'Entlader'){
+                            startMachine = t_source[i];
+                        }
                     }
                 }
+                return startMachine
+            }
             
             // 
+            let start = '';
+            calcStart() = start;
             for (let j=0; j<t_source.length; j++){
                 if (t_source[j].ID  === priority){
-                    if(t_source[i].Parent_Machine = startMachine.Children_Machine){
+                    if(t_source[j].Parent_Machine = start.Children_Machine){
                         path.push(t_source[i].Parent_Machine)
                         startMachine = t_source[i]
                     }
