@@ -352,25 +352,26 @@
         function findPaths(t_source, priority) {
             let path = [];
             
-            // Finde die Startmaschine mit der Priorität "Entlader"
+            // Finden Sie die Maschine mit der angegebenen Priorität und 'Entlader' als Elternmaschine
             const startMachine = t_source.find(machine => machine.ID === priority && machine.Parent_Machine === 'Entlader');
             
             if (!startMachine) {
-                return path; // Wenn die Startmaschine nicht gefunden wurde, gibt es keinen Pfad.
+                return path; // Wenn die Maschine mit der angegebenen Priorität nicht gefunden wurde, gibt es keinen Pfad.
             }
             
-            // Füge die Startmaschine zum Pfad hinzu
-            path.push(startMachine.Parent_Machine);
-            
-            // Durchlaufe die Hierarchie der Maschinen und füge die Children_Machine zu path hinzu
+            // Starten Sie mit der "Entlader"-Maschine
             let currentMachine = startMachine;
+            
             while (currentMachine) {
+                path.push(currentMachine.Parent_Machine);
+                
+                // Suchen Sie die nächste Maschine in der Hierarchie
                 const nextMachine = t_source.find(machine => machine.Parent_Machine === currentMachine.Children_Machine);
+                
                 if (nextMachine) {
-                    path.push(nextMachine.Children_Machine);
                     currentMachine = nextMachine;
                 } else {
-                    currentMachine = null; // Wenn keine nächste Maschine gefunden wird, beende die Schleife.
+                    currentMachine = null; // Wenn keine nächste Maschine gefunden wird, beenden Sie die Schleife.
                 }
             }
             
