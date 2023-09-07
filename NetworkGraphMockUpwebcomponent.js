@@ -390,6 +390,7 @@
                 if (t_source[i].ID === priority){
                     if (t_source[i].Parent_Machine === 'Entlader'){
                         startMachine = t_source[i];
+                        console.log(startMachine);
                     }
                 }
             }
@@ -398,6 +399,7 @@
                 if (t_source[j].ID  === priority){
                     if(t_source[j].Parent_Machine = startMachine.Children_Machine){
                         path.push(t_source[j].Parent_Machine)
+                        console.log(path);
                         startMachine = t_source[j]
                     }
                 }
