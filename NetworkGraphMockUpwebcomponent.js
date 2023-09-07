@@ -362,7 +362,6 @@
 
         function findPaths(t_source, priority){
             let path = [];
-            let startMachine = '';
             // define "Entlader" as the start Position for the path
             let start;
             start = calcStart('1');
@@ -371,7 +370,7 @@
                 if (t_source[j].ID  === priority){
                     if(t_source[j].Parent_Machine = start.Children_Machine){
                         path.push(t_source[j].Parent_Machine)
-                        startMachine = t_source[i]
+                        start = t_source[i]
                     }
                 }
             }
