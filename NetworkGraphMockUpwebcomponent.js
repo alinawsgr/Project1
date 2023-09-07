@@ -352,18 +352,18 @@
                         console.log('c');
                         //startMachine = t_source[j].Children_Machine;
                     }
-                    for (a=0; a<path.length;a++){
-                        console.log('d');
-                        if(t_source[j].Parent_Machine === path[a]){
-                            console.log('e');
-                            path.push(t_source[j].Children_Machine);
-                            console.log('f');
+                         for (a=0; a<path.length;a++){
+                            console.log('d');
+                            if(t_source[j].Parent_Machine === path[a]){
+                                console.log('e');
+                                path.push(t_source[j].Children_Machine);
+                                console.log('f');
+                            }
+                        }
                     }
                 }
-                }
+                return path;
             }
-            return path;
-        }
 
 
         // function that calculates paths for each connection value (1,2,3,...) -> start findPaths()
