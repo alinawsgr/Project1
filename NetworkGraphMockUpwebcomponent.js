@@ -364,7 +364,7 @@
             let path = [];
             let startMachine = '';
             // define "Entlader" as the start Position for the path
-            let start = '';
+            let start;
             calcStart('1') = start;
             console.log(start);
             for (let j=0; j<t_source.length; j++){
