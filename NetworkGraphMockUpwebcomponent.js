@@ -348,33 +348,25 @@
             }
             return path;
         } */
-
-        function findPaths(t_source, priority) {
+        function findPaths(t_source, priority){
             let path = [];
-            
-            // Finden Sie die Maschine mit der angegebenen Priorität und 'Entlader' als Elternmaschine
-            const startMachine = t_source.find(machine => machine.ID === priority && machine.Parent_Machine === 'Entlader');
-            
-            if (!startMachine) {
-                return path; // Wenn die Maschine mit der angegebenen Priorität nicht gefunden wurde, gibt es keinen Pfad.
-            }
-            
-            // Starten Sie mit der "Entlader"-Maschine
-            let currentMachine = startMachine;
-            
-            while (currentMachine) {
-                path.push(currentMachine.Parent_Machine);
-                
-                // Suchen Sie die nächste Maschine in der Hierarchie
-                const nextMachine = t_source.find(machine => machine.Parent_Machine === currentMachine.Children_Machine);
-                
-                if (nextMachine) {
-                    currentMachine = nextMachine;
-                } else {
-                    currentMachine = null; // Wenn keine nächste Maschine gefunden wird, beenden Sie die Schleife.
+            // define "Entlader" as the start Position for the path
+            for (let i=0; i<t_source.length; i++){
+                if (t_source[i].ID === priority){
+                    if (t_source[i].Parent_Machine === 'Entlader'){
+                        startMachine = t_source[i];
+                    }
                 }
             }
-            
+            // 
+            for (let j=0; j<t_source.length; j++){
+                if (t_source[j].ID  === priority){
+                    if(t_source[i].Parent_Machine = startMachine.Children_Machine){
+                        path.push(t_source[i].Parent_Machine)
+                        startMachine = t_source[i]
+                    }
+                }
+            }
             return path;
         }
 
