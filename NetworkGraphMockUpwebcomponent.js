@@ -349,6 +349,8 @@
             return path;
         } */
 
+        /*
+
         function calcStart(priority){
             for (let i=0; i<t_source.length; i++){
                 if (t_source[i].ID === priority){
@@ -365,7 +367,7 @@
             // define "Entlader" as the start Position for the path
             let start;
             start = calcStart('1');
-            console.log(start);
+
             for (let j=0; j<t_source.length; j++){
                 if (t_source[j].ID  === priority){
                     if(t_source[j].Parent_Machine = start.Children_Machine){
@@ -375,6 +377,31 @@
                 }
             }
         
+            return path;
+        } */
+
+        function findPaths(t_source, priority){
+            // calculates the row of the start machine, from where the paths start
+            let startMachine = ['Entlader']; // nicht optimal -> sollte man besser in Excel fix vorgeben wo der genaue Startpunkt ist
+            // path1 contains all connections with value 1 -> Hauptlinie
+            let path = [];
+            // define "Entlader" as the start Position for the path
+            for (let i=0; i<t_source.length; i++){
+                if (t_source[i].ID === priority){
+                    if (t_source[i].Parent_Machine === 'Entlader'){
+                        startMachine = t_source[i];
+                    }
+                }
+            }
+            // calculate all other machines with the same priority
+            for (let j=0; j<t_source.length; j++){
+                if (t_source[j].ID  === priority){
+                    if(t_source[j].Parent_Machine = startMachine.Children_Machine){
+                        path.push(t_source[j].Parent_Machine)
+                        startMachine = t_source[j]
+                    }
+                }
+            }
             return path;
         }
         
