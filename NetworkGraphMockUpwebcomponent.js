@@ -502,7 +502,7 @@
         // 1
         calcpositionshor_r(path1_hor_r, t_source, nodeWidth, '1');
         calcpositionssenkr_u(path1_senkr_u, t_source, nodeHeight,'1');
-        //calcpositionshor_l (path1_hor_l,t_source,nodeWidth,'1');
+        calcpositionshor_l (path1_hor_l,t_source,nodeWidth,'1');
         // 2
         //calcpositionssenkr_u(path2,t_source,nodeHeight);
         // others...
