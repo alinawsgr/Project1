@@ -252,7 +252,6 @@
     let yEntladerPosition = 1500;
     // direction changes in the graph (in this case of the main line)
     let directionChange = ['Waschmaschine', 'Etikettiermaschine']
-    let startPoints = ['Entlader'];
     
     
     //////////////////////////////////////////////////////// MAIN FUNCTION ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -328,92 +327,13 @@
         calculatedependencies(t_source); */
 
         // calculates all paths in the graph regarding their value/priority (path priority must be given as an input and as a string in the format: 'number')
-        /*function findPaths(t_source, priority){
-            // calculates the row of the start machine, from where the paths start
-            // path1 contains all connections with value 1 -> Hauptlinie
-            let path = [];
-            // calculate all other machines with the same priority
-            for (let j=0; j<t_source.length; j++){
-                if (t_source[j].ID  === priority){
-                    if(t_source[j].Parent_Machine === 'Entlader'){
-                        path.push(t_source[j].Parent_Machine);
-                        //startMachine = t_source[j].Children_Machine;
-                    }
-                    for (a=0; a<path.length;a++){
-                        if(t_source[j].Parent_Machine === path[a]){
-                            path.push(t_source[j].Children_Machine);
-                    }
-                }
-                }
-            }
-            return path;
-        } */
-
-        /*
-
-        function calcStart(priority){
-            for (let i=0; i<t_source.length; i++){
-                if (t_source[i].ID === priority){
-                    if (t_source[i].Parent_Machine === 'Entlader'){
-                        startMachine = t_source[i];
-                    }
-                }
-            }
-            return startMachine;
-        }
-
-        function findPaths(t_source, priority){
-            let path = [];
-            // define "Entlader" as the start Position for the path
-            let start;
-            start = calcStart('1');
-
-            for (let j=0; j<t_source.length; j++){
-                if (t_source[j].ID  === priority){
-                    if(t_source[j].Parent_Machine = start.Children_Machine){
-                        path.push(t_source[j].Parent_Machine)
-                        start = t_source[i]
-                    }
-                }
-            }
-        
-            return path;
-        } */
-
-       /* function findPaths(t_source, priority){
-            // calculates the row of the start machine, from where the paths start
-            let startMachine = ['Entlader']; // nicht optimal -> sollte man besser in Excel fix vorgeben wo der genaue Startpunkt ist
-            // path1 contains all connections with value 1 -> Hauptlinie
-            let path = [];
-            // define "Entlader" as the start Position for the path
-            for (let i=0; i<t_source.length; i++){
-                if (t_source[i].ID === priority){
-                    if (t_source[i].Parent_Machine === 'Entlader'){
-                        startMachine = t_source[i];
-                        console.log(startMachine);
-                    }
-                }
-            }
-            // calculate all other machines with the same priority
-            for (let j=0; j<t_source.length; j++){
-                if (t_source[j].ID  === priority){
-                    if(t_source[j].Parent_Machine = startMachine.Children_Machine){
-                        path.push(t_source[j].Parent_Machine)
-                        console.log(path);
-                        startMachine = t_source[j]
-                    }
-                }
-            }
-            return path;
-        } */
-
-        function findPaths(t_source, priority){
+        function findPaths(t_source, priority, start){
             // calculates the row of the start machine, from where the paths start
             // path1 contains all connections with value 1 -> Hauptlinie
             let path = [];
             // define "Entlader" as the start Position for the path
             for (let i=0; i<t_source.length; i++){
-                if (t_source[i].ID === priority && t_source[i].Parent_Machine == 'Entlader'){
+                if (t_source[i].ID === priority && t_source[i].Parent_Machine == start){
                     path.push(t_source[i].Parent_Machine);
                     path.push(t_source[i].Children_Machine);                    
                 }
@@ -430,18 +350,19 @@
         }
             
         
-
-
         // function that calculates paths for each connection value (1,2,3,...) -> start findPaths()
         // hier ist noch etwas manueller workaround
         // red 
-        let path1 = findPaths(t_source, '1');
+        let path1 = findPaths(t_source, '1', 'Entlader');
         console.log(path1);
         // cut the path in direction changes
         let path1_hor_r = path1.slice(0, (path1.indexOf(directionChange[0])+1));
+        console.log(path1_hor_r);
         //console.log(path1_hor_r);
         let path1_senkr_u = path1.slice((path1.indexOf(directionChange[0])), (path1.indexOf(directionChange[1]) + 1));
+        console.log(path1_senkr_u);
         let path1_hor_l = path1.slice((path1.indexOf(directionChange[1])),( path1.length));
+        console.log(path1_senkr_u);
         // yellow
         let path2 = [];
         //path2 = findPaths(t_source, '2');
@@ -567,9 +488,8 @@
         // calculates all paths and the positions of all machines
         // 1
         calcpositionshor_r(path1_hor_r, t_source, nodeWidth, '1');
-        console.log(path1_hor_r); // ['TBG_EG01', 'TBB_EG19', 'TBP1_EG07', 'TBB_EG02', 'TBB_EG03', 'TBB_EG05', 'TBB_EG06', 'TBB_EG07', 'TBB_EG12', 'TBB_EG15', 'TBB_EG16', 'Waschmaschine']
-        //calcpositionssenkr_u(path1_senkr_u, t_source, nodeHeight,'1');
-        //calcpositionshor_l (path1_hor_l,t_source,nodeWidth,'1');
+        calcpositionssenkr_u(path1_senkr_u, t_source, nodeHeight,'1');
+        calcpositionshor_l (path1_hor_l,t_source,nodeWidth,'1');
         // 2
         //calcpositionssenkr_u(path2,t_source,nodeHeight);
         // others...
