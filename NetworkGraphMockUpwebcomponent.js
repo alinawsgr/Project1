@@ -415,8 +415,8 @@
             // define "Entlader" as the start Position for the path
             for (let i=0; i<t_source.length; i++){
                 if (t_source[i].ID === priority && t_source[i].Parent_Machine == 'Entlader'){
-                    path.push(startIndex.Parent_Machine);
-                    path.push(startIndex.Children_Machine);                    
+                    path.push(t_source[i].Parent_Machine);
+                    path.push(t_source[i].Children_Machine);                    
                 }
             }
 
