@@ -397,14 +397,14 @@
                         firstMachineY = t_source[j].Y;
                         console.log(firstMachineX);
                         console.log(firstMachineY);
+                        break; 
                     }
                 }
         
                 for (let a = 0; a < t_source.length; a++) {
                     if ((t_source[a].Parent_Machine === path[i + 1]) && (t_source[a].ID === priority)) {
-                        let currentMachine = t_source[a];
-                        currentMachine.X = firstMachineX + xOffset;
-                        currentMachine.Y = firstMachineY + yOffset;
+                        t_source[a].X = firstMachineX + xOffset;
+                        t_source[a].Y = firstMachineY + yOffset;
                     }
                 }
             }
