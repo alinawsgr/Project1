@@ -416,10 +416,10 @@
             for (let i=0; i<t_source.length; i++){
                 if (t_source[i].ID === priority){
                     if (t_source[i].Parent_Machine === startMachine){
-                        startMachine = t_source[i];
-                        path.push(startMachine.Parent_Machine);
-                        path.push(startMachine.Children_Machine);
-                        startMachine= startMachine.Parent_Machine;                     
+                        startMachine = t_source[i].Children_Machine;
+                        startIndex = t_source[i];
+                        path.push(startIndex.Parent_Machine);
+                        path.push(startIndex.Children_Machine);                    
                     }
                 }
             }
