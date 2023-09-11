@@ -409,7 +409,6 @@
 
         function findPaths(t_source, priority){
             // calculates the row of the start machine, from where the paths start
-            // nicht optimal -> sollte man besser in Excel fix vorgeben wo der genaue Startpunkt ist
             // path1 contains all connections with value 1 -> Hauptlinie
             let path = [];
             // define "Entlader" as the start Position for the path
@@ -420,28 +419,13 @@
                 }
             }
 
-            for (let j=1; i<path.length; i++){
-                for (let a=0; a<t_source.length; a++){
-                    currM = [];
-                    currM = path[j];
-                    console.log(currM);
-                    if (t_source[a].ID === priority && t_source[a].Parent_Machine == currM){
-                        path.push(t_source[a].Children_Machine);
-                    }
-
-                }
-
-            }
-
-
-            /*
             for (let j=1; j<path.length; j++){
                 for (let a=0; a<t_source.length; a++){
-                    if(t_source[a].Parent_Machine === path[j].Parent_Machine){
+                    if (t_source[a].ID === priority && t_source[a].Parent_Machine == path[j]){
                         path.push(t_source[a].Children_Machine);
                     }
                 }
-            } */
+            }
             return path;
         }
             
