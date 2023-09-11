@@ -423,9 +423,10 @@
             for (let j=1; i<path.length; i++){
                 for (let a=0; a<t_source.length; a++){
                     currM = [];
-                    currM = path[j].Parent_Machine;
+                    currM = path[j];
+                    console.log(currM);
                     if (t_source[a].ID === priority && t_source[a].Parent_Machine == currM){
-                        path.push(path[j].Children_Machine);
+                        path.push(t_source[a].Children_Machine);
                     }
 
                 }
