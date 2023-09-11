@@ -381,31 +381,33 @@
 
 
         // functions that calculate the coordinates for each direction
-        function calcpositionshor_r (path, t_source, nodeWidth, priority){
+        function calcpositionshor_r(path, t_source, nodeWidth, priority) {
             let firstMachineSource = [];
-            let firstMachineX = [];
-            let firstMachineY = []
-            for (let i=0; i<path.length; i++){
-                let xOffset = i * nodeWidth;
+            let firstMachineX = null; // Ändern Sie die Initialisierung
+            let firstMachineY = null; // Ändern Sie die Initialisierung
+        
+            for (let i = 0; i < path.length; i++) {
+                let xOffset = (i + 1) * nodeWidth;
                 let yOffset = 0;
                 let firstMachine = path[0];
-                for(let j=0; j<t_source.length; j++){
-                    if ((t_source[j].Parent_Machine === firstMachine) && (t_source[j].ID === priority)){
-                        firstMachineSource = t_source[j];
-                        firstMachineX = firstMachineSource.X;
-                        firstMachineY = firstMachineSource.Y;
+        
+                for (let j = 0; j < t_source.length; j++) {
+                    if ((t_source[j].Parent_Machine === firstMachine) && (t_source[j].ID === priority)) {
+                        firstMachineX = t_source[j].X;
+                        firstMachineY = t_source[j].Y;
                     }
                 }
-                for (let a=0; a<t_source.length; a++){
-                    if ((t_source[a].Parent_Machine === path[i+1]) && (t_source[a].ID === priority)){
+        
+                for (let a = 0; a < t_source.length; a++) {
+                    if ((t_source[a].Parent_Machine === path[i + 1]) && (t_source[a].ID === priority)) {
                         let currentMachine = t_source[a];
                         currentMachine.X = firstMachineX + xOffset;
                         currentMachine.Y = firstMachineY + yOffset;
                     }
                 }
-
-                }
             }
+        }
+        
           
           function calcpositionshor_l (path,t_source, nodeWidth, priority){
             let firstMachineSource = [];
