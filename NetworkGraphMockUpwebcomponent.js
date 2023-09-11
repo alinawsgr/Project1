@@ -294,7 +294,7 @@
                 }
             }
             }
-        console.log(allconnectionvalues); // ['3', '1', '1', '2', '4', '1', '1', '10', '1', '3', '1', '1', '20', '20', '20', '1', '10', '1', '4', '4', '1', '1', '1', '1', '1', '10', '1', '1', '1', '1', '1', '2', '3', '2', '1', '3', '1', '4', '1', '4', '2', '2', '2', '2', '2', '1', '1', '2', '1', '2', '1', '2', '1', '20', '1', '1', '1', '1', '101', '1', '1', '1', '2', '2', '4', '1', '4', '3']
+        //console.log(allconnectionvalues); // ['3', '1', '1', '2', '4', '1', '1', '10', '1', '3', '1', '1', '20', '20', '20', '1', '10', '1', '4', '4', '1', '1', '1', '1', '1', '10', '1', '1', '1', '1', '1', '2', '3', '2', '1', '3', '1', '4', '1', '4', '2', '2', '2', '2', '2', '1', '1', '2', '1', '2', '1', '2', '1', '20', '1', '1', '1', '1', '101', '1', '1', '1', '2', '2', '4', '1', '4', '3']
         // fehler: hier aktuell []
     
 
@@ -354,18 +354,15 @@
         // hier ist noch etwas manueller workaround
         // red 
         let path1 = findPaths(t_source, '1', 'Entlader');
-        console.log(path1);
         // cut the path in direction changes
         let path1_hor_r = path1.slice(0, (path1.indexOf(directionChange[0])+1));
-        console.log(path1_hor_r);
         //console.log(path1_hor_r);
         let path1_senkr_u = path1.slice((path1.indexOf(directionChange[0])), (path1.indexOf(directionChange[1]) + 1));
-        console.log(path1_senkr_u);
         let path1_hor_l = path1.slice((path1.indexOf(directionChange[1])),( path1.length));
-        console.log(path1_hor_l);
         // yellow
         let path2 = [];
-        //path2 = findPaths(t_source, '2');
+        path2_Entlader = findPaths(t_source, '2', 'Entlader');
+        console.log(path2_Entlader);
         //console.log(path2);
         // rest
         let path3 = [];
@@ -504,7 +501,7 @@
         calcpositionssenkr_u(path1_senkr_u, t_source, nodeHeight,'1');
         calcpositionshor_l (path1_hor_l,t_source,nodeWidth,'1');
         // 2
-        //calcpositionssenkr_u(path2,t_source,nodeHeight);
+        calcpositionssenkr_u(path2_Entlader,t_source,nodeHeight);
         // others...
         }
         
