@@ -391,8 +391,6 @@
                     if ((t_source[j].Parent_Machine === firstMachine) && (t_source[j].ID === priority)) {
                         firstMachineX = t_source[j].X;
                         firstMachineY = t_source[j].Y;
-                        console.log(firstMachineX);
-                        console.log(firstMachineY);
                         break; 
                     }
                 }
@@ -420,8 +418,6 @@
                     if ((t_source[j].Parent_Machine === firstMachine) && (t_source[j].ID === priority)) {
                         firstMachineX = t_source[j].X;
                         firstMachineY = t_source[j].Y;
-                        console.log(firstMachineX);
-                        console.log(firstMachineY);
                         break; 
                     }
                 }
@@ -479,8 +475,6 @@
                     if ((t_source[j].Parent_Machine === firstMachine) && (t_source[j].ID === priority)) {
                         firstMachineX = t_source[j].X;
                         firstMachineY = t_source[j].Y;
-                        console.log(firstMachineX);
-                        console.log(firstMachineY);
                         break; 
                     }
                 }
