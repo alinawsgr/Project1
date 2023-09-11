@@ -382,7 +382,6 @@
 
         // functions that calculate the coordinates for each direction
         function calcpositionshor_r(path, t_source, nodeWidth, priority) {
-            let firstMachineSource = [];
             let firstMachineX = null; 
             let firstMachineY = null; 
         
@@ -412,88 +411,98 @@
         
           
           function calcpositionshor_l (path,t_source, nodeWidth, priority){
-            let firstMachineSource = [];
-            let firstMachineX = [];
-            let firstMachineY = []
-            for (let i=0; i<path.length; i++){
-                let xOffset = i * nodeWidth;
-                let firstMachine = path[i];
-                for(let j=0; j<t_source.length; j++){
-                    if ((t_source[j].Parent_Machine === firstMachine) && (t_source[j].ID === priority)){
-                        firstMachineSource = t_source[j];
-                        firstMachineX = firstMachineSource.X;
-                        firstMachineY = firstMachineSource.Y;
+            let firstMachineX = null; 
+            let firstMachineY = null; 
+        
+            for (let i = 0; i < path.length; i++) {
+                let xOffset = (i + 1) * nodeWidth;
+                let yOffset = 0;
+                let firstMachine = path[0];
+        
+                for (let j = 0; j < t_source.length; j++) {
+                    if ((t_source[j].Parent_Machine === firstMachine) && (t_source[j].ID === priority)) {
+                        firstMachineX = t_source[j].X;
+                        firstMachineY = t_source[j].Y;
+                        console.log(firstMachineX);
+                        console.log(firstMachineY);
+                        break; 
                     }
                 }
-                for (let a=0; a<t_source.length; a++){
-                    if ((t_source[a].Parent_Machine === firstMachine) && (t_source[a].ID === priority)){
-                        let currentMachine = t_source[a];
-                        currentMachine.X = firstMachineX - xOffset;
-                        currentMachine.Y = firstMachineY;
+        
+                for (let a = 0; a < t_source.length; a++) {
+                    if ((t_source[a].Parent_Machine === path[i + 1]) && (t_source[a].ID === priority)) {
+                        t_source[a].X = firstMachineX - xOffset;
+                        t_source[a].Y = firstMachineY + yOffset;
                     }
                 }
-
-                }
+            }
+            
             
           }
           
           function calcpositionssenkr_u(path,t_source, nodeHeight, priority) {
-            let firstMachineSource = [];
-            let firstMachineX = [];
-            let firstMachineY = []
-            for (let i=0; i<path.length; i++){
-                let yOffset = i * nodeHeight;
-                let firstMachine = path[i];
-                for(let j=0; j<t_source.length; j++){
-                    if ((t_source[j].Parent_Machine === firstMachine) && (t_source[j].ID === priority)){
-                        firstMachineSource = t_source[j];
-                        firstMachineX = firstMachineSource.X;
-                        firstMachineY = firstMachineSource.Y;
+            let firstMachineX = null; 
+            let firstMachineY = null; 
+        
+            for (let i = 0; i < path.length; i++) {
+                let xOffset = 0;
+                let yOffset = (i + 1) * nodeHeight;
+                let firstMachine = path[0];
+        
+                for (let j = 0; j < t_source.length; j++) {
+                    if ((t_source[j].Parent_Machine === firstMachine) && (t_source[j].ID === priority)) {
+                        firstMachineX = t_source[j].X;
+                        firstMachineY = t_source[j].Y;
+                        console.log(firstMachineX);
+                        console.log(firstMachineY);
+                        break; 
                     }
                 }
-                for (let a=0; a<t_source.length; a++){
-                    if ((t_source[a].Parent_Machine === firstMachine) && (t_source[a].ID === priority)){
-                        let currentMachine = t_source[a];
-                        currentMachine.X = firstMachineX;
-                        currentMachine.Y = firstMachineY - yOffset;
+        
+                for (let a = 0; a < t_source.length; a++) {
+                    if ((t_source[a].Parent_Machine === path[i + 1]) && (t_source[a].ID === priority)) {
+                        t_source[a].X = firstMachineX + xOffset;
+                        t_source[a].Y = firstMachineY - yOffset;
                     }
                 }
-
-                }
+            }
 
             }
           
           function calcpositionssenkr_o (path,t_source, nodeHeight,priority){
-            let firstMachineSource = [];
-            let firstMachineX = [];
-            let firstMachineY = []
-            for (let i=0; i<path.length; i++){
-                let yOffset = i * nodeHeight;
-                let firstMachine = path[i];
-                for(let j=0; j<t_source.length; j++){
-                    if ((t_source[j].Parent_Machine === firstMachine) && (t_source[j].ID === priority)){
-                        firstMachineSource = t_source[j];
-                        firstMachineX = firstMachineSource.X;
-                        firstMachineY = firstMachineSource.Y;
+            let firstMachineX = null; 
+            let firstMachineY = null; 
+        
+            for (let i = 0; i < path.length; i++) {
+                let xOffset = 0;
+                let yOffset = (i + 1) * nodeHeight;
+                let firstMachine = path[0];
+        
+                for (let j = 0; j < t_source.length; j++) {
+                    if ((t_source[j].Parent_Machine === firstMachine) && (t_source[j].ID === priority)) {
+                        firstMachineX = t_source[j].X;
+                        firstMachineY = t_source[j].Y;
+                        console.log(firstMachineX);
+                        console.log(firstMachineY);
+                        break; 
                     }
                 }
-                for (let a=0; a<t_source.length; a++){
-                    if ((t_source[a].Parent_Machine === firstMachine) && (t_source[a].ID === priority)){
-                        let currentMachine = t_source[a];
-                        currentMachine.X = firstMachineX;
-                        currentMachine.Y = firstMachineY + yOffset;
+        
+                for (let a = 0; a < t_source.length; a++) {
+                    if ((t_source[a].Parent_Machine === path[i + 1]) && (t_source[a].ID === priority)) {
+                        t_source[a].X = firstMachineX + xOffset;
+                        t_source[a].Y = firstMachineY + yOffset;
                     }
                 }
-
-                }
+            }
            
           }
 
         // calculates all paths and the positions of all machines
         // 1
         calcpositionshor_r(path1_hor_r, t_source, nodeWidth, '1');
-        //calcpositionssenkr_u(path1_senkr_u, t_source, nodeHeight,'1');
-        //calcpositionshor_l (path1_hor_l,t_source,nodeWidth,'1');
+        calcpositionssenkr_u(path1_senkr_u, t_source, nodeHeight,'1');
+        calcpositionshor_l (path1_hor_l,t_source,nodeWidth,'1');
         // 2
         //calcpositionssenkr_u(path2,t_source,nodeHeight);
         // others...
