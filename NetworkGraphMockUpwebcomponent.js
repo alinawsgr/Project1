@@ -49,7 +49,7 @@
             let Machines = []; // contains names of existing machines
             let t_source = []; // contains the transformed xml-structure
 
-            source = Array(74);
+            
             // get all machines -> Machines contains all existing machines
             for(i = 0; i < source.length; i++){
                 Machines.push({Machine: source[i].Quelle_.id.replace(" ", "-")})
