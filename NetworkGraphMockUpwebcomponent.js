@@ -77,6 +77,60 @@
             }
             console.log(t_source)
             setCoordinates(t_source,source);
+
+            let oNewDataSource = restructureNodes(t_source);
+        }
+
+        restructureNodes(aSource){
+            var oNewStructure = {
+                "nodes" : [],
+                "lines": []
+            };
+
+            // Define ID 
+            for(var x in aSource){
+                let oCurrent = aSource[x];
+
+                oCurrent.Key = x;
+            }
+
+            var aNodes = oNewStructure.nodes,
+                aLines = oNewStructure.lines;
+
+            for(var i in aSource){
+                let oCurrentNode = aSource[i],
+                sCurrentName = oCurrentNode.Parent_Machine,
+                sCurrKey = oCurrentNode.Key,
+                sCurrentChild = oCurrentNode.Children_Machine;
+
+                aNodes.push({
+                    "key": sCurrKey,
+                    "title": sCurrentName,
+                    "x": oCurrentNode.X,
+                    "y": oCurrentNode.Y,
+                    "status": "Success",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "92,59%"
+                        }
+                    ]
+                });
+
+                let aFiltredNextNodes = aSource.filter(oData => oData.Parent_Machine === sCurrentChild);
+                for(var j in aFiltredNextNodes){
+                    let oNexNode = aFiltredNextNodes[j],
+                    sNextKey = oNexNode.key;
+                    
+                    sKey = oNexNode.Key;
+                    aLines.push({
+                        "from": sCurrKey,
+                        "to": sNextKey
+                    })
+                }
+            }
+
+            return oNewStructure;
         }
 
         connectedCallback() {
