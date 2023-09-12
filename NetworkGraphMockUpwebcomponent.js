@@ -499,6 +499,9 @@
         calcpositionssenkr_u(path2_Entlader,t_source,nodeHeight,'2');
         // others...
         }
+
+        console.log(path1_senkr_u);
+        console.log(path2_Entlader);
         
 
 
