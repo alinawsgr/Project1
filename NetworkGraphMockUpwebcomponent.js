@@ -79,6 +79,8 @@
             setCoordinates(t_source,source);
 
             let oNewDataSource = restructureNodes(t_source);
+
+            this.data = oNewDataSource;
         }
 
         connectedCallback() {
@@ -546,13 +548,12 @@
             let aFiltredNextNodes = aSource.filter(oData => oData.Parent_Machine === sCurrentChild);
             for(var j in aFiltredNextNodes){
                 let oNexNode = aFiltredNextNodes[j],
-                sNextKey = oNexNode.key;
-                
-                sKey = oNexNode.Key;
+                sNextKey = oNexNode.Key;
+
                 aLines.push({
                     "from": sCurrKey,
                     "to": sNextKey
-                })
+                });
             }
         }
 
