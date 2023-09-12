@@ -356,14 +356,16 @@
         let path1 = findPaths(t_source, '1', 'Entlader');
         // cut the path in direction changes
         let path1_hor_r = path1.slice(0, (path1.indexOf(directionChange[0])+1));
-        //console.log(path1_hor_r);
         let path1_senkr_u = path1.slice((path1.indexOf(directionChange[0])), (path1.indexOf(directionChange[1]) + 1));
         let path1_hor_l = path1.slice((path1.indexOf(directionChange[1])),( path1.length));
+        console.log(path1_senkr_u);
         // yellow
         let path2 = [];
         path2_Entlader = findPaths(t_source, '2', 'Entlader');
+        path2_Auspacker = findPaths(t_source,'2', 'Auspacker');
         console.log(path2_Entlader);
-        //console.log(path2);
+        console.log(path2_Auspacker);
+
         // rest
         let path3 = [];
         //path3 = findPaths(t_source, '3');
@@ -499,10 +501,6 @@
         calcpositionssenkr_u(path2_Entlader,t_source,nodeHeight,'2');
         // others...
         }
-
-        console.log(path1_senkr_u);
-        console.log(path2_Entlader);
-        
 
 
 
