@@ -446,8 +446,6 @@
                     if ((t_source[j].Parent_Machine === firstMachine) && (t_source[j].ID === priority)) {
                         firstMachineX = t_source[j].X;
                         firstMachineY = t_source[j].Y;
-                        console.log(firstMachineX);
-                        console.log(firstMachineY);
                         break; 
                     }
                 }
@@ -456,6 +454,9 @@
                     if ((t_source[a].Parent_Machine === path[i + 1]) && (t_source[a].ID === priority)) {
                         t_source[a].X = firstMachineX + xOffset;
                         t_source[a].Y = firstMachineY - yOffset;
+                        console.log(t_source[a].X);
+                        console.log(t_source[a].X);
+
                     }
                 }
             }
