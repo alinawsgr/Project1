@@ -79,8 +79,8 @@
             setCoordinates(t_source,source);
 
             let oNewDataSource = restructureNodes(t_source);
-
             this.data = oNewDataSource;
+            buildgraph(this);
         }
 
         connectedCallback() {
@@ -558,7 +558,110 @@
         }
 
         return oNewStructure;
-    }       
+    }
+
+    function buildgraph(that) {
+        var that_ = that;
+
+        widgetName = "mockNetworkGraph_1";
+        console.log("widgetName:" + widgetName);
+        if (typeof widgetName === "undefined") {
+            widgetName = that._export_settings.title.split("|")[0];
+            console.log("widgetName_:" + widgetName);
+        }
+
+        div = document.createElement('div');
+        div.slot = "content_" + widgetName;
+            console.log("--First Time --");
+        
+            let div0 = document.createElement('div');
+            div0.innerHTML = '<?xml version="1.0"?><script id="oView_UpStream' + widgetName + '" name="oView_' + widgetName + '" type="sapui5/xmlview"><mvc:View controllerName="myView.Template" xmlns="sap.suite.ui.commons.networkgraph" xmlns:layout="sap.suite.ui.commons.networkgraph.layout" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns:l="sap.ui.layout"><l:FixFlex><l:fixContent><m:FlexBox fitContainer="true" renderType="Bare" wrap="Wrap"><m:items><Graph  enableWheelZoom="true"  nodes="{' + widgetName + '>/nodes}" lines="{' + widgetName + '>/lines}" groups="{' + widgetName + '>/groups}" id="graph_' + widgetName + '" orientation="LeftRight"> <layoutData> <m:FlexItemData/> </layoutData> <layoutAlgorithm> <layout:LayeredLayout mergeEdges="{settings>mergeEdges}" nodePlacement="{settings>nodePlacement}" nodeSpacing="{settings>nodeSpacing}" lineSpacingFactor="{settings>lineSpacingFactor}"> </layout:LayeredLayout> </layoutAlgorithm> <statuses><Status key="CustomKrones" title="Standard" backgroundColor="#0060AD" borderColor="sapUiContentShadowColor" hoverBorderColor="sapUiContentShadowColor"/></statuses> <nodes> <Node key="{' + widgetName +'>key}"  title="{' + widgetName + '>title}" icon="{' + widgetName + '>icon}" group="{' + widgetName + '>group}" attributes="{' + widgetName + '>attributes}"  shape="Box" status="{'+ widgetName + '>status}" x="{' + widgetName + '>x}"  y="{' + widgetName + '>y}" showDetailButton="false" width="auto" maxWidth="500"> <attributes> <ElementAttribute label="{' + widgetName + '>label}" value="{' + widgetName + '>value}"/> </attributes> </Node> </nodes> <lines> <Line from="{' + widgetName + '>from}" to="{' + widgetName + '>to}" status="{' + widgetName + '>status}" arrowOrientation="ParentOf" arrowPosition="Middle" press="linePress"></Line> </lines> <groups> <Group key="{' + widgetName + '>key}" title="{' + widgetName + '>title}"></Group> </groups> </Graph></m:items></m:FlexBox></l:fixContent></l:FixFlex> </mvc:View></script>';
+
+
+            if(that._firstConnection === 1){
+                _shadowRoot.removeChild(_shadowRoot.lastChild);
+                _shadowRoot.removeChild(_shadowRoot.lastChild);
+                _shadowRoot.appendChild(div0);
+            }else{
+                _shadowRoot.appendChild(div0);
+            }
+
+            let div1 = document.createElement('div');
+            div1.innerHTML = '<div id="ui5_content_' + widgetName + '" name="ui5_content_' + widgetName + '"><slot name="content_' + widgetName + '"></slot></div>';
+
+            _shadowRoot.appendChild(div1);
+
+            if(that_.childElementCount > 0){
+                that_.removeChild(that_.firstChild);
+            }
+
+            that_.appendChild(div);
+
+            var mapcanvas_divstr = _shadowRoot.getElementById('oView_UpStream' + widgetName);
+
+            Ar = [];
+            Ar.push({
+                'id': widgetName,
+                'div': mapcanvas_divstr
+            });
+            console.log(Ar);
+        //that_._renderExportButton();
+
+        sap.ui.getCore().attachInit(function() {
+            "use strict";
+
+            //### Controller ###
+            sap.ui.define([
+                "sap/ui/core/mvc/Controller",
+                "sap/ui/model/json/JSONModel",
+                "sap/m/Popover"
+            ], function(Controller, JSONModel, Popover) {
+                "use strict";
+
+                return Controller.extend("myView.Template", {
+                    onInit: function () {
+                        var this_ = this;
+
+                            that._firstConnection = 1;
+
+                            var oModel = new JSONModel(that.data[0]);
+                            
+                            oModel.setSizeLimit(Number.MAX_SAFE_INTEGER);
+
+                            this_.getView().setModel(oModel, that.widgetName);
+
+                            this_.oModelSettings = new JSONModel({
+                                maxIterations: 200,
+                                maxTime: 500,
+                                initialTemperature: 200,
+                                coolDownStep: 1,
+                                mergeEdges: true,
+                                nodePlacement: sap.suite.ui.commons.networkgraph.NodePlacement.LinearSegments,
+                                nodeSpacing: 50,
+                                lineSpacingFactor: 0.25
+                            });
+                            
+                            this_.getView().setModel(this_.oModelSettings, "settings");
+
+                            this_.oGraph = this_.byId("graph_" + widgetName);
+                            //this_.oGraph._fZoomLevel = 0.75;
+                        }
+                    });
+            });
+
+            console.log("widgetName Final:" + widgetName);
+            var foundIndex = Ar.findIndex(x => x.id == widgetName);
+            var divfinal = Ar[foundIndex].div;
+            console.log(divfinal);
+
+            //### THE APP: place the XMLView somewhere into DOM ###
+            var oView = sap.ui.xmlview({
+                viewContent: jQuery(divfinal).html(),
+            });
+
+            oView.placeAt(div);
+        });
+    }
 
     
     // UTILS
