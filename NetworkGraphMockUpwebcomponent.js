@@ -457,7 +457,7 @@
                         t_source[a].X = firstMachineX + xOffset;
                         t_source[a].Y = firstMachineY - yOffset;
                         console.log(t_source[a].X);
-                        console.log(t_source[a].X);
+                        console.log(t_source[a].Y);
 
                     }
                 }
@@ -499,6 +499,7 @@
         calcpositionshor_l (path1_hor_l,t_source,nodeWidth,'1');
         // 2
         calcpositionssenkr_u(path2_Entlader,t_source,nodeHeight,'2');
+        calcpositionssenkr_u(path2_Auspacker, t_source, nodeHeight, '2');
         // others...
         }
 
