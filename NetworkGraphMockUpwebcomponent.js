@@ -51,13 +51,13 @@
 
             
             // get all machines -> Machines contains all existing machines
-            for(i = 0; i < source.length; i++){
+            for(let i = 0; i < source.length; i++){
                 Machines.push({Machine: source[i].Quelle_.id.replace(" ", "-")})
             }
 
             // transform source xml into a less complex structure 
-            for(i = 0; i < source.length; i++){
-                for(j = 0; j < Machines.length; j++){
+            for(let i = 0; i < source.length; i++){
+                for(let j = 0; j < Machines.length; j++){
                     if(Machines[j].Machine in source[i]){
                         if(Machines[j].Machine[1] !== undefined){
                             if(source[i][Machines[j].Machine].id !== "@NullMember" && source[i][Machines[j].Machine].id !== ""){
