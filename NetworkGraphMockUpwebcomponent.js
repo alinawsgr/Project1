@@ -298,38 +298,7 @@
                 }
             }
             }
-        //console.log(allconnectionvalues); // ['3', '1', '1', '2', '4', '1', '1', '10', '1', '3', '1', '1', '20', '20', '20', '1', '10', '1', '4', '4', '1', '1', '1', '1', '1', '10', '1', '1', '1', '1', '1', '2', '3', '2', '1', '3', '1', '4', '1', '4', '2', '2', '2', '2', '2', '1', '1', '2', '1', '2', '1', '2', '1', '20', '1', '1', '1', '1', '101', '1', '1', '1', '2', '2', '4', '1', '4', '3']
-        // fehler: hier aktuell []
-    
-
-        /*function, that calculates the position dependencies from fix machines and sets their coordinates based on that
-        function calculatedependencies(t_source) {
-            for (let i = 0; i < t_source.length; i++) {
-                // iterates through the fix machines from column Fixe_Maschinen
-                for (let a=0; a<fixmachinesstring.length; a++){
-                    // calculates dependencies to the fix machines in the columns X and Y
-                    if (fixmachinesstring[a] == t_source[i].X){ //contains ist ein problem
-                        for (let j=0; allmachinesstring.length; j++){
-                            // find the position/ row of the fix machine in t_source
-                            if (fixmachinesstring[a] == allmachinesstring[j]){
-                                t_source[i].X = t_source[j].X;
-                            }
-                        }
-                    }
-                    if (fixmachinesstring[a] == t_source[i].Y){
-                        for (let j=0; allmachinesstring.length; j++){
-                            // find the position/ row of the fix machine in t_source
-                            if (fixmachinesstring[a] == allmachinesstring[j]){
-                                t_source[i].Y = t_source[j].Y;
-                            }
-                        }
-                    }
-
-                } 
-            }
-        }
-        calculatedependencies(t_source); */
-
+      
         // calculates all paths in the graph regarding their value/priority (path priority must be given as an input and as a string in the format: 'number')
         function findPaths(t_source, priority, start){
             // calculates the row of the start machine, from where the paths start
@@ -575,7 +544,8 @@
             console.log("--First Time --");
         
             let div0 = document.createElement('div');
-            div0.innerHTML = '<?xml version="1.0"?><script id="oView_UpStream' + widgetName + '" name="oView_' + widgetName + '" type="sapui5/xmlview" xmlns:layout="sap.suite.ui.commons.networkgraph.layout" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns:l="sap.ui.layout" xmlns="sap.suite.ui.commons.networkgraph" height="100%"><mvc:View controllerName="myView.Template"><m:Panel><m:Label text="Process Flow sample with connection labels - zooming buttons and highlighted items" /><m:HBox renderType="Bare"><m:Button text="Zoom In" press="onZoomIn" /><m:Button text="Zoom Out" press="onZoomOut" /><m:ToggleButton text="Toggle Connection Labels" pressed="true" press="onHideConnectionLabels" /><m:ToggleButton text="Toggle Highlighted Path" press="onHighlightPath" /><m:Button text="Reset Selected Path" press="onResetSelection" /></m:HBox></m:Panel><l:FixFlex><l:fixContent><m:FlexBox fitContainer="true" renderType="Bare" wrap="Wrap"><m:items><Graph enableWheelZoom="true" height="200%" width="200%" nodes="{' + widgetName + '>/nodes}" lines="{' + widgetName + '>/lines}" groups="{' + widgetName + '>/groups}" id="graph_' + widgetName + '"><statuses><Status key="CustomKrones" title="Standard" backgroundColor="#0060AD" borderColor="sapUiContentShadowColor" hoverBorderColor="sapUiContentShadowColor"/></statuses><nodes><Node key="{' + widgetName +'>key}" title="{' + widgetName + '>title}" icon="{' + widgetName + '>icon}" group="{' + widgetName + '>group}" attributes="{' + widgetName + '>attributes}" shape="Circle" status="{'+ widgetName + '>status}" x="{' + widgetName + '>x}" y="{' + widgetName + '>y}" showDetailButton="false" width="auto" maxWidth="500"><attributes><ElementAttribute label="{' + widgetName + '>label}" value="{' + widgetName + '>value}"/></attributes></Node></nodes><lines><Line from="{' + widgetName + '>from}" to="{' + widgetName + '>to}" status="{' + widgetName + '>status}" arrowOrientation="ParentOf" arrowPosition="Middle" press="linePress"/></lines><groups><Group key="{' + widgetName + '>key}" title="{' + widgetName + '>title}"/></groups></Graph></m:items></m:FlexBox></l:fixContent></l:FixFlex></mvc:View></script>';
+            div0.innerHTML = '<?xml version="1.0"?><script id="oView_UpStream' + widgetName + '" name="oView_' + widgetName + '" type="sapui5/xmlview"><mvc:View controllerName="myView.Template" xmlns="sap.suite.ui.commons.networkgraph" xmlns:layout="sap.suite.ui.commons.networkgraph.layout" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns:l="sap.ui.layout" height="100%">><l:FixFlex><l:fixContent><m:FlexBox fitContainer="true" renderType="Bare" wrap="Wrap"><m:SegmentedButton selectionChange="changeData"><m:items><m:SegmentedButtonItem text="Ebene 1" key="data"/><m:SegmentedButtonItem text="Ebene 2" key="nodata"/><m:SegmentedButtonItem text="Ebene 3" key="nodata3"/></m:items></m:SegmentedButton><m:items><Graph  enableWheelZoom="true" height="200%" width="200%" nodes="{' + widgetName + '>/nodes}" lines="{' + widgetName + '>/lines}" groups="{' + widgetName + '>/groups}" id="graph_' + widgetName + '" > <statuses><Status key="CustomKrones" title="Standard" backgroundColor="#0060AD" borderColor="sapUiContentShadowColor" hoverBorderColor="sapUiContentShadowColor"/></statuses> <nodes> <Node key="{' + widgetName +'>key}"  title="{' + widgetName + '>title}" icon="{' + widgetName + '>icon}" group="{' + widgetName + '>group}"  attributes="{' + widgetName + '>attributes}"  shape="Box" status="{'+ widgetName + '>status}" x="{' + widgetName + '>x}"  y="{' + widgetName + '>y}" showDetailButton="false" width="auto" maxWidth="500"> <attributes> <ElementAttribute label="{' + widgetName + '>label}" value="{' + widgetName + '>value}"/> </attributes> </Node> </nodes> <lines> <Line from="{' + widgetName + '>from}" to="{' + widgetName + '>to}" status="{' + widgetName + '>status}" arrowOrientation="ParentOf" arrowPosition="Middle" press="linePress"></Line> </lines> <groups> <Group key="{' + widgetName + '>key}" title="{' + widgetName + '>title}"></Group> </groups> </Graph></m:items></m:FlexBox></l:fixContent></l:FixFlex> </mvc:View></script>';
+
 
             if(that._firstConnection === 1){
                 _shadowRoot.removeChild(_shadowRoot.lastChild);
