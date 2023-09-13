@@ -666,6 +666,67 @@
     
     // UTILS
     function loadthis(that) {
+        that.data = [{
+            "nodes": [
+                {
+                    "key": 0,
+                    "title": "Stretch Blow Molder",
+                    "status": "Success",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "92,59%"
+                        }
+                    ]
+                },{
+                    "key": 1,
+                    "title": "Filler",
+                    "status": "Warning",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "81,81%"
+                        }
+                    ]
+                },{
+                    "key": 2,
+                    "title": "Labeller",
+                    "status": "Error",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "59,06%"
+                        }
+                    ]
+                },{
+                    "key": 3,
+                    "title": "Non-returnable Packer",
+                    "status": "Success",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "92,39%"
+                        }
+                    ]
+                },{
+                    "key": 4,
+                    "title": "Palettizer",
+                    "status": "Success",
+                    "attributes": [
+                        {
+                            "label": "Technical Availability",
+                            "value": "94,14%"
+                        }
+                    ]
+                },
+            ],
+            "lines": [
+                {"from": 0, "to": 1},
+                {"from": 1, "to": 2},
+                {"from": 2, "to": 3},
+                {"from": 3, "to": 4}
+            ]
+        }];
         var that_ = that;
 
         widgetName = "mockNetworkGraph_1";
