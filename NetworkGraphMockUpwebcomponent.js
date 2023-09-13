@@ -584,39 +584,38 @@
                 "sap/ui/core/mvc/Controller",
                 "sap/ui/model/json/JSONModel",
                 "sap/m/Popover"
-            ], function(Controller, JSONModel, Popover) {
+                 "sap/suite/ui/commons/networkgraph/layout/NoopLayout"
+            ], function(Controller, JSONModel, Popover, NoopLayout) {
                 "use strict";
 
                 return Controller.extend("myView.Template", {
-                    onInit: function () {
-                        var this_ = this;
+                  onInit: function () {
+                      var this_ = this;
 
-                            that._firstConnection = 1;
+                          that._firstConnection = 1;
 
-                            var oModel = new JSONModel(that.data[0]);
-                            
-                            oModel.setSizeLimit(Number.MAX_SAFE_INTEGER);
+                          var oModel = new JSONModel(that.data[0]);
+                          
+                          oModel.setSizeLimit(Number.MAX_SAFE_INTEGER);
 
-                            this_.getView().setModel(oModel, that.widgetName);
+                          this_.getView().setModel(oModel, that.widgetName);
 
-                            this_.oModelSettings = new JSONModel({
-                                maxIterations: 200,
-                                maxTime: 500,
-                                initialTemperature: 200,
-                                coolDownStep: 1,
-                                mergeEdges: true,
-                                nodePlacement: sap.suite.ui.commons.networkgraph.NodePlacement.LinearSegments,
-                                nodeSpacing: 50,
-                                lineSpacingFactor: 0.25
-                            });
-                            
-                            this_.getView().setModel(this_.oModelSettings, "settings");
+                          this_.oModelSettings = new JSONModel({
+                              maxIterations: 200,
+                              maxTime: 500,
+                              initialTemperature: 200,
+                              coolDownStep: 1,
+                              mergeEdges: true,
+                          });
+                          
+                          this_.getView().setModel(this_.oModelSettings, "settings");
 
-                            this_.oGraph = this_.byId("graph_" + widgetName);
-                            //this_.oGraph._fZoomLevel = 0.75;
-                        }
-                    });
-            });
+                          this_.oGraph = this_.byId("graph_" + widgetName);
+        this_.oGraph.setLayoutAlgorithm(new NoopLayout);
+                          //this_.oGraph._fZoomLevel = 0.75;
+                      }
+                  });
+          });
 
             console.log("widgetName Final:" + widgetName);
             var foundIndex = Ar.findIndex(x => x.id == widgetName);
