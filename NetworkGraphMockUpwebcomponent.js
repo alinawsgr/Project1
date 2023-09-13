@@ -544,7 +544,7 @@
             console.log("--First Time --");
         
             let div0 = document.createElement('div');
-            div0.innerHTML = '<?xml version="1.0"?><script id="oView_UpStream' + widgetName + '" name="oView_' + widgetName + '" type="sapui5/xmlview"><mvc:View controllerName="myView.Template" xmlns="sap.suite.ui.commons.networkgraph" xmlns:layout="sap.suite.ui.commons.networkgraph.layout" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns:l="sap.ui.layout" height="100%">><l:FixFlex><l:fixContent><m:FlexBox fitContainer="true" renderType="Bare" wrap="Wrap"><m:SegmentedButton selectionChange="changeData"><m:items><m:SegmentedButtonItem text="Ebene 1" key="data"/><m:SegmentedButtonItem text="Ebene 2" key="nodata"/><m:SegmentedButtonItem text="Ebene 3" key="nodata3"/></m:items></m:SegmentedButton><m:items><Graph  enableWheelZoom="true" height="200%" width="200%" nodes="{' + widgetName + '>/nodes}" lines="{' + widgetName + '>/lines}" groups="{' + widgetName + '>/groups}" id="graph_' + widgetName + '" > <statuses><Status key="CustomKrones" title="Standard" backgroundColor="#0060AD" borderColor="sapUiContentShadowColor" hoverBorderColor="sapUiContentShadowColor"/></statuses> <nodes> <Node key="{' + widgetName +'>key}"  title="{' + widgetName + '>title}" icon="{' + widgetName + '>icon}" group="{' + widgetName + '>group}"  attributes="{' + widgetName + '>attributes}"  shape="Box" status="{'+ widgetName + '>status}" x="{' + widgetName + '>x}"  y="{' + widgetName + '>y}" showDetailButton="false" width="auto" maxWidth="500"> <attributes> <ElementAttribute label="{' + widgetName + '>label}" value="{' + widgetName + '>value}"/> </attributes> </Node> </nodes> <lines> <Line from="{' + widgetName + '>from}" to="{' + widgetName + '>to}" status="{' + widgetName + '>status}" arrowOrientation="ParentOf" arrowPosition="Middle" press="linePress"></Line> </lines> <groups> <Group key="{' + widgetName + '>key}" title="{' + widgetName + '>title}"></Group> </groups> </Graph></m:items></m:FlexBox></l:fixContent></l:FixFlex> </mvc:View></script>';
+            div0.innerHTML = '<?xml version="1.0"?><script id="oView_UpStream' + widgetName + '" name="oView_' + widgetName + '" type="sapui5/xmlview"><mvc:View controllerName="myView.Template" xmlns="sap.suite.ui.commons.networkgraph" xmlns:layout="sap.suite.ui.commons.networkgraph.layout" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns:l="sap.ui.layout" height="100%">><l:FixFlex><l:fixContent><m:FlexBox fitContainer="true" renderType="Bare" wrap="Wrap"><m:SegmentedButton selectionChange="changeData"><m:items><m:SegmentedButtonItem text="Ebene 1" key="data"/><m:SegmentedButtonItem text="Ebene 2" key="nodata"/><m:SegmentedButtonItem text="Ebene 3" key="nodata3"/></m:items></m:SegmentedButton><m:items><Graph  enableWheelZoom="true" height="200%" width="200%" nodes="{' + widgetName + '>/nodes}" lines="{' + widgetName + '>/lines}" groups="{' + widgetName + '>/groups}" id="graph_' + widgetName + '" ><layoutAlgorithm><layout:NoopLayout/><layoutAlgorithm><statuses><Status key="CustomKrones" title="Standard" backgroundColor="#0060AD" borderColor="sapUiContentShadowColor" hoverBorderColor="sapUiContentShadowColor"/></statuses> <nodes> <Node key="{' + widgetName +'>key}"  title="{' + widgetName + '>title}" icon="{' + widgetName + '>icon}" group="{' + widgetName + '>group}"  attributes="{' + widgetName + '>attributes}"  shape="Box" status="{'+ widgetName + '>status}" x="{' + widgetName + '>x}"  y="{' + widgetName + '>y}" showDetailButton="false" width="auto" maxWidth="500"> <attributes> <ElementAttribute label="{' + widgetName + '>label}" value="{' + widgetName + '>value}"/> </attributes> </Node> </nodes> <lines> <Line from="{' + widgetName + '>from}" to="{' + widgetName + '>to}" status="{' + widgetName + '>status}" arrowOrientation="ParentOf" arrowPosition="Middle" press="linePress"></Line> </lines> <groups> <Group key="{' + widgetName + '>key}" title="{' + widgetName + '>title}"></Group> </groups> </Graph></m:items></m:FlexBox></l:fixContent></l:FixFlex> </mvc:View></script>';
 
 
             if(that._firstConnection === 1){
@@ -583,39 +583,40 @@
             sap.ui.define([
                 "sap/ui/core/mvc/Controller",
                 "sap/ui/model/json/JSONModel",
-                "sap/m/Popover",
-                 "sap/suite/ui/commons/networkgraph/layout/NoopLayout"
-            ], function(Controller, JSONModel, Popover, NoopLayout) {
+                "sap/m/Popover"
+            ], function(Controller, JSONModel, Popover) {
                 "use strict";
 
                 return Controller.extend("myView.Template", {
-                  onInit: function () {
-                      var this_ = this;
+                    onInit: function () {
+                        var this_ = this;
 
-                          that._firstConnection = 1;
+                            that._firstConnection = 1;
 
-                          var oModel = new JSONModel(that.data[0]);
-                          
-                          oModel.setSizeLimit(Number.MAX_SAFE_INTEGER);
+                            var oModel = new JSONModel(that.data[0]);
+                            
+                            oModel.setSizeLimit(Number.MAX_SAFE_INTEGER);
 
-                          this_.getView().setModel(oModel, that.widgetName);
+                            this_.getView().setModel(oModel, that.widgetName);
 
-                          this_.oModelSettings = new JSONModel({
-                              maxIterations: 200,
-                              maxTime: 500,
-                              initialTemperature: 200,
-                              coolDownStep: 1,
-                              mergeEdges: true,
-                          });
-                          
-                          this_.getView().setModel(this_.oModelSettings, "settings");
+                            this_.oModelSettings = new JSONModel({
+                                maxIterations: 200,
+                                maxTime: 500,
+                                initialTemperature: 200,
+                                coolDownStep: 1,
+                                mergeEdges: true,
+                                nodePlacement: sap.suite.ui.commons.networkgraph.NodePlacement.LinearSegments,
+                                nodeSpacing: 50,
+                                lineSpacingFactor: 0.25
+                            });
+                            
+                            this_.getView().setModel(this_.oModelSettings, "settings");
 
-                          this_.oGraph = this_.byId("graph_" + widgetName);
-        this_.oGraph.setLayoutAlgorithm(new NoopLayout);
-                          //this_.oGraph._fZoomLevel = 0.75;
-                      }
-                  });
-          });
+                            this_.oGraph = this_.byId("graph_" + widgetName);
+                            //this_.oGraph._fZoomLevel = 0.75;
+                        }
+                    });
+            });
 
             console.log("widgetName Final:" + widgetName);
             var foundIndex = Ar.findIndex(x => x.id == widgetName);
@@ -820,3 +821,4 @@
         });
     }
 })();
+
