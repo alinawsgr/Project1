@@ -583,7 +583,7 @@
             sap.ui.define([
                 "sap/ui/core/mvc/Controller",
                 "sap/ui/model/json/JSONModel",
-                "sap/m/Popover"
+                "sap/m/Popover",
                  "sap/suite/ui/commons/networkgraph/layout/NoopLayout"
             ], function(Controller, JSONModel, Popover, NoopLayout) {
                 "use strict";
