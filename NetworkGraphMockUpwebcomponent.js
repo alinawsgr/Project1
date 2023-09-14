@@ -79,7 +79,7 @@
             setCoordinates(t_source,source);
 
             let oNewDataSource = restructureNodes(t_source);
-            this.data = oNewDataSource;
+            this.data = [oNewDataSource];
             buildgraph(this);
         }
 
@@ -822,4 +822,3 @@
         });
     }
 })();
-
