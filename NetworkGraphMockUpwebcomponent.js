@@ -332,13 +332,11 @@
         let path1_hor_r = path1.slice(0, (path1.indexOf(directionChange[0])+1));
         let path1_senkr_u = path1.slice((path1.indexOf(directionChange[0])), (path1.indexOf(directionChange[1]) + 1));
         let path1_hor_l = path1.slice((path1.indexOf(directionChange[1])),( path1.length));
-        console.log(path1_senkr_u);
+     
         // yellow
         let path2 = [];
         path2_Entlader = findPaths(t_source, '2', 'Entlader');
         path2_Auspacker = findPaths(t_source,'2', 'Auspacker');
-        console.log(path2_Entlader);
-        console.log(path2_Auspacker);
 
         // rest
         let path3 = [];
@@ -430,8 +428,6 @@
                     if (t_source[a].Parent_Machine === path[i + 1]) {
                         t_source[a].X = firstMachineX + xOffset;
                         t_source[a].Y = firstMachineY - yOffset;
-                        console.log(t_source[a].X);
-                        console.log(t_source[a].Y);
 
                     }
                 }
@@ -636,67 +632,7 @@
     
     // UTILS
     function loadthis(that) {
-        that.data = [{
-            "nodes": [
-                {
-                    "key": 0,
-                    "title": "Stretch Blow Molder",
-                    "status": "Success",
-                    "attributes": [
-                        {
-                            "label": "Technical Availability",
-                            "value": "92,59%"
-                        }
-                    ]
-                },{
-                    "key": 1,
-                    "title": "Filler",
-                    "status": "Warning",
-                    "attributes": [
-                        {
-                            "label": "Technical Availability",
-                            "value": "81,81%"
-                        }
-                    ]
-                },{
-                    "key": 2,
-                    "title": "Labeller",
-                    "status": "Error",
-                    "attributes": [
-                        {
-                            "label": "Technical Availability",
-                            "value": "59,06%"
-                        }
-                    ]
-                },{
-                    "key": 3,
-                    "title": "Non-returnable Packer",
-                    "status": "Success",
-                    "attributes": [
-                        {
-                            "label": "Technical Availability",
-                            "value": "92,39%"
-                        }
-                    ]
-                },{
-                    "key": 4,
-                    "title": "Palettizer",
-                    "status": "Success",
-                    "attributes": [
-                        {
-                            "label": "Technical Availability",
-                            "value": "94,14%"
-                        }
-                    ]
-                },
-            ],
-            "lines": [
-                {"from": 0, "to": 1},
-                {"from": 1, "to": 2},
-                {"from": 2, "to": 3},
-                {"from": 3, "to": 4}
-            ]
-        }];
+        that.data = [];
         var that_ = that;
 
         widgetName = "mockNetworkGraph_1";
