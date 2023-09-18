@@ -360,6 +360,8 @@
         let indexVar = path1_hor_l.indexOf('Varioline');
         let path1_hor_l_1 = path1_hor_l.slice(0, indexVar-1);
         let path1_hor_l_2 = path1_hor_l.slice (indexVar, path1_hor_l.length);
+        console.log(path1_hor_l_1);
+        console.log(path1_hor_l_2);
 
      
         // yellow
