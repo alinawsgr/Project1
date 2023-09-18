@@ -431,24 +431,6 @@
                 let xOffset = (i + 1) * nodeWidth;
                 let yOffset = 0;
                 let firstMachine = path[0];
-                for (let a=0; a<t_source.length; a++){
-                    if (t_source[a].Y_dep === 'Etikettiermasschine'){
-                        for (let y=0; y<t_source.length; y++){
-                            if(t_source[y].Parent_Machine === 'Etikettiermasschine'){
-                                t_source[a].Y = t_source[y].Y;
-                            }      
-                        }
-                    }
-                    if (t_source[a].X_dep === 'Etikettiermasschine'){
-                        for (let x=0; x<t_source.length; x++){
-                            if(t_source[x].Parent_Machine === 'Etikettiermasschine'){
-                                t_source[a].X = t_source[x].X;
-                            }      
-                        }
-                    }
-                }
-                
-        
                 for (let j = 0; j < t_source.length; j++) {
                     if (t_source[j].Parent_Machine === firstMachine) {
                         firstMachineX = t_source[j].X;
@@ -458,29 +440,22 @@
                 }
         
                 for (let a = 0; a < t_source.length; a++) {
-                    if (t_source[a].Parent_Machine === path[i + 1]) {
+                    if (t_source[a].Parent_Machine === path[i + 1] && path[i + 1] !== 'Varioline') {
                         t_source[a].X = firstMachineX - xOffset;
                         t_source[a].Y = firstMachineY + yOffset;
                     }
-                }
-                if (path[i] === 'Varioline'){
-                    for (let c=0; c<t_source.length; c++){
-                        if (t_source[c].Y_dep === 'Auslader'){
-                            for (let y=0; y<t_source.length; y++){
-                                if(t_source[y].Parent_Machine === 'Auslader'){
-                                    t_source[c].Y = t_source[y].Y;
-                                }      
+                    if (path[i+1] === 'Varioline'){
+                        for (let c=0; c<t_source.length; c++){
+                            if (t_source[c].Y_dep === 'Ettikettiermasschine'){
+                                for (let y=0; y<t_source.length; y++){
+                                    if(t_source[y].Parent_Machine === 'Ettikettiermasschine'){
+                                        t_source[c].Y = t_source[y].Y;
+                                    }      
+                                }
                             }
                         }
-                        if (t_source[c].X_dep === 'Auslader'){
-                            for (let x=0; x<t_source.length; x++){
-                                if(t_source[x].Parent_Machine === 'Auslader'){
-                                    t_source[c].X = t_source[x].X;
-                                }      
-                            }
-                        }
-                    }
 
+                    }
                 }
                 
             }
