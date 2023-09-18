@@ -500,6 +500,39 @@
         calcpositionssenkr_u(path1_senkr_u, t_source, nodeHeight,'1');
         
         calcpositionshor_l(path1_hor_l_1,t_source,nodeWidth,'1');
+
+        for (let a=0; a<t_source.length; a++){
+            if (t_source[a].Y_dep === 'Etikettiermasschine'){
+                for (let y=0; y<t_source.length; y++){
+                    if(t_source[y].Parent_Machine === 'Etikettiermasschine'){
+                        t_source[a].Y = t_source[y].Y;
+                    }      
+                }
+            }
+            if (t_source[a].X_dep === 'Etikettiermasschine'){
+                for (let x=0; x<t_source.length; x++){
+                    if(t_source[x].Parent_Machine === 'Etikettiermasschine'){
+                        t_source[a].X = t_source[x].X;
+                    }      
+                }
+            }
+            if (t_source[a].Y_dep === 'Auspacker'){
+                for (let y=0; y<t_source.length; y++){
+                    if(t_source[y].Parent_Machine === 'Auspacker'){
+                        t_source[a].Y = t_source[y].Y;
+                    }      
+                }
+            }
+            if (t_source[a].X_dep === 'Auspacker'){
+                for (let x=0; x<t_source.length; x++){
+                    if(t_source[x].Parent_Machine === 'Auspacker'){
+                        t_source[a].X = t_source[x].X;
+                    }      
+                }
+            }
+        }
+
+
         
         // 2
         calcpositionssenkr_u(path2_Entlader,t_source,nodeHeight,'2');
