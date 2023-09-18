@@ -326,15 +326,15 @@
         for (let i=0; i<t_source.length; i++){
             if (t_source[i].Y_dep === 'Entlader'){
                 for (let j=0; j<t_source.length; j++){
-                    if(t_source[j].Parent_Machine = 'Entlader'){
+                    if(t_source[j].Parent_Machine === 'Entlader'){
                         t_source[i].Y = t_source[j].Y;
                     }      
                 }
             }
             if (t_source[i].X_dep === 'Entlader'){
-                for (let j=0; j<t_source.length; j++){
-                    if(t_source[j].Parent_Machine = 'Entlader'){
-                        t_source[i].X = t_source[j].X;
+                for (let x=0; x<t_source.length; x++){
+                    if(t_source[x].Parent_Machine === 'Entlader'){
+                        t_source[i].X = t_source[x].X;
                     }      
                 }
             }
