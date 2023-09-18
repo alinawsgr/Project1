@@ -476,22 +476,7 @@
                 let xOffset = 0;
                 let yOffset = (i + 1) * nodeHeight;
                 let firstMachine = path[0];
-                for (let a=0; a<t_source.length; a++){
-                    if (t_source[a].Y_dep === 'Auspacker'){
-                        for (let y=0; y<t_source.length; y++){
-                            if(t_source[y].Parent_Machine === 'Auspacker'){
-                                t_source[a].Y = t_source[y].Y;
-                            }      
-                        }
-                    }
-                    if (t_source[a].X_dep === 'Auspacker'){
-                        for (let x=0; x<t_source.length; x++){
-                            if(t_source[x].Parent_Machine === 'Auspacker'){
-                                t_source[a].X = t_source[x].X;
-                            }      
-                        }
-                    }
-                }
+                
         
                 for (let j = 0; j < t_source.length; j++) {
                     if (t_source[j].Parent_Machine === firstMachine) {
@@ -505,6 +490,24 @@
                     if (t_source[a].Parent_Machine === path[i + 1]) {
                         t_source[a].X = firstMachineX + xOffset;
                         t_source[a].Y = firstMachineY + yOffset;
+                    }
+                    if (path[i] == 'Varioline'){
+                        for (let c=0; c<t_source.length; c++){
+                            if (t_source[c].Y_dep === 'Auspacker'){
+                                for (let y=0; y<t_source.length; y++){
+                                    if(t_source[y].Parent_Machine === 'Auspacker'){
+                                        t_source[c].Y = t_source[y].Y;
+                                    }      
+                                }
+                            }
+                            if (t_source[c].X_dep === 'Auspacker'){
+                                for (let x=0; x<t_source.length; x++){
+                                    if(t_source[x].Parent_Machine === 'Auspacker'){
+                                        t_source[c].X = t_source[x].X;
+                                    }      
+                                }
+                            }
+                        }
 
                     }
                 }
