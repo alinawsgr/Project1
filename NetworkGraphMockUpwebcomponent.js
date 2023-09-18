@@ -529,6 +529,22 @@
             }
         }
         calcpositionshor_l (path1_hor_l,t_source,nodeWidth,'1');
+        for (let i=0; i<t_source.length; i++){
+            if (t_source[i].Y_dep === 'Etikettiermasschine'){
+                for (let j=0; j<t_source.length; j++){
+                    if(t_source[j].Parent_Machine === 'Etikettiermasschine'){
+                        t_source[i].Y = t_source[j].Y;
+                    }      
+                }
+            }
+            if (t_source[i].X_dep === 'Etikettiermasschine'){
+                for (let x=0; x<t_source.length; x++){
+                    if(t_source[x].Parent_Machine === 'Etikettiermasschine'){
+                        t_source[i].X = t_source[x].X;
+                    }      
+                }
+            }
+        }
         // 2
         calcpositionssenkr_u(path2_Entlader,t_source,nodeHeight,'2');
         calcpositionssenkr_u(path2_Auspacker, t_source, nodeHeight, '2');
