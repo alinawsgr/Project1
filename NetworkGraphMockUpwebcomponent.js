@@ -426,6 +426,7 @@
           function calcpositionshor_l (path,t_source, nodeWidth, priority){
             let firstMachineX = null; 
             let firstMachineY = null; 
+
         
             for (let i = 0; i < path.length; i++) {
                 let xOffset = (i + 1) * nodeWidth;
@@ -443,18 +444,6 @@
                     if (t_source[a].Parent_Machine === path[i + 1] && path[i + 1] !== 'Varioline') {
                         t_source[a].X = firstMachineX - xOffset;
                         t_source[a].Y = firstMachineY + yOffset;
-                    }
-                    if (path[i+1] === 'Varioline'){
-                        for (let c=0; c<t_source.length; c++){
-                            if (t_source[c].Y_dep === 'Ettikettiermasschine'){
-                                for (let y=0; y<t_source.length; y++){
-                                    if(t_source[y].Parent_Machine === 'Ettikettiermasschine'){
-                                        t_source[c].Y = t_source[y].Y;
-                                    }      
-                                }
-                            }
-                        }
-
                     }
                 }
                 
@@ -821,4 +810,3 @@
         });
     }
 })();
-
