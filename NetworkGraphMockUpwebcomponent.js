@@ -456,7 +456,7 @@
                 }
         
                 for (let a = 0; a < t_source.length; a++) {
-                    if (t_source[a].Parent_Machine === path[i + 1]) {
+                    if (t_source[a].Parent_Machine === path[i + 1] && path[i+1] != 'Varioline') {
                         t_source[a].X = firstMachineX + xOffset;
                         t_source[a].Y = firstMachineY + yOffset;
                     }
