@@ -284,9 +284,6 @@
             }
         }
 
-
-
-
         // get all existing machines in string format -> ['Abschieber', 'Linatronic', 'Belader_links', 'Gebindewascher', 'Abschrauber', 'TBB_EG01', 'TBB_EG02', 'TBB_EG02', 'TBB_EG03', 'TBB_EG04', 'TBB_EG05', 'TBB_EG06', 'TBB_EG07', 'TBB_EG07', 'TBB_EG07', 'TBB_EG07', 'TBB_EG11', 'TBB_EG12', 'TBB_EG12', 'TBB_EG14', 'TBB_EG15', 'TBB_EG16', 'TBB_EG17', 'TBB_EG18', 'TBB_EG21', 'TBB_EG22', 'TBB_EG22', 'TBB_EG24', 'TBB_EG26', 'TBG_EG01', 'TBG_EG02', 'TBG_EG05', 'TBG_EG05', 'TBG_EG06', 'TBG_EG07', 'TBG_EG08', 'TBG_EG09', 'TBG_EG09', 'TBG_EG10', 'TBG_EG12', 'TBG_EG15', 'TBP1_EG02', 'TBP1_EG03', 'TBP1_EG04', 'TBP1_EG05', 'TBP1_EG07', 'Extern_Aufgabe_PAL', 'TBG_EG04', 'Entlader', 'Entlader', 'Auspacker', 'Auspacker', 'Waschmaschine', 'F�ller', 'F�ller', 'Etikettiermaschine', 'Varioline', 'Belader_rechts', 'TBP1_EG08', 'TBB_EG23', 'TBP1_EG01', 'TBG_EG11', 'TBP1_EG06', 'TBP1_EG06', 'TBG_EG13', 'TBG_EG03', 'TBB_EG13', 'EXTERN01']
         let allmachinesstring = [];
         for (let i=0; i < t_source.length; i++){
@@ -338,6 +335,24 @@
         let path1 = findPaths(t_source, '1', 'Entlader');
         // cut the path in direction changes
         let path1_hor_r = path1.slice(0, (path1.indexOf(directionChange[0])+1));
+        for (let a=0; a<fixmachinesstring.length; a++){
+            for (let i=0; i<t_source.length; i++){
+                if (t_source[i].Y_dep = fixmachinesstring[a]){
+                    for (let j=0; j<t_source.length; j++){
+                        if(t_source[j].Parent_Machine = fixmachinesstring[a]){
+                            t_source[i].Y = t_source[j].Y;
+                        }      
+                    }
+                 }
+                if (t_source[i].X_dep = fixmachinesstring[a]){
+                    for (let j=0; j<t_source.length; j++){
+                        if(t_source[j].Parent_Machine = fixmachinesstring[a]){
+                            t_source[i].X = t_source[j].X;
+                        }      
+                    }
+                }
+            }
+        }
         let path1_senkr_u = path1.slice((path1.indexOf(directionChange[0])), (path1.indexOf(directionChange[1]) + 1));
         let path1_hor_l = path1.slice((path1.indexOf(directionChange[1])),( path1.length));
      
@@ -473,107 +488,11 @@
         // calculates all paths and the positions of all machines
         // 1
         calcpositionshor_r(path1_hor_r, t_source, nodeWidth, '1');
-        // calculates dependencies
-        for (let a=0; a<fixmachinesstring.length; a++){
-            for (let i=0; i<t_source.length; i++){
-                if (t_source[i].Y_dep = fixmachinesstring[a]){
-                    for (let j=0; j<t_source.length; j++){
-                        if(t_source[j].Parent_Machine = fixmachinesstring[a]){
-                            t_source[i].Y = t_source[j].Y;
-                        }      
-                    }
-                 }
-                if (t_source[i].X_dep = fixmachinesstring[a]){
-                    for (let j=0; j<t_source.length; j++){
-                        if(t_source[j].Parent_Machine = fixmachinesstring[a]){
-                            t_source[i].X = t_source[j].X;
-                        }      
-                    }
-                }
-            }
-        }
-        
         calcpositionssenkr_u(path1_senkr_u, t_source, nodeHeight,'1');
-        // calculates dependencies
-        for (let a=0; a<fixmachinesstring.length; a++){
-            for (let i=0; i<t_source.length; i++){
-                if (t_source[i].Y_dep = fixmachinesstring[a]){
-                    for (let j=0; j<t_source.length; j++){
-                        if(t_source[j].Parent_Machine = fixmachinesstring[a]){
-                            t_source[i].Y = t_source[j].Y;
-                        }      
-                    }
-                 }
-                if (t_source[i].X_dep = fixmachinesstring[a]){
-                    for (let j=0; j<t_source.length; j++){
-                        if(t_source[j].Parent_Machine = fixmachinesstring[a]){
-                            t_source[i].X = t_source[j].X;
-                        }      
-                    }
-                }
-            }
-        }
         calcpositionshor_l (path1_hor_l,t_source,nodeWidth,'1');
-        // calculates dependencies
-        for (let a=0; a<fixmachinesstring.length; a++){
-            for (let i=0; i<t_source.length; i++){
-                if (t_source[i].Y_dep = fixmachinesstring[a]){
-                    for (let j=0; j<t_source.length; j++){
-                        if(t_source[j].Parent_Machine = fixmachinesstring[a]){
-                            t_source[i].Y = t_source[j].Y;
-                        }      
-                    }
-                 }
-                if (t_source[i].X_dep = fixmachinesstring[a]){
-                    for (let j=0; j<t_source.length; j++){
-                        if(t_source[j].Parent_Machine = fixmachinesstring[a]){
-                            t_source[i].X = t_source[j].X;
-                        }      
-                    }
-                }
-            }
-        }
         // 2
         calcpositionssenkr_u(path2_Entlader,t_source,nodeHeight,'2');
-        // calculates dependencies
-        for (let a=0; a<fixmachinesstring.length; a++){
-            for (let i=0; i<t_source.length; i++){
-                if (t_source[i].Y_dep = fixmachinesstring[a]){
-                    for (let j=0; j<t_source.length; j++){
-                        if(t_source[j].Parent_Machine = fixmachinesstring[a]){
-                            t_source[i].Y = t_source[j].Y;
-                        }      
-                    }
-                 }
-                if (t_source[i].X_dep = fixmachinesstring[a]){
-                    for (let j=0; j<t_source.length; j++){
-                        if(t_source[j].Parent_Machine = fixmachinesstring[a]){
-                            t_source[i].X = t_source[j].X;
-                        }      
-                    }
-                }
-            }
-        }
         calcpositionssenkr_u(path2_Auspacker, t_source, nodeHeight, '2');
-        // calculates dependencies
-        for (let a=0; a<fixmachinesstring.length; a++){
-            for (let i=0; i<t_source.length; i++){
-                if (t_source[i].Y_dep = fixmachinesstring[a]){
-                    for (let j=0; j<t_source.length; j++){
-                        if(t_source[j].Parent_Machine = fixmachinesstring[a]){
-                            t_source[i].Y = t_source[j].Y;
-                        }      
-                    }
-                 }
-                if (t_source[i].X_dep = fixmachinesstring[a]){
-                    for (let j=0; j<t_source.length; j++){
-                        if(t_source[j].Parent_Machine = fixmachinesstring[a]){
-                            t_source[i].X = t_source[j].X;
-                        }      
-                    }
-                }
-            }
-        }
         // others...
 
         
