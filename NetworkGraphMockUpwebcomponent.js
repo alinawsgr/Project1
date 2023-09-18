@@ -255,8 +255,8 @@
     const nodeWidth = 300;
     const nodeHeight = 200;
     // fix position of "Entlader"
-    let xEntladerPosition = 600;
-    let yEntladerPosition = 600;
+    let xEntladerPosition = 1500;
+    let yEntladerPosition = 1500;
     // direction changes in the graph (in this case of the main line)
     let directionChange = ['Waschmaschine', 'Etikettiermaschine']
     
