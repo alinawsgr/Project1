@@ -470,7 +470,7 @@
         // calculates all paths and the positions of all machines
         // 1
         calcpositionshor_r(path1_hor_r, t_source, nodeWidth, '1');
-        for (let a=0; a<fixmachinesstring.length; a++){
+        /*for (let a=0; a<fixmachinesstring.length; a++){
             for (let i=0; i<t_source.length; i++){
                 if (t_source[i].Y_dep = fixmachinesstring[a]){
                     for (let j=0; j<t_source.length; j++){
@@ -487,7 +487,7 @@
                     }
                 }
             }
-        }
+        }*/
         calcpositionssenkr_u(path1_senkr_u, t_source, nodeHeight,'1');
         calcpositionshor_l (path1_hor_l,t_source,nodeWidth,'1');
         // 2
