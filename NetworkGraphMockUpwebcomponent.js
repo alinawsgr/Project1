@@ -323,25 +323,6 @@
                     }
                 }
             }*/
-        for (let i=0; i<t_source.length; i++){
-            if (t_source[i].Y_dep === 'Entlader'){
-                for (let j=0; j<t_source.length; j++){
-                    if(t_source[j].Parent_Machine === 'Entlader'){
-                        t_source[i].Y = t_source[j].Y;
-                    }      
-                }
-            }
-            if (t_source[i].X_dep === 'Entlader'){
-                for (let x=0; x<t_source.length; x++){
-                    if(t_source[x].Parent_Machine === 'Entlader'){
-                        t_source[i].X = t_source[x].X;
-                    }      
-                }
-            }
-        }
-
-
-        
 
         // calculates all paths in the graph regarding their value/priority (path priority must be given as an input and as a string in the format: 'number')
         function findPaths(t_source, priority, start){
@@ -376,6 +357,10 @@
         let path1_hor_r = path1.slice(0, (path1.indexOf(directionChange[0])+1));
         let path1_senkr_u = path1.slice((path1.indexOf(directionChange[0])), (path1.indexOf(directionChange[1]) + 1));
         let path1_hor_l = path1.slice((path1.indexOf(directionChange[1])),( path1.length));
+        let indexVar = path1_hor_l.indexOf('Varioline');
+        let path1_hor_l_1 = path1_hor_l.slice(0, indexVar-1);
+        let path1_hor_l_2 = path1_hor_l.slice (indexVar, path1_hor_l.length);
+
      
         // yellow
         let path2 = [];
@@ -514,7 +499,7 @@
         
         calcpositionssenkr_u(path1_senkr_u, t_source, nodeHeight,'1');
         
-        calcpositionshor_l (path1_hor_l,t_source,nodeWidth,'1');
+        calcpositionshor_l(path1_hor_l_1,t_source,nodeWidth,'1');
         
         // 2
         calcpositionssenkr_u(path2_Entlader,t_source,nodeHeight,'2');
