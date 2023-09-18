@@ -463,6 +463,26 @@
                         t_source[a].Y = firstMachineY + yOffset;
                     }
                 }
+                if (path[i] === 'Varioline'){
+                    for (let c=0; c<t_source.length; c++){
+                        if (t_source[c].Y_dep === 'Auslader'){
+                            for (let y=0; y<t_source.length; y++){
+                                if(t_source[y].Parent_Machine === 'Auslader'){
+                                    t_source[c].Y = t_source[y].Y;
+                                }      
+                            }
+                        }
+                        if (t_source[c].X_dep === 'Auslader'){
+                            for (let x=0; x<t_source.length; x++){
+                                if(t_source[x].Parent_Machine === 'Auslader'){
+                                    t_source[c].X = t_source[x].X;
+                                }      
+                            }
+                        }
+                    }
+
+                }
+                
             }
             
             
