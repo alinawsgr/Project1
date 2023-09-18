@@ -330,25 +330,7 @@
             return path;
         }
 
-        // calculates dependencies
-        for (let a=0; a<fixmachinesstring.length; a++){
-            for (let i=0; i<t_source.length; i++){
-                if (t_source[i].Y_dep = fixmachinesstring[a]){
-                    for (let j=0; j<t_source.length; j++){
-                        if(t_source[j].Parent_Machine = fixmachinesstring[a]){
-                            t_source[i].Y = t_source[j].Y;
-                        }      
-                    }
-                }
-                if (t_source[i].X_dep = fixmachinesstring[a]){
-                    for (let j=0; j<t_source.length; j++){
-                        if(t_source[j].Parent_Machine = fixmachinesstring[a]){
-                            t_source[i].X = t_source[j].X;
-                        }      
-                    }
-                }
-            }
-        }
+
         
         // function that calculates paths for each connection value (1,2,3,...) -> start findPaths()
         // hier ist noch etwas manueller workaround
@@ -497,6 +479,26 @@
         calcpositionssenkr_u(path2_Entlader,t_source,nodeHeight,'2');
         calcpositionssenkr_u(path2_Auspacker, t_source, nodeHeight, '2');
         // others...
+
+                // calculates dependencies
+                for (let a=0; a<fixmachinesstring.length; a++){
+                    for (let i=0; i<t_source.length; i++){
+                        if (t_source[i].Y_dep = fixmachinesstring[a]){
+                            for (let j=0; j<t_source.length; j++){
+                                if(t_source[j].Parent_Machine = fixmachinesstring[a]){
+                                    t_source[i].Y = t_source[j].Y;
+                                }      
+                            }
+                        }
+                        if (t_source[i].X_dep = fixmachinesstring[a]){
+                            for (let j=0; j<t_source.length; j++){
+                                if(t_source[j].Parent_Machine = fixmachinesstring[a]){
+                                    t_source[i].X = t_source[j].X;
+                                }      
+                            }
+                        }
+                    }
+                }
         }
 
     // function that transform p_source data into input format for graph 
