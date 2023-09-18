@@ -504,7 +504,7 @@
         for (let a=0; a<t_source.length; a++){
             if (t_source[a].Y_dep === 'Etikettiermasschine'){
                 for (let y=0; y<t_source.length; y++){
-                    if(t_source[y].Parent_Machine === 'Etikettiermasschine'){
+                    if(t_source[y].Parent_Machine === 'Etikettiermaschine'){
                         t_source[a].Y = t_source[y].Y;
                     }      
                 }
