@@ -304,6 +304,45 @@
             }
             }
 
+        /* dependencies
+            for (let a=0; a<fixmachinesstring.length; a++){
+                for (let i=0; i<t_source.length; i++){
+                    if (t_source[i].Y_dep = fixmachinesstring[a]){
+                        for (let j=0; j<t_source.length; j++){
+                            if(t_source[j].Parent_Machine = fixmachinesstring[a]){
+                                t_source[i].Y = t_source[j].Y;
+                            }      
+                        }
+                     }
+                    if (t_source[i].X_dep = fixmachinesstring[a]){
+                        for (let j=0; j<t_source.length; j++){
+                            if(t_source[j].Parent_Machine = fixmachinesstring[a]){
+                                t_source[i].X = t_source[j].X;
+                            }      
+                        }
+                    }
+                }
+            }*/
+        for (let i=0; i<t_source.length; i++){
+            if (t_source[i].Y_dep = 'Entlader'){
+                for (let j=0; j<t_source.length; j++){
+                    if(t_source[j].Parent_Machine = 'Entlader'){
+                        t_source[i].Y = t_source[j].Y;
+                    }      
+                }
+            }
+            if (t_source[i].X_dep = 'Entlader'){
+                for (let j=0; j<t_source.length; j++){
+                    if(t_source[j].Parent_Machine = 'Entlader'){
+                        t_source[i].X = t_source[j].X;
+                    }      
+                }
+            }
+        }
+
+
+        
+
         // calculates all paths in the graph regarding their value/priority (path priority must be given as an input and as a string in the format: 'number')
         function findPaths(t_source, priority, start){
             // calculates the row of the start machine, from where the paths start
@@ -478,24 +517,7 @@
         calcpositionssenkr_u(path2_Entlader,t_source,nodeHeight,'2');
         calcpositionssenkr_u(path2_Auspacker, t_source, nodeHeight, '2');
         // others...
-        for (let a=0; a<fixmachinesstring.length; a++){
-            for (let i=0; i<t_source.length; i++){
-                if (t_source[i].Y_dep = fixmachinesstring[a]){
-                    for (let j=0; j<t_source.length; j++){
-                        if(t_source[j].Parent_Machine = fixmachinesstring[a]){
-                            t_source[i].Y = t_source[j].Y;
-                        }      
-                    }
-                 }
-                if (t_source[i].X_dep = fixmachinesstring[a]){
-                    for (let j=0; j<t_source.length; j++){
-                        if(t_source[j].Parent_Machine = fixmachinesstring[a]){
-                            t_source[i].X = t_source[j].X;
-                        }      
-                    }
-                }
-            }
-        }
+        
 
         
     }
