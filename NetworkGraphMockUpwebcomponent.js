@@ -482,28 +482,9 @@
                 }
         
                 for (let a = 0; a < t_source.length; a++) {
-                    if (t_source[a].Parent_Machine === path[i + 1]) {
+                    if (t_source[a].Parent_Machine === path[i + 1] && path[i + 1] !== 'Varioline') {
                         t_source[a].X = firstMachineX + xOffset;
                         t_source[a].Y = firstMachineY + yOffset;
-                    }
-                    if (path[i] === 'Varioline'){
-                        for (let c=0; c<t_source.length; c++){
-                            if (t_source[c].Y_dep === 'Etikettiermasschine'){
-                                for (let y=0; y<t_source.length; y++){
-                                    if(t_source[y].Parent_Machine === 'Etikettiermasschine'){
-                                        t_source[c].Y = t_source[y].Y;
-                                    }      
-                                }
-                            }
-                            if (t_source[c].X_dep === 'Etikettiermasschine'){
-                                for (let x=0; x<t_source.length; x++){
-                                    if(t_source[x].Parent_Machine === 'Etikettiermasschine'){
-                                        t_source[c].X = t_source[x].X;
-                                    }      
-                                }
-                            }
-                        }
-
                     }
                 }
             }
@@ -840,3 +821,4 @@
         });
     }
 })();
+
