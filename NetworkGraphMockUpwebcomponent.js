@@ -252,11 +252,11 @@
 
     // fix variables that have to be declared in the beginning
     // size of the space between the machine nodes
-    const nodeWidth = 350;
-    const nodeHeight = 250;
+    const nodeWidth = 300;
+    const nodeHeight = 200;
     // fix position of "Entlader"
-    let xEntladerPosition = 200;
-    let yEntladerPosition = 200;
+    let xEntladerPosition = 600;
+    let yEntladerPosition = 600;
     // direction changes in the graph (in this case of the main line)
     let directionChange = ['Waschmaschine', 'Etikettiermaschine']
     
