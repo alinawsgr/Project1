@@ -365,12 +365,12 @@
         // neuer Versuch
         // cut path1 in parts
         path1_hor_r_Entlader_Auspacker = path1.slice(0, (path1.indexOf(pathChanges[1])));
-        path1_hor_r_Auspacker_Wama = path1.slice(pathChanges[1], (path1.indexOf(directionChange[1])+1));
-        path1_senkr_u_Wama_Etima = path1.slice(pathChanges[2], (path1.indexOf(directionChange[2])+1));
-        path1_hor_l_Etima_Varioline = path1.slice(pathChanges[3], (path1.indexOf(directionChange[3])+1));
-        path1_hor_l_Varioline_Belader = path1.slice(pathChanges[4], (path1.indexOf(directionChange[4])+1));
-        console.log(path1_hor_r_Entlader_Auspacker);
-        console.log(path1_hor_r_Auspacker_Wama);
+        path1_hor_r_Auspacker_Wama = path1.slice(path1.indexOf(pathChanges[1]), (path1.indexOf(directionChange[1])+1));
+        path1_senkr_u_Wama_Etima = path1.slice(path1.indexOf(pathChanges[2]), (path1.indexOf(directionChange[2])+1));
+        path1_hor_l_Etima_Varioline = path1.slice(path1.indexOf(pathChanges[3]), (path1.indexOf(directionChange[3])+1));
+        path1_hor_l_Varioline_Belader = path1.slice(path1.indexOf(pathChanges[4]), (path1.length));
+        console.log(path1_hor_r_Entlader_Auspacker); // ['Entlader', 'TBG_EG01', 'TBG_EG02', 'TBG_EG03']
+        console.log(path1_hor_r_Auspacker_Wama); // stimmt noch nicht
 
 
 
