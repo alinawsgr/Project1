@@ -417,7 +417,7 @@
 
         
             for (let i = 0; i < path.length; i++) {
-                let xOffset = (i + 1) * 300;
+                let xOffset = (i + 1) * 400;
                 let yOffset = 0;
                 let firstMachine = path[0];
                 for (let j = 0; j < t_source.length; j++) {
