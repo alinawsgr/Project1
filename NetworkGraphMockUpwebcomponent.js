@@ -252,8 +252,8 @@
 
     // fix variables that have to be declared in the beginning
     // size of the space between the machine nodes
-    const nodeWidth = 250;
-    const nodeHeight = 150;
+    const nodeWidth = 450;
+    const nodeHeight = 300;
     // fix position of "Entlader"
     let xEntladerPosition = 1200;
     let yEntladerPosition = 1200;
