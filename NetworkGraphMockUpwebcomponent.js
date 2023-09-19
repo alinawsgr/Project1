@@ -525,6 +525,23 @@
 
         
         // 2
+        for (let a=0; a<t_source.length; a++){
+            if (t_source[a].Y_dep === 'Etikettiermasschine'){
+                for (let y=0; y<t_source.length; y++){
+                    if(t_source[y].Parent_Machine === 'Etikettiermaschine'){
+                        t_source[a].Y = t_source[y].Y;
+                    }      
+                }
+            }
+            if (t_source[a].X_dep === 'Entlader'){
+                for (let x=0; x<t_source.length; x++){
+                    if(t_source[x].Parent_Machine === 'Entlader'){
+                        t_source[a].X = t_source[x].X;
+                    }      
+                }
+            }
+        }
+
         calcpositionssenkr_u(path2_Entlader,t_source,nodeHeight,'2');
         calcpositionssenkr_u(path2_Auspacker, t_source, nodeHeight, '2');
         // others...
