@@ -525,6 +525,9 @@
 
         
         // 2
+        
+
+        calcpositionssenkr_u(path2_Entlader,t_source,nodeHeight,'2');
         for (let a=0; a<t_source.length; a++){
             if (t_source[a].Y_dep === 'Etikettiermasschine'){
                 for (let y=0; y<t_source.length; y++){
@@ -541,8 +544,6 @@
                 }
             }
         }
-
-        calcpositionssenkr_u(path2_Entlader,t_source,nodeHeight,'2');
         calcpositionssenkr_u(path2_Auspacker, t_source, nodeHeight, '2');
         // others...
         
