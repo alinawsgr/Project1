@@ -259,6 +259,7 @@
     let yEntladerPosition = 1200;
     // direction changes in the graph (in this case of the main line)
     let directionChange = ['Waschmaschine', 'Etikettiermaschine']
+    let pathChanges = ['Entlader','Auspacker','Waschmaschine','Etikettiermaschine', 'Varioline', 'Belader-rechts']
     
     
     //////////////////////////////////////////////////////// MAIN FUNCTION ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -360,8 +361,20 @@
         let indexVar = path1_hor_l.indexOf('Varioline');
         let path1_hor_l_1 = path1_hor_l.slice(0, indexVar);
         let path1_hor_l_2 = path1_hor_l.slice (indexVar, path1_hor_l.length);
-        console.log(path1_hor_l_1);
-        console.log(path1_hor_l_2);
+
+        // neuer Versuch
+        // cut path1 in parts
+        path1_hor_r_Entlader_Auspacker = path1.slice(0, (path1.indexOf(pathChanges[0])+1));
+        path1_hor_r_Auspacker_Wama = path1.slice(0, (path1.indexOf(directionChange[1])+1));
+        path1_senkr_u_Wama_Etima = path1.slice(0, (path1.indexOf(directionChange[2])+1));
+        path1_hor_l_Etima_Varioline = path1.slice(0, (path1.indexOf(directionChange[3])+1));
+        path1_hor_l_Varioline_Belader = path1.slice(0, (path1.indexOf(directionChange[4])+1));
+        console.log(path1_hor_r_Entlader_Auspacker);
+        console.log(path1_hor_r_Auspacker_Wama);
+
+
+
+
 
 
      
