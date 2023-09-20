@@ -416,6 +416,7 @@
         } else {
             maxLength_Entlader_Auspacker_Varioline_Belader = path1_hor_l_Varioline_Belader_length;
         }
+        console.log(maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima);
 
         // Auspacker -> Wama / Etima -> Varioline
         let maxLength_Auspacker_Wama_Etima_Varioline = 0;
@@ -424,6 +425,7 @@
         } else {
             maxLength_Auspacker_Wama_Etima_Varioline = path1_hor_l_Etima_Varioline_length;
         }
+        console.log(maxLength_Auspacker_Wama_Etima_Varioline);
 
         // Entlader -> Belader / Auspacker -> Varioline / Wama -> Etima
         let maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = 0;
@@ -445,6 +447,7 @@
         if (path1_senkr_u_Wama_Etima_length < path2_Entlader_length){
             maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path2_Entlader_length;
         }
+        console.log(maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima);
 
         
 
