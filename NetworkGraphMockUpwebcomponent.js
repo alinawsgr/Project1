@@ -573,7 +573,7 @@
         // calculates all paths and the positions of all machines
         // 1
         
-        calcpositionshor_r(path1_hor_r, t_source, nodeWidth, '1');
+        calcpositionshor_r(path1_hor_r_Entlader_Auspacker,maxLength_Entlader_Auspacker_Varioline_Belader, t_source, nodeWidth, '1');
         
         calcpositionssenkr_u(path1_senkr_u, t_source, nodeHeight,'1');
         
