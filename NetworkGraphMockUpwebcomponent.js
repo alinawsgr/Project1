@@ -383,6 +383,7 @@
         path1_hor_r_Entlader_Auspacker.push(path1_hor_r_Auspacker_Wama[0]);
         path1_hor_r_Auspacker_Wama.push(path1_senkr_u_Wama_Etima[0]);
         path1_senkr_u_Wama_Etima.push(path1_hor_l_Etima_Varioline[0]);
+        path1_hor_l_Varioline_Belader.push(path1.indexOf(path1.length));
         path1_hor_l_Etima_Varioline.push(path1_hor_l_Varioline_Belader[0]);
 
 
