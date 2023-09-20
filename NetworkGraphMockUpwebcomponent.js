@@ -486,13 +486,14 @@
         }
         
           
-          function calcpositionshor_l (path,t_source, nodeWidth, priority){
+          function calcpositionshor_l (path,t_source,maxLength, nodeWidth, priority){
             let firstMachineX = null; 
             let firstMachineY = null; 
+            let space = ((maxLength * nodeWidth)/ path.length) + 100;
 
         
             for (let i = 0; i < path.length; i++) {
-                let xOffset = (i + 1) * 400;
+                let xOffset = (i + 1) * space;
                 let yOffset = 0;
                 let firstMachine = path[0];
                 for (let j = 0; j < t_source.length; j++) {
@@ -515,13 +516,14 @@
             
           }
           
-          function calcpositionssenkr_u(path,t_source, nodeHeight, priority) {
+          function calcpositionssenkr_u(path,t_source, maxLength, nodeHeight, priority) {
             let firstMachineX = null; 
             let firstMachineY = null; 
+            let space = ((maxLength * nodeHeight)/ path.length) + 100;
         
             for (let i = 0; i < path.length; i++) {
                 let xOffset = 0;
-                let yOffset = (i + 1) * nodeHeight;
+                let yOffset = (i + 1) * space;
                 let firstMachine = path[0];
                 
         
@@ -543,13 +545,14 @@
 
             }
           
-          function calcpositionssenkr_o (path,t_source, nodeHeight,priority){
+          function calcpositionssenkr_o (path,t_source, maxLength, nodeHeight,priority){
             let firstMachineX = null; 
-            let firstMachineY = null; 
+            let firstMachineY = null;
+            let space = ((maxLength * nodeHeight)/ path.length) + 100; 
         
             for (let i = 0; i < path.length; i++) {
                 let xOffset = 0;
-                let yOffset = (i + 1) * nodeHeight;
+                let yOffset = (i + 1) * space;
                 let firstMachine = path[0];
         
                 for (let j = 0; j < t_source.length; j++) {
@@ -576,9 +579,10 @@
         calcpositionshor_r(path1_hor_r_Entlader_Auspacker,maxLength_Entlader_Auspacker_Varioline_Belader, t_source, nodeWidth, '1');
         calcpositionshor_r(path1_hor_r_Auspacker_Wama,maxLength_Auspacker_Wama_Etima_Varioline, t_source, nodeWidth, '1');
         
-        calcpositionssenkr_u(path1_senkr_u, t_source, nodeHeight,'1');
+        calcpositionssenkr_u(path1_senkr_u_Wama_Etima,maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, t_source, nodeHeight,'1');
         
-        calcpositionshor_l(path1_hor_l_1,t_source,nodeWidth,'1');
+        calcpositionshor_l(path1_hor_l_Etima_Varioline,maxLength_Auspacker_Wama_Etima_Varioline,t_source,nodeWidth,'1');
+        
 
         for (let a=0; a<t_source.length; a++){
             if (t_source[a].Y_dep === 'Etikettiermasschine'){
@@ -596,12 +600,12 @@
                 }
             }
         }
-        calcpositionshor_l(path1_hor_l_2,t_source,nodeWidth,'1');
+        calcpositionshor_l(path1_hor_l_Varioline_Belader,maxLength_Entlader_Auspacker_Varioline_Belader,t_source,nodeWidth,'1');
 
 
         
         // 2
-        calcpositionssenkr_u(path2_Entlader,t_source,nodeHeight,'2');
+        calcpositionssenkr_u(path2_Entlader,t_source, maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight,'2');
         for (let a=0; a<t_source.length; a++){
             if (t_source[a].Y_dep === 'Etikettiermasschine'){
                 for (let y=0; y<t_source.length; y++){
@@ -618,7 +622,7 @@
                 }
             }
         }
-        calcpositionssenkr_u(path2_Auspacker, t_source, nodeHeight, '2');
+        calcpositionssenkr_u(path2_Auspacker, t_source, maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight, '2');
         // others...     
     }
 
