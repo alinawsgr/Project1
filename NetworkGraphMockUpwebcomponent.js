@@ -416,7 +416,7 @@
         } else {
             maxLength_Entlader_Auspacker_Varioline_Belader = path1_hor_l_Varioline_Belader_length;
         }
-        console.log(maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima);
+        console.log(maxLength_Entlader_Auspacker_Varioline_Belader);
 
         // Auspacker -> Wama / Etima -> Varioline
         let maxLength_Auspacker_Wama_Etima_Varioline = 0;
