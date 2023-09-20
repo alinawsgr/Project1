@@ -365,13 +365,28 @@
         // neuer Versuch
         // cut path1 in parts
         path1_hor_r_Entlader_Auspacker = path1.slice(0, (path1.indexOf(pathChanges[1])));
+        path1_hor_r_Entlader_Auspacker_length = path1_hor_r_Entlader_Auspacker.length;
+
         path1_hor_r_Auspacker_Wama = path1.slice(path1.indexOf(pathChanges[1]), (path1.indexOf(pathChanges[2])));
+        path1_hor_r_Auspacker_Wama_length = path1_hor_r_Auspacker_Wama.length;
+
         path1_senkr_u_Wama_Etima = path1.slice(path1.indexOf(pathChanges[2]), (path1.indexOf(pathChanges[3])));
+        path1_senkr_u_Wama_Etima_length = path1_senkr_u_Wama_Etima.length;
+
         path1_hor_l_Etima_Varioline = path1.slice(path1.indexOf(pathChanges[3]), (path1.indexOf(pathChanges[4])));
-        path1_hor_l_Varioline_Belader = path1.slice(path1.indexOf(pathChanges[4]), (pathChanges.length));
-        console.log(path1_hor_r_Entlader_Auspacker); // ['Entlader', 'TBG_EG01', 'TBG_EG02', 'TBG_EG03']
-        console.log(path1_hor_r_Auspacker_Wama);
+        path1_hor_l_Etima_Varioline_length = path1_hor_l_Etima_Varioline.length;
+
         
+        path1_hor_l_Varioline_Belader = path1.slice(path1.indexOf(pathChanges[4]), (pathChanges.length));
+        path1_hor_l_Varioline_Belader_length = path1_hor_l_Varioline_Belader.length;
+
+
+        console.log(path1_hor_r_Entlader_Auspacker); // ['Entlader', 'TBG_EG01', 'TBG_EG02', 'TBG_EG03']
+        console.log(path1_hor_r_Auspacker_Wama); //['Auspacker', 'TBB_EG01', 'TBB_EG02', 'TBB_EG03', 'TBB_EG05', 'TBB_EG06', 'TBB_EG07', 'TBB_EG12', 'TBB_EG15', 'TBB_EG16']
+        console.log(path1_hor_r_Entlader_Auspacker_length);
+        
+
+        // 
 
 
 
