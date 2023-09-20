@@ -396,13 +396,14 @@
 
         //path3 = findPaths(t_source, '3');
         let path4 = [];
+        //path4 = findPaths(t_source,'4',)
         let machine4 = [];
         for (i=0; i<t_source.length; i++){
             if(t_source[i].ID === '4'){
-                machine4.push(t_source[i].Parent_Machine);
+                machine4.push(t_source[i].Children_Machine);
             }
         }
-        console.log(machine4);
+        console.log(machine4); // ['Abschrauber', 'TBB_EG12', 'TBB_EG14', 'TBG_EG09', 'TBG_EG12', 'TBG_EG13', 'TBB_EG13']
 
         /*function findExternalGraphs (priority){
             let endm = '';
