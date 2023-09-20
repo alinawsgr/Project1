@@ -571,8 +571,8 @@
         // calculates all paths and the positions of all machines
         // 1
         
-        calcpositionshor_r(path1_hor_r_Entlader_Auspacker,maxLength_Entlader_Auspacker_Varioline_Belader, t_source, nodeWidth, '1');
-        calcpositionshor_r(path1_hor_r_Auspacker_Wama,maxLength_Auspacker_Wama_Etima_Varioline, t_source, nodeWidth, '1');
+        calcpositionshor_r(path1_hor_r_Entlader_Auspacker, t_source, nodeWidth, maxLength_Entlader_Auspacker_Varioline_Belader,'1');
+        calcpositionshor_r(path1_hor_r_Auspacker_Wama, t_source, nodeWidth, maxLength_Auspacker_Wama_Etima_Varioline,'1');
         
         calcpositionssenkr_u(path1_senkr_u_Wama_Etima,maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, t_source, nodeHeight,'1');
         
