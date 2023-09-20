@@ -405,6 +405,13 @@
 
         // rest
         let path3 = [];
+        let machine3 = [];
+        for (i=0; i<t_source.length; i++){
+            if(t_source[i].ID === '3'){
+                machine3.push(t_source[i].Parent_Machine);
+            }
+        }
+        console.log(machine3);
         //path3 = findPaths(t_source, '3');
         let path4 = [];
         //path4 = findPaths(t_source, '4');
