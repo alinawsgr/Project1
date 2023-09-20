@@ -419,41 +419,41 @@
         // dependent paths: 
         // Entlader -> Auspacker / Varioline -> Belader
         let maxLength_Entlader_Auspacker_Varioline_Belader = 0;
-        if (path1_hor_r_Entlader_Auspacker_length > path1_hor_l_Varioline_Belader_length){
-            maxLength_Entlader_Auspacker_Varioline_Belader = path1_hor_r_Entlader_Auspacker_length;
+        if (path1_hor_r_Entlader_Auspacker.length > path1_hor_l_Varioline_Belader.length){
+            maxLength_Entlader_Auspacker_Varioline_Belader = path1_hor_r_Entlader_Auspacker.length;
         } else {
-            maxLength_Entlader_Auspacker_Varioline_Belader = path1_hor_l_Varioline_Belader_length;
+            maxLength_Entlader_Auspacker_Varioline_Belader = path1_hor_l_Varioline_Belader.length;
         }
         console.log(maxLength_Entlader_Auspacker_Varioline_Belader);
 
         // Auspacker -> Wama / Etima -> Varioline
         let maxLength_Auspacker_Wama_Etima_Varioline = 0;
-        if (path1_hor_r_Auspacker_Wama_length > path1_hor_l_Etima_Varioline_length){
-            maxLength_Auspacker_Wama_Etima_Varioline = path1_hor_r_Auspacker_Wama_length;
+        if (path1_hor_r_Auspacker_Wama.length > path1_hor_l_Etima_Varioline.length){
+            maxLength_Auspacker_Wama_Etima_Varioline = path1_hor_r_Auspacker_Wama.length;
         } else {
-            maxLength_Auspacker_Wama_Etima_Varioline = path1_hor_l_Etima_Varioline_length;
+            maxLength_Auspacker_Wama_Etima_Varioline = path1_hor_l_Etima_Varioline.length;
         }
         console.log(maxLength_Auspacker_Wama_Etima_Varioline);
 
         // Entlader -> Belader / Auspacker -> Varioline / Wama -> Etima
         let maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = 0;
-        if ( path2_Entlader_length > path2_Auspacker_length){
-            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima  = path2_Entlader_length;
+        if ( path2_Entlader.length > path2_Auspacker.length){
+            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima  = path2_Entlader.length;
         }
-        if(path2_Entlader_length < path2_Auspacker_length){
-            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path2_Auspacker_length;
+        if(path2_Entlader.length < path2_Auspacker.length){
+            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path2_Auspacker.length;
         }
-        if(path2_Auspacker_length > path1_senkr_u_Wama_Etima_length){
-            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path2_Auspacker_length;
+        if(path2_Auspacker.length > path1_senkr_u_Wama_Etima.length){
+            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path2_Auspacker.length;
         }
-        if(path2_Auspacker_length < path1_senkr_u_Wama_Etima_length){
-            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path1_senkr_u_Wama_Etima_length;
+        if(path2_Auspacker.length < path1_senkr_u_Wama_Etima.length){
+            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path1_senkr_u_Wama_Etima.length;
         }
-        if(path1_senkr_u_Wama_Etima_length > path2_Entlader_length){
-            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path1_senkr_u_Wama_Etima_length;
+        if(path1_senkr_u_Wama_Etima.length > path2_Entlader.length){
+            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path1_senkr_u_Wama_Etima.length;
         }
-        if (path1_senkr_u_Wama_Etima_length < path2_Entlader_length){
-            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path2_Entlader_length;
+        if (path1_senkr_u_Wama_Etima.length < path2_Entlader.length){
+            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path2_Entlader.length;
         }
         console.log(maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima);
 
