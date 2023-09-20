@@ -411,9 +411,19 @@
                 machine3.push(t_source[i].Parent_Machine);
             }
         }
-        console.log(machine3);
+        console.log(machine3); // ['Abschieber', 'TBB_EG04', 'TBG_EG05', 'TBG_EG08', 'EXTERN01']
+
+
         //path3 = findPaths(t_source, '3');
         let path4 = [];
+        let machine4 = [];
+        for (i=0; i<t_source.length; i++){
+            if(t_source[i].ID === '4'){
+                machine4.push(t_source[i].Parent_Machine);
+            }
+        }
+        console.log(machine4);
+
         //path4 = findPaths(t_source, '4');
         let path10 = [];
         //path10 = findPaths(t_source, '10');
