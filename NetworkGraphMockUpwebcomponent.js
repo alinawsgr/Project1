@@ -377,14 +377,15 @@
         path1_hor_l_Etima_Varioline_length = path1_hor_l_Etima_Varioline.length;
 
         
-        path1_hor_l_Varioline_Belader = path1.slice(path1.indexOf(pathChanges[4]), (path1.indexOf(path1.length)));
+        path1_hor_l_Varioline_Belader = path1.slice(path1.indexOf(pathChanges[4]), (path1.indexOf(pathChanges[5])));
         path1_hor_l_Varioline_Belader_length = path1_hor_l_Varioline_Belader.length;
+
+        path1_hor_l_Belader_ = path1.slice(path1.indexOf(pathChanges[5]))
         
         path1_hor_r_Entlader_Auspacker.push(path1_hor_r_Auspacker_Wama[0]);
         path1_hor_r_Auspacker_Wama.push(path1_senkr_u_Wama_Etima[0]);
         path1_senkr_u_Wama_Etima.push(path1_hor_l_Etima_Varioline[0]);
-        path1_hor_l_Varioline_Belader.push(path1.indexOf(path1.length));
-        path1_hor_l_Etima_Varioline.push(path1_hor_l_Varioline_Belader[0]);
+        path1_hor_l_Varioline_Belader.push(pathChanges[5]);
 
 
 
