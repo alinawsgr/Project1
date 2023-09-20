@@ -381,7 +381,9 @@
         path1_hor_l_Varioline_Belader_length = path1_hor_l_Varioline_Belader.length;
         
         path1_hor_r_Entlader_Auspacker.push(path1_hor_r_Auspacker_Wama[0]);
+        path1_hor_r_Auspacker_Wama.push(path1_senkr_u_Wama_Etima[0]);
         path1_hor_l_Etima_Varioline.push(path1_hor_l_Varioline_Belader[0]);
+
 
 
         console.log(path1_hor_r_Entlader_Auspacker); // ['Entlader', 'TBG_EG01', 'TBG_EG02', 'TBG_EG03']
