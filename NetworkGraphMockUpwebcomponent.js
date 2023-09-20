@@ -386,22 +386,13 @@
         console.log(path1_hor_l_Varioline_Belader);
         console.log(path1_hor_r_Entlader_Auspacker_length);
         
-
-        // get maximal path length for each dependent paths and set path length for each path
-
-
-
-
-
-
-
-
-
-     
         // yellow
         let path2 = [];
         path2_Entlader = findPaths(t_source, '2', 'Entlader');
+        path2_Entlader_length = path2_Entlader.length;
         path2_Auspacker = findPaths(t_source,'2', 'Auspacker');
+        path2_Auspacker_length = path2_Auspacker.length;
+
 
         // rest
         let path3 = [];
@@ -414,6 +405,53 @@
         //path20 = findPaths(t_source, '20');
         let path101 = [];
         //path101 = findPaths(t_source, '101');
+
+        
+        // get maximal path length for each dependent paths and set path length for each path
+        // dependent paths: 
+        // Entlader -> Auspacker / Varioline -> Belader
+        let maxLength_Entlader_Auspacker_Varioline_Belader = 0;
+        if (path1_hor_r_Entlader_Auspacker_length > path1_hor_l_Varioline_Belader_length){
+            maxLength_Entlader_Auspacker_Varioline_Belader = path1_hor_r_Entlader_Auspacker_length;
+        } else {
+            maxLength_Entlader_Auspacker_Varioline_Belader = path1_hor_l_Varioline_Belader_length;
+        }
+
+        // Auspacker -> Wama / Etima -> Varioline
+        let maxLength_Auspacker_Wama_Etima_Varioline = 0;
+        if (path1_hor_r_Auspacker_Wama_length > path1_hor_l_Etima_Varioline_length){
+            maxLength_Auspacker_Wama_Etima_Varioline = path1_hor_r_Auspacker_Wama_length;
+        } else {
+            maxLength_Auspacker_Wama_Etima_Varioline = path1_hor_l_Etima_Varioline_length;
+        }
+
+        // Entlader -> Belader / Auspacker -> Varioline / Wama -> Etima
+        let maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = 0;
+        if ( path2_Entlader_length > path2_Auspacker_length){
+            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima  = path2_Entlader_length;
+        }
+        if(path2_Entlader_length < path2_Auspacker_length){
+            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path2_Auspacker_length;
+        }
+        if(path2_Auspacker_length > path1_senkr_u_Wama_Etima_length){
+            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path2_Auspacker_length;
+        }
+        if(path2_Auspacker_length < path1_senkr_u_Wama_Etima_length){
+            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path1_senkr_u_Wama_Etima_length;
+        }
+        if(path1_senkr_u_Wama_Etima_length > path2_Entlader_length){
+            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path1_senkr_u_Wama_Etima_length;
+        }
+        if (path1_senkr_u_Wama_Etima_length < path2_Entlader_length){
+            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path2_Entlader_length;
+        }
+
+        
+
+
+
+    
+
 
 
         // functions that calculate the coordinates for each direction
