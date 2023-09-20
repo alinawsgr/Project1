@@ -461,7 +461,7 @@
         function calcpositionshor_r(path, t_source, nodeWidth, maxLength, priority) {
             let firstMachineX = null; 
             let firstMachineY = null; 
-            let space = (maxLength * nodeWidth)/ path.length;
+            let space = ((maxLength * nodeWidth)/ path.length) + 100;
         
             for (let i = 0; i < path.length; i++) {
                 let xOffset = (i + 1) * space;
@@ -574,6 +574,7 @@
         // 1
         
         calcpositionshor_r(path1_hor_r_Entlader_Auspacker,maxLength_Entlader_Auspacker_Varioline_Belader, t_source, nodeWidth, '1');
+        calcpositionshor_r(path1_hor_r_Auspacker_Wama,maxLength_Auspacker_Wama_Etima_Varioline, t_source, nodeWidth, '1');
         
         calcpositionssenkr_u(path1_senkr_u, t_source, nodeHeight,'1');
         
