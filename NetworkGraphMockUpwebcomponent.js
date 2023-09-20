@@ -383,6 +383,7 @@
 
         console.log(path1_hor_r_Entlader_Auspacker); // ['Entlader', 'TBG_EG01', 'TBG_EG02', 'TBG_EG03']
         console.log(path1_hor_r_Auspacker_Wama); //['Auspacker', 'TBB_EG01', 'TBB_EG02', 'TBB_EG03', 'TBB_EG05', 'TBB_EG06', 'TBB_EG07', 'TBB_EG12', 'TBB_EG15', 'TBB_EG16']
+        console.log(path1_hor_l_Varioline_Belader);
         console.log(path1_hor_r_Entlader_Auspacker_length);
         
 
