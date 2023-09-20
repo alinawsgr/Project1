@@ -458,12 +458,13 @@
 
 
         // functions that calculate the coordinates for each direction
-        function calcpositionshor_r(path, t_source, nodeWidth, priority) {
+        function calcpositionshor_r(path, t_source, nodeWidth, maxLength, priority) {
             let firstMachineX = null; 
             let firstMachineY = null; 
+            let space = (maxLength * nodeWidth)/ path.length;
         
             for (let i = 0; i < path.length; i++) {
-                let xOffset = (i + 1) * nodeWidth;
+                let xOffset = (i + 1) * space;
                 let yOffset = 0;
                 let firstMachine = path[0];
         
