@@ -459,7 +459,7 @@
 
 
         // functions that calculate the coordinates for each direction
-        function calcpositionshor_r(path, t_source, nodeWidth, maxLength, priority) {
+        function calcpositionshor_r(path, t_source,maxLength, nodeWidth, priority) {
             let firstMachineX = null; 
             let firstMachineY = null; 
             let space = (maxLength * nodeWidth)/ path.length;
@@ -577,12 +577,12 @@
         // calculates all paths and the positions of all machines
         // 1
         
-        calcpositionshor_r(path1_hor_r_Entlader_Auspacker, t_source, nodeWidth, maxLength_Entlader_Auspacker_Varioline_Belader,'1');
-        calcpositionshor_r(path1_hor_r_Auspacker_Wama, t_source, nodeWidth, maxLength_Auspacker_Wama_Etima_Varioline,'1');
+        calcpositionshor_r(path1_hor_r_Entlader_Auspacker, t_source,maxLength_Entlader_Auspacker_Varioline_Belader, nodeWidth,'1');
+        calcpositionshor_r(path1_hor_r_Auspacker_Wama, t_source,maxLength_Auspacker_Wama_Etima_Varioline, nodeWidth, '1');
         
-        calcpositionssenkr_u(path1_senkr_u_Wama_Etima,maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, t_source, nodeHeight,'1');
+        calcpositionssenkr_u(path1_senkr_u_Wama_Etima, t_source,maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight,'1');
         
-        calcpositionshor_l(path1_hor_l_Etima_Varioline,maxLength_Auspacker_Wama_Etima_Varioline,t_source,nodeWidth,'1');
+        calcpositionshor_l(path1_hor_l_Etima_Varioline,t_source,maxLength_Auspacker_Wama_Etima_Varioline, nodeWidth,'1');
         
 
         for (let a=0; a<t_source.length; a++){
@@ -601,7 +601,7 @@
                 }
             }
         }
-        calcpositionshor_l(path1_hor_l_Varioline_Belader,maxLength_Entlader_Auspacker_Varioline_Belader,t_source,nodeWidth,'1');
+        calcpositionshor_l(path1_hor_l_Varioline_Belader,t_source, maxLength_Entlader_Auspacker_Varioline_Belader, nodeWidth,'1');
 
 
         
