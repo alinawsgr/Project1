@@ -377,7 +377,7 @@
         path1_hor_l_Etima_Varioline_length = path1_hor_l_Etima_Varioline.length;
 
         
-        path1_hor_l_Varioline_Belader = path1.slice(path1.indexOf(pathChanges[4]), (pathChanges.length));
+        path1_hor_l_Varioline_Belader = path1.slice(path1.indexOf(pathChanges[4]), (path1.indexOf(pathChanges[5])));
         path1_hor_l_Varioline_Belader_length = path1_hor_l_Varioline_Belader.length;
 
 
@@ -387,7 +387,10 @@
         console.log(path1_hor_r_Entlader_Auspacker_length);
         
 
-        // 
+        // get maximal path length for each dependent paths and set path length for each path
+
+
+
 
 
 
