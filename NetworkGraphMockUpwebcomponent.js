@@ -259,7 +259,7 @@
     let yEntladerPosition = 1200;
     // direction changes in the graph (in this case of the main line)
     let directionChange = ['Waschmaschine', 'Etikettiermaschine']
-    let pathChanges = ['Entlader','Auspacker','Waschmaschine','Etikettiermaschine', 'Varioline', 'Belader-rechts'];
+    let pathChanges = ['Entlader','Auspacker','Waschmaschine','Etikettiermaschine', 'Varioline', 'Belader_rechts'];
     
     
     //////////////////////////////////////////////////////// MAIN FUNCTION ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -599,8 +599,6 @@
 
         
         // 2
-        
-
         calcpositionssenkr_u(path2_Entlader,t_source,nodeHeight,'2');
         for (let a=0; a<t_source.length; a++){
             if (t_source[a].Y_dep === 'Etikettiermasschine'){
@@ -619,10 +617,7 @@
             }
         }
         calcpositionssenkr_u(path2_Auspacker, t_source, nodeHeight, '2');
-        // others...
-        
-
-        
+        // others...     
     }
 
     // function that transform p_source data into input format for graph 
