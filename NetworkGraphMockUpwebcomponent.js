@@ -452,16 +452,11 @@
         
 
 
-
-    
-
-
-
         // functions that calculate the coordinates for each direction
         function calcpositionshor_r(path, t_source, nodeWidth, maxLength, priority) {
             let firstMachineX = null; 
             let firstMachineY = null; 
-            let space = ((maxLength * nodeWidth)/ path.length) + 100;
+            let space = (maxLength * nodeWidth)/ path.length;
         
             for (let i = 0; i < path.length; i++) {
                 let xOffset = (i + 1) * space;
@@ -486,10 +481,10 @@
         }
         
           
-          function calcpositionshor_l (path,t_source,maxLength, nodeWidth, priority){
+        function calcpositionshor_l (path,t_source,maxLength, nodeWidth, priority){
             let firstMachineX = null; 
             let firstMachineY = null; 
-            let space = ((maxLength * nodeWidth)/ path.length) + 100;
+            let space = (maxLength * nodeWidth)/ path.length;
 
         
             for (let i = 0; i < path.length; i++) {
@@ -516,10 +511,10 @@
             
           }
           
-          function calcpositionssenkr_u(path,t_source, maxLength, nodeHeight, priority) {
+        function calcpositionssenkr_u(path,t_source, maxLength, nodeHeight, priority) {
             let firstMachineX = null; 
             let firstMachineY = null; 
-            let space = ((maxLength * nodeHeight)/ path.length) + 100;
+            let space = (maxLength * nodeHeight)/ path.length;
         
             for (let i = 0; i < path.length; i++) {
                 let xOffset = 0;
@@ -545,10 +540,10 @@
 
             }
           
-          function calcpositionssenkr_o (path,t_source, maxLength, nodeHeight,priority){
+        function calcpositionssenkr_o (path,t_source, maxLength, nodeHeight,priority){
             let firstMachineX = null; 
             let firstMachineY = null;
-            let space = ((maxLength * nodeHeight)/ path.length) + 100; 
+            let space = (maxLength * nodeHeight)/ path.length; 
         
             for (let i = 0; i < path.length; i++) {
                 let xOffset = 0;
