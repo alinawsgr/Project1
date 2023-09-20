@@ -285,7 +285,7 @@
             }
         }
 
-        // get all existing machines in string format -> ['Abschieber', 'Linatronic', 'Belader_links', 'Gebindewascher', 'Abschrauber', 'TBB_EG01', 'TBB_EG02', 'TBB_EG02', 'TBB_EG03', 'TBB_EG04', 'TBB_EG05', 'TBB_EG06', 'TBB_EG07', 'TBB_EG07', 'TBB_EG07', 'TBB_EG07', 'TBB_EG11', 'TBB_EG12', 'TBB_EG12', 'TBB_EG14', 'TBB_EG15', 'TBB_EG16', 'TBB_EG17', 'TBB_EG18', 'TBB_EG21', 'TBB_EG22', 'TBB_EG22', 'TBB_EG24', 'TBB_EG26', 'TBG_EG01', 'TBG_EG02', 'TBG_EG05', 'TBG_EG05', 'TBG_EG06', 'TBG_EG07', 'TBG_EG08', 'TBG_EG09', 'TBG_EG09', 'TBG_EG10', 'TBG_EG12', 'TBG_EG15', 'TBP1_EG02', 'TBP1_EG03', 'TBP1_EG04', 'TBP1_EG05', 'TBP1_EG07', 'Extern_Aufgabe_PAL', 'TBG_EG04', 'Entlader', 'Entlader', 'Auspacker', 'Auspacker', 'Waschmaschine', 'F�ller', 'F�ller', 'Etikettiermaschine', 'Varioline', 'Belader_rechts', 'TBP1_EG08', 'TBB_EG23', 'TBP1_EG01', 'TBG_EG11', 'TBP1_EG06', 'TBP1_EG06', 'TBG_EG13', 'TBG_EG03', 'TBB_EG13', 'EXTERN01']
+        // get all existing machines in string format 
         let allmachinesstring = [];
         for (let i=0; i < t_source.length; i++){
             allmachinesstring.push(t_source[i].Parent_Machine);
@@ -295,7 +295,7 @@
         let allconnectionvalues = [];
         let allconnectionvalues_a = [];
         for (let i=0; i<t_source.length; i++){
-            allconnectionvalues_a.push(t_source[i].ID);   // ['3', '1', '1', '2', '4', '1', '1', '10', '1', '3', '1', '1', '20', '20', '20', '1', '10', '1', '4', '4', '1', '1', '1', '1', '1', '10', '1', '1', '1', '1', '1', '2', '3', '2', '1', '3', '1', '4', '1', '4', '2', '2', '2', '2', '2', '1', '1', '2', '1', '2', '1', '2', '1', '20', '1', '1', '1', '1', '101', '1', '1', '1', '2', '2', '4', '1', '4', '3']
+            allconnectionvalues_a.push(t_source[i].ID);  
         }
         for (let j=0; j<allconnectionvalues_a.length; j++){
             for (let a=0; a<allconnectionvalues.length; a++){
@@ -304,26 +304,6 @@
                 }
             }
             }
-
-        /* dependencies
-            for (let a=0; a<fixmachinesstring.length; a++){
-                for (let i=0; i<t_source.length; i++){
-                    if (t_source[i].Y_dep = fixmachinesstring[a]){
-                        for (let j=0; j<t_source.length; j++){
-                            if(t_source[j].Parent_Machine = fixmachinesstring[a]){
-                                t_source[i].Y = t_source[j].Y;
-                            }      
-                        }
-                     }
-                    if (t_source[i].X_dep = fixmachinesstring[a]){
-                        for (let j=0; j<t_source.length; j++){
-                            if(t_source[j].Parent_Machine = fixmachinesstring[a]){
-                                t_source[i].X = t_source[j].X;
-                            }      
-                        }
-                    }
-                }
-            }*/
 
         // calculates all paths in the graph regarding their value/priority (path priority must be given as an input and as a string in the format: 'number')
         function findPaths(t_source, priority, start){
@@ -389,8 +369,8 @@
 
 
 
-        console.log(path1_hor_r_Entlader_Auspacker); // ['Entlader', 'TBG_EG01', 'TBG_EG02', 'TBG_EG03']
-        console.log(path1_hor_r_Auspacker_Wama); //['Auspacker', 'TBB_EG01', 'TBB_EG02', 'TBB_EG03', 'TBB_EG05', 'TBB_EG06', 'TBB_EG07', 'TBB_EG12', 'TBB_EG15', 'TBB_EG16']
+        console.log(path1_hor_r_Entlader_Auspacker); 
+        console.log(path1_hor_r_Auspacker_Wama); 
         console.log(path1_hor_l_Varioline_Belader);
         console.log(path1_hor_r_Entlader_Auspacker_length);
         
@@ -423,6 +403,24 @@
             }
         }
         console.log(machine4);
+
+        /*function findExternalGraphs (priority){
+            let endm = '';
+            for (i=0; i<t_source; i++){
+                if (t_source[i].Id === priority){
+                    if(t_source[i].Children_Machine ){
+
+
+                    }
+                
+
+                }
+                
+
+            }
+
+
+        }*/
 
         //path4 = findPaths(t_source, '4');
         let path10 = [];
