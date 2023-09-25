@@ -316,9 +316,9 @@
                     found = true;
                     break;
                 }
-                if (found){
-                    externalpaths.push(t_source[i].Parent_Machine);
-                }
+            }
+            if (found){
+                externalpaths.push(t_source[i].Parent_Machine);
             }
         }
        
