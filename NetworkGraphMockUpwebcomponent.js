@@ -403,7 +403,19 @@
                 machine4.push(t_source[i].Children_Machine);
             }
         }
-        console.log(machine4); // ['Abschrauber', 'TBB_EG12', 'TBB_EG14', 'TBG_EG09', 'TBG_EG12', 'TBG_EG13', 'TBB_EG13']
+        console.log(machine4); 
+        // ['Abschrauber', 'TBB_EG12', 'TBB_EG14', 'TBG_EG09', 'TBG_EG12', 'TBG_EG13', 'TBB_EG13']           -> Parent
+        // ['TBB_EG14', 'TBB_EG13', 'TBB_EG16', 'TBG_EG12', 'TBG_EG13', 'Belader_links', 'Abschrauber']      -> Children
+
+        for (i=0; i<t_source; i++){
+            let x = '';
+            
+        }
+
+
+        // wenn parent machine in keiner children machine einer anderen parent machine der jeweiligen priority mehr drin ist, dann ist das der start
+        // wenn parent machine keine children machine in gleicher prio mehr hat
+
 
         /*function findExternalGraphs (priority){
             let endm = '';
@@ -646,6 +658,21 @@
         calcpositionssenkr_u(path2_Auspacker, t_source, maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight, '2');
 
         // others...     
+
+
+        // function that calculates "Ausreißer"
+        //allmachinesstring
+        let externalpaths = [];
+        for (let i=0; i<t_source.length; i++){
+            for (let j=i+1; j<t_source.length; j++){
+                if (t_source[i].Parent_Machine === t_source[j].Parent_Machine){
+                    externalpaths.push(t_source[i].Parent_Machine);
+                    externalpaths.push(t_source[i].ID);
+                }
+            }
+        }
+        console.log(externalpaths);
+
     }
 
     // function that transform p_source data into input format for graph 
