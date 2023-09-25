@@ -318,8 +318,7 @@
                 }
             }
             if (found){
-                externalpaths.push(t_source[i].Parent_Machine);
-                externalpaths.push(t_source[i].ID);
+                externalpaths.push(t_source[i].Parent_Machine, t_source[i].ID);
             }
         }
        
