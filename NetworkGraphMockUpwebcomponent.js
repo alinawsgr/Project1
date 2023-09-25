@@ -321,9 +321,19 @@
                 externalpaths.push(t_source[i].Parent_Machine, t_source[i].ID);
             }
         }
-       
-        console.log(externalpaths); // ['TBB_EG02', '1', 'TBB_EG07', '20', 'TBB_EG07', '20', 'TBB_EG07', '20', 'TBB_EG07', '20', 'TBB_EG07', '20', 'TBB_EG07', '20', 'TBB_EG12', '1', 'TBB_EG22', '10', 'TBG_EG05', '2', 'TBG_EG09', '1', 'Entlader', '1', 'Auspacker', '1', 'Fueller', '20', 'TBP1_EG06', '2']
+        console.log(externalpaths);
+        
+        for (let a=0; a<externalpaths.length; a++){
+            const index = externalpaths.indexOf(externalpaths[a]-1);
+            if (externalpaths[a] === '1'){
+                externalpaths.splice(index,2);
 
+            }
+            if (externalpaths[a] === '2'){
+                externalpaths.splice(index,2);
+                
+            }
+        }
 
         // calculates all paths in the graph regarding their value/priority (path priority must be given as an input and as a string in the format: 'number')
         function findPaths(t_source, priority, start){
