@@ -308,14 +308,20 @@
         // function that calculates "Ausreißer"
         //allmachinesstring
         let externalpaths = [];
-        for (let i=0; i<allmachinesstring.length; i++){
-            for (let j=i+1; j<t_source.length; j++){
-                if (t_source[j].Parent_Machine === allmachinesstring[i]){
-                    externalpaths.push(t_source[j].Parent_Machine);
-                    externalpaths.push(t_source[j].ID);
+        for (let i=0; i<t_source.length; i++){
+            let currentM = t_source[i].Parent_Machine;
+            var found = false;
+            for (var j=0; j<t_source.length; j++){
+                if (i !== j && t_source[j].Parent_Machine === currentM){
+                    found = true;
+                    break;
+                }
+                if (found){
+                    externalpaths.push(t_source[i].Parent_Machine);
                 }
             }
         }
+       
         console.log(externalpaths); // ['TBB_EG02', '1', 'TBB_EG07', '20', 'TBB_EG07', '20', 'TBB_EG07', '20', 'TBB_EG07', '20', 'TBB_EG07', '20', 'TBB_EG07', '20', 'TBB_EG12', '1', 'TBB_EG22', '10', 'TBG_EG05', '2', 'TBG_EG09', '1', 'Entlader', '1', 'Auspacker', '1', 'Fueller', '20', 'TBP1_EG06', '2']
 
 
