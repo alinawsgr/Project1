@@ -319,6 +319,7 @@
             }
             if (found){
                 externalpaths.push(t_source[i].Parent_Machine);
+                externalpaths.push(t_source[i].ID);
             }
         }
        
