@@ -312,11 +312,10 @@
             for (let j=i+1; j<t_source.length; j++){
                 if (t_source[i].Parent_Machine === t_source[j].Parent_Machine){
                     externalpaths.push(t_source[i].Parent_Machine);
-                    externalpaths.push(t_source[i].ID);
                 }
             }
         }
-        console.log(externalpaths);
+        console.log(externalpaths); // ['TBB_EG02', '1', 'TBB_EG07', '20', 'TBB_EG07', '20', 'TBB_EG07', '20', 'TBB_EG07', '20', 'TBB_EG07', '20', 'TBB_EG07', '20', 'TBB_EG12', '1', 'TBB_EG22', '10', 'TBG_EG05', '2', 'TBG_EG09', '1', 'Entlader', '1', 'Auspacker', '1', 'Fueller', '20', 'TBP1_EG06', '2']
 
 
         // calculates all paths in the graph regarding their value/priority (path priority must be given as an input and as a string in the format: 'number')
