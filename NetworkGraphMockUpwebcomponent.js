@@ -321,7 +321,7 @@
                 externalpaths.push(t_source[i].Parent_Machine, t_source[i].ID);
             }
         }
-        console.log(externalpaths);
+        
         
         for (let a=0; a<externalpaths.length; a++){
             const index = externalpaths.indexOf(externalpaths[a]-1);
@@ -334,6 +334,7 @@
                 
             }
         }
+        console.log(externalpaths);
 
         // calculates all paths in the graph regarding their value/priority (path priority must be given as an input and as a string in the format: 'number')
         function findPaths(t_source, priority, start){
