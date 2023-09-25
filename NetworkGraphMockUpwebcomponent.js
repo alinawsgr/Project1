@@ -308,10 +308,11 @@
         // function that calculates "Ausreißer"
         //allmachinesstring
         let externalpaths = [];
-        for (let i=0; i<t_source.length; i++){
+        for (let i=0; i<allmachinesstring.length; i++){
             for (let j=i+1; j<t_source.length; j++){
-                if (t_source[i].Parent_Machine === t_source[j].Parent_Machine){
-                    externalpaths.push(t_source[i].Parent_Machine);
+                if (t_source[j].Parent_Machine === allmachinesstring[i]){
+                    externalpaths.push(t_source[j].Parent_Machine);
+                    externalpaths.push(t_source[j].ID);
                 }
             }
         }
