@@ -304,6 +304,20 @@
                 }
             }
             }
+        
+        // function that calculates "Ausreißer"
+        //allmachinesstring
+        let externalpaths = [];
+        for (let i=0; i<t_source.length; i++){
+            for (let j=i+1; j<t_source.length; j++){
+                if (t_source[i].Parent_Machine === t_source[j].Parent_Machine){
+                    externalpaths.push(t_source[i].Parent_Machine);
+                    externalpaths.push(t_source[i].ID);
+                }
+            }
+        }
+        console.log(externalpaths);
+
 
         // calculates all paths in the graph regarding their value/priority (path priority must be given as an input and as a string in the format: 'number')
         function findPaths(t_source, priority, start){
@@ -660,19 +674,7 @@
         // others...     
 
 
-        // function that calculates "Ausreißer"
-        //allmachinesstring
-        let externalpaths = [];
-        for (let i=0; i<t_source.length; i++){
-            for (let j=i+1; j<t_source.length; j++){
-                if (t_source[i].Parent_Machine === t_source[j].Parent_Machine){
-                    externalpaths.push(t_source[i].Parent_Machine);
-                    externalpaths.push(t_source[i].ID);
-                }
-            }
-        }
-        console.log(externalpaths);
-
+      
     }
 
     // function that transform p_source data into input format for graph 
