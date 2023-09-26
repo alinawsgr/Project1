@@ -321,20 +321,17 @@
                 externalpaths.push(t_source[i].Parent_Machine, t_source[i].ID);
             }
         }
-        
-        
-        for (let a=0; a<externalpaths.length; a++){
-            const index = externalpaths.indexOf(externalpaths[a]);
-            if (externalpaths[a] === '1'){
-                externalpaths.splice(index,2);
 
-            }
-            if (externalpaths[a] === '2'){
-                externalpaths.splice(index,2);
-                
+
+        let t_externalpaths = [];
+        for (let a=0; a<externalpaths.length; a++){
+            if (externalpaths[a] === '1' || externalpaths[a] === '2'){
+                t_externalpaths.pop();
+            } else {
+                t_externalpaths.push(externalpaths[a]);
             }
         }
-        console.log(externalpaths);
+        console.log(t_externalpaths);
 
         // calculates all paths in the graph regarding their value/priority (path priority must be given as an input and as a string in the format: 'number')
         function findPaths(t_source, priority, start){
