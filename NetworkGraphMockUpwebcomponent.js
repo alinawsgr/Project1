@@ -685,7 +685,14 @@
         }
         calcpositionssenkr_u(path2_Auspacker, t_source, maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight, '2');
 
-        // others...     
+        // others...    
+        let pathe = []; 
+        for (let i= 0; i<t_externalpaths.length; i++){
+            pathe = findPaths(t_source, '4', t_externalpaths[i]);
+
+
+        }
+        console.log(pathe);
 
 
       
