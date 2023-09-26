@@ -693,19 +693,18 @@
         let paths_3 = [];
 
         for (let i = 0; i < t_externalpaths.length; i++) {
-            let value = t_externalpaths[i];
             let index = '';
 
-            if (value === '4') {
+            if (t_externalpaths[i] === '4') {
                 index = t_externalpaths[i-1]
                 paths_4.push(findPaths(t_source, '4', index));
-            } else if (value === '10') {
+            } else if (t_externalpaths[i] === '10') {
                 index = t_externalpaths[i-1]
                 paths_10.push(findPaths(t_source, '10', index));
-            } else if (value === '20') {
+            } else if (t_externalpaths[i] === '20') {
                 index = t_externalpaths[i-1]
                 paths_20.push(findPaths(t_source, '20', index));
-            } else if (value === '3') {
+            } else if (t_externalpaths[i] === '3') {
                 index = t_externalpaths[i-1]
                 paths_3.push(findPaths(t_source, '3', index));
             }
