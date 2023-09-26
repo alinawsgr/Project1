@@ -689,10 +689,11 @@
         let pathe = []; 
         for (let i= 0; i<t_externalpaths.length; i++){
             pathe = findPaths(t_source, '4', t_externalpaths[i]);
+            console.log(pathe);
 
 
         }
-        console.log(pathe);
+        
 
 
       
