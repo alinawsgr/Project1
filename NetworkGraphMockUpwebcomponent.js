@@ -686,17 +686,22 @@
         calcpositionssenkr_u(path2_Auspacker, t_source, maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight, '2');
 
         // others...    
-        let pathe = []; 
-        for (let i= 0; i<t_externalpaths.length; i++){
-            pathe = findPaths(t_source, '4', t_externalpaths[i]);
-            console.log(pathe);
+        let paths_4 = [];
+        let paths_10 = [];
+        let paths_20 = [];
+        let paths_3 = [];
 
-
+        for (let i = 0; i < t_externalpaths.length; i++) {
+            if (t_externalpaths[i] === '4') {
+                paths_4.push(findPaths(t_source, '4', t_externalpaths[i]));
+            } else if (t_externalpaths[i] === '10') {
+                paths_10.push(findPaths(t_source, '10', t_externalpaths[i]));
+            } else if (t_externalpaths[i] === '20') {
+                paths_20.push(findPaths(t_source, '20', t_externalpaths[i]));
+            } else if (t_externalpaths[i] === '3') {
+                paths_3.push(findPaths(t_source, '3', t_externalpaths[i]));
+            }
         }
-        
-
-
-      
     }
 
     // function that transform p_source data into input format for graph 
