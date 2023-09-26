@@ -706,6 +706,7 @@
                 paths_3.push(findPaths(t_source, '3', index));
             }
         }
+        console.log(paths_4);
     }
 
     // function that transform p_source data into input format for graph 
