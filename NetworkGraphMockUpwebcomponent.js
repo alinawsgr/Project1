@@ -324,7 +324,7 @@
         
         
         for (let a=0; a<externalpaths.length; a++){
-            const index = externalpaths.indexOf(externalpaths[a]-1);
+            const index = externalpaths.indexOf(externalpaths[a]);
             if (externalpaths[a] === '1'){
                 externalpaths.splice(index,2);
 
