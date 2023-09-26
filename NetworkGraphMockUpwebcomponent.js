@@ -692,9 +692,9 @@
         let paths_20 = [];
         let paths_3 = [];
 
-        for (let i = 1; i < t_externalpaths.length; i += 2) {
-            let value = t_externalpaths[i - 1];
-            let index = t_externalpaths[i];
+        for (let i = 0; i < t_externalpaths.length; i++) {
+            let value = t_externalpaths[i];
+            let index = t_externalpaths[i + 1];
 
             if (value === '4') {
                 paths_4.push(findPaths(t_source, '4', index));
@@ -705,8 +705,10 @@
             } else if (value === '3') {
                 paths_3.push(findPaths(t_source, '3', index));
             }
+
+    // Überspringe den nächsten Wert in t_externalpaths, da er bereits verwendet wurde.
+            i++;
         }
-        console.log(paths_4);
     }
 
     // function that transform p_source data into input format for graph 
