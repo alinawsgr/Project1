@@ -709,6 +709,10 @@
     // Überspringe den nächsten Wert in t_externalpaths, da er bereits verwendet wurde.
             i++;
         }
+        console.log(paths_3);
+        console.log(paths_4);
+        console.log(paths_10);
+        console.log(paths_20);
     }
 
     // function that transform p_source data into input format for graph 
