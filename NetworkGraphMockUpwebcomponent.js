@@ -685,25 +685,27 @@
         }
         calcpositionssenkr_u(path2_Auspacker, t_source, maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight, '2');
 
-        // others...    
+        // others...   
+        
         let paths_4 = [];
         let paths_10 = [];
         let paths_20 = [];
         let paths_3 = [];
 
-        for (let i = 0; i < t_externalpaths.length; i++) {
-            if (t_externalpaths[i] === '4') {
-                paths_4.push(findPaths(t_source, '4', t_externalpaths[i]));
-            } else if (t_externalpaths[i] === '10') {
-                paths_10.push(findPaths(t_source, '10', t_externalpaths[i]));
-            } else if (t_externalpaths[i] === '20') {
-                paths_20.push(findPaths(t_source, '20', t_externalpaths[i]));
-            } else if (t_externalpaths[i] === '3') {
-                paths_3.push(findPaths(t_source, '3', t_externalpaths[i]));
+        for (let i = 1; i < t_externalpaths.length; i += 2) {
+            let value = t_externalpaths[i - 1];
+            let index = t_externalpaths[i];
+
+            if (value === '4') {
+                paths_4.push(findPaths(t_source, '4', index));
+            } else if (value === '10') {
+                paths_10.push(findPaths(t_source, '10', index));
+            } else if (value === '20') {
+                paths_20.push(findPaths(t_source, '20', index));
+            } else if (value === '3') {
+                paths_3.push(findPaths(t_source, '3', index));
             }
         }
-        console.log(paths_4);
-        console.log(paths_10);
     }
 
     // function that transform p_source data into input format for graph 
