@@ -601,7 +601,6 @@
             let end = path[path.length];
             let endX = 0;
             let endY = 0;
-            for (let i=0; i<path.length; i++){
                 // get coordinates of start and end machine of the external path
                 for (let x = 0; x<t_source.length; x++){
                     if (t_source[x].Parent_Machine === start){
@@ -618,7 +617,6 @@
                         t_source[x].Y = endY;
                     } 
                 }
-            }
             let elementsbetween = path.length - 3; 
             let pathlength_X = (startX- endX) / elementsbetween;
             //let pathlength_Y = endY - endY; 
