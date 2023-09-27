@@ -777,7 +777,8 @@
 
                 aLines.push({
                     "from": sCurrKey,
-                    "to": sNextKey
+                    "to": sNextKey,
+                    "status": "LineBorderStatus"
                 });
             }
         }
