@@ -696,6 +696,7 @@
             let index = '';
 
             if (t_externalpaths[i] === '4') {
+                console.log(t_externalpaths[i]);
                 index = t_externalpaths[i-1]
                 paths_4.push(findPaths(t_source, '4', index));
             } else if (t_externalpaths[i] === '10') {
@@ -708,8 +709,6 @@
                 index = t_externalpaths[i-1]
                 paths_3.push(findPaths(t_source, '3', index));
             }
-
-    // Überspringe den nächsten Wert in t_externalpaths, da er bereits verwendet wurde.
             i++;
         }
         console.log(paths_3);
