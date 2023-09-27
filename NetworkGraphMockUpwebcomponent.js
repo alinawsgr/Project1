@@ -667,9 +667,9 @@
                 console.log(index);
                 paths_4.push(findPaths(t_source, '4', index));
                 console.log(path_4);
-            } else if (t_externalpaths[i] === '10') {
+            } else if (t_externalpaths[1] === '10') {
                 x = i-1;
-                index = t_externalpaths[x];
+                index = t_externalpaths[i];
                 paths_10.push(findPaths(t_source, '10', index));
             } else if (t_externalpaths[i] === '20') {
                 x = i-1;
