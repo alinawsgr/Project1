@@ -313,7 +313,7 @@
             let currentM_C = t_source[i].Children_Machine;
             var found = false;
             for (var j=0; j<t_source.length; j++){
-                if ((i !== j && t_source[j].Parent_Machine === currentM_P) || (i !== j && t_source[j].Children_Machine === currentM_C)){
+                if ((i !== j && t_source[j].Parent_Machine === currentM_P) /*|| (i !== j && t_source[j].Children_Machine === currentM_C)*/){
                     found = true;
                     break;
                 }
@@ -662,17 +662,21 @@
         for (let i = 0; i < t_externalpaths.length; i++) {
             let index = '';
             if (t_externalpaths[i] === '4') {
-                index = t_externalpaths[i-1];
+                x = i-1;
+                index = t_externalpaths[x];
                 console.log(index);
                 paths_4.push(findPaths(t_source, '4', index));
             } else if (t_externalpaths[i] === '10') {
-                index = t_externalpaths[i-1];
+                x = i-1;
+                index = t_externalpaths[x];
                 paths_10.push(findPaths(t_source, '10', index));
             } else if (t_externalpaths[i] === '20') {
-                index = t_externalpaths[i-1];
+                x = i-1;
+                index = t_externalpaths[x];
                 paths_20.push(findPaths(t_source, '20', index));
             } else if (t_externalpaths[i] === '3') {
-                index = t_externalpaths[i-1];
+                x = i-1;
+                index = t_externalpaths[x];
                 paths_3.push(findPaths(t_source, '3', index));
             }
             i++;
