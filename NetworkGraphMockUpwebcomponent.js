@@ -77,7 +77,6 @@
                 }
                 
             }
-            console.log(t_source)
             setCoordinates(t_source,source);
 
             let oNewDataSource = restructureNodes(t_source);
@@ -332,7 +331,6 @@
                 t_externalpaths.push(externalpaths[a]);
             }
         }
-        console.log(t_externalpaths);
 
         // calculates all paths in the graph regarding their value/priority (path priority must be given as an input and as a string in the format: 'number')
         function findPaths(t_source, priority, start){
@@ -396,12 +394,6 @@
         path1_senkr_u_Wama_Etima.push(path1_hor_l_Etima_Varioline[0]);
         path1_hor_l_Varioline_Belader.push(pathChanges[5]);
 
-
-
-        console.log(path1_hor_r_Entlader_Auspacker); 
-        console.log(path1_hor_r_Auspacker_Wama); 
-        console.log(path1_hor_l_Varioline_Belader);
-        console.log(path1_hor_r_Entlader_Auspacker_length);
         
         // yellow
         let path2 = [];
@@ -448,7 +440,7 @@
         } else {
             maxLength_Entlader_Auspacker_Varioline_Belader = path1_hor_l_Varioline_Belader.length;
         }
-        console.log(maxLength_Entlader_Auspacker_Varioline_Belader);
+    
 
         // Auspacker -> Wama / Etima -> Varioline
         let maxLength_Auspacker_Wama_Etima_Varioline = 0;
@@ -457,7 +449,7 @@
         } else {
             maxLength_Auspacker_Wama_Etima_Varioline = path1_hor_l_Etima_Varioline.length;
         }
-        console.log(maxLength_Auspacker_Wama_Etima_Varioline);
+        
 
         // Entlader -> Belader / Auspacker -> Varioline / Wama -> Etima
         let maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = 0;
@@ -479,7 +471,7 @@
         if (path1_senkr_u_Wama_Etima.length < path2_Entlader.length){
             maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path2_Entlader.length;
         }
-        console.log(maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima);
+        
 
         
 
@@ -665,9 +657,7 @@
             if (t_externalpaths[i] === '4') {
                 x = i-1;
                 index = t_externalpaths[x];
-                console.log(index);
                 paths_4.push(findPaths(t_source, '4', index));
-                console.log(path_4);
             } else if (t_externalpaths[1] === '10') {
                 x = i-1;
                 index = t_externalpaths[i];
@@ -683,10 +673,6 @@
             }
             i++;
         }
-        console.log(paths_3);
-        console.log(paths_4);
-        console.log(paths_10);
-        console.log(paths_20);
     }
 
     // function that transform p_source data into input format for graph 
