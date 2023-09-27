@@ -618,11 +618,10 @@
                     } 
                 }
             let elementsbetween = path.length - 3; 
-            let pathlength_X = (endX- startX) / elementsbetween;
-            let space = (pathlength_X * nodeWidth)/ path.length; 
+            let pathlength_X = (endX- startX) / elementsbetween 
             //let pathlength_Y = endY - endY; 
             for (let j=2; j<(path.length) -1; j++){
-                let offset = (j-1) * space;
+                let offset = (j-1) * pathlength_X - nodeWidth;
                 let nextMachine = path[j];
                 for (let e=0; e<t_source.length; e++){
                     if (t_source[e].Parent_Machine === path[j]){
