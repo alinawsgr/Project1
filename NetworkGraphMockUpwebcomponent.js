@@ -694,19 +694,18 @@
 
         for (let i = 0; i < t_externalpaths.length; i++) {
             let index = '';
-
             if (t_externalpaths[i] === '4') {
-                console.log(t_externalpaths[i]);
-                index = t_externalpaths[i-1]
+                index = t_externalpaths[i-1];
+                console.log(index);
                 paths_4.push(findPaths(t_source, '4', index));
             } else if (t_externalpaths[i] === '10') {
-                index = t_externalpaths[i-1]
+                index = t_externalpaths[i-1];
                 paths_10.push(findPaths(t_source, '10', index));
             } else if (t_externalpaths[i] === '20') {
-                index = t_externalpaths[i-1]
+                index = t_externalpaths[i-1];
                 paths_20.push(findPaths(t_source, '20', index));
             } else if (t_externalpaths[i] === '3') {
-                index = t_externalpaths[i-1]
+                index = t_externalpaths[i-1];
                 paths_3.push(findPaths(t_source, '3', index));
             }
             i++;
