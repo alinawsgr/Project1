@@ -336,22 +336,24 @@
         function findPaths(t_source, priority, start){
             // calculates the row of the start machine, from where the paths start
             // path1 contains all connections with value 1 -> Hauptlinie
+            // end nodes!
             let path = [];
-            // define "Entlader" as the start Position for the path
+            // define the start machine of the path
             for (let i=0; i<t_source.length; i++){
                 if (t_source[i].ID === priority && t_source[i].Parent_Machine == start){
                     path.push(t_source[i].Parent_Machine);
                     path.push(t_source[i].Children_Machine);                    
                 }
             }
-
-            for (let j=1; j<path.length; j++){
-                for (let a=0; a<t_source.length; a++){
-                    if (t_source[a].ID === priority && t_source[a].Parent_Machine == path[j]){
-                        path.push(t_source[a].Children_Machine);
+            if (path.length > 2){
+                for (let j=1; j<path.length; j++){
+                    for (let a=0; a<t_source.length; a++){
+                        if (t_source[a].ID === priority && t_source[a].Parent_Machine == path[j]){
+                            path.push(t_source[a].Children_Machine);
+                        }
                     }
                 }
-            }
+            }   
             return path;
         }
 
@@ -651,6 +653,8 @@
         let paths_20 = [];
         let paths_3 = [];
 
+        // externalpaths: 
+
         for (let i = 0; i < t_externalpaths.length; i++) {
             let index = '';
             if (t_externalpaths[i] === '4') {
@@ -672,7 +676,7 @@
             }
         }
         console.log(paths_3);
-        console.log(paths_4);
+        console.log(paths_4); // 1: ['TBB_EG12', 'TBB_EG13', 'Abschrauber', 'TBB_EG14', 'TBB_EG16'] 2: ['TBG_EG09', 'TBG_EG12', 'TBG_EG13', 'Belader_links']
         console.log(paths_10);
         console.log(paths_20);
 
