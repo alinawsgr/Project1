@@ -653,7 +653,6 @@
 
         for (let i = 0; i < t_externalpaths.length; i++) {
             let index = '';
-            console.log(i);
             if (t_externalpaths[i] === '4') {
                 x = i-1;
                 index = t_externalpaths[x];
@@ -671,8 +670,13 @@
                 index = t_externalpaths[x];
                 paths_3.push(findPaths(t_source, '3', index));
             }
-            
         }
+        console.log(paths_3);
+        console.log(paths_4);
+        console.log(paths_10);
+        console.log(paths_20);
+
+
     }
 
     // function that transform p_source data into input format for graph 
