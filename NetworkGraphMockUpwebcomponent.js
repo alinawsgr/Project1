@@ -720,8 +720,8 @@
         console.log(paths_10);
         console.log(paths_20);
 
-        for (let i=0; i<paths_4.length; i++){
-            let currentpath = paths_4[i];
+        for (let p=0; p<paths_4.length; p++){
+            let currentpath = paths_4[p];
             calcpositionsexternal(currentpath);
         }
     }
