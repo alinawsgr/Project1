@@ -618,7 +618,7 @@
                     } 
                 }
             let elementsbetween = path.length - 3; 
-            let pathlength_X = (startX- endX) / elementsbetween;
+            let pathlength_X = (endX- startX) / elementsbetween;
             //let pathlength_Y = endY - endY; 
             for (let j=2; j<(path.length) -1 ; j++){
                 let offset = (j-1) * pathlength_X;
