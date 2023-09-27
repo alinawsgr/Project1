@@ -598,7 +598,7 @@
             let startsecond = path[1];
             let startX = 0;
             let startY = 0;
-            let end = path[path.length];
+            let end = path[path.length - 1];
             let endX = 0;
             let endY = 0;
                 // get coordinates of start and end machine of the external path
