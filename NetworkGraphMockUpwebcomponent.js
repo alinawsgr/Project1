@@ -594,14 +594,14 @@
           }
         
         function calcpositionsexternal (path){
+            let start = path[0];
+            let startsecond = path[1];
+            let startX = 0;
+            let startY = 0;
+            let end = path[path.length];
+            let endX = 0;
+            let endY = 0;
             for (let i=0; i<path.length; i++){
-                let start = path[0];
-                let startsecond = path[1];
-                let startX = 0;
-                let startY = 0;
-                let end = path[path.length];
-                let endX = 0;
-                let endY = 0;
                 // get coordinates of start and end machine of the external path
                 for (let x = 0; x<t_source.length; x++){
                     if (t_source[x].Parent_Machine === start){
