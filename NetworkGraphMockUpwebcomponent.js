@@ -630,6 +630,15 @@
                     }
                 }
             }
+            for (let s= 2; s<paths_4.length; s++){
+                for (let g= 0; g< t_source.length; g++){
+                    if(path[s] === t_source[g].Parent_Machine){
+                        if (t_source[g].X === startX && t_source[g].Y === startY){
+                            t_source[g].Y === startY + nodeHeight;
+                        }
+                    }
+                }
+            }
         }
 
         // calculates all paths and the positions of all machines
