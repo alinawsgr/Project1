@@ -762,7 +762,6 @@
                 "title": sCurrentName,
                 "x": oCurrentNode.X,
                 "y": oCurrentNode.Y,
-                "status": "Success",
                 "attributes": [
                     {
                         "label": "Technical Availability",
