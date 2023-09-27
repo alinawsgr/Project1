@@ -661,6 +661,7 @@
 
         for (let i = 0; i < t_externalpaths.length; i++) {
             let index = '';
+            console.log(i);
             if (t_externalpaths[i] === '4') {
                 x = i-1;
                 index = t_externalpaths[x];
