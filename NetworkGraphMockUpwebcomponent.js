@@ -660,7 +660,7 @@
                 paths_4.push(findPaths(t_source, '4', index));
             } else if (t_externalpaths[1] === '10') {
                 x = i-1;
-                index = t_externalpaths[i];
+                index = t_externalpaths[x];
                 paths_10.push(findPaths(t_source, '10', index));
             } else if (t_externalpaths[i] === '20') {
                 x = i-1;
@@ -671,7 +671,7 @@
                 index = t_externalpaths[x];
                 paths_3.push(findPaths(t_source, '3', index));
             }
-            i++;
+            
         }
     }
 
