@@ -592,6 +592,47 @@
             }
            
           }
+        
+        function calcpositionsexternal (path){
+            for (let i=0; i<path.length; i++){
+                let start = path[0];
+                let startsecond = path[1];
+                let startX = 0;
+                let startY = 0;
+                let end = path[path.length];
+                let endX = 0;
+                let endY = 0;
+                // get coordinates of start and end machine of the external path
+                for (let x = 0; x<t_source.length; x++){
+                    if (t_source[x].Parent_Machine === start){
+                        startX = t_source[x].X;
+                        startY = t_source[x].Y;
+                    }
+                    if (t_source[x].Parent_Machine === end){
+                        endX = t_source[x].X;
+                        endY = t_source[x].Y;
+                    }
+                    // the position of the second machine in the path is calculated with the X coordinate from the start machine and the y coordinate from the end machine
+                    if (t_source[x].Parent_Machine === startsecond){
+                        t_source[x].X = startX;
+                        t_source[x].Y = endY;
+                    } 
+                }
+            }
+            let elementsbetween = path.length - 3; 
+            let pathlength_X = (startX- endX) / elementsbetween;
+            //let pathlength_Y = endY - endY; 
+            for (let j=2; j<(path.length) -1 ; j++){
+                let offset = (j-1) * pathlength_X;
+                let nextMachine = path[i];
+                for (let e=0; e<t_source.length; e++){
+                    if (t_source[e].Parent_Machine === path[j]){
+                        t_source[e].Y = endY;
+                        t_source[e].X = t_source[e].X + offset;
+                    }
+                }
+            }
+        }
 
         // calculates all paths and the positions of all machines
         // 1
@@ -679,7 +720,9 @@
         console.log(paths_10);
         console.log(paths_20);
 
-
+        for (let i=0; i<paths_4.length; i++){
+            calcpositionsexternal(paths_4[i]);
+        }
     }
 
     // function that transform p_source data into input format for graph 
