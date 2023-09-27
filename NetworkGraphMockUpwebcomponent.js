@@ -309,10 +309,11 @@
         //allmachinesstring
         let externalpaths = [];
         for (let i=0; i<t_source.length; i++){
-            let currentM = t_source[i].Parent_Machine;
+            let currentM_P = t_source[i].Parent_Machine;
+            let currentM_C = t_source[i].Children_Machine;
             var found = false;
             for (var j=0; j<t_source.length; j++){
-                if (i !== j && t_source[j].Parent_Machine === currentM){
+                if ((i !== j && t_source[j].Parent_Machine === currentM_P) || (i !== j && t_source[j].Children_Machine === currentM_C)){
                     found = true;
                     break;
                 }
@@ -411,7 +412,7 @@
         
 
 
-        // rest
+        /* rest
         let path3 = [];
         let machine3 = [];
         for (i=0; i<t_source.length; i++){
@@ -434,44 +435,10 @@
         console.log(machine4); 
         // ['Abschrauber', 'TBB_EG12', 'TBB_EG14', 'TBG_EG09', 'TBG_EG12', 'TBG_EG13', 'TBB_EG13']           -> Parent
         // ['TBB_EG14', 'TBB_EG13', 'TBB_EG16', 'TBG_EG12', 'TBG_EG13', 'Belader_links', 'Abschrauber']      -> Children
-
-        for (i=0; i<t_source; i++){
-            let x = '';
-            
-        }
+        */
 
 
-        // wenn parent machine in keiner children machine einer anderen parent machine der jeweiligen priority mehr drin ist, dann ist das der start
-        // wenn parent machine keine children machine in gleicher prio mehr hat
 
-
-        /*function findExternalGraphs (priority){
-            let endm = '';
-            for (i=0; i<t_source; i++){
-                if (t_source[i].Id === priority){
-                    if(t_source[i].Children_Machine ){
-
-
-                    }
-                
-
-                }
-                
-
-            }
-
-
-        }*/
-
-        //path4 = findPaths(t_source, '4');
-        let path10 = [];
-        //path10 = findPaths(t_source, '10');
-        let path20 = [];
-        //path20 = findPaths(t_source, '20');
-        let path101 = [];
-        //path101 = findPaths(t_source, '101');
-
-        
         // get maximal path length for each dependent paths and set path length for each path
         // dependent paths: 
         // Entlader -> Auspacker / Varioline -> Belader
