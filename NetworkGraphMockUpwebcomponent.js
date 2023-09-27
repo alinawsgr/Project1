@@ -345,15 +345,14 @@
                     path.push(t_source[i].Children_Machine);                    
                 }
             }
-            if (path.length > 2){
-                for (let j=1; j<path.length; j++){
-                    for (let a=0; a<t_source.length; a++){
-                        if (t_source[a].ID === priority && t_source[a].Parent_Machine == path[j]){
-                            path.push(t_source[a].Children_Machine);
-                        }
+
+            for (let j=1; j<path.length; j++){
+                for (let a=0; a<t_source.length; a++){
+                    if (t_source[a].ID === priority && t_source[a].Parent_Machine == path[j]){
+                        path.push(t_source[a].Children_Machine);
                     }
                 }
-            }   
+            }
             return path;
         }
 
