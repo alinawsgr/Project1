@@ -634,7 +634,7 @@
                 for (let g= 0; g< t_source.length; g++){
                     if(paths_4[s] === t_source[g].Parent_Machine){
                         if (t_source[g].X === startX && t_source[g].Y === startY){
-                            t_source[g].Y === startY + nodeHeight;
+                            t_source[g].Y === startY - nodeHeight;
                         }
                     }
                 }
