@@ -666,6 +666,7 @@
                 index = t_externalpaths[x];
                 console.log(index);
                 paths_4.push(findPaths(t_source, '4', index));
+                console.log(path_4);
             } else if (t_externalpaths[i] === '10') {
                 x = i-1;
                 index = t_externalpaths[x];
