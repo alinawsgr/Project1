@@ -625,7 +625,7 @@
                 let nextMachine = path[j];
                 for (let e=0; e<t_source.length; e++){
                     if (startY !== endY){
-                        offset = (j) * pathlength_X - nodeHeight;
+                        offset = (j-3) * pathlength_X - nodeHeight;
                         if (t_source[e].Parent_Machine === path[j]){
                             t_source[e].Y = endY;
                             t_source[e].X = t_source[e].X - offset;
