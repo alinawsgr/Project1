@@ -255,8 +255,8 @@
     const nodeWidth = 400;
     const nodeHeight = 400;
     // fix position of "Entlader"
-    let xEntladerPosition = 10000;
-    let yEntladerPosition = 10000;
+    let xEntladerPosition = 2000;
+    let yEntladerPosition = 2000;
     // direction changes in the graph (in this case of the main line)
     let directionChange = ['Waschmaschine', 'Etikettiermaschine']
     let pathChanges = ['Entlader','Auspacker','Waschmaschine','Etikettiermaschine', 'Varioline', 'Belader_rechts'];
@@ -631,9 +631,9 @@
                     }
                 }
             }
-            for (let s= 2; s<paths_4.length; s++){
+            for (let s= 2; s<path.length; s++){
                 for (let g= 0; g< t_source.length; g++){
-                    if(paths_4[s] === t_source[g].Parent_Machine){
+                    if(path[s] === t_source[g].Parent_Machine){
                         if (t_source[g].X === startX && t_source[g].Y === startY){
                             t_source[g].Y === startY - nodeHeight;
                         }
