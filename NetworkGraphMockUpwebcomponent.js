@@ -626,13 +626,16 @@
                 let nextMachine = path[j];
                 for (let e=0; e<t_source.length; e++){
                     if (t_source[e].Parent_Machine === path[j]){
-                        if(startY !== endY){
                         t_source[e].Y = endY;
                         t_source[e].X = t_source[e].X - offset;
-                        }
-                        if (startY === endY){
-                            t_source[e].Y = startY - nodeHeight;
-                            t_source[e].X = t_source[e].X + offset;
+                    }
+                }
+            }
+            for (let s= 2; s<paths_4.length; s++){
+                for (let g= 0; g< t_source.length; g++){
+                    if(paths_4[s] === t_source[g].Parent_Machine){
+                        if (t_source[g].X === startX && t_source[g].Y === startY){
+                            t_source[g].Y === startY - nodeHeight;
                         }
                     }
                 }
