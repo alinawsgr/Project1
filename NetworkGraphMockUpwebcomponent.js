@@ -255,8 +255,8 @@
     const nodeWidth = 400;
     const nodeHeight = 400;
     // fix position of "Entlader"
-    let xEntladerPosition = 2000;
-    let yEntladerPosition = 2000;
+    let xEntladerPosition = 3000;
+    let yEntladerPosition = 3000;
     // direction changes in the graph (in this case of the main line)
     let directionChange = ['Waschmaschine', 'Etikettiermaschine']
     let pathChanges = ['Entlader','Auspacker','Waschmaschine','Etikettiermaschine', 'Varioline', 'Belader_rechts'];
