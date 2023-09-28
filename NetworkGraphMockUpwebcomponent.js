@@ -632,7 +632,7 @@
                     }
                     if (startY === endY){
                         if (t_source[e].Parent_Machine === path[j]){
-                            t_source[e].Y = t_source[e].X - offset;
+                            t_source[e].Y = t_source[e].X - nodeWidth;
                             t_source[e].X = startX + offset; 
                         }
 
