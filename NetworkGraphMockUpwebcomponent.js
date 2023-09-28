@@ -620,29 +620,29 @@
             let elementsbetween = path.length - 3; 
             let pathlength_X = (endX- startX) / elementsbetween 
             //let pathlength_Y = endY - endY; 
-            for (let j=1; j<(path.length)-1; j++){
+            for (let j=2; j<(path.length)-1; j++){
                 let offset = 0;
                 let nextMachine = path[j];
                 for (let e=0; e<t_source.length; e++){
                     if (startY !== endY){
-                        j++;
                         offset = (j-1) * pathlength_X - nodeWidth;
                         if (t_source[e].Parent_Machine === path[j]){
                             t_source[e].Y = endY;
                             t_source[e].X = t_source[e].X - offset;
                         }
                     }
-
-
-
-                    if (startY === endY){
-                        offset = (j) * pathlength_X - nodeWidth;
-                        if (t_source[e].Parent_Machine === path[j]){
-                            t_source[e].Y = startY - nodeWidth;
-                            t_source[e].X = startX + offset; 
+                }
+            }
+            for (let a=1; a<(path.length)-1; a++){
+                let offset = 0;
+                let nextMachine = path[a];
+                for (let b=0; b<t_source.length; b++){
+                if (startY === endY){
+                        offset = (a) * pathlength_X - nodeWidth;
+                        if (t_source[b].Parent_Machine === path[a]){
+                            t_source[b].Y = startY - nodeWidth;
+                            t_source[b].X = startX + offset; 
                         }
-
-
                     }
                 }
             }
