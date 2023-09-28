@@ -621,7 +621,7 @@
             let pathlength_X = (endX- startX) / elementsbetween 
             //let pathlength_Y = endY - endY; 
             for (let j=1; j<(path.length) -1; j++){
-                let offset = (j-1) * pathlength_X - nodeWidth;
+                let offset = (j) * pathlength_X - nodeWidth;
                 let nextMachine = path[j];
                 for (let e=0; e<t_source.length; e++){
                     if (startY !== endY){
