@@ -624,21 +624,23 @@
                 let offset = (j-1) * pathlength_X - nodeWidth;
                 let nextMachine = path[j];
                 for (let e=0; e<t_source.length; e++){
-                    if (t_source[e].Parent_Machine === path[j]){
-                        t_source[e].Y = endY;
-                        t_source[e].X = t_source[e].X - offset;
-                    }
-                }
-            }
-            for (let s= 2; s<paths_4.length; s++){
-                for (let g= 0; g< t_source.length; g++){
-                    if(paths_4[s] === t_source[g].Parent_Machine){
-                        if (t_source[g].X === startX && t_source[g].Y === startY){
-                            t_source[g].Y === startY - nodeHeight;
+                    if (startY !== endY){
+                        if (t_source[e].Parent_Machine === path[j]){
+                            t_source[e].Y = endY;
+                            t_source[e].X = t_source[e].X - offset;
                         }
                     }
+                    if (startY === endY){
+                        if (t_source[e].Parent_Machine === path[j]){
+                            t_source[e].Y = t_source[e].X - offset;
+                            t_source[e].X = startX + offset; 
+                        }
+
+
+                    }
                 }
             }
+            
         }
 
         // calculates all paths and the positions of all machines
