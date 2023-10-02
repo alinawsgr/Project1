@@ -757,7 +757,7 @@
         endmachines = [];
         for (let j=0; j<allchildrenmachines.length; j++){
             for (let x=0; x<allmothermachines.length; x++){
-                if (isInArray(allchildrenmachines[j], allmothermachines)){
+                if (isInArray(allchildrenmachines[j], allmothermachines) === false){
                     endmachines.push(allchildrenmachines[j]);
                 }
             }  
