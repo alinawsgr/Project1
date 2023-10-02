@@ -742,11 +742,11 @@
 
         // get end machines
         // get list with children machines
-        allchildrenmachines =  [];
+        let allchildrenmachines =  [];
         for (let i=0; i< t_source.length; i++){
             allchildrenmachines.push(t_source[i].Children_Machine);
         }
-        allmothermachines = [];
+        let allmothermachines = [];
         for (let b=0; b< t_source.length; b++){
             allmothermachines.push(t_source[b].Parent_Machine);
         }
@@ -754,7 +754,7 @@
         function isInArray(value, array) {
             return array.indexOf(value) > -1;
           }
-        endmachines = [];
+        let endmachines = [];
         for (let j=0; j<allchildrenmachines.length; j++){
             for (let x=0; x<allmothermachines.length; x++){
                 if (isInArray(allchildrenmachines[j], allchildrenmachines === false)){
