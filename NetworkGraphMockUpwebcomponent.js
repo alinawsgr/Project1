@@ -739,6 +739,17 @@
             let currentpath = paths_4[p];
             calcpositionsexternal(currentpath);
         }
+
+        // get end machines
+        // get list with children machines
+        allchildrenmachines =  [];
+        for (let i=0; i< t_source.length; i++){
+            allchildrenmachines.push(t_source[i].Children_Machine);
+        }
+        console.log(allchildrenmachines);
+
+
+    
     }
 
     // function that transform p_source data into input format for graph 
