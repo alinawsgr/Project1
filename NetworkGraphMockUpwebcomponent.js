@@ -746,12 +746,18 @@
         for (let i=0; i< t_source.length; i++){
             allchildrenmachines.push(t_source[i].Children_Machine);
         }
-        console.log(allchildrenmachines);
+        allmothermachines = [];
+        for (let b=0; b< t_source.length; b++){
+            allmothermachines.push(t_source[b].Parent_Machine);
+        }
 
+        function isInArray(value, array) {
+            return array.indexOf(value) > -1;
+          }
         endmachines = [];
         for (let j=0; j<allchildrenmachines.length; j++){
-            for (let x=0; x<t_source.length; x++){
-                if (allchildrenmachines[j] !== t_source[x].Parent_Machine){
+            for (let x=0; x<allmothermachines.length; x++){
+                if (isInArray(allchildrenmachines[j], allmothermachines)){
                     endmachines.push(allchildrenmachines[j]);
                 }
             }  
