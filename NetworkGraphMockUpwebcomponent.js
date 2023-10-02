@@ -748,6 +748,16 @@
         }
         console.log(allchildrenmachines);
 
+        endmachines = [];
+        for (let j=0; j<allchildrenmachines.length; j++){
+            for (let x=0; x<t_source.length; x++){
+                if (allchildrenmachines[j] !== t_source[x].Parent_Machine){
+                    endmachines.push(allchildrenmachines[j]);
+                }
+            }  
+        }
+        console.log(endmachines);
+
 
     
     }
