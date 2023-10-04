@@ -780,7 +780,7 @@
         for (let mc = 0; mc<multichilds.length; mc++){
             for (let mp = 0; mp<multiparent.length; mp++){
                 for (let i=0; i<t_source.length; i++){
-                    if(t_source[i].Parent_Machine == multiparent[mp]){
+                    if(t_source[i].Parent_Machine === multiparent[mp]){
                         let parenty = t_source[i].Y;
                         let parentx = t_source[i].X;
                         if(t_source[i].Children_Machine === multichilds[mc]){
