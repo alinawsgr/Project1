@@ -786,7 +786,7 @@
                     }
                     if(t_source[i].Children_Machine === multichilds[mc]){
                         let space = nodeHeight/ multichilds.length;
-                        for (let i = 0; i < path.length; i++) {
+                        for (let i = 0; i < multichilds.length; i++) {
                             let xOffset = 0;
                             let yOffset = (i + 1) * space;
                             t_source[i].Y = parenty + yOffset;
