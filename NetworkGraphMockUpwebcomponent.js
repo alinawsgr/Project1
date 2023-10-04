@@ -779,12 +779,14 @@
         console.log(t_source);
 
         // calculate positions of multichilds
+        let parenty = 0;
+        let parentx = 0;
         for (let mp = 0; mp<multiparent.length; mp++){
             for (let mc = 0; mc<multichilds.length; mc++){
                 for (let i=0; i<t_source.length; i++){
                     if(t_source[i].Parent_Machine === multiparent[mp]){
-                        let parenty = t_source[i].Y;
-                        let parentx = t_source[i].X;
+                        parenty = t_source[i].Y;
+                        parentx = t_source[i].X;
                     }
                 for (let j=0; j<t_source.length; j++){
                     if(t_source[i].Children_Machine === multichilds[mc]){
