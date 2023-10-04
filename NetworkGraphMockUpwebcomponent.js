@@ -789,7 +789,7 @@
                         parentx = t_source[i].X;
                     }
                 for (let j=0; j<t_source.length; j++){
-                    if(t_source[i].Children_Machine === multichilds[mc]){
+                    if(t_source[j].Children_Machine === multichilds[mc]){
                         let space = nodeHeight/ multichilds.length;
                         let xOffset = 0;
                         let yOffset = (j + 1) * space;
