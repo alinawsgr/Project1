@@ -747,7 +747,7 @@
         for (const [key, value] of Objects.entries(counts)) {
             console.log(key, value);
           }
-        }
+        
     
 
 
