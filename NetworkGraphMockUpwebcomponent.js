@@ -763,32 +763,47 @@
             }
         }
 
+        // if end node has only one parent -> place it inside (- space parent)
+        for (let i=0; i<endmachines.length; i++){
+            t_source.push( { // push end machines into t_source with undefined parent machine so that the psoition can be stored
+            Parent_Machine: endmachines[i],
+            X: 0,
+            Y: 0,
+            ID: 'end',
+            Children_Machine: '',
+            X_dep: '',
+            Y_dep: ''});
+        }
+        console.log(t_source);
+
         // calculate positions of multichilds
         for (let mc = 0; mc<multichilds.length; mc++){
-            for (let i=0; i<t_source.length; i++){
-                if(t_source[i].Children_Machine === multichilds[mc]){
-                    t_source.push( {
-                        Parent_Machine: multichilds[mc],
-                        X: 0,
-                        Y: 0,
-                        ID: 15,
-                        Children_Machine: '',
-                        X_dep: '',
-                        Y_dep: ''
-                    });
-                }
+            for (let mp = 0; mp<multiparent.length; mp++){
+                for (let i=0; i<t_source.length; i++){
+                    if(t_source[i].Parent_Machine == multiparent[mp]){
+                        let parenty = t_source[i].Y;
+                        let parentx = t_source[i].X;
+                    }
+                    if(t_source[i].Children_Machine === multichilds[mc]){
+                        let space = nodeHeight/ multichilds.length;
+                        for (let i = 0; i < path.length; i++) {
+                            let xOffset = 0;
+                            let yOffset = (i + 1) * space;
+                            t_source[i].Y = parenty + yOffset;
+                            t_source[i].X = parentx+ xOffset + 200;
+                        }
+                    }
+                }   
             }
         }
         console.log(t_source);
         
 
 
-        
     
+        
 
-
-
-        // if end node has only one parent -> place it inside (- space parent)
+    
 
 
     
