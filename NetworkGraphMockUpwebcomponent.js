@@ -781,30 +781,31 @@
         // calculate positions of multichilds
         let parenty = 0;
         let parentx = 0;
-
         for (let mp = 0; mp<multiparent.length; mp++){
-            for (let mc = 0; mc<multichilds.length; mc++){
-                for (let i=0; i<t_source.length; i++){
-                    if(t_source[i].Parent_Machine === multiparent[mp]){
-                        parenty = t_source[i].Y;
-                        parentx = t_source[i].X;
-                    }
-                let space = nodeHeight/ multichilds.length;
-                let xOffset = 0;
-                let yOffset = (mc + 1) * space;
-                let yvalue = parenty + yOffset;
-                let xvalue = parentx+ xOffset + 200;
-                t_source.push( { // push end machines into t_source with undefined parent machine so that the psoition can be stored
-                    Parent_Machine: multichilds[mc],
-                    X: xvalue,
-                    Y: yvalue,
-                    ID: 'multiend',
-                    Children_Machine: '',
-                    X_dep: '',
-                    Y_dep: ''});
-                }      
+            for (let i=0; i<t_source.length; i++){
+                if(t_source[i].Parent_Machine === multiparent[mp]){
+                    parenty = t_source[i].Y;
+                    parentx = t_source[i].X;
+                }
             }
-        }     
+        }
+
+
+        for (let mc = 0; mc<multichilds.length; mc++){
+            let space = nodeHeight/ multichilds.length;
+            let xOffset = 0;
+            let yOffset = (mc + 1) * space;
+            let yvalue = parenty + yOffset;
+            let xvalue = parentx+ xOffset + 200;
+            t_source.push( { // push end machines into t_source with undefined parent machine so that the psoition can be stored
+                Parent_Machine: multichilds[mc],
+                X: xvalue,
+                Y: yvalue,
+                ID: 'multiend',
+                Children_Machine: '',
+                X_dep: '',
+                Y_dep: ''});
+        }           
             
         
         console.log(t_source);
