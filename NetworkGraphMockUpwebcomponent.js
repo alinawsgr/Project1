@@ -404,34 +404,6 @@
         path2_Auspacker_length = path2_Auspacker.length;
         
 
-
-        /* rest
-        let path3 = [];
-        let machine3 = [];
-        for (i=0; i<t_source.length; i++){
-            if(t_source[i].ID === '3'){
-                machine3.push(t_source[i].Parent_Machine);
-            }
-        }
-        console.log(machine3); // ['Abschieber', 'TBB_EG04', 'TBG_EG05', 'TBG_EG08', 'EXTERN01']
-
-
-        //path3 = findPaths(t_source, '3');
-        let path4 = [];
-        //path4 = findPaths(t_source,'4',)
-        let machine4 = [];
-        for (i=0; i<t_source.length; i++){
-            if(t_source[i].ID === '4'){
-                machine4.push(t_source[i].Children_Machine);
-            }
-        }
-        console.log(machine4); 
-        // ['Abschrauber', 'TBB_EG12', 'TBB_EG14', 'TBG_EG09', 'TBG_EG12', 'TBG_EG13', 'TBB_EG13']           -> Parent
-        // ['TBB_EG14', 'TBB_EG13', 'TBB_EG16', 'TBG_EG12', 'TBG_EG13', 'Belader_links', 'Abschrauber']      -> Children
-        */
-
-
-
         // get maximal path length for each dependent paths and set path length for each path
         // dependent paths: 
         // Entlader -> Auspacker / Varioline -> Belader
@@ -754,8 +726,8 @@
 
         let endmachines = [];
         for (let j=0; j<allchildrenmachines.length; j++){
-                if (isInArray(allchildrenmachines[j], allchildrenmachines) === false){
-                    if (isInArray(allchildrenmachines[j], allmothermachines) === false){
+                if (allmothermachines.indexOf(allchildrenmachines[j]) <= -1){
+                    if (allchildrenmachines.indexOf(allchildrenmachines[j]) <= -1){
                         endmachines.push(allchildrenmachines[j]);
                     }
                 }  
