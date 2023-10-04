@@ -742,11 +742,38 @@
         console.log(parentarray);
 
         //if end nodes have the same parent node -> place them inside down with extra space
+        
+        // get parent machine with more than one children
         const counts = {};
         parentarray.forEach(function (x) {counts[x] = (counts[x] || 0) + 1; }); // counts ocurrences of parent machines
+        let multiparent = [];
         for (const [key, value] of Object.entries(counts)) {
-            console.log(key, value);
-          }
+            if(value > 1){
+                multiparent.push(key);
+            }
+        }
+
+        // get children of multiparent
+        let multichilds = []
+        for (let m=0; m<multiparent.length; m++){
+            for (let x=0; x<t_source.length; x++){
+                if (t_source[x].Parent_Machine === multiparent[m]){
+                    multichilds.push(t_source[x].Children_Machine);
+                }
+            }
+        }
+
+        // calculate positions of multichilds
+        for (let mc = 0; mc<multichilds.length; mc++){
+            for (let i=0; i<t_source.length; i++){
+                if(t_source[i].Children_Machine){
+                    console.log('...');
+                }
+            }
+
+        }
+
+
         
     
 
