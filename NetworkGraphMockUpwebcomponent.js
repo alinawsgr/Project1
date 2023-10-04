@@ -724,7 +724,7 @@
         let endmachines = [];
         for (let j=0; j<allchildrenmachines.length; j++){
             if (allmothermachines.indexOf(allchildrenmachines[j]) === -1){
-                endmachines.push(allchildrenmachines[j]);
+                endmachines.push(allchildrenmachines[j]); //['TBB_EG08',  'TBB_EG09', 'TBB_EG10', 'TBB_EG25','TBB_EG20', 'Extern_Abgabe_PAL']
             }  
         }
 
@@ -741,17 +741,22 @@
         }
         console.log(parentarray);
 
-        //if end nodes have the same parent node -> place them inside down with extra space
         
         // get parent machine with more than one children
         const counts = {};
         parentarray.forEach(function (x) {counts[x] = (counts[x] || 0) + 1; }); // counts ocurrences of parent machines
         let multiparent = [];
+        let singleparent = [];
         for (const [key, value] of Object.entries(counts)) {
             if(value > 1){
                 multiparent.push(key);
             }
+            if (value = 1){
+                singleparent.push(key);
+            }
         }
+        console.log(multiparent);
+        console.log(singleparent);
 
         // get children of multiparent
         let multichilds = []
@@ -767,18 +772,7 @@
         console.log(multichilds); // ['TBB_EG08', 'TBB_EG09', 'TBB_EG10', 'TBB_EG12']
         console.log(multiparent); // ['TBB_EG07']
 
-        // if end node has only one parent -> place it inside (- space parent)
-        for (let i=0; i<endmachines.length; i++){
-            t_source.push( { // push end machines into t_source with undefined parent machine so that the psoition can be stored
-            Parent_Machine: endmachines[i],
-            X: 0,
-            Y: 0,
-            ID: 'end',
-            Children_Machine: '',
-            X_dep: '',
-            Y_dep: ''});
-        }
-        console.log(t_source);
+    
 
         // calculate positions of multichilds
         let parenty = 0;
@@ -791,8 +785,6 @@
                 }
             }
         }
-
-
         for (let mc = 0; mc<multichilds.length; mc++){
             let space = nodeHeight/ multichilds.length;
             let xOffset = 0;
@@ -807,7 +799,21 @@
                 Children_Machine: '',
                 X_dep: '',
                 Y_dep: ''});
-        }           
+        } 
+        
+    
+         // if end node has only one parent -> place it inside (- space parent)
+         for (let i=0; i<endmachines.length; i++){
+            t_source.push( { // push end machines into t_source with undefined parent machine so that the psoition can be stored
+            Parent_Machine: endmachines[i],
+            X: 0,
+            Y: 0,
+            ID: 'end',
+            Children_Machine: '',
+            X_dep: '',
+            Y_dep: ''});
+        }
+        console.log(t_source);
             
         
         console.log(t_source);   
