@@ -723,11 +723,11 @@
 
         let endmachines = [];
         for (let j=0; j<allchildrenmachines.length; j++){
-                if (allmothermachines.indexOf(allchildrenmachines[j]) === 0){
-                    if (allchildrenmachines.indexOf(allchildrenmachines[j]) === 0){
-                        endmachines.push(allchildrenmachines[j]);
-                    }
-                }  
+            if (allmothermachines.indexOf(allchildrenmachines[j]) === 0){
+                if (allchildrenmachines.indexOf(allchildrenmachines[j]) = 0){
+                    endmachines.push(allchildrenmachines[j]);
+                }
+            }  
         }
         console.log(endmachines);
 
