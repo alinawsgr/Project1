@@ -744,7 +744,7 @@
         //if end nodes have the same parent node -> place them inside down with extra space
         const counts = {};
         parentarray.forEach(function (x) {counts[x] = (counts[x] || 0) + 1; }); // counts ocurrences of parent machines
-        for (const [key, value] of Objects.entries(counts)) {
+        for (const [key, value] of Object.entries(counts)) {
             console.log(key, value);
           }
         
