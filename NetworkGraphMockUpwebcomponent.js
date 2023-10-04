@@ -758,12 +758,14 @@
         for (let m=0; m<multiparent.length; m++){
             for (let x=0; x<t_source.length; x++){
                 if (t_source[x].Parent_Machine === multiparent[m]){
-                    multichilds.push(t_source[x].Children_Machine);
+                    if (t_souce[x].X === 0){
+                        multichilds.push(t_source[x].Children_Machine);
+                    }
                 }
             }
         }
-        console.log(multichilds);
-        console.log(multiparent);
+        console.log(multichilds); // ['TBB_EG08', 'TBB_EG09', 'TBB_EG10', 'TBB_EG12']
+        console.log(multiparent); // ['TBB_EG07']
 
         // if end node has only one parent -> place it inside (- space parent)
         for (let i=0; i<endmachines.length; i++){
@@ -808,17 +810,7 @@
         }           
             
         
-        console.log(t_source);
-        
-
-
-    
-        
-
-    
-
-
-    
+        console.log(t_source);   
     }
 
     // function that transform p_source data into input format for graph 
