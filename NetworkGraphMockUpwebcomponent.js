@@ -790,7 +790,7 @@
             }
         }
         console.log(parenty);
-        console.log(consolex);
+        console.log(parentx);
 
 
         for (let mp = 0; mp<multiparent.length; mp++){
