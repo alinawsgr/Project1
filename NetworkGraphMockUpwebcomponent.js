@@ -785,12 +785,10 @@
                         let parentx = t_source[i].X;
                         if(t_source[i].Children_Machine === multichilds[mc]){
                             let space = nodeHeight/ multichilds.length;
-                            for (let i = 0; i < multichilds.length; i++) {
-                                let xOffset = 0;
-                                let yOffset = (i + 1) * space;
-                                t_source[i].Y = parenty + yOffset;
-                                t_source[i].X = parentx+ xOffset + 200;
-                            }
+                            let xOffset = 0;
+                            let yOffset = (i + 1) * space;
+                            t_source[i].Y = parenty + yOffset;
+                            t_source[i].X = parentx+ xOffset + 200;
                         }
                     }
                 }   
