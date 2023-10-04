@@ -724,8 +724,8 @@
         let endmachines = [];
         for (let j=0; j<allchildrenmachines.length; j++){
             console.log(allmothermachines.indexOf(allchildrenmachines[j]));
-            if (allmothermachines.indexOf(allchildrenmachines[j]) <= -1){
-                if (allchildrenmachines.indexOf(allchildrenmachines[j]) <= -1){
+            if (allmothermachines.indexOf(allchildrenmachines[j]) === -1){
+                if (allchildrenmachines.indexOf(allchildrenmachines[j]) === -1){
                     endmachines.push(allchildrenmachines[j]);
                 }
             }  
