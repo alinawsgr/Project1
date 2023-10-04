@@ -785,15 +785,17 @@
                     if(t_source[i].Parent_Machine === multiparent[mp]){
                         let parenty = t_source[i].Y;
                         let parentx = t_source[i].X;
-                        if(t_source[i].Children_Machine === multichilds[mc]){
-                            let space = nodeHeight/ multichilds.length;
-                            let xOffset = 0;
-                            let yOffset = (i + 1) * space;
-                            t_source[i].Y = parenty + yOffset;
-                            t_source[i].X = parentx+ xOffset + 200;
-                        }
                     }
-                }   
+                for (let j=0; j<t_source.length; j++){
+                    if(t_source[i].Children_Machine === multichilds[mc]){
+                        let space = nodeHeight/ multichilds.length;
+                        let xOffset = 0;
+                        let yOffset = (j + 1) * space;
+                        t_source[j].Y = parenty + yOffset;
+                        t_source[j].X = parentx+ xOffset + 200;
+                    }
+                    }
+                }  
             }
         }
         console.log(t_source);
