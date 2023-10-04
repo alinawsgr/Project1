@@ -766,12 +766,20 @@
         // calculate positions of multichilds
         for (let mc = 0; mc<multichilds.length; mc++){
             for (let i=0; i<t_source.length; i++){
-                if(t_source[i].Children_Machine){
-                    console.log('...');
+                if(t_source[i].Children_Machine === multichilds[mc]){
+                    t_source.push( {
+                        Parent_Machine: multichilds[mc],
+                        X: 0,
+                        Y: 0,
+                        ID: 15,
+                        Children_Machine: '',
+                        X_dep: '',
+                        Y_dep: ''
+                    });
                 }
             }
-
         }
+        
 
 
         
