@@ -758,7 +758,7 @@
         for (let m=0; m<multiparent.length; m++){
             for (let x=0; x<t_source.length; x++){
                 if (t_source[x].Parent_Machine === multiparent[m]){
-                    if (endmachines.indexOf(t_source[x].Children_Machine) > 0){
+                    if (endmachines.indexOf(t_source[x].Children_Machine) >= 0){
                         multichilds.push(t_source[x].Children_Machine);
                     }
                 }
