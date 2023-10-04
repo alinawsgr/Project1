@@ -730,10 +730,7 @@
                 paths_3.push(findPaths(t_source, '3', index));
             }
         }
-        console.log(paths_3);
-        console.log(paths_4); // 1: ['TBB_EG12', 'TBB_EG13', 'Abschrauber', 'TBB_EG14', 'TBB_EG16'] 2: ['TBG_EG09', 'TBG_EG12', 'TBG_EG13', 'Belader_links']
-        console.log(paths_10);
-        console.log(paths_20);
+
 
         for (let p=0; p<paths_4.length; p++){
             let currentpath = paths_4[p];
