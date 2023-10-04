@@ -782,12 +782,16 @@
         let parenty = 0;
         let parentx = 0;
         for (let mp = 0; mp<multiparent.length; mp++){
-            for (let mc = 0; mc<multichilds.length; mc++){
-                for (let i=0; i<t_source.length; i++){
-                    if(t_source[i].Parent_Machine === multiparent[mp]){
-                        parenty = t_source[i].Y;
-                        parentx = t_source[i].X;
+            for (let i=0; i<t_source.length; i++){
+                if(t_source[i].Parent_Machine === multiparent[mp]){
+                    parenty = t_source[i].Y;
+                    parentx = t_source[i].X;
                     }
+                }
+            }
+
+        for (let mp = 0; mp<multiparent.length; mp++){
+            for (let mc = 0; mc<multichilds.length; mc++){
                 for (let j=0; j<t_source.length; j++){
                     if(t_source[j].Children_Machine === multichilds[mc]){
                         let space = nodeHeight/ multichilds.length;
@@ -796,9 +800,8 @@
                         t_source[j].Y = parenty + yOffset;
                         t_source[j].X = parentx+ xOffset + 200;
                     }
-                    }
-                }  
-            }
+                }
+            }  
         }
         console.log(t_source);
         
