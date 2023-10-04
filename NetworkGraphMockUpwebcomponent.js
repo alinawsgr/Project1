@@ -800,7 +800,7 @@
                     let yvalue = parenty + yOffset;
                     let xvalue = parentx+ xOffset + 200;
                     t_source.push( { // push end machines into t_source with undefined parent machine so that the psoition can be stored
-                        Parent_Machine: multichilds[i],
+                        Parent_Machine: multichilds[mc],
                         X: xvalue,
                         Y: yvalue,
                         ID: 'multiend',
