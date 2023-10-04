@@ -720,14 +720,11 @@
             allmothermachines.push(t_source[b].Parent_Machine);
         }
 
-        function isInArray(value, array) {
-            return array.indexOf(value) > -1;
-          }
 
         let endmachines = [];
         for (let j=0; j<allchildrenmachines.length; j++){
-                if (allmothermachines.indexOf(allchildrenmachines[j]) <= -1){
-                    if (allchildrenmachines.indexOf(allchildrenmachines[j]) <= -1){
+                if (allmothermachines.indexOf(allchildrenmachines[j]) === 0){
+                    if (allchildrenmachines.indexOf(allchildrenmachines[j]) === 0){
                         endmachines.push(allchildrenmachines[j]);
                     }
                 }  
