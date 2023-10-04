@@ -762,6 +762,8 @@
                 }
             }
         }
+        console.log(multichilds);
+        console.log(multiparent);
 
         // if end node has only one parent -> place it inside (- space parent)
         for (let i=0; i<endmachines.length; i++){
