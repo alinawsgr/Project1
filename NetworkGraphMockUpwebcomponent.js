@@ -786,9 +786,12 @@
                 if(t_source[i].Parent_Machine === multiparent[mp]){
                     parenty = t_source[i].Y;
                     parentx = t_source[i].X;
-                    }
                 }
             }
+        }
+        console.log(parenty);
+        console.log(consolex);
+
 
         for (let mp = 0; mp<multiparent.length; mp++){
             for (let mc = 0; mc<multichilds.length; mc++){
