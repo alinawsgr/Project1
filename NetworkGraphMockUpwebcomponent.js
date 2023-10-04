@@ -792,23 +792,21 @@
 
 
         for (let mc = 0; mc<multichilds.length; mc++){
-            for (let j=0; j<t_source.length; j++){
-                let space = nodeHeight/ multichilds.length;
-                let xOffset = 0;
-                let yOffset = (j + 1) * space;
-                let yvalue = parenty + yOffset;
-                let xvalue = parentx+ xOffset + 200;
-                t_source.push( { // push end machines into t_source with undefined parent machine so that the psoition can be stored
-                    Parent_Machine: multichilds[mc],
-                    X: xvalue,
-                    Y: yvalue,
-                    ID: 'multiend',
-                    Children_Machine: '',
-                    X_dep: '',
-                    Y_dep: ''});
-                    }
-                    
-            }
+            let space = nodeHeight/ multichilds.length;
+            let xOffset = 0;
+            let yOffset = (mc + 1) * space;
+            let yvalue = parenty + yOffset;
+            let xvalue = parentx+ xOffset + 200;
+            t_source.push( { // push end machines into t_source with undefined parent machine so that the psoition can be stored
+                Parent_Machine: multichilds[mc],
+                X: xvalue,
+                Y: yvalue,
+                ID: 'multiend',
+                Children_Machine: '',
+                X_dep: '',
+                Y_dep: ''});
+        }           
+            
         
         console.log(t_source);
         
