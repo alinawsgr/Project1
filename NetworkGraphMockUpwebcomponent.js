@@ -728,7 +728,7 @@
             }  
         }
 
-        //if end nodes have the same parent node -> place them inside down with extra space
+        // get parent machines of end nodes
         let parentarray = [];
         for (let i=0; i<endmachines.length; i++){
             for (let j=0; j<t_source.length; j++){
@@ -741,9 +741,14 @@
         }
         console.log(parentarray);
 
+        //if end nodes have the same parent node -> place them inside down with extra space
+        const counts = {};
+        parentarray.forEach(function (x) { counts[x] = (counts[x] || 0) + 1; });
+        console.log(counts)
 
 
-        // if end node has only one parent -> place it inside 
+
+        // if end node has only one parent -> place it inside (- space parent)
 
 
     
