@@ -60,7 +60,7 @@
                 for(let j = 0; j < Machines.length; j++){
                     if(Machines[j].Machine in source[i]){
                         if(Machines[j].Machine[1] !== undefined){
-
+                            if(source[i][Machines[j].Machine].id !== "@NullMember" && source[i][Machines[j].Machine].id !== ""){
                                 t_source.push( {
                                     Parent_Machine: source[i].Quelle_.id,
                                     X: source[i].X.id,
@@ -71,6 +71,7 @@
                                     Y_dep: source[i].Y.id
                                 }
                                 )
+                            }
                         }
                     }
                 }
