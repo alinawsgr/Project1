@@ -709,7 +709,7 @@
             calcpositionsexternal(currentpath);
         }
 
-        // get end machines
+        ///////// end nodes /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // get list with children machines
         let allchildrenmachines =  [];
         for (let i=0; i< t_source.length; i++){
@@ -720,17 +720,30 @@
             allmothermachines.push(t_source[b].Parent_Machine);
         }
 
-
+        // if a children machine can not be found as a parent machine -> end node
         let endmachines = [];
         for (let j=0; j<allchildrenmachines.length; j++){
-            console.log(allmothermachines.indexOf(allchildrenmachines[j]));
             if (allmothermachines.indexOf(allchildrenmachines[j]) === -1){
-                //if (allchildrenmachines.indexOf(allchildrenmachines[j]) === -1){
                 endmachines.push(allchildrenmachines[j]);
-                //}
             }  
         }
-        console.log(endmachines);
+
+        //if end nodes have the same parent node -> place them inside down with extra space
+        let parentarray = [];
+        for (let i=0; i<endmachines.length; i++){
+            for (let j=0; j<t_source.length; j++){
+                if (t_source[j].Children_Machine === endmachines[i]){
+                    let parent = t_source[j].Parent_Machine;
+                    parentarray.push(parent);
+                }
+                
+            }
+        }
+        console.log(parentarray);
+
+
+
+        // if end node has only one parent -> place it inside 
 
 
     
@@ -1021,4 +1034,3 @@
         });
     }
 })();
-
