@@ -789,14 +789,12 @@
                 }
             }
         }
-        console.log(parenty);
-        console.log(parentx);
 
 
         for (let mp = 0; mp<multiparent.length; mp++){
             for (let mc = 0; mc<multichilds.length; mc++){
                 for (let j=0; j<t_source.length; j++){
-                    if(t_source[j].Children_Machine === multichilds[mc]){
+                    if(t_source[j].Parent_Machine === multichilds[mc]){
                         let space = nodeHeight/ multichilds.length;
                         let xOffset = 0;
                         let yOffset = (j + 1) * space;
