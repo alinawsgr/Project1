@@ -751,7 +751,7 @@
             if(value > 1){
                 multiparent.push(key);
             }
-            if (value = 1){
+            if (value === 1){
                 singleparent.push(key);
             }
         }
@@ -803,6 +803,9 @@
         
     
          // if end node has only one parent -> place it inside (- space parent)
+
+         ///////////////////// hier weiter -> singleparent mal noch loggen lassen
+         // parent davon braucht man und dann x von parent minus dem platzhalter (nach innen)
          for (let i=0; i<endmachines.length; i++){
             t_source.push( { // push end machines into t_source with undefined parent machine so that the psoition can be stored
             Parent_Machine: endmachines[i],
@@ -814,9 +817,17 @@
             Y_dep: ''});
         }
         console.log(t_source);
+
+
+
+        // Überlegungen für Abschieber
+        // welche Prio haben diese Wege?
+        // evtl. Abschieber als zentralen Punkt definieren 
+        // so Zeugs muss nach außen,da keine bloßen endblätter
+
             
         
-        console.log(t_source);   
+        
     }
 
     // function that transform p_source data into input format for graph 
