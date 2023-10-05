@@ -833,7 +833,7 @@
 
         let singleparentchild = {};
         for (let o=0; o<singleparent.length; o++){
-            singleparentchild[singleparent[i]] = singlechilds[i];
+            singleparentchild[singleparent[o]] = singlechilds[o];
         }
         console.log(singleparentchild);
         
