@@ -840,7 +840,7 @@
                     parentsx = t_source[i].X;
                 }
             }
-            for (let sc = 1; sc<singlechilds.length; sc++){
+            for (let sc = 0; sc<singlechilds.length; sc++){
                 let space = nodeWidth;
                 let xOffset = space;
                 let yOffset = 0;
