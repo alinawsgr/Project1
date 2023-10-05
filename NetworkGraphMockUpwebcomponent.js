@@ -739,7 +739,7 @@
                 
             }
         }
-        console.log(parentarray);
+        //console.log(parentarray);
 
         
         // get parent machine with more than one children
@@ -755,8 +755,8 @@
                 singleparent.push(key);
             }
         }
-        console.log(multiparent);
-        console.log(singleparent);
+        //console.log(multiparent);
+        //console.log(singleparent); // ['TBB_EG22', 'Fueller', 'TBP1_EG08'] 
 
         // get children of multiparent
         let multichilds = []
@@ -769,8 +769,8 @@
                 }
             }
         }
-        console.log(multichilds); // ['TBB_EG08', 'TBB_EG09', 'TBB_EG10', 'TBB_EG12']
-        console.log(multiparent); // ['TBB_EG07']
+        //console.log(multichilds); // ['TBB_EG08', 'TBB_EG09', 'TBB_EG10', 'TBB_EG12']
+        //console.log(multiparent); // ['TBB_EG07']
 
     
 
@@ -816,6 +816,24 @@
             X_dep: '',
             Y_dep: ''});
         }
+
+        // get children of singleparent
+        let singlechilds = []
+        for (let s=0; s<singleparent.length; s++){
+            for (let x=0; x<t_source.length; x++){
+                if (t_source[x].Parent_Machine === singleparent[s]){
+                    if (endmachines.indexOf(t_source[x].Children_Machine) >= 0){
+                        singlechilds.push(t_source[x].Children_Machine);
+                    }
+                }
+            }
+        }
+        console.log(singlechilds);
+
+
+
+
+
         console.log(t_source);
 
 
