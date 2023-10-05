@@ -841,6 +841,9 @@
                 }
             }
         }
+        console.log(parentsx);
+        console.log(parentsy);
+        
         for (let sc = 1; sc<singlechilds.length; sc++){
             let space = nodeHeight;
             let xOffset = space;
