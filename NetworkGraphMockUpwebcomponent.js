@@ -828,6 +828,7 @@
                 }
             }
         }
+        console.log(singlechilds);
         
         // place singlechild inside the graph
         let parentsy = 0;
