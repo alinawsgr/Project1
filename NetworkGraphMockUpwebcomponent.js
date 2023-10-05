@@ -840,25 +840,25 @@
                     parentsx = t_source[i].X;
                 }
             }
-        }
-        console.log(parentsx);
-        console.log(parentsy);
+            for (let sc = 1; sc<singlechilds.length; sc++){
+                let space = nodeWidth;
+                let xOffset = space;
+                let yOffset = 0;
+                let yvalue = parentsy + yOffset;
+                let xvalue = parentsx - xOffset;
+                t_source.push( { // push end machines into t_source with undefined parent machine so that the psoition can be stored
+                    Parent_Machine: singlechilds[sc],
+                    X: xvalue,
+                    Y: yvalue,
+                    ID: 'singleend',
+                    Children_Machine: '',
+                    X_dep: '',
+                    Y_dep: ''});
+            } 
 
-        for (let sc = 1; sc<singlechilds.length; sc++){
-            let space = nodeWidth;
-            let xOffset = space;
-            let yOffset = 0;
-            let yvalue = parentsy + yOffset;
-            let xvalue = parentsx - xOffset;
-            t_source.push( { // push end machines into t_source with undefined parent machine so that the psoition can be stored
-                Parent_Machine: singlechilds[sc],
-                X: xvalue,
-                Y: yvalue,
-                ID: 'singleend',
-                Children_Machine: '',
-                X_dep: '',
-                Y_dep: ''});
-        } 
+        }
+
+        
        
 
     
