@@ -841,8 +841,8 @@
             }
         }
         for (let sc = 0; sc<singlechilds.length; sc++){
-            let space = nodeHeight/ singlechilds.length;
-            let xOffset = (sc + 1) * space;
+            let space = nodeHeight;
+            let xOffset = space;
             let yOffset = 0;
             let yvalue = parentsy + yOffset;
             let xvalue = parentsx+ xOffset;
