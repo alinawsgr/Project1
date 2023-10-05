@@ -828,7 +828,36 @@
                 }
             }
         }
-        console.log(singlechilds);
+        
+        // place singlechild inside the graph
+        let parentsy = 0;
+        let parentsx = 0;
+        for (let sp = 0; sp<singleparent.length; sp++){
+            for (let i=0; i<t_source.length; i++){
+                if(t_source[i].Parent_Machine === singleparent[sp]){
+                    parentsy = t_source[i].Y;
+                    parentsx = t_source[i].X;
+                }
+            }
+        }
+        for (let sc = 0; sc<singlechilds.length; sc++){
+            let space = nodeHeight/ singlechilds.length;
+            let xOffset = (sc + 1) * space;
+            let yOffset = 0;
+            let yvalue = parentsy + yOffset;
+            let xvalue = parentsx+ xOffset;
+            t_source.push( { // push end machines into t_source with undefined parent machine so that the psoition can be stored
+                Parent_Machine: singlechilds[sc],
+                X: xvalue,
+                Y: yvalue,
+                ID: 'singleend',
+                Children_Machine: '',
+                X_dep: '',
+                Y_dep: ''});
+        } 
+       
+
+    
 
 
 
