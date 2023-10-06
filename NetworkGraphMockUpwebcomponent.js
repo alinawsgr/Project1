@@ -839,29 +839,30 @@
         // place singlechild inside the graph
         let parentsy = 0;
         let parentsx = 0;
-        for (let sp = 0; sp<singleparent.length; sp++){
+        Object.entries(singleparentchild).forEach(([key,value]) => {
             for (let i=0; i<t_source.length; i++){
-                if(t_source[i].Parent_Machine === singleparent[sp]){
+                if(t_source[i].Parent_Machine === singleparentchild[key]){
                     parentsy = t_source[i].Y;
                     parentsx = t_source[i].X;
                 }
+                if (t_source[i].Parent_Machine === singleparentchild[value]){
+                    let space = nodeHeight/ multichilds.length;
+                    let xOffset = space;
+                    let yOffset = 0;
+                    let yvalue = parentsy + yOffset;
+                    let xvalue = parentsx - xOffset;
+                    t_source.push({ // push end machines into t_source with undefined parent machine so that the psoition can be stored
+                        Parent_Machine: singlechilds[sc],
+                        X: xvalue,
+                        Y: yvalue,
+                        ID: 'singleend',
+                        Children_Machine: '',
+                        X_dep: '',
+                        Y_dep: ''});
+                }
             }
-        }
-        for (let sc = 0; sc<singlechilds.length; sc++){
-            let space = nodeHeight/ multichilds.length;
-            let xOffset = space;
-            let yOffset = 0;
-            let yvalue = parentsy + yOffset;
-            let xvalue = parentsx - xOffset ;
-            t_source.push( { // push end machines into t_source with undefined parent machine so that the psoition can be stored
-                Parent_Machine: singlechilds[sc],
-                X: xvalue,
-                Y: yvalue,
-                ID: 'singleend',
-                Children_Machine: '',
-                X_dep: '',
-                Y_dep: ''});
-        } 
+        });
+        
         console.log(t_source);
 
 
