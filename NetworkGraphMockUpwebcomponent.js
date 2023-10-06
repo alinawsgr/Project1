@@ -833,9 +833,7 @@
 
 
         let singleparentchild = {};
-        for (let o=0; o<singleparent.length; o++){
-            singleparentchild[singleparent[o]] = singlechilds[o];
-        }
+        singleparent.forEach((key,index) => {singleparentchild[key] = singlechilds[index];})
         console.log(singleparentchild);
         
         // place singlechild inside the graph
