@@ -833,13 +833,12 @@
 
 
         let singleparentchild = {};
-        singleparent.forEach((key,index) => {singleparentchild[key] = singlechilds[index];})
+        singleparent.forEach((key,value) => {singleparentchild[key] = singlechilds[value];})
         console.log(singleparentchild); // {TBB_EG22: 'TBB_EG25', Fueller: 'TBB_EG20', TBP1_EG08: 'Extern_Abgabe_PAL'}
         
         // place singlechild inside the graph
 
-        let pair = Object.entries(singleparentchild);
-        let processeda = pair.map(([key,index]) => {
+        for (const key in singleparentchild){
             let parentsy = 0;
             let parentsx = 0;
             for (let i=0; i<t_source.length; i++){
@@ -847,7 +846,7 @@
                     parentsy = t_source[i].Y;
                     parentsx = t_source[i].X;
                 }
-                if (t_source[i].Parent_Machine === singleparentchild[index]){
+                if (t_source[i].Parent_Machine === singleparentchild[value]){
                     let space = nodeHeight/ multichilds.length;
                     let xOffset = space;
                     let yOffset = 0;
@@ -863,11 +862,8 @@
                         Y_dep: ''});
                 }
             }
-            return [key,index];
-
-       
+        }
             
-        });
         
         console.log(t_source);
 
