@@ -853,7 +853,7 @@
                     let yvalue = parentsy + yOffset;
                     let xvalue = parentsx - xOffset;
                     t_source.push({ // push end machines into t_source with undefined parent machine so that the psoition can be stored
-                        Parent_Machine: key,
+                        Parent_Machine: value,
                         X: xvalue,
                         Y: yvalue,
                         ID: 'singleend',
