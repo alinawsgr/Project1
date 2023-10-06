@@ -837,7 +837,9 @@
         console.log(singleparentchild); // {TBB_EG22: 'TBB_EG25', Fueller: 'TBB_EG20', TBP1_EG08: 'Extern_Abgabe_PAL'}
         
         // place singlechild inside the graph
-        function a(key,index){
+
+        let pair = Object.entries(singleparentchild);
+        let processeda = pair.map(([key,index]) => {
             let parentsy = 0;
             let parentsx = 0;
             for (let i=0; i<t_source.length; i++){
@@ -861,12 +863,9 @@
                         Y_dep: ''});
                 }
             }
+            return [key,index];
 
-        }
-        
-    
-        Object.entries(singleparentchild).forEach(([key,index]) => {
-            a(key,index);
+       
             
         });
         
