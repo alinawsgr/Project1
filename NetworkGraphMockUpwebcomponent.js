@@ -828,6 +828,7 @@
                 }
             }
         }
+        console.log(singleparent);
         console.log(singlechilds);
 
 
