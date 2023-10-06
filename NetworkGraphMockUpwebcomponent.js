@@ -839,13 +839,13 @@
         // place singlechild inside the graph
         let parentsy = 0;
         let parentsx = 0;
-        Object.entries(singleparentchild).forEach(([key,value]) => {
+        Object.entries(singleparentchild).forEach(([key,index]) => {
             for (let i=0; i<t_source.length; i++){
                 if(t_source[i].Parent_Machine === singleparentchild[key]){
                     parentsy = t_source[i].Y;
                     parentsx = t_source[i].X;
                 }
-                if (t_source[i].Parent_Machine === singleparentchild[value]){
+                if (t_source[i].Parent_Machine === singleparentchild[index]){
                     let space = nodeHeight/ multichilds.length;
                     let xOffset = space;
                     let yOffset = 0;
