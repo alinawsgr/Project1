@@ -837,9 +837,9 @@
         console.log(singleparentchild); // {TBB_EG22: 'TBB_EG25', Fueller: 'TBB_EG20', TBP1_EG08: 'Extern_Abgabe_PAL'}
         
         // place singlechild inside the graph
-        let parentsy = 0;
-        let parentsx = 0;
-        Object.entries(singleparentchild).forEach(([key,index]) => {
+        function a(key,index){
+            let parentsy = 0;
+            let parentsx = 0;
             for (let i=0; i<t_source.length; i++){
                 if(t_source[i].Parent_Machine === singleparentchild[key]){
                     parentsy = t_source[i].Y;
@@ -861,6 +861,13 @@
                         Y_dep: ''});
                 }
             }
+
+        }
+        
+    
+        Object.entries(singleparentchild).forEach(([key,index]) => {
+            a(key,index);
+            
         });
         
         console.log(t_source);
