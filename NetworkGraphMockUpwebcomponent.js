@@ -837,7 +837,7 @@
         console.log(singleparentchild); // {TBB_EG22: 'TBB_EG25', Fueller: 'TBB_EG20', TBP1_EG08: 'Extern_Abgabe_PAL'}
         
         // place singlechild inside the graph
-        /*
+        
 
         for (const [key,value] of Object.entries(singleparentchild)){
             let parentsy = 0;
@@ -852,7 +852,7 @@
                     let xOffset = space;
                     let yOffset = 0;
                     let yvalue = parentsy + yOffset;
-                    let xvalue = parentsx - xOffset - 200;
+                    let xvalue = parentsx - xOffset;
                     t_source.push({ 
                         Parent_Machine: value,
                         X: xvalue,
@@ -865,7 +865,7 @@
             }
         
         }
-        */
+        
             
         
         console.log(t_source);
@@ -876,7 +876,18 @@
         // welche Prio haben diese Wege?
         // evtl. Abschieber als zentralen Punkt definieren 
         // so Zeugs muss nach außen,da keine bloßen endblätter
+        // if Abschieber
+        function checkAbschieber (){
+            for (let t=0; t<t_source.length; t++){
+                if (t_source[t].Parent_Machine === 'Abschieber'){
+                    return true;
+                }
+            }
+        }
 
+        function calculateAbschieberpath (){
+
+        }
             
         
         
