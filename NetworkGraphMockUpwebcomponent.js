@@ -900,8 +900,21 @@
                         positionAbschieber = i;
                     }
                     pathAbschieberhor_r = findPaths(t_source,'3','Abschieber'); // ['Abschieber', 'TBB_EG04', 'TBB_EG05']
-                    pathAbschieberhor_r_reverse = pathAbschieberhor_r.reverse();
-                    console.log(pathAbschieberhor_r_reverse);
+                    pathAbschieberhor_r_reverse = pathAbschieberhor_r.reverse(); //['TBB_EG05', 'TBB_EG04', 'Abschieber']
+                    for (let j=0; j<t_source.length; j++){
+                        if (t_source[j].Parent_Machine === pathAbschieberhor_r_reverse[0]){
+                            let startx = t_source[j].X;
+                            let starty = t_source[j].Y;
+                        }
+                        for (let a=1; a<pathAbschieberhor_r_reverse.length; a++){
+                            if (t_source[j].Parent_Machine === pathAbschieberhor_r_reverse[a]){
+                                let space = i * nodeWidth
+                                t_source[j].X = startx - space
+                                t_source[j].Y = startY - space
+                            }
+
+                        }
+                    }
                     }
 
                 } 
