@@ -839,7 +839,7 @@
         // place singlechild inside the graph
         
 
-        for (const [key,value] of Object.entries(singleparentchild)){
+        /*for (const [key,value] of Object.entries(singleparentchild)){
             let parentsy = 0;
             let parentsx = 0;
             for (let i=0; i<t_source.length; i++){
@@ -864,7 +864,7 @@
                 }
             }
         
-        }
+        } */
         
             
         
@@ -885,9 +885,31 @@
             }
         }
 
+        // Abschienber eingehend (hor_r)
+        // Abschieber ausgehend (senkr_u) -> mündet in Pfad von Hauptlinie
+        // Abschieber ausgehend (senkr_o) -> mündet nicht in Pfad von Hauptlinie
+
+
         function calculateAbschieberpath (){
+            let positionAbschieber = 0;
+            let pathAbschieberhor_r = [];
+            for (let i=0; i<t_source.length; i++){
+                if (checkAbschieber() === true){ // if "Abschieber" exists
+                    if(t_source[i].Parent_Machine === "Abschieber"){
+                        positionAbschieber = i;
+                    }
+                    pathAbschieberhor_r = findPaths(t_source,'4','Abschieber');
+                    console.log(pathAbschieberhor_r);
+                    
+
+
+                } 
+            }
+
+
 
         }
+        calculateAbschieberpath();
             
         
         
