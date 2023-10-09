@@ -910,7 +910,7 @@
                         }
                         for (let a=1; a<pathAbschieberhor_r_reverse.length; a++){
                             if (t_source[j].Parent_Machine === pathAbschieberhor_r_reverse[a]){
-                                let space = i * nodeWidth
+                                let space = a * nodeWidth
                                 t_source[j].X = startx - space
                                 t_source[j].Y = starty - space
                             }
