@@ -890,26 +890,32 @@
         // Abschieber ausgehend (senkr_o) -> mündet nicht in Pfad von Hauptlinie
 
 
-        function calculateAbschieberpath (){
+        function findAbschieberpath (){
             let positionAbschieber = 0;
             let pathAbschieberhor_r = [];
+            let pathAbschieberhor_r_reverse = [];
             for (let i=0; i<t_source.length; i++){
                 if (checkAbschieber() === true){ // if "Abschieber" exists
                     if(t_source[i].Parent_Machine === "Abschieber"){
                         positionAbschieber = i;
                     }
-                    pathAbschieberhor_r = findPaths(t_source,'3','Abschieber');
-                    console.log(pathAbschieberhor_r);
-                    
-
+                    pathAbschieberhor_r = findPaths(t_source,'3','Abschieber'); // ['Abschieber', 'TBB_EG04', 'TBB_EG05']
+                    pathAbschieberhor_r_reverse = pathAbschieberhor_r.length < 2 ? pathAbschieberhor_r : [pathAbschieberhor_r.pop()].concat(reverse(pathAbschieberhor_r_reverse));
+                    console.log(pathAbschieberhor_r_reverse);
+                    }
 
                 } 
             }
+            return pathAbschieberhor_r;
 
 
 
-        }
+        
         calculateAbschieberpath();
+
+
+
+        
             
         
         
