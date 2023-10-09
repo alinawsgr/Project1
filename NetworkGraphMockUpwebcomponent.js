@@ -898,7 +898,7 @@
                     if(t_source[i].Parent_Machine === "Abschieber"){
                         positionAbschieber = i;
                     }
-                    pathAbschieberhor_r = findPaths(t_source,'4','Abschieber');
+                    pathAbschieberhor_r = findPaths(t_source,'3','Abschieber');
                     console.log(pathAbschieberhor_r);
                     
 
