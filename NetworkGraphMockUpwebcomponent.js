@@ -906,12 +906,11 @@
 
                 } 
             }
-            return pathAbschieberhor_r;
 
 
 
         
-        calculateAbschieberpath();
+        findAbschieberpath();
 
 
 
