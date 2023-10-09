@@ -900,7 +900,7 @@
                         positionAbschieber = i;
                     }
                     pathAbschieberhor_r = findPaths(t_source,'3','Abschieber'); // ['Abschieber', 'TBB_EG04', 'TBB_EG05']
-                    pathAbschieberhor_r_reverse = pathAbschieberhor_r.length < 2 ? pathAbschieberhor_r : [pathAbschieberhor_r.pop()].concat(reverse(pathAbschieberhor_r_reverse));
+                    pathAbschieberhor_r_reverse = pathAbschieberhor_r.reverse();
                     console.log(pathAbschieberhor_r_reverse);
                     }
 
