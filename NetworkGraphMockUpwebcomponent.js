@@ -832,14 +832,14 @@
         console.log(singlechilds);
 
 
-        let singleparentchild = {};
+       /* let singleparentchild = {};
         singleparent.forEach((key,value) => {singleparentchild[key] = singlechilds[value];})
         console.log(singleparentchild); // {TBB_EG22: 'TBB_EG25', Fueller: 'TBB_EG20', TBP1_EG08: 'Extern_Abgabe_PAL'}
         
         // place singlechild inside the graph
         
 
-        /*for (const [key,value] of Object.entries(singleparentchild)){
+        for (const [key,value] of Object.entries(singleparentchild)){
             let parentsy = 0;
             let parentsx = 0;
             for (let i=0; i<t_source.length; i++){
