@@ -842,7 +842,7 @@
                             parentsx = t_source[x].X;
                             for (let b=0; b<t_source.length; b++){
                                 if (t_source[b].Children_Machine === singlechilds[j]){
-                                    let space = nodeHeight/ singlechilds.length;
+                                    let space = nodeHeight/ singlechilds.length + 200;
                                     let xOffset = space;
                                     let yOffset = 0;
                                     let yvalue = parentsy + yOffset;
