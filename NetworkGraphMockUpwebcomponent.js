@@ -855,7 +855,7 @@
                                     Children_Machine: '',
                                     X_dep: '',
                                     Y_dep: ''});
-                                break;
+                                continue;
                                 }
                             }
                         }
