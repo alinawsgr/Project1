@@ -839,7 +839,7 @@
         // place singlechild inside the graph
         
 
-        /*for (const [key,value] of Object.entries(singleparentchild)){
+        for (const [key,value] of Object.entries(singleparentchild)){
             let parentsy = 0;
             let parentsx = 0;
             for (let i=0; i<t_source.length; i++){
@@ -847,24 +847,26 @@
                     parentsy = t_source[i].Y;
                     parentsx = t_source[i].X;
                 }
-                if (t_source[i].Parent_Machine === value){
-                    let space = nodeHeight/ multichilds.length;
-                    let xOffset = space;
-                    let yOffset = 0;
-                    let yvalue = parentsy + yOffset;
-                    let xvalue = parentsx - xOffset;
-                    t_source.push({ 
-                        Parent_Machine: value,
-                        X: xvalue,
-                        Y: yvalue,
-                        ID: 'singleend',
-                        Children_Machine: '',
-                        X_dep: '',
-                        Y_dep: ''});
+                for (let f=0; f<t_source.length; f++){
+                    if (t_source[f].Parent_Machine === value){
+                        let space = nodeHeight/ multichilds.length;
+                        let xOffset = space;
+                        let yOffset = 0;
+                        let yvalue = parentsy + yOffset;
+                        let xvalue = parentsx - xOffset;
+                        t_source.push({ 
+                            Parent_Machine: value,
+                            X: xvalue,
+                            Y: yvalue,
+                            ID: 'singleend',
+                            Children_Machine: '',
+                            X_dep: '',
+                            Y_dep: ''});
+                    }
                 }
             }
         
-        } */
+        } 
         
             
         
