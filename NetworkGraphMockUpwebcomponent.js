@@ -832,7 +832,7 @@
         console.log(singlechilds); //['TBB_EG25', 'TBB_EG20', 'Extern_Abgabe_PAL']
 
         function placesinglechilds (){
-            for (let i=0; i<singleparent.length; i++){
+           outerloop:  for (let i=0; i<singleparent.length; i++){
             for (let j=0; j<singlechilds.length; j++){
                 let parentsy = 0;
                 let parentsx = 0;
@@ -856,6 +856,7 @@
                                     X_dep: '',
                                     Y_dep: ''});
                                 continue;
+                                outerloop;
                                 }
                             }
                         }
