@@ -828,8 +828,41 @@
                 }
             }
         }
-        console.log(singleparent);
-        console.log(singlechilds);
+        console.log(singleparent); // ['TBB_EG22', 'Fueller', 'TBP1_EG08']
+        console.log(singlechilds); //['TBB_EG25', 'TBB_EG20', 'Extern_Abgabe_PAL']
+
+        function placesinglechilds (){
+            for (let i=0; i<singleparent.length; i++){
+                for (let j=0; j<singlechilds.length; j++){
+                    let parentsy = 0;
+                    let parentsx = 0;
+                    for (let i=0; i<t_source.length; i++){
+                        if(t_source[i].Parent_Machine === singleparent[i]){
+                            parentsy = t_source[i].Y;
+                            parentsx = t_source[i].X;
+                        for (let f=0; f<t_source.length; f++){
+                            if (t_source[f].Parent_Machine === singlechilds[j]){
+                                let space = nodeHeight/ multichilds.length;
+                                let xOffset = space;
+                                let yOffset = 0;
+                                let yvalue = parentsy + yOffset;
+                                let xvalue = parentsx - xOffset;
+                                t_source.push({ 
+                                    Parent_Machine: value,
+                                    X: xvalue,
+                                    Y: yvalue,
+                                    ID: 'singleend',
+                                    Children_Machine: '',
+                                    X_dep: '',
+                                    Y_dep: ''});
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        placesinglechilds();
+
 
 
        /* let singleparentchild = {};
@@ -867,6 +900,8 @@
             }
         
         } */
+
+
         
             
         
