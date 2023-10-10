@@ -846,7 +846,6 @@
                 if(t_source[i].Parent_Machine === key){
                     parentsy = t_source[i].Y;
                     parentsx = t_source[i].X;
-                }
                 for (let f=0; f<t_source.length; f++){
                     if (t_source[f].Parent_Machine === value){
                         let space = nodeHeight/ multichilds.length;
@@ -863,6 +862,7 @@
                             X_dep: '',
                             Y_dep: ''});
                     }
+                }
                 }
             }
         
