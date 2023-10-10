@@ -848,7 +848,7 @@
                                     let yvalue = parentsy + yOffset;
                                     let xvalue = parentsx - xOffset;
                                     t_source.push({ 
-                                        Parent_Machine: value,
+                                        Parent_Machine: singlechilds[j],
                                         X: xvalue,
                                         Y: yvalue,
                                         ID: 'singleend',
