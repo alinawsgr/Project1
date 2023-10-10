@@ -836,12 +836,11 @@
                 for (let j=0; j<singlechilds.length; j++){
                     let parentsy = 0;
                     let parentsx = 0;
-                    for (let i=0; i<t_source.length; i++){
-                        if(t_source[i].Parent_Machine === singleparent[i]){
-                            parentsy = t_source[i].Y;
-                            parentsx = t_source[i].X;
-                        for (let f=0; f<t_source.length; f++){
-                            if (t_source[f].Parent_Machine === singlechilds[j]){
+                    for (let x=0; x<t_source.length; x++){
+                        if(t_source[x].Parent_Machine === singleparent[i]){
+                            parentsy = t_source[x].Y;
+                            parentsx = t_source[x].X;
+                            if (t_source[x].Parent_Machine === singlechilds[j]){
                                 let space = nodeHeight/ multichilds.length;
                                 let xOffset = space;
                                 let yOffset = 0;
@@ -861,7 +860,7 @@
                     }
                 }
             }
-        }
+        
         placesinglechilds();
 
 
