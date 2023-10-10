@@ -908,7 +908,7 @@
                             startx = t_source[j].X;
                             starty = t_source[j].Y;
                             for (let x=0; x<t_source.length; x++){
-                                for (let a=1; a<pathAbschieberhor_r_reverse.length; a++){
+                                for (let a=0; a<pathAbschieberhor_r_reverse.length; a++){
                                     if (t_source[x].Parent_Machine === pathAbschieberhor_r_reverse[a]){
                                         let space = (a-1) * nodeWidth
                                         t_source[x].X = startx - space;
