@@ -839,7 +839,7 @@
         // place singlechild inside the graph
         
 
-        for (const [key,value] of Object.entries(singleparentchild)){
+        /*for (const [key,value] of Object.entries(singleparentchild)){
             let parentsy = 0;
             let parentsx = 0;
             for (let i=0; i<t_source.length; i++){
@@ -866,7 +866,7 @@
                 }
             }
         
-        } 
+        } */
         
             
         
