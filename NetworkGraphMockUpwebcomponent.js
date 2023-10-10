@@ -833,35 +833,35 @@
 
         function placesinglechilds (){
             for (let i=0; i<singleparent.length; i++){
-                for (let j=0; j<singlechilds.length; j++){
-                    let parentsy = 0;
-                    let parentsx = 0;
-                    for (let x=0; x<t_source.length; x++){
-                        if(t_source[x].Parent_Machine === singleparent[i]){
-                            parentsy = t_source[x].Y;
-                            parentsx = t_source[x].X;
-                            for (let b=0; b<t_source.length; b++){
-                                if (t_source[b].Children_Machine === singlechilds[j]){
-                                    let space = nodeHeight/ singlechilds.length + 200;
-                                    let xOffset = space;
-                                    let yOffset = 0;
-                                    let yvalue = parentsy + yOffset;
-                                    let xvalue = parentsx - xOffset;
-                                    t_source.push({ 
-                                        Parent_Machine: singlechilds[j],
-                                        X: xvalue,
-                                        Y: yvalue,
-                                        ID: 'singleend',
-                                        Children_Machine: '',
-                                        X_dep: '',
-                                        Y_dep: ''});
-                                    }
+            for (let j=0; j<singlechilds.length; j++){
+                let parentsy = 0;
+                let parentsx = 0;
+                for (let x=0; x<t_source.length; x++){
+                    if(t_source[x].Parent_Machine === singleparent[i]){
+                        parentsy = t_source[x].Y;
+                        parentsx = t_source[x].X;
+                        for (let b=0; b<t_source.length; b++){
+                            if (t_source[b].Children_Machine === singlechilds[j]){
+                                let space = nodeHeight/ singlechilds.length + 200;
+                                let xOffset = space;
+                                let yOffset = 0;
+                                let yvalue = parentsy + yOffset;
+                                let xvalue = parentsx - xOffset;
+                                t_source.push({ 
+                                    Parent_Machine: singlechilds[j],
+                                    X: xvalue,
+                                    Y: yvalue,
+                                    ID: 'singleend',
+                                    Children_Machine: '',
+                                    X_dep: '',
+                                    Y_dep: ''});
                                 }
                             }
-                            }
+                        }
                         }
                     }
                 }
+            }
         
         placesinglechilds();
 
