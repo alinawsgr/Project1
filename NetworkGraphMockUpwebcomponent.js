@@ -840,26 +840,28 @@
                         if(t_source[x].Parent_Machine === singleparent[i]){
                             parentsy = t_source[x].Y;
                             parentsx = t_source[x].X;
-                            if (t_source[x].Parent_Machine === singlechilds[j]){
-                                let space = nodeHeight/ multichilds.length;
-                                let xOffset = space;
-                                let yOffset = 0;
-                                let yvalue = parentsy + yOffset;
-                                let xvalue = parentsx - xOffset;
-                                t_source.push({ 
-                                    Parent_Machine: value,
-                                    X: xvalue,
-                                    Y: yvalue,
-                                    ID: 'singleend',
-                                    Children_Machine: '',
-                                    X_dep: '',
-                                    Y_dep: ''});
+                            for (let b=0; b<t_source.length; b++){
+                                if (t_source[b].Parent_Machine === singlechilds[j]){
+                                    let space = nodeHeight/ multichilds.length;
+                                    let xOffset = space;
+                                    let yOffset = 0;
+                                    let yvalue = parentsy + yOffset;
+                                    let xvalue = parentsx - xOffset;
+                                    t_source.push({ 
+                                        Parent_Machine: value,
+                                        X: xvalue,
+                                        Y: yvalue,
+                                        ID: 'singleend',
+                                        Children_Machine: '',
+                                        X_dep: '',
+                                        Y_dep: ''});
+                                    }
+                                }
                             }
-                        }
+                            }
                         }
                     }
                 }
-            }
         
         placesinglechilds();
 
