@@ -945,7 +945,10 @@
             return list;
         }
         let list = findAbschieberpath_top();
+        console.log(list);
 
+
+        // place other outgoing path from Abschieber above 
         function placeAbschieberpath_top(){
             let firstMachineX = null; 
             let firstMachineY = null;
