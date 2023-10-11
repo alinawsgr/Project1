@@ -942,26 +942,30 @@
             let list=['Abschieber'];
             for (let i=0; i<t_source.length; i++){
                 if ((t_source[i].Parent_Machine === 'Abschieber') && (t_source[i].ID === '3')){
-                    let startx = t_source[i].X;
-                    let starty = t_source[i].Y;
-                    list.push(t_source[i].Children_Machine);
-                    for (let j=0; j<t_source.length; j++){
-                        for (let l=0; l<list.length; l++){
-                            if (list[l] === t_source[j].Parent_Machine){
-                                list.push(t_source[j].Children_Machine);
+                    let source = t_source[i].Child_Machine;
+                    for (let x =0; x<t_source.length;x++){
+                        if(t_source[x].Parent_Machine === source){
+                            if(t_source[x].X === ''){
+                                 // und ist noch nicht positioniert 
+                                let startx = t_source[i].X;
+                                let starty = t_source[i].Y;
+                                list.push(t_source[i].Children_Machine);
+                                for (let j=0; j<t_source.length; j++){
+                                    for (let l=0; l<list.length; l++){
+                                        if (list[l] === t_source[j].Parent_Machine){
+                                            list.push(t_source[j].Children_Machine);
+                                        }
+                                        // if list[l] is a end machine (endmachines) -> new entry with the end machine in t_source -> indexof >0
+                                        if (endmachines.indexOf(list[l]) >0){
+                                            break;
+                                        }       
+                                    }
+                                }
+
                             }
-                            // if list[l] is a end machine (endmachines) -> new entry with the end machine in t_source -> indexof >0
-                            if (endmachines.indexOf(list[l]) >0){
-                                break;
-                            }
-                                
                         }
                     }
-                        
-
                 }
-
-
             }
             return list;
         }
