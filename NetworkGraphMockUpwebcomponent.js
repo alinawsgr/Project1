@@ -918,7 +918,7 @@
         
         
         function findAbschieberpath_top (){
-            let list=[];
+            let list=['Abschieber'];
             for (let i=0; i<t_source.length; i++){
                 if (t_source[i].Parent_Machine === 'Abschieber'){
                     let startx = t_source[i].X;
@@ -929,21 +929,50 @@
                             if (list[l] === t_source[j].Parent_Machine){
                                 list.push(t_source[j].Children_Machine);
                             }
-                            // if list[l] is a end machine (endmachines) -> new entry with the end machine in t_source
-                            
-                            
-
-
+                            // if list[l] is a end machine (endmachines) -> new entry with the end machine in t_source -> indexof >0
+                            if (endmachines.indexOf(list[l]) >0){
+                                break;
+                            }
+                                
                         }
+                    }
                         
 
                 }
 
 
+            }
+            return list;
+        }
+        let list = findAbschieberpath_top();
+
+        function placeAbschieberpath_top(){
+            let firstMachineX = null; 
+            let firstMachineY = null;
+            let space = nodeHeight; 
+        
+            for (let i = 0; i < list.length; i++) {
+                let xOffset = 0;
+                let yOffset = (i + 1) * space;
+                let firstMachine = list[0];
+        
+                for (let j = 0; j < t_source.length; j++) {
+                    if (t_source[j].Parent_Machine === firstMachine) {
+                        firstMachineX = t_source[j].X;
+                        firstMachineY = t_source[j].Y;
+                        break; 
+                    }
+                }
+        
+                for (let a = 0; a < t_source.length; a++) {
+                    if (t_source[a].Parent_Machine === list[i + 1]) {
+                        t_source[a].X = firstMachineX + xOffset;
+                        t_source[a].Y = firstMachineY - yOffset;
+                    }
                 }
             }
         }
-        findAbschieberpath_top;
+        placeAbschieberpath_top();
     }
 
     // function that transform p_source data into input format for graph 
