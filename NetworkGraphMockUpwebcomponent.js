@@ -852,7 +852,8 @@
                             ID: 'singleend',
                             Children_Machine: '',
                             X_dep: '',
-                            Y_dep: ''});     
+                            Y_dep: ''});
+                            break;     
                         }
                 }
             }
