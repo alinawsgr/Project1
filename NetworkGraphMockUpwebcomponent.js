@@ -870,6 +870,27 @@
         // Abschieber ausgehend (senkr_u) -> mündet in Pfad von Hauptlinie
         // Abschieber ausgehend (senkr_o) -> mündet nicht in Pfad von Hauptlinie
 
+
+        // get prior machines of Abschieber
+        for (let z=0; z<t_source.length;z++){
+            let start = 'Abschieber';
+            let listbefore = [];
+            if (t_source[z].Children_Machine === start){
+                listbefore.push(t_source[z].Parent_Machine);
+                for (let l=0; l<listbefore.length; l++){
+                    if (t_source[z].Children_Machine === listbefore[l]){
+                        listbefore.push(t_source[z].Parent_Machine);
+                    }
+                    if (endmachines.indexOf(listbefore[z]) >0){
+                        break; 
+                    }
+
+                }
+
+
+            }
+        }
+
         // gets the input and output paths from 'Abschieber'
         function findAbschieberpath_hor_r (){
             let positionAbschieber = 0;
@@ -920,12 +941,12 @@
         function findAbschieberpath_top (){
             let list=['Abschieber'];
             for (let i=0; i<t_source.length; i++){
-                if (t_source[i].Parent_Machine === 'Abschieber'){
+                if ((t_source[i].Parent_Machine === 'Abschieber') && (t_source[i].ID === '3')){
                     let startx = t_source[i].X;
                     let starty = t_source[i].Y;
                     list.push(t_source[i].Children_Machine);
                     for (let j=0; j<t_source.length; j++){
-                        for ( let l=0; l<list.length; l++){
+                        for (let l=0; l<list.length; l++){
                             if (list[l] === t_source[j].Parent_Machine){
                                 list.push(t_source[j].Children_Machine);
                             }
