@@ -840,23 +840,20 @@
                     if(t_source[x].Parent_Machine === singleparent[i]){
                         parentsy = t_source[x].Y;
                         parentsx = t_source[x].X;
-                    //if (t_source[x].Children_Machine === singlechilds[j]){
                         let space = nodeHeight/ singlechilds.length + 200;
                         let xOffset = space;
                         let yOffset = 0;
                         let yvalue = parentsy + yOffset;
                         let xvalue = parentsx - xOffset;
                         t_source.push({ 
-                            Parent_Machine: singlechilds[j],
+                            Parent_Machine: t_source[x].Children_Machine,
                             X: xvalue,
                             Y: yvalue,
                             ID: 'singleend',
                             Children_Machine: '',
                             X_dep: '',
-                            Y_dep: ''});
-                        break;     
+                            Y_dep: ''});     
                         }
-                    //}
                 }
             }
             }
@@ -937,7 +934,7 @@
                     if(t_source[i].Parent_Machine === "Abschieber"){
                         positionAbschieber = i;
                     }
-                    pathAbschieberhor_r = findPaths(t_source,'3','Abschieber'); // ['Abschieber', 'TBB_EG04', 'TBB_EG05']
+                    pathAbschieberhor_r = findPaths(t_source,'3','Abschieber'); // ['Abschieber', 'TBB_EG04', 'TBB_EG05'] -> da kommt dann wahrscheinlich ein pfad dazu 
                     pathAbschieberhor_r_reverse = pathAbschieberhor_r.reverse(); //['TBB_EG05', 'TBB_EG04', 'Abschieber']
                     let startx = 0;
                     let starty = 0;
@@ -972,10 +969,6 @@
                 } 
             }
         }
-
-
-
-        
         findAbschieberpath();
 
 
