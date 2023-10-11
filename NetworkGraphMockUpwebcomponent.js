@@ -739,7 +739,6 @@
                 
             }
         }
-        //console.log(parentarray);
 
         
         // get parent machine with more than one children
@@ -755,8 +754,6 @@
                 singleparent.push(key);
             }
         }
-        //console.log(multiparent);
-        //console.log(singleparent); // ['TBB_EG22', 'Fueller', 'TBP1_EG08'] 
 
         // get children of multiparent
         let multichilds = []
@@ -769,9 +766,6 @@
                 }
             }
         }
-        //console.log(multichilds); // ['TBB_EG08', 'TBB_EG09', 'TBB_EG10', 'TBB_EG12']
-        //console.log(multiparent); // ['TBB_EG07']
-
     
 
         // calculate positions of multichilds
@@ -863,56 +857,7 @@
         placesinglechilds();
 
 
-
-       /* let singleparentchild = {};
-        singleparent.forEach((key,value) => {singleparentchild[key] = singlechilds[value];})
-        console.log(singleparentchild); // {TBB_EG22: 'TBB_EG25', Fueller: 'TBB_EG20', TBP1_EG08: 'Extern_Abgabe_PAL'}
-        
-        // place singlechild inside the graph
-        
-
-        for (const [key,value] of Object.entries(singleparentchild)){
-            let parentsy = 0;
-            let parentsx = 0;
-            for (let i=0; i<t_source.length; i++){
-                if(t_source[i].Parent_Machine === key){
-                    parentsy = t_source[i].Y;
-                    parentsx = t_source[i].X;
-                for (let f=0; f<t_source.length; f++){
-                    if (t_source[f].Parent_Machine === value){
-                        let space = nodeHeight/ multichilds.length;
-                        let xOffset = space;
-                        let yOffset = 0;
-                        let yvalue = parentsy + yOffset;
-                        let xvalue = parentsx - xOffset;
-                        t_source.push({ 
-                            Parent_Machine: value,
-                            X: xvalue,
-                            Y: yvalue,
-                            ID: 'singleend',
-                            Children_Machine: '',
-                            X_dep: '',
-                            Y_dep: ''});
-                    }
-                }
-                }
-            }
-        
-        } */
-
-
-        
-            
-        
-        console.log(t_source);
-
-
-
-        // Überlegungen für Abschieber
-        // welche Prio haben diese Wege?
-        // evtl. Abschieber als zentralen Punkt definieren 
-        // so Zeugs muss nach außen,da keine bloßen endblätter
-        // if Abschieber
+        // checks if "Abschieber" exists in the line
         function checkAbschieber (){
             for (let t=0; t<t_source.length; t++){
                 if (t_source[t].Parent_Machine === 'Abschieber'){
@@ -925,59 +870,74 @@
         // Abschieber ausgehend (senkr_u) -> mündet in Pfad von Hauptlinie
         // Abschieber ausgehend (senkr_o) -> mündet nicht in Pfad von Hauptlinie
 
-
+        // gets the input and output paths from 'Abschieber'
         function findAbschieberpath (){
             let positionAbschieber = 0;
             let pathAbschieberhor_r = [];
             let pathAbschieberhor_r_reverse = [];
             for (let i=0; i<t_source.length; i++){
-                if (checkAbschieber() === true){ // if "Abschieber" exists
+                if (checkAbschieber() === true){ 
                     if(t_source[i].Parent_Machine === "Abschieber"){
                         positionAbschieber = i;
                     }
                     pathAbschieberhor_r = findPaths(t_source,'3','Abschieber'); // ['Abschieber', 'TBB_EG04', 'TBB_EG05'] -> da kommt dann wahrscheinlich ein pfad dazu 
-                    pathAbschieberhor_r_reverse = pathAbschieberhor_r.reverse(); //['TBB_EG05', 'TBB_EG04', 'Abschieber']
-                    let startx = 0;
-                    let starty = 0;
-                    for (let j=0; j<t_source.length; j++){
-                        if (t_source[j].Parent_Machine === pathAbschieberhor_r_reverse[0]){
-                            startx = t_source[j].X;
-                            starty = t_source[j].Y;
-                            for (let x=0; x<t_source.length; x++){
-                                for (let a=1; a<2; a++){
-                                    if (t_source[x].Parent_Machine === pathAbschieberhor_r_reverse[a]){
-                                        let spacey = a * nodeWidth
-                                        let spacex = (a-1) * nodeWidth;
-                                        t_source[x].X = startx - spacex;
-                                        t_source[x].Y = starty - spacey;
+                    for (let p=0; p<pathAbschieberhor_r.length; p++){
+                        for (let j=0; j<t_source.length; j++){
+                            // check if last machine is element of the main line
+                            console.log(pathAbschieberhor_r[pathAbschieberhor_r.length] === t_source[j].Parent_Machine) && (t_source[j].ID === '1');
+                            if ((pathAbschieberhor_r[pathAbschieberhor_r.length] === t_source[j].Parent_Machine) && (t_source[j].ID === '1')){
+                                let startx = 0;
+                                let starty = 0;
+                                pathAbschieberhor_r_reverse = pathAbschieberhor_r[p].reverse(); //['TBB_EG05', 'TBB_EG04', 'Abschieber']
+                                if (t_source[j].Parent_Machine === pathAbschieberhor_r_reverse[0]){
+                                    startx = t_source[j].X;
+                                    starty = t_source[j].Y;
+                                    for (let x=0; x<t_source.length; x++){
+                                        for (let a=1; a<2; a++){
+                                            if (t_source[x].Parent_Machine === pathAbschieberhor_r_reverse[a]){
+                                                let spacey = a * nodeWidth
+                                                let spacex = (a-1) * nodeWidth;
+                                                t_source[x].X = startx - spacex;
+                                                t_source[x].Y = starty - spacey;
+                                            }
+                                            }
+                                        for (let b=2; b<pathAbschieberhor_r_reverse.length; b++){
+                                            if (t_source[x].Parent_Machine === pathAbschieberhor_r_reverse[b]){
+                                                let spacey = nodeWidth
+                                                let spacex = (b-1) * nodeWidth;
+                                                t_source[x].X = startx - spacex;
+                                                t_source[x].Y = starty - spacey;
+                                            }
+                                        }
                                     }
-                                    }
-                                for (let b=2; b<pathAbschieberhor_r_reverse.length; b++){
-                                    if (t_source[x].Parent_Machine === pathAbschieberhor_r_reverse[b]){
-                                        let spacey = nodeWidth
-                                        let spacex = (b-1) * nodeWidth;
-                                        t_source[x].X = startx - spacex;
-                                        t_source[x].Y = starty - spacey;
-                                    }
-
-
+                                }
+                                
+                            }
+                            // if the path does not end in the main line place it above 'Abschieber'
+                            if ((pathAbschieberhor_r[pathAbschieberhor_r.length] === t_source[j].Parent_Machine) && t_source[j].ID !== '1'){
+                                let startx = 0;
+                                let starty = 0;
+                                if (t_source[j].Parent_Machine === pathAbschieberhor_r[0]){
+                                    startx = t_source[j].X;
+                                    starty = t_source[j].Y;
+                                    for (let x=0; x<t_source.length; x++){
+                                        for (let a=1; a<pathAbschieberhor_r.length; a++){
+                                            if (t_source[x].Parent_Machine === pathAbschieberhor_r[a]){
+                                                let spacey = a * nodeHeight;
+                                                t_source[x].X = startx;
+                                                t_source[x].Y = starty - spacey;
+                                            }
+                                        }
                                 }
                             }
-                        
                         }
-                    }
 
-                } 
+                        } 
+                    }
+                }
             }
         }
-        findAbschieberpath();
-
-
-
-        
-            
-        
-        
+        findAbschieberpath();  
     }
 
     // function that transform p_source data into input format for graph 
