@@ -882,12 +882,11 @@
                     }
                     pathAbschieberhor_r = findPaths(t_source,'3','Abschieber'); // ['Abschieber', 'TBB_EG04', 'TBB_EG05'] -> da kommt dann wahrscheinlich ein pfad dazu 
                     console.log(pathAbschieberhor_r);
-                    for (let p=0; p<pathAbschieberhor_r.length; p++){
                         for (let j=0; j<t_source.length; j++){
                             // check if last machine is element of the main line
                                 let startx = 0;
                                 let starty = 0;
-                                pathAbschieberhor_r_reverse = pathAbschieberhor_r[p].reverse(); //['TBB_EG05', 'TBB_EG04', 'Abschieber']
+                                pathAbschieberhor_r_reverse = pathAbschieberhor_r.reverse(); //['TBB_EG05', 'TBB_EG04', 'Abschieber']
                                 if (t_source[j].Parent_Machine === pathAbschieberhor_r_reverse[0]){
                                     startx = t_source[j].X;
                                     starty = t_source[j].Y;
@@ -911,8 +910,7 @@
                                     }
                                 }
                                 
-                            }
-                        }                     
+                            }                 
                 }
             }
         }
@@ -931,7 +929,10 @@
                             if (list[l] === t_source[j].Parent_Machine){
                                 list.push(t_source[j].Children_Machine);
                             }
+                            // if list[l] is a end machine (endmachines) -> new entry with the end machine in t_source
                             
+                            
+
 
                         }
                         
