@@ -871,7 +871,7 @@
         // Abschieber ausgehend (senkr_o) -> mündet nicht in Pfad von Hauptlinie
 
         // gets the input and output paths from 'Abschieber'
-        function findAbschieberpath (){
+        function findAbschieberpath_hor_r (){
             let positionAbschieber = 0;
             let pathAbschieberhor_r = [];
             let pathAbschieberhor_r_reverse = [];
@@ -885,8 +885,6 @@
                     for (let p=0; p<pathAbschieberhor_r.length; p++){
                         for (let j=0; j<t_source.length; j++){
                             // check if last machine is element of the main line
-                            console.log(pathAbschieberhor_r[pathAbschieberhor_r.length] === t_source[j].Parent_Machine) && (t_source[j].ID === '1');
-                            if ((pathAbschieberhor_r[pathAbschieberhor_r.length] === t_source[j].Parent_Machine) && (t_source[j].ID === '1')){
                                 let startx = 0;
                                 let starty = 0;
                                 pathAbschieberhor_r_reverse = pathAbschieberhor_r[p].reverse(); //['TBB_EG05', 'TBB_EG04', 'Abschieber']
@@ -914,31 +912,37 @@
                                 }
                                 
                             }
-                            // if the path does not end in the main line place it above 'Abschieber'
-                            if ((pathAbschieberhor_r[pathAbschieberhor_r.length] === t_source[j].Parent_Machine) && t_source[j].ID !== '1'){
-                                let startx = 0;
-                                let starty = 0;
-                                if (t_source[j].Parent_Machine === pathAbschieberhor_r[0]){
-                                    startx = t_source[j].X;
-                                    starty = t_source[j].Y;
-                                    for (let x=0; x<t_source.length; x++){
-                                        for (let a=1; a<pathAbschieberhor_r.length; a++){
-                                            if (t_source[x].Parent_Machine === pathAbschieberhor_r[a]){
-                                                let spacey = a * nodeHeight;
-                                                t_source[x].X = startx;
-                                                t_source[x].Y = starty - spacey;
-                                            }
-                                        }
-                                }
-                            }
-                        }
-
-                        } 
-                    }
+                        }                     
                 }
             }
         }
-        findAbschieberpath();  
+        findAbschieberpath_hor_r();
+        
+        
+        function findAbschieberpath_top (){
+            let list=[];
+            for (let i=0; i<t_source.length; i++){
+                if (t_source[i].Parent_Machine === 'Abschieber'){
+                    let startx = t_source[i].X;
+                    let starty = t_source[i].Y;
+                    list.push(t_source[i].Children_Machine);
+                    for (let j=0; j<t_source.length; j++){
+                        for ( let l=0; l<list.length; l++){
+                            if (list[l] === t_source[j].Parent_Machine){
+                                list.push(t_source[j].Children_Machine);
+                            }
+                            
+
+                        }
+                        
+
+                }
+
+
+                }
+            }
+        }
+        findAbschieberpath_top;
     }
 
     // function that transform p_source data into input format for graph 
