@@ -881,6 +881,7 @@
                         positionAbschieber = i;
                     }
                     pathAbschieberhor_r = findPaths(t_source,'3','Abschieber'); // ['Abschieber', 'TBB_EG04', 'TBB_EG05'] -> da kommt dann wahrscheinlich ein pfad dazu 
+                    console.log(pathAbschieberhor_r);
                     for (let p=0; p<pathAbschieberhor_r.length; p++){
                         for (let j=0; j<t_source.length; j++){
                             // check if last machine is element of the main line
