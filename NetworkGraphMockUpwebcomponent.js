@@ -822,8 +822,7 @@
                 }
             }
         }
-        console.log(singleparent); // ['TBB_EG22', 'Fueller', 'TBP1_EG08']
-        console.log(singlechilds); //['TBB_EG25', 'TBB_EG20', 'Extern_Abgabe_PAL']
+
 
         function placesinglechilds (){
             for (let i=0; i<singleparent.length; i++){
@@ -898,8 +897,6 @@
             for (let i=0; i<t_source.length; i++){
                 if (checkAbschieber() === true){
                     pathAbschieber= findPaths(t_source, '3', 'Abschieber');
-                    console.log(pathAbschieber); // ['Abschieber', 'TBB_EG04', 'Abschieber', 'TBP2_EG2', 'TBB_EG05', 'TBB_EG04', 'TBP2_EG2', 'TBB_EG05'
-                    
                     // split path in 2 seperate ones -> fehleranfällig
                     pathAbschieberhor_r.push(pathAbschieber[0]);
                     pathAbschieberhor_r.push(pathAbschieber[1]);
@@ -914,6 +911,7 @@
                             let starty = 0;
                             let pathAbschieberhor_r_reverse = [];
                             pathAbschieberhor_r_reverse = pathAbschieberhor_r.reverse(); //['TBB_EG05', 'TBB_EG04', 'Abschieber']
+                            console.log(pathAbschieberhor_r_reverse);
                             if (t_source[j].Parent_Machine === pathAbschieberhor_r_reverse[0]){
                                 startx = t_source[j].X;
                                 starty = t_source[j].Y;
