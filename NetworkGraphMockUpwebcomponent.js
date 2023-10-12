@@ -905,7 +905,7 @@
                             pathAbschieberhor_r.push(t_source[i].Parent_Machine);                
                         }
                     }
-                    for (let o=1; o<pathAbschieberhor_r.length; o++){
+                    for (let o=0; o<pathAbschieberhor_r.length; o++){
                         for (let a=0; a<t_source.length; a++){
                             if (t_source[a].Parent_Machine == pathAbschieberhor_r[o]){
                                 pathAbschieberhor_r.push(t_source[a].Children_Machine);
