@@ -911,14 +911,13 @@
                             let starty = 0;
                             let pathAbschieberhor_r_reverse = [];
                             pathAbschieberhor_r_reverse = pathAbschieberhor_r.reverse(); //['TBB_EG05', 'TBB_EG04', 'Abschieber']
-                            console.log(pathAbschieberhor_r_reverse);
                             if (t_source[j].Parent_Machine === pathAbschieberhor_r_reverse[0]){
                                 startx = t_source[j].X;
                                 starty = t_source[j].Y;
                                 for (let x=0; x<t_source.length; x++){
                                     for (let a=1; a<2; a++){
                                         if (t_source[x].Parent_Machine === pathAbschieberhor_r_reverse[a]){
-                                            let spacey = a * nodeWidth
+                                            let spacey = a * nodeWidth;
                                             let spacex = (a-1) * nodeWidth;
                                             t_source[x].X = startx - spacex;
                                             t_source[x].Y = starty - spacey;
@@ -964,7 +963,7 @@
                     }
                 }
         
-                for (let a = 0; a < t_source.length; a++) {
+                for (let a = 1; a < t_source.length; a++) {
                     if (t_source[a].Parent_Machine === pathAbschiebersenkr_o[i + 1]) {
                         t_source[a].X = firstMachineX + xOffset;
                         t_source[a].Y = firstMachineY - yOffset;
