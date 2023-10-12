@@ -897,44 +897,54 @@
             let pathAbschieberhor_r = [];
             let pathAbschieberhor_r_reverse = [];
             for (let i=0; i<t_source.length; i++){
-                if (checkAbschieber() === true){ 
-                    if(t_source[i].Parent_Machine === "Abschieber"){
-                        positionAbschieber = i;
+                if (checkAbschieber() === true){
+
+                    // find paths
+                    for (let t=0; t<t_source.length; t++){
+                        if ( t_source[i].Parent_Machine == 'Abschieber'){
+                            pathAbschieberhor_r.push(t_source[i].Parent_Machine);                
+                        }
                     }
-                    pathAbschieberhor_r = findPaths(t_source,'3','Abschieber'); // ['Abschieber', 'TBB_EG04', 'TBB_EG05'] -> da kommt dann wahrscheinlich ein pfad dazu 
-                    console.log(pathAbschieberhor_r);
-                        for (let j=0; j<t_source.length; j++){
-                            // check if last machine is element of the main line
-                                let startx = 0;
-                                let starty = 0;
-                                pathAbschieberhor_r_reverse = pathAbschieberhor_r.reverse(); //['TBB_EG05', 'TBB_EG04', 'Abschieber']
-                                if (t_source[j].Parent_Machine === pathAbschieberhor_r_reverse[0]){
-                                    startx = t_source[j].X;
-                                    starty = t_source[j].Y;
-                                    for (let x=0; x<t_source.length; x++){
-                                        for (let a=1; a<2; a++){
-                                            if (t_source[x].Parent_Machine === pathAbschieberhor_r_reverse[a]){
-                                                let spacey = a * nodeWidth
-                                                let spacex = (a-1) * nodeWidth;
-                                                t_source[x].X = startx - spacex;
-                                                t_source[x].Y = starty - spacey;
-                                            }
-                                            }
-                                        for (let b=2; b<pathAbschieberhor_r_reverse.length; b++){
-                                            if (t_source[x].Parent_Machine === pathAbschieberhor_r_reverse[b]){
-                                                let spacey = nodeWidth
-                                                let spacex = (b-1) * nodeWidth;
-                                                t_source[x].X = startx - spacex;
-                                                t_source[x].Y = starty - spacey;
-                                            }
+                    for (let o=1; o<pathAbschieberhor_r.length; o++){
+                        for (let a=0; a<t_source.length; a++){
+                            if (t_source[a].Parent_Machine == path[o]){
+                                pathAbschieberhor_r.push(t_source[a].Children_Machine);
+                            }
+                        }
+                    }
+                    console.log (pathAbschieberhor_r);
+                    for (let j=0; j<t_source.length; j++){
+                        // check if last machine is element of the main line
+                            let startx = 0;
+                            let starty = 0;
+                            pathAbschieberhor_r_reverse = pathAbschieberhor_r.reverse(); //['TBB_EG05', 'TBB_EG04', 'Abschieber']
+                            if (t_source[j].Parent_Machine === pathAbschieberhor_r_reverse[0]){
+                                startx = t_source[j].X;
+                                starty = t_source[j].Y;
+                                for (let x=0; x<t_source.length; x++){
+                                    for (let a=1; a<2; a++){
+                                        if (t_source[x].Parent_Machine === pathAbschieberhor_r_reverse[a]){
+                                            let spacey = a * nodeWidth
+                                            let spacex = (a-1) * nodeWidth;
+                                            t_source[x].X = startx - spacex;
+                                            t_source[x].Y = starty - spacey;
+                                        }
+                                        }
+                                    for (let b=2; b<pathAbschieberhor_r_reverse.length; b++){
+                                        if (t_source[x].Parent_Machine === pathAbschieberhor_r_reverse[b]){
+                                            let spacey = nodeWidth
+                                            let spacex = (b-1) * nodeWidth;
+                                            t_source[x].X = startx - spacex;
+                                            t_source[x].Y = starty - spacey;
                                         }
                                     }
                                 }
-                                
-                            }                 
-                }
+                            }
+                            
+                        }                 
             }
         }
+    }
         findAbschieberpath_hor_r();
         
         
