@@ -923,6 +923,8 @@
 
                     pathAbschiebersenkr_o.push(pathAbschieber[2]);
                     pathAbschiebersenkr_o.push(pathAbschieber[3]);
+                    console.log(pathAbschieberhor_r);
+                    console.log(pathAbschiebersenkr_o);
 
                     for (let j=0; j<t_source.length; j++){
                         // check if last machine is element of the main line
