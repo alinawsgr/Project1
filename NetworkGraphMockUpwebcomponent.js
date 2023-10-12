@@ -912,8 +912,18 @@
                         }
                     }
                     */
-                    pathAbschieberhor_r = findPaths(t_source, '3', 'Abschieber');
-                    console.log(pathAbschieberhor_r);
+                    pathAbschieber= findPaths(t_source, '3', 'Abschieber');
+                    console.log(pathAbschieber); // ['Abschieber', 'TBB_EG04', 'Abschieber', 'TBP2_EG2', 'TBB_EG05', 'TBB_EG04', 'TBP2_EG2', 'TBB_EG05']
+                    let pathAbschieberhor_r = [];
+                    let pathAbschiebersenkr_o = [];
+                    // split path in 2 seperate ones -> fehleranfällig
+                    pathAbschieberhor_r.push(pathAbschieber[0]);
+                    pathAbschieberhor_r.push(pathAbschieber[1]);
+                    pathAbschieberhor_r.push(pathAbschieber[4]);
+
+                    pathAbschiebersenkr_o.push(pathAbschieber[2]);
+                    pathAbschiebersenkr_o.push(pathAbschieber[3]);
+
                     for (let j=0; j<t_source.length; j++){
                         // check if last machine is element of the main line
                             let startx = 0;
