@@ -913,6 +913,8 @@
                         }
                     }
                     console.log (pathAbschieberhor_r);
+
+
                     for (let j=0; j<t_source.length; j++){
                         // check if last machine is element of the main line
                             let startx = 0;
@@ -929,7 +931,7 @@
                                             t_source[x].X = startx - spacex;
                                             t_source[x].Y = starty - spacey;
                                         }
-                                        }
+                                    }
                                     for (let b=2; b<pathAbschieberhor_r_reverse.length; b++){
                                         if (t_source[x].Parent_Machine === pathAbschieberhor_r_reverse[b]){
                                             let spacey = nodeWidth
@@ -942,9 +944,9 @@
                             }
                             
                         }                 
+                }
             }
         }
-    }
         findAbschieberpath_hor_r();
         
         
