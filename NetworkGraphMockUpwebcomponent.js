@@ -893,12 +893,12 @@
 
         // gets the input and output paths from 'Abschieber'
         function findAbschieberpath_hor_r (){
+            let pathAbschieberhor_r = [];
+                let pathAbschiebersenkr_o = [];
             for (let i=0; i<t_source.length; i++){
                 if (checkAbschieber() === true){
                     pathAbschieber= findPaths(t_source, '3', 'Abschieber');
-                    console.log(pathAbschieber); // ['Abschieber', 'TBB_EG04', 'Abschieber', 'TBP2_EG2', 'TBB_EG05', 'TBB_EG04', 'TBP2_EG2', 'TBB_EG05']
-                    let pathAbschieberhor_r = [];
-                    let pathAbschiebersenkr_o = [];
+                    console.log(pathAbschieber); // ['Abschieber', 'TBB_EG04', 'Abschieber', 'TBP2_EG2', 'TBB_EG05', 'TBB_EG04', 'TBP2_EG2', 'TBB_EG05'
                     
                     // split path in 2 seperate ones -> fehleranfällig
                     pathAbschieberhor_r.push(pathAbschieber[0]);
