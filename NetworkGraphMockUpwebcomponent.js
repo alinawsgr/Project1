@@ -944,7 +944,7 @@
     
 
 
-        // place other outgoing path from Abschieber above 
+        /* place other outgoing path from Abschieber above 
         function placeAbschieberpath_top(){
             let firstMachineX = null; 
             let firstMachineY = null;
@@ -971,7 +971,7 @@
                 }
             }
         }
-        placeAbschieberpath_top();
+        placeAbschieberpath_top(); */
 
         console.log(t_source);
     }
