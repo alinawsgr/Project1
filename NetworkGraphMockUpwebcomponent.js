@@ -904,7 +904,7 @@
                     pathAbschieberhor_r.push(pathAbschieber[0]);
                     pathAbschieberhor_r.push(pathAbschieber[1]);
                     pathAbschieberhor_r.push(pathAbschieber[4]);
-                    
+
                     pathAbschiebersenkr_o.push(pathAbschieber[2]);
                     pathAbschiebersenkr_o.push(pathAbschieber[3]);
 
@@ -952,10 +952,10 @@
             let firstMachineY = null;
             let space = nodeHeight; 
         
-            for (let i = 0; i < list.length; i++) {
+            for (let i = 0; i < pathAbschiebersenkr_o.length; i++) {
                 let xOffset = 0;
                 let yOffset = (i + 1) * space;
-                let firstMachine = list[0];
+                let firstMachine = pathAbschiebersenkr_o[0];
         
                 for (let j = 0; j < t_source.length; j++) {
                     if (t_source[j].Parent_Machine === firstMachine) {
@@ -966,7 +966,7 @@
                 }
         
                 for (let a = 0; a < t_source.length; a++) {
-                    if (t_source[a].Parent_Machine === list[i + 1]) {
+                    if (t_source[a].Parent_Machine === pathAbschiebersenkr_o[i + 1]) {
                         t_source[a].X = firstMachineX + xOffset;
                         t_source[a].Y = firstMachineY - yOffset;
                     }
