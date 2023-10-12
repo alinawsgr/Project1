@@ -898,8 +898,7 @@
             let pathAbschieberhor_r_reverse = [];
             for (let i=0; i<t_source.length; i++){
                 if (checkAbschieber() === true){
-
-                    // find paths
+                    /* find paths
                     for (let t=0; t<t_source.length; t++){
                         if ( t_source[i].Parent_Machine == 'Abschieber'){
                             pathAbschieberhor_r.push(t_source[i].Parent_Machine);                
@@ -912,9 +911,9 @@
                             }
                         }
                     }
-                    console.log (pathAbschieberhor_r);
-
-
+                    */
+                    pathAbschieberhor_r = findPaths(t_source, '3', 'Abschieber');
+                    console.log(pathAbschieberhor_r);
                     for (let j=0; j<t_source.length; j++){
                         // check if last machine is element of the main line
                             let startx = 0;
