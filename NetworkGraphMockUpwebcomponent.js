@@ -893,43 +893,26 @@
 
         // gets the input and output paths from 'Abschieber'
         function findAbschieberpath_hor_r (){
-            let positionAbschieber = 0;
-            let pathAbschieberhor_r = [];
-            let pathAbschieberhor_r_reverse = [];
             for (let i=0; i<t_source.length; i++){
                 if (checkAbschieber() === true){
-                    /* find paths
-                    for (let t=0; t<t_source.length; t++){
-                        if ( t_source[i].Parent_Machine == 'Abschieber'){
-                            pathAbschieberhor_r.push(t_source[i].Parent_Machine);                
-                        }
-                    }
-                    for (let o=0; o<pathAbschieberhor_r.length; o++){
-                        for (let a=0; a<t_source.length; a++){
-                            if (t_source[a].Parent_Machine == pathAbschieberhor_r[o]){
-                                pathAbschieberhor_r.push(t_source[a].Children_Machine);
-                            }
-                        }
-                    }
-                    */
                     pathAbschieber= findPaths(t_source, '3', 'Abschieber');
                     console.log(pathAbschieber); // ['Abschieber', 'TBB_EG04', 'Abschieber', 'TBP2_EG2', 'TBB_EG05', 'TBB_EG04', 'TBP2_EG2', 'TBB_EG05']
                     let pathAbschieberhor_r = [];
                     let pathAbschiebersenkr_o = [];
+                    
                     // split path in 2 seperate ones -> fehleranfällig
                     pathAbschieberhor_r.push(pathAbschieber[0]);
                     pathAbschieberhor_r.push(pathAbschieber[1]);
                     pathAbschieberhor_r.push(pathAbschieber[4]);
-
+                    
                     pathAbschiebersenkr_o.push(pathAbschieber[2]);
                     pathAbschiebersenkr_o.push(pathAbschieber[3]);
-                    console.log(pathAbschieberhor_r);
-                    console.log(pathAbschiebersenkr_o);
 
                     for (let j=0; j<t_source.length; j++){
                         // check if last machine is element of the main line
                             let startx = 0;
                             let starty = 0;
+                            let pathAbschieberhor_r_reverse = [];
                             pathAbschieberhor_r_reverse = pathAbschieberhor_r.reverse(); //['TBB_EG05', 'TBB_EG04', 'Abschieber']
                             if (t_source[j].Parent_Machine === pathAbschieberhor_r_reverse[0]){
                                 startx = t_source[j].X;
@@ -960,40 +943,7 @@
         }
         findAbschieberpath_hor_r();
         
-        
-        function findAbschieberpath_top (){
-            let list=['Abschieber'];
-            for (let i=0; i<t_source.length; i++){
-                if ((t_source[i].Parent_Machine === 'Abschieber') && (t_source[i].ID === '3')){
-                    let source = t_source[i].Child_Machine;
-                    for (let x =0; x<t_source.length;x++){
-                        if(t_source[x].Parent_Machine === source){
-                            if(t_source[x].X === ''){
-                                 // und ist noch nicht positioniert 
-                                let startx = t_source[i].X;
-                                let starty = t_source[i].Y;
-                                list.push(t_source[i].Children_Machine);
-                                for (let j=0; j<t_source.length; j++){
-                                    for (let l=0; l<list.length; l++){
-                                        if (list[l] === t_source[j].Parent_Machine){
-                                            list.push(t_source[j].Children_Machine);
-                                        }
-                                        // if list[l] is a end machine (endmachines) -> new entry with the end machine in t_source -> indexof >0
-                                        if (endmachines.indexOf(list[l]) >0){
-                                            break;
-                                        }       
-                                    }
-                                }
-
-                            }
-                        }
-                    }
-                }
-            }
-            return list;
-        }
-        let list = findAbschieberpath_top();
-        console.log(list); // ['Abschieber']
+    
 
 
         // place other outgoing path from Abschieber above 
