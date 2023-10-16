@@ -885,26 +885,29 @@
         // gets the input and output paths from 'Abschieber'
         function findAbschieberpath_hor_r (){
             let pathAbschieberhor_r = [];
-                let pathAbschiebersenkr_o = [];
-            for (let i=0; i<t_source.length; i++){
-                if (checkAbschieber() === true){
-                    pathAbschieber= findPaths(t_source, '3', 'Abschieber');
-                    // split path in 2 seperate ones -> fehleranfällig
-                    pathAbschieberhor_r.push(pathAbschieber[0]);
-                    pathAbschieberhor_r.push(pathAbschieber[1]);
-                    pathAbschieberhor_r.push(pathAbschieber[4]);
+            let pathAbschiebersenkr_o = [];
+            if (checkAbschieber() === true){
+                pathAbschieber= findPaths(t_source, '3', 'Abschieber');
+                // split path in 2 seperate ones -> fehleranfällig
+                pathAbschieberhor_r.push(pathAbschieber[0]);
+                pathAbschieberhor_r.push(pathAbschieber[1]);
+                pathAbschieberhor_r.push(pathAbschieber[4]);
 
-                    pathAbschiebersenkr_o.push(pathAbschieber[2]);
-                    pathAbschiebersenkr_o.push(pathAbschieber[3]);
-
-                }
+                pathAbschiebersenkr_o.push(pathAbschieber[2]);
+                pathAbschiebersenkr_o.push(pathAbschieber[3]);
             }
+            console.log(pathAbschieberhor_r);
+            console.log(pathAbschiebersenkr_o);
+
+
+      
 
                     // set positions
             let startx = 0;
             let starty = 0;
             let pathAbschieberhor_r_reverse = [];
             pathAbschieberhor_r_reverse = pathAbschieberhor_r.reverse(); //['TBB_EG05', 'TBB_EG04', 'Abschieber']
+            console.log(pathAbschieberhor_r_reverse);
 
             for (let j=0; j<t_source.length; j++){
                 // check if last machine is element of the main line
