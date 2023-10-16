@@ -976,9 +976,9 @@
                     if (t_source[j].Parent_Machine === firstMachine) {
                         firstMachineX = t_source[j].X;
                         firstMachineY = t_source[j].Y;
-                        break; 
                     }
                 }
+            }
             for (let x=1; x<leftAbschieberpath.length; x++){
                 for (let a = 0; a < t_source.length; a++) {
                     let xOffset = x * space;
@@ -987,9 +987,7 @@
                         t_source[a].X = firstMachineX - xOffset;
                         t_source[a].Y = firstMachineY + yOffset;
                     }
-                }
-            }
-                
+                }      
             }
         }
         placeleftAbschieberpath();
