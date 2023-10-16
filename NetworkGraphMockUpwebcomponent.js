@@ -994,7 +994,6 @@
         }
 
         let leftAbschieberpath = getleftAbschieberpath();
-        console.log(leftAbschieberpath);
 
 
         function placeleftAbschieberpath (){
@@ -1016,8 +1015,8 @@
                 }
                 for (let a = 1; a < t_source.length; a++) {
                     if (t_source[a].Parent_Machine === pathAbschiebersenkr_o[i + 1]) {
-                        t_source[a].X = firstMachineX + xOffset;
-                        t_source[a].Y = firstMachineY - yOffset;
+                        t_source[a].X = firstMachineX - xOffset;
+                        t_source[a].Y = firstMachineY + yOffset;
                     }
                 }
                 
