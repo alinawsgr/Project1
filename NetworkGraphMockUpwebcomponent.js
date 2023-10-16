@@ -983,7 +983,7 @@
                 for (let a = 0; a < t_source.length; a++) {
                     let xOffset = x * space;
                     let yOffset = 0;
-                    if (t_source[a].Parent_Machine === leftAbschieberpath[a]) {
+                    if (t_source[a].Parent_Machine === leftAbschieberpath[x]) {
                         t_source[a].X = firstMachineX - xOffset;
                         t_source[a].Y = firstMachineY + yOffset;
                     }
