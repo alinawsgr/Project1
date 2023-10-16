@@ -865,11 +865,6 @@
             }
         }
 
-        // Abschienber eingehend (hor_r)
-        // Abschieber ausgehend (senkr_u) -> mündet in Pfad von Hauptlinie
-        // Abschieber ausgehend (senkr_o) -> mündet nicht in Pfad von Hauptlinie
-
-
         // get prior machines of Abschieber
         for (let z=0; z<t_source.length;z++){
             let start = 'Abschieber';
@@ -883,10 +878,7 @@
                     if (endmachines.indexOf(listbefore[z]) >0){
                         break; 
                     }
-
                 }
-
-
             }
         }
 
@@ -905,36 +897,46 @@
                     pathAbschiebersenkr_o.push(pathAbschieber[2]);
                     pathAbschiebersenkr_o.push(pathAbschieber[3]);
 
-                    for (let j=0; j<t_source.length; j++){
-                        // check if last machine is element of the main line
-                            let startx = 0;
-                            let starty = 0;
-                            let pathAbschieberhor_r_reverse = [];
-                            pathAbschieberhor_r_reverse = pathAbschieberhor_r.reverse(); //['TBB_EG05', 'TBB_EG04', 'Abschieber']
-                            if (t_source[j].Parent_Machine === pathAbschieberhor_r_reverse[0]){
-                                startx = t_source[j].X;
-                                starty = t_source[j].Y;
-                                for (let x=0; x<t_source.length; x++){
-                                    for (let a=1; a<2; a++){
-                                        if (t_source[x].Parent_Machine === pathAbschieberhor_r_reverse[a]){
-                                            let spacey = a * nodeWidth;
-                                            let spacex = (a-1) * nodeWidth;
-                                            t_source[x].X = startx - spacex;
-                                            t_source[x].Y = starty - spacey;
-                                        }
-                                    }
-                                    for (let b=2; b<pathAbschieberhor_r_reverse.length; b++){
-                                        if (t_source[x].Parent_Machine === pathAbschieberhor_r_reverse[b]){
-                                            let spacey = nodeWidth
-                                            let spacex = (b-1) * nodeWidth;
-                                            t_source[x].X = startx - spacex;
-                                            t_source[x].Y = starty - spacey;
-                                        }
-                                    }
+                }
+            }
+
+                    // set positions
+            let startx = 0;
+            let starty = 0;
+            let pathAbschieberhor_r_reverse = [];
+            pathAbschieberhor_r_reverse = pathAbschieberhor_r.reverse(); //['TBB_EG05', 'TBB_EG04', 'Abschieber']
+
+            for (let j=0; j<t_source.length; j++){
+                // check if last machine is element of the main line
+                if (t_source[j].Parent_Machine === pathAbschieberhor_r_reverse[0]){
+                    if (t_source[j].ID === '1'){
+                        // if yes, set the coordinates of this machine as the start position
+                        startx = t_source[j].X;
+                        starty = t_source[j].Y;   
+
+                        // calculate positions
+                        for (let x=0; x<t_source.length; x++){
+                            // do it only for the machine at position [1]
+                            for (let a=1; a<2; a++){
+                                if (t_source[x].Parent_Machine === pathAbschieberhor_r_reverse[a]){
+                                    let spacey = a * nodeWidth;
+                                    let spacex = (a-1) * nodeWidth;
+                                    t_source[x].X = startx - spacex;
+                                    t_source[x].Y = starty - spacey;
                                 }
                             }
-                            
-                        }                 
+                        for (let y=0; y<t_source.length; y++){
+                            for (let b=2; b<pathAbschieberhor_r_reverse.length; b++){
+                                if (t_source[y].Parent_Machine === pathAbschieberhor_r_reverse[b]){
+                                    let spacey = nodeWidth
+                                    let spacex = (b-1) * nodeWidth;
+                                    t_source[y].X = startx - spacex;
+                                    t_source[y].Y = starty - spacey;
+                                }
+                            }
+                        }
+                        }  
+                    }   
                 }
             }
             return pathAbschiebersenkr_o;
