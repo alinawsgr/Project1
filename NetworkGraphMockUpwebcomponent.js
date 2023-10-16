@@ -980,9 +980,9 @@
 
         // get left path from abschieber
         function getleftAbschieberpath (){
-            let path = []
+            let path = [];
             // starting point
-            path.push('Abschieber')
+            path.push('Abschieber');
             for (let i=0; i<t_source.length; i++){
                 for (let j=0; j<path.length; j++){
                     if (t_source[i].Children_Machine === path[j] && t_source[i].ID === '3'){
@@ -996,7 +996,38 @@
         let leftAbschieberpath = getleftAbschieberpath();
         console.log(leftAbschieberpath);
 
+
+        function placeleftAbschieberpath (){
+            let firstMachineX = null; 
+            let firstMachineY = null;
+            let space = nodeWidth; 
+        
+            for (let i = 0; i < leftAbschieberpath.length; i++) {
+                let xOffset = (i+1) * space;
+                let yOffset = 0;
+                let firstMachine = leftAbschieberpath[0];
+        
+                for (let j = 0; j < t_source.length; j++) {
+                    if (t_source[j].Parent_Machine === firstMachine) {
+                        firstMachineX = t_source[j].X;
+                        firstMachineY = t_source[j].Y;
+                        break; 
+                    }
+                }
+                for (let a = 1; a < t_source.length; a++) {
+                    if (t_source[a].Parent_Machine === pathAbschiebersenkr_o[i + 1]) {
+                        t_source[a].X = firstMachineX + xOffset;
+                        t_source[a].Y = firstMachineY - yOffset;
+                    }
+                }
+                
+            }
+        }
+        placeleftAbschieberpath();
+        
+        
         console.log(t_source);
+        
     }
 
     // function that transform p_source data into input format for graph 
