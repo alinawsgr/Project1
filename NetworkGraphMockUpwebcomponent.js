@@ -978,6 +978,24 @@
         }
         placeAbschieberpath_top(); 
 
+        // get left path from abschieber
+        function getleftAbschieberpath (){
+            let path = []
+            // starting point
+            path.push('Abschieber')
+            for (let i=0; i<t_source.length; i++){
+                for (let j=0; j<path.length; j++){
+                    if (t_source[i].Children_Machine === path[j] && t_source[i].ID === '3'){
+                        path.push(t_source[i].Parent_Machine);
+                    }
+                }
+            }
+            return path;
+        }
+
+        let leftAbschieberpath = getleftAbschieberpath();
+        console.log(leftAbschieberpath);
+
         console.log(t_source);
     }
 
@@ -1000,7 +1018,7 @@
             aLines = oNewStructure.lines;
 
         for(var i in aSource){
-            let oCurrentNode = aSource[i],
+            let oCurrentNode = aSource[i]
             sCurrentName = oCurrentNode.Parent_Machine,
             sCurrKey = oCurrentNode.Key,
             sCurrentChild = oCurrentNode.Children_Machine;
