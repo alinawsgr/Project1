@@ -902,7 +902,7 @@
 
       
 
-                    // set positions
+            // set positions
             let startx = 0;
             let starty = 0;
             let pathAbschieberhor_r_reverse = [];
@@ -976,6 +976,7 @@
                     if (t_source[j].Parent_Machine === firstMachine) {
                         firstMachineX = t_source[j].X;
                         firstMachineY = t_source[j].Y;
+                        break;
                     }
                 }
             }
