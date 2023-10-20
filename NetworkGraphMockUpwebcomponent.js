@@ -994,7 +994,6 @@
                         }
                     }
                 }
-            }
 
             for (let s=1; s<(leftAbschieberpath.length)+1; s++){
                 for (let l = 0; l< t_source.length; l++) {
