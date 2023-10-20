@@ -985,10 +985,18 @@
                     let xOffset = x * space;
                     let yOffset = 0;
                     if (t_source[a].Parent_Machine === leftAbschieberpath[x]) {
-                        if (endmachines.indexOf(t_source[x].Children_Machine) >= 0){
-                            t_source[a].X = firstMachineX - xOffset;
-                            t_source[a].Y = firstMachineY + yOffset;
+                        if (endmachines.indexOf(t_source[a].Children_Machine) >= 0){
+                            t_source.push({ 
+                                Parent_Machine: leftAbschieberpath[x],
+                                X: xvalue,
+                                Y: yvalue,
+                                ID: 'singleend',
+                                Children_Machine: '',
+                                X_dep: '',
+                                Y_dep: ''});
                         }
+                        t_source[a].X = firstMachineX - xOffset;
+                        t_source[a].Y = firstMachineY + yOffset;
                     }
                 }      
             }
