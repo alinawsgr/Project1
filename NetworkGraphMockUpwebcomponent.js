@@ -985,8 +985,8 @@
                     if (endmachines.indexOf(t_source[a].Children_Machine) >= 0){
                         t_source.push({ 
                             Parent_Machine: leftAbschieberpath[x],
-                            X: xvalue,
-                            Y: yvalue,
+                            X: 0,
+                            Y: 0,
                             ID: '',
                             Children_Machine: '',
                             X_dep: '',
