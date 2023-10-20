@@ -980,7 +980,7 @@
                     }
                 }
             }
-            for (let x=1; x<leftAbschieberpath.length; x++){
+            for (let x=1; x<(leftAbschieberpath.length)+1; x++){
                 for (let a = 0; a < t_source.length; a++) {
                     let xOffset = x * space;
                     let yOffset = 0;
