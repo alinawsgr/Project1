@@ -991,13 +991,12 @@
                             Children_Machine: '',
                             X_dep: '',
                             Y_dep: ''});
-                        }
                     }
                 }
+            }
 
-            for (let s=1; s<(leftAbschieberpath.length)+1; s++){
+            for (let s=1; s<leftAbschieberpath.length; s++){
                 for (let l = 0; l< t_source.length; l++) {
-                    
                     let xOffset = s * space;
                     let yOffset = 0;
                     if (t_source[l].Parent_Machine === leftAbschieberpath[s]) {
