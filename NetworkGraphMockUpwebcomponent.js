@@ -346,7 +346,7 @@
                 }
             }
 
-            for (let j=1; j<path.length; j++){
+            for (let j=1; j<(path.length)-1; j++){
                 for (let a=0; a<(t_source.length)-1; a++){
                     if (t_source[a].ID === priority && t_source[a].Parent_Machine == path[j]){
                         path.push(t_source[a].Children_Machine);
