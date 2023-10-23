@@ -896,12 +896,6 @@
                 pathAbschiebersenkr_o.push(pathAbschieber[2]);
                 pathAbschiebersenkr_o.push(pathAbschieber[3]);
             }
-            console.log(pathAbschieberhor_r);
-            console.log(pathAbschiebersenkr_o);
-
-
-      
-
             // set positions
             let startx = 0;
             let starty = 0;
@@ -942,7 +936,6 @@
                     }   
                 }
             }
-            return pathAbschiebersenkr_o;
         }
         //pathAbschiebersenkr_o = findAbschieberpath_hor_r(); 
 
@@ -1008,11 +1001,12 @@
         }
         placeleftAbschieberpath();
         
-    
-
-
         //place other outgoing path from Abschieber above 
         function placeAbschieberpath_top(){
+            let pathAbschiebersenkr_o = [];
+            pathAbschiebersenkr_o.push(pathAbschieber[2]);
+            pathAbschiebersenkr_o.push(pathAbschieber[3]);
+
             let firstMachineX = null; 
             let firstMachineY = null;
             let space = nodeHeight; 
