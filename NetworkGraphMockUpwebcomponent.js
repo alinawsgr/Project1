@@ -944,7 +944,7 @@
             }
             return pathAbschiebersenkr_o;
         }
-        pathAbschiebersenkr_o = findAbschieberpath_hor_r(); 
+        //pathAbschiebersenkr_o = findAbschieberpath_hor_r(); 
 
         // get left path from abschieber
         function getleftAbschieberpath (){
