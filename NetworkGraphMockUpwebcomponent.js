@@ -1003,6 +1003,7 @@
         
         //place other outgoing path from Abschieber above 
         function placeAbschieberpath_top(){
+            pathAbschieber= findPaths(t_source, '3', 'Abschieber');
             let pathAbschiebersenkr_o = [];
             pathAbschiebersenkr_o.push(pathAbschieber[2]);
             pathAbschiebersenkr_o.push(pathAbschieber[3]);
