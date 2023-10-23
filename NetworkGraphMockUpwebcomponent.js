@@ -883,7 +883,7 @@
         }
 
         // gets the input and output paths from 'Abschieber'
-        function findAbschieberpath_hor_r (){
+        /*function findAbschieberpath_hor_r (){
             let pathAbschieberhor_r = [];
             let pathAbschiebersenkr_o = [];
             if (checkAbschieber() === true){
@@ -944,7 +944,7 @@
             }
             return pathAbschiebersenkr_o;
         }
-        pathAbschiebersenkr_o = findAbschieberpath_hor_r();
+        pathAbschiebersenkr_o = findAbschieberpath_hor_r(); */
 
         // get left path from abschieber
         function getleftAbschieberpath (){
