@@ -346,8 +346,8 @@
                 }
             }
 
-            for (let j=1; j<(path.length)-2; j++){
-                for (let a=0; a<(t_source.length)-2; a++){
+            for (let j=1; j<(path.length)-1; j++){
+                for (let a=0; a<(t_source.length)-1; a++){
                     if (t_source[a].ID === priority && t_source[a].Parent_Machine == path[j]){
                         path.push(t_source[a].Children_Machine);
                     }
@@ -896,6 +896,12 @@
                 pathAbschiebersenkr_o.push(pathAbschieber[2]);
                 pathAbschiebersenkr_o.push(pathAbschieber[3]);
             }
+            console.log(pathAbschieberhor_r);
+            console.log(pathAbschiebersenkr_o);
+
+
+      
+
             // set positions
             let startx = 0;
             let starty = 0;
@@ -936,8 +942,9 @@
                     }   
                 }
             }
+            return pathAbschiebersenkr_o;
         }
-        //pathAbschiebersenkr_o = findAbschieberpath_hor_r(); 
+        pathAbschiebersenkr_o = findAbschieberpath_hor_r(); 
 
         // get left path from abschieber
         function getleftAbschieberpath (){
@@ -1001,13 +1008,11 @@
         }
         placeleftAbschieberpath();
         
+    
+
+
         //place other outgoing path from Abschieber above 
         function placeAbschieberpath_top(){
-            pathAbschieber= findPaths(t_source, '3', 'Abschieber');
-            let pathAbschiebersenkr_o = [];
-            pathAbschiebersenkr_o.push(pathAbschieber[2]);
-            pathAbschiebersenkr_o.push(pathAbschieber[3]);
-
             let firstMachineX = null; 
             let firstMachineY = null;
             let space = nodeHeight; 
