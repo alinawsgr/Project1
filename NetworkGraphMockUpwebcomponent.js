@@ -674,7 +674,7 @@
         calcpositionssenkr_u(path2_Auspacker, t_source, maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight, '2');
 
         // others...   
-        
+        /*
         let paths_4 = [];
         let paths_10 = [];
         let paths_20 = [];
@@ -707,7 +707,7 @@
         for (let p=0; p<paths_4.length; p++){
             let currentpath = paths_4[p];
             calcpositionsexternal(currentpath);
-        }
+        }*/
 
         ///////// end nodes /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // get list with children machines
@@ -724,7 +724,7 @@
         let endmachines = [];
         for (let j=0; j<allchildrenmachines.length; j++){
             if (allmothermachines.indexOf(allchildrenmachines[j]) === -1){
-                endmachines.push(allchildrenmachines[j]); //['TBB_EG08',  'TBB_EG09', 'TBB_EG10', 'TBB_EG25','TBB_EG20', 'Extern_Abgabe_PAL']
+                endmachines.push(allchildrenmachines[j]); 
             }  
         }
 
@@ -896,12 +896,6 @@
                 pathAbschiebersenkr_o.push(pathAbschieber[2]);
                 pathAbschiebersenkr_o.push(pathAbschieber[3]);
             }
-            console.log(pathAbschieberhor_r);
-            console.log(pathAbschiebersenkr_o);
-
-
-      
-
             // set positions
             let startx = 0;
             let starty = 0;
@@ -942,9 +936,8 @@
                     }   
                 }
             }
-            return pathAbschiebersenkr_o;
         }
-        pathAbschiebersenkr_o = findAbschieberpath_hor_r();
+        //pathAbschiebersenkr_o = findAbschieberpath_hor_r(); 
 
         // get left path from abschieber
         function getleftAbschieberpath (){
@@ -981,23 +974,49 @@
                 }
             }
             for (let x=1; x<leftAbschieberpath.length; x++){
-                for (let a = 0; a < t_source.length; a++) {
-                    let xOffset = x * space;
+                for (let a=0; a<t_source.length; a++){
+                    if (endmachines.indexOf(t_source[a].Children_Machine) >= 0){
+                        t_source.push({ 
+                            Parent_Machine: t_source[a].Children_Machine,
+                            X: 0,
+                            Y: 0,
+                            ID: '',
+                            Children_Machine: '',
+                            X_dep: '',
+                            Y_dep: ''});
+                    }
+                }
+            }
+
+            for (let s=1; s<leftAbschieberpath.length; s++){
+                for (let l = 0; l< t_source.length; l++) {
+                    let xOffset = s * space;
                     let yOffset = 0;
-                    if (t_source[a].Parent_Machine === leftAbschieberpath[x]) {
-                        t_source[a].X = firstMachineX - xOffset;
-                        t_source[a].Y = firstMachineY + yOffset;
+                    if (t_source[l].Parent_Machine === leftAbschieberpath[s]) {
+                        t_source[l].X = firstMachineX - xOffset;
+                        t_source[l].Y = firstMachineY + yOffset;
                     }
                 }      
             }
         }
         placeleftAbschieberpath();
+
+/*
+        function findpaths3 (quelle){
+            for (let i=0; i<t_source.length; i++){
+                if (t_source[i].Parent_Machine)
+
+
+            }
+        }
         
-    
-
-
         //place other outgoing path from Abschieber above 
         function placeAbschieberpath_top(){
+            //pathAbschieber= findPaths(t_source, '3', 'Abschieber')
+            let pathAbschiebersenkr_o = [];
+            pathAbschiebersenkr_o.push(pathAbschieber[2]);
+            pathAbschiebersenkr_o.push(pathAbschieber[3]);
+
             let firstMachineX = null; 
             let firstMachineY = null;
             let space = nodeHeight; 
@@ -1023,7 +1042,7 @@
                 }
             }
         }
-        placeAbschieberpath_top(); 
+        placeAbschieberpath_top(); */
 
         
         
