@@ -923,8 +923,8 @@
         function placeAbschieberpath_top(){
             pathAbschieber= findPaths(t_source, '3', 'Abschieber')
             let pathAbschiebersenkr_o = [];
-            pathAbschiebersenkr_o.push(pathAbschieber[2]);
-            pathAbschiebersenkr_o.push(pathAbschieber[3]);
+            pathAbschiebersenkr_o.push(pathAbschieber[4]);
+            pathAbschiebersenkr_o.push(pathAbschieber[5]);
 
             let firstMachineX = null; 
             let firstMachineY = null;
