@@ -346,8 +346,8 @@
                 }
             }
 
-            for (let j=1; j<path.length; j++){
-                for (let a=0; a<t_source.length; a++){
+            for (let j=1; j<(path.length)-2; j++){
+                for (let a=0; a<(t_source.length)-2; a++){
                     if (t_source[a].ID === priority && t_source[a].Parent_Machine == path[j]){
                         path.push(t_source[a].Children_Machine);
                     }
@@ -708,7 +708,7 @@
             let currentpath = paths_4[p];
             calcpositionsexternal(currentpath);
         }*/
-/*
+
         ///////// end nodes /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // get list with children machines
         let allchildrenmachines =  [];
@@ -880,10 +880,7 @@
                     }
                 }
             }
-            console.log(listbefore);
         }
-        /*
-        
 
         // gets the input and output paths from 'Abschieber'
         function findAbschieberpath_hor_r (){
@@ -940,7 +937,7 @@
                 }
             }
         }
-        pathAbschiebersenkr_o = findAbschieberpath_hor_r(); 
+        //pathAbschiebersenkr_o = findAbschieberpath_hor_r(); 
 
         // get left path from abschieber
         function getleftAbschieberpath (){
@@ -1003,19 +1000,10 @@
             }
         }
         placeleftAbschieberpath();
-
-/*
-        function findpaths3 (quelle){
-            for (let i=0; i<t_source.length; i++){
-                if (t_source[i].Parent_Machine)
-
-
-            }
-        }
         
         //place other outgoing path from Abschieber above 
         function placeAbschieberpath_top(){
-            //pathAbschieber= findPaths(t_source, '3', 'Abschieber')
+            pathAbschieber= findPaths(t_source, '3', 'Abschieber');
             let pathAbschiebersenkr_o = [];
             pathAbschiebersenkr_o.push(pathAbschieber[2]);
             pathAbschiebersenkr_o.push(pathAbschieber[3]);
@@ -1045,7 +1033,7 @@
                 }
             }
         }
-        placeAbschieberpath_top(); */
+        placeAbschieberpath_top(); 
 
         
         
