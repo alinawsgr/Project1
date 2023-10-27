@@ -881,6 +881,7 @@
                 }
             }
         }
+        
 
         // gets the input and output paths from 'Abschieber'
         function findAbschieberpath_hor_r (){
@@ -937,7 +938,7 @@
                 }
             }
         }
-        //pathAbschiebersenkr_o = findAbschieberpath_hor_r(); 
+        pathAbschiebersenkr_o = findAbschieberpath_hor_r(); 
 
         // get left path from abschieber
         function getleftAbschieberpath (){
