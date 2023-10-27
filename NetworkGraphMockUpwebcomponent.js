@@ -968,21 +968,6 @@
                 }
             }
         }
-        for (let x=1; x<pathAbschieberhor_l.length; x++){
-            for (let a=0; a<t_source.length; a++){
-                if (endmachines.indexOf(t_source[a].Children_Machine) >= 0){
-                    t_source.push({ 
-                        Parent_Machine: t_source[a].Children_Machine,
-                        X: 0,
-                        Y: 0,
-                        ID: '',
-                        Children_Machine: '',
-                        X_dep: '',
-                        Y_dep: ''});
-                }
-            }
-        }
-
         for (let s=1; s<pathAbschieberhor_l; s++){
             for (let l = 0; l< t_source.length; l++) {
                 let xOffset = s * space;
