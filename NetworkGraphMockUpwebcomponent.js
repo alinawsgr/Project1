@@ -913,7 +913,9 @@
             returnarray = [pathAbschiebersenkr_o,pathAbschieberhor_l];
             return returnarray;
         }
+        // hier liegt der fehler!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! es springt hier nicht rein
         result = findAbschieberpath();
+        console.log(result);
         pathAbschiebersenkr_o = result[0]; 
         pathAbschieberhor_l = result[1]; 
         
