@@ -674,7 +674,6 @@
         calcpositionssenkr_u(path2_Auspacker, t_source, maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight, '2');
 
         // others...   
-        
         let paths_4 = [];
         let paths_10 = [];
         let paths_20 = [];
@@ -724,7 +723,7 @@
         let endmachines = [];
         for (let j=0; j<allchildrenmachines.length; j++){
             if (allmothermachines.indexOf(allchildrenmachines[j]) === -1){
-                endmachines.push(allchildrenmachines[j]); //['TBB_EG08',  'TBB_EG09', 'TBB_EG10', 'TBB_EG25','TBB_EG20', 'Extern_Abgabe_PAL']
+                endmachines.push(allchildrenmachines[j]); 
             }  
         }
 
@@ -880,7 +879,10 @@
                     }
                 }
             }
+            console.log(listbefore);
         }
+        
+        
 
         // gets the input and output paths from 'Abschieber'
         function findAbschieberpath_hor_r (){
@@ -896,12 +898,6 @@
                 pathAbschiebersenkr_o.push(pathAbschieber[2]);
                 pathAbschiebersenkr_o.push(pathAbschieber[3]);
             }
-            console.log(pathAbschieberhor_r);
-            console.log(pathAbschiebersenkr_o);
-
-
-      
-
             // set positions
             let startx = 0;
             let starty = 0;
@@ -942,9 +938,8 @@
                     }   
                 }
             }
-            return pathAbschiebersenkr_o;
         }
-        pathAbschiebersenkr_o = findAbschieberpath_hor_r();
+        pathAbschiebersenkr_o = findAbschieberpath_hor_r(); 
 
         // get left path from abschieber
         function getleftAbschieberpath (){
@@ -1007,12 +1002,23 @@
             }
         }
         placeleftAbschieberpath();
+
+
+        /*function findpaths3 (quelle){
+            for (let i=0; i<t_source.length; i++){
+                if (t_source[i].Parent_Machine)
+
+
+            }
+        }*/
         
-    
-
-
         //place other outgoing path from Abschieber above 
         function placeAbschieberpath_top(){
+            pathAbschieber= findPaths(t_source, '3', 'Abschieber')
+            let pathAbschiebersenkr_o = [];
+            pathAbschiebersenkr_o.push(pathAbschieber[2]);
+            pathAbschiebersenkr_o.push(pathAbschieber[3]);
+
             let firstMachineX = null; 
             let firstMachineY = null;
             let space = nodeHeight; 
