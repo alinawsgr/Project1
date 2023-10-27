@@ -674,7 +674,7 @@
         calcpositionssenkr_u(path2_Auspacker, t_source, maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight, '2');
 
         // others...   
-        /*
+        
         let paths_4 = [];
         let paths_10 = [];
         let paths_20 = [];
@@ -707,7 +707,7 @@
         for (let p=0; p<paths_4.length; p++){
             let currentpath = paths_4[p];
             calcpositionsexternal(currentpath);
-        }*/
+        }
 
         ///////// end nodes /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // get list with children machines
@@ -724,7 +724,7 @@
         let endmachines = [];
         for (let j=0; j<allchildrenmachines.length; j++){
             if (allmothermachines.indexOf(allchildrenmachines[j]) === -1){
-                endmachines.push(allchildrenmachines[j]); 
+                endmachines.push(allchildrenmachines[j]); //['TBB_EG08',  'TBB_EG09', 'TBB_EG10', 'TBB_EG25','TBB_EG20', 'Extern_Abgabe_PAL']
             }  
         }
 
@@ -944,7 +944,7 @@
             }
             return pathAbschiebersenkr_o;
         }
-        pathAbschiebersenkr_o = findAbschieberpath_hor_r(); 
+        pathAbschiebersenkr_o = findAbschieberpath_hor_r();
 
         // get left path from abschieber
         function getleftAbschieberpath (){
