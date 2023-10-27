@@ -828,6 +828,7 @@
                 }
             }
         }
+        /*
 
         // get prior machines of Abschieber
         for (let z=0; z<t_source.length;z++){
@@ -845,7 +846,7 @@
                 }
             }
             console.log(listbefore);
-        }
+        } */
         
         
 
@@ -855,6 +856,7 @@
             let pathAbschiebersenkr_o = [];
             if (checkAbschieber() === true){
                 pathAbschieber= findPaths(t_source, '3', 'Abschieber');
+                console.log(pathAbschieber);
                 // split path in 2 seperate ones -> fehleranfällig
                 pathAbschieberhor_r.push(pathAbschieber[0]);
                 pathAbschieberhor_r.push(pathAbschieber[1]);
