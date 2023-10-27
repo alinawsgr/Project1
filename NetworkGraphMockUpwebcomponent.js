@@ -880,7 +880,9 @@
                     }
                 }
             }
+            console.log(listbefore);
         }
+        /*
         
 
         // gets the input and output paths from 'Abschieber'
