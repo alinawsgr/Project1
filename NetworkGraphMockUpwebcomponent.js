@@ -956,6 +956,10 @@
         
        // place left abschieber path
        function placeleftAbschieberpath (){
+        pathAbschieber= findPaths(t_source, '3', 'Abschieber')
+        let pathAbschieberhor_l = [];
+        pathAbschieberhor_l.push(pathAbschieber[2]);
+        pathAbschieberhor_l.push(pathAbschieber[3]);
         let firstMachineX = null; 
         let firstMachineY = null;
         let space = nodeWidth; 
