@@ -981,27 +981,12 @@
                 }
             }
             for (let x=1; x<leftAbschieberpath.length; x++){
-                for (let a=0; a<t_source.length; a++){
-                    if (endmachines.indexOf(t_source[a].Children_Machine) >= 0){
-                        t_source.push({ 
-                            Parent_Machine: t_source[a].Children_Machine,
-                            X: 0,
-                            Y: 0,
-                            ID: '',
-                            Children_Machine: '',
-                            X_dep: '',
-                            Y_dep: ''});
-                    }
-                }
-            }
-
-            for (let s=1; s<leftAbschieberpath.length; s++){
-                for (let l = 0; l< t_source.length; l++) {
-                    let xOffset = s * space;
+                for (let a = 0; a < t_source.length; a++) {
+                    let xOffset = x * space;
                     let yOffset = 0;
-                    if (t_source[l].Parent_Machine === leftAbschieberpath[s]) {
-                        t_source[l].X = firstMachineX - xOffset;
-                        t_source[l].Y = firstMachineY + yOffset;
+                    if (t_source[a].Parent_Machine === leftAbschieberpath[x]) {
+                        t_source[a].X = firstMachineX - xOffset;
+                        t_source[a].Y = firstMachineY + yOffset;
                     }
                 }      
             }
