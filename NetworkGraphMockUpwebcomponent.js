@@ -851,9 +851,10 @@
         
 
         // gets the input and output paths from 'Abschieber'
-        function findAbschieberpath_hor_r (){
+        function findAbschieberpath (){
             let pathAbschieberhor_r = [];
             let pathAbschiebersenkr_o = [];
+            let pathAbschieberhor_l = [];
             if (checkAbschieber() === true){
                 pathAbschieber= findPaths(t_source, '3', 'Abschieber');
                 console.log(pathAbschieber);
@@ -864,6 +865,9 @@
 
                 pathAbschiebersenkr_o.push(pathAbschieber[4]);
                 pathAbschiebersenkr_o.push(pathAbschieber[5]);
+
+                pathAbschieberhor_l.push(pathAbschieber[2]);
+                pathAbschieberhor_l.push(pathAbschieber[3]);
             }
             // set positions
             let startx = 0;
@@ -905,35 +909,22 @@
                     }   
                 }
             }
+            let returnarray = [];
+            returnarray = [pathAbschiebersenkr_o,pathAbschieberhor_l];
+            return returnarray;
         }
-        pathAbschiebersenkr_o = findAbschieberpath_hor_r(); 
+        result = findAbschieberpath();
+        pathAbschiebersenkr_o = result[0]; 
+        pathAbschieberhor_l = result[1]; 
 
-        // get left path from abschieber
-        function getleftAbschieberpath (){
-            let path = [];
-            // starting point
-            path.push('Abschieber');
-            for (let i=0; i<t_source.length; i++){
-                for (let j=0; j<path.length; j++){
-                    if (t_source[i].Children_Machine === path[j] && t_source[i].ID === '3'){
-                        path.push(t_source[i].Parent_Machine);
-                    }
-                }
-            }
-            return path;
-        }
-
-        let leftAbschieberpath = getleftAbschieberpath();
-        console.log(leftAbschieberpath);
-
-
+       // place left abschieber path
         function placeleftAbschieberpath (){
             let firstMachineX = null; 
             let firstMachineY = null;
             let space = nodeWidth; 
         
-            for (let i = 0; i < leftAbschieberpath.length; i++) {
-                let firstMachine = leftAbschieberpath[0];
+            for (let i = 0; i <pathAbschieberhor_l.length; i++) {
+                let firstMachine = pathAbschieberhor_l[0];
                 for (let j = 0; j < t_source.length; j++) {
                     if (t_source[j].Parent_Machine === firstMachine) {
                         firstMachineX = t_source[j].X;
@@ -942,7 +933,7 @@
                     }
                 }
             }
-            for (let x=1; x<leftAbschieberpath.length; x++){
+            for (let x=1; x<pathAbschieberhor_l.length; x++){
                 for (let a=0; a<t_source.length; a++){
                     if (endmachines.indexOf(t_source[a].Children_Machine) >= 0){
                         t_source.push({ 
@@ -957,7 +948,7 @@
                 }
             }
 
-            for (let s=1; s<leftAbschieberpath.length; s++){
+            for (let s=1; s<pathAbschieberhor_l; s++){
                 for (let l = 0; l< t_source.length; l++) {
                     let xOffset = s * space;
                     let yOffset = 0;
