@@ -860,10 +860,10 @@
                 // split path in 2 seperate ones -> fehleranfällig
                 pathAbschieberhor_r.push(pathAbschieber[0]);
                 pathAbschieberhor_r.push(pathAbschieber[1]);
-                pathAbschieberhor_r.push(pathAbschieber[4]);
+                pathAbschieberhor_r.push(pathAbschieber[6]);
 
-                pathAbschiebersenkr_o.push(pathAbschieber[2]);
-                pathAbschiebersenkr_o.push(pathAbschieber[3]);
+                pathAbschiebersenkr_o.push(pathAbschieber[4]);
+                pathAbschiebersenkr_o.push(pathAbschieber[5]);
             }
             // set positions
             let startx = 0;
