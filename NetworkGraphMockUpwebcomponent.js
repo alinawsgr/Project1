@@ -708,7 +708,7 @@
             let currentpath = paths_4[p];
             calcpositionsexternal(currentpath);
         }*/
-
+/*
         ///////// end nodes /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // get list with children machines
         let allchildrenmachines =  [];
