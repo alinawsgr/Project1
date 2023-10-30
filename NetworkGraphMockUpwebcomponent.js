@@ -916,8 +916,8 @@
         // hier liegt der fehler!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! es springt hier nicht rein
         result = findAbschieberpath();
         console.log(result);
-        pathAbschiebersenkr_o = result[0]; 
-        pathAbschieberhor_l = result[1]; 
+        pathAbschiebersenkr_o = result[0]; // ['Abschieber', 'TBP2_EG2']
+        pathAbschieberhor_l = result[1];  // ['Abschieber', 'TBP2_EG1']
         
         //place other outgoing path from Abschieber above 
         function placeAbschieberpath_top(){
@@ -956,10 +956,6 @@
         
        // place left abschieber path
        function placeleftAbschieberpath (){
-        pathAbschieber= findPaths(t_source, '3', 'Abschieber')
-        let pathAbschieberhor_l = [];
-        pathAbschieberhor_l.push(pathAbschieber[2]);
-        pathAbschieberhor_l.push(pathAbschieber[3]);
         let firstMachineX = null; 
         let firstMachineY = null;
         let space = nodeWidth; 
