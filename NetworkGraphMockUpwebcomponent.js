@@ -972,7 +972,7 @@
         }
         for (let s=1; s<pathAbschieberhor_l.length; s++){
             for (let l = 0; l< t_source.length; l++) {
-                let xOffset = (s+1) * space;
+                let xOffset = s * space;
                 let yOffset = 0;
                 if (t_source[l].Parent_Machine === pathAbschieberhor_l[s]) {
                     t_source[l].X = firstMachineX - xOffset;
