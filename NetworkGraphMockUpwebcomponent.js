@@ -673,42 +673,6 @@
         }
         calcpositionssenkr_u(path2_Auspacker, t_source, maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight, '2');
 
-        // others...   
-        
-        let paths_4 = [];
-        let paths_10 = [];
-        let paths_20 = [];
-        let paths_3 = [];
-
-        // externalpaths: 
-
-        for (let i = 0; i < t_externalpaths.length; i++) {
-            let index = '';
-            if (t_externalpaths[i] === '4') {
-                x = i-1;
-                index = t_externalpaths[x];
-                paths_4.push(findPaths(t_source, '4', index));
-            } else if (t_externalpaths[1] === '10') {
-                x = i-1;
-                index = t_externalpaths[x];
-                paths_10.push(findPaths(t_source, '10', index));
-            } else if (t_externalpaths[i] === '20') {
-                x = i-1;
-                index = t_externalpaths[x];
-                paths_20.push(findPaths(t_source, '20', index));
-            } else if (t_externalpaths[i] === '3') {
-                x = i-1;
-                index = t_externalpaths[x];
-                paths_3.push(findPaths(t_source, '3', index));
-            }
-        }
-
-
-        for (let p=0; p<paths_4.length; p++){
-            let currentpath = paths_4[p];
-            calcpositionsexternal(currentpath);
-        }
-
         ///////// end nodes /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // get list with children machines
         let allchildrenmachines =  [];
@@ -724,7 +688,7 @@
         let endmachines = [];
         for (let j=0; j<allchildrenmachines.length; j++){
             if (allmothermachines.indexOf(allchildrenmachines[j]) === -1){
-                endmachines.push(allchildrenmachines[j]); //['TBB_EG08',  'TBB_EG09', 'TBB_EG10', 'TBB_EG25','TBB_EG20', 'Extern_Abgabe_PAL']
+                endmachines.push(allchildrenmachines[j]); 
             }  
         }
 
@@ -864,11 +828,7 @@
                 }
             }
         }
-
-        // Abschienber eingehend (hor_r)
-        // Abschieber ausgehend (senkr_u) -> mündet in Pfad von Hauptlinie
-        // Abschieber ausgehend (senkr_o) -> mündet nicht in Pfad von Hauptlinie
-
+        /*
 
         // get prior machines of Abschieber
         for (let z=0; z<t_source.length;z++){
@@ -883,69 +843,89 @@
                     if (endmachines.indexOf(listbefore[z]) >0){
                         break; 
                     }
-
                 }
-
-
             }
-        }
+            console.log(listbefore);
+        } */
+        
+        
 
         // gets the input and output paths from 'Abschieber'
-        function findAbschieberpath_hor_r (){
+        function findAbschieberpath (){
             let pathAbschieberhor_r = [];
-                let pathAbschiebersenkr_o = [];
-            for (let i=0; i<t_source.length; i++){
-                if (checkAbschieber() === true){
-                    pathAbschieber= findPaths(t_source, '3', 'Abschieber');
-                    // split path in 2 seperate ones -> fehleranfällig
-                    pathAbschieberhor_r.push(pathAbschieber[0]);
-                    pathAbschieberhor_r.push(pathAbschieber[1]);
-                    pathAbschieberhor_r.push(pathAbschieber[4]);
+            let pathAbschiebersenkr_o = [];
+            let pathAbschieberhor_l = [];
+            if (checkAbschieber() === true){
+                pathAbschieber= findPaths(t_source, '3', 'Abschieber');
+                console.log(pathAbschieber);
+                // split path in 2 seperate ones -> fehleranfällig
+                pathAbschieberhor_r.push(pathAbschieber[0]);
+                pathAbschieberhor_r.push(pathAbschieber[1]);
+                pathAbschieberhor_r.push(pathAbschieber[6]);
 
-                    pathAbschiebersenkr_o.push(pathAbschieber[2]);
-                    pathAbschiebersenkr_o.push(pathAbschieber[3]);
+                pathAbschiebersenkr_o.push(pathAbschieber[4]);
+                pathAbschiebersenkr_o.push(pathAbschieber[5]);
 
-                    for (let j=0; j<t_source.length; j++){
-                        // check if last machine is element of the main line
-                            let startx = 0;
-                            let starty = 0;
-                            let pathAbschieberhor_r_reverse = [];
-                            pathAbschieberhor_r_reverse = pathAbschieberhor_r.reverse(); //['TBB_EG05', 'TBB_EG04', 'Abschieber']
-                            if (t_source[j].Parent_Machine === pathAbschieberhor_r_reverse[0]){
-                                startx = t_source[j].X;
-                                starty = t_source[j].Y;
-                                for (let x=0; x<t_source.length; x++){
-                                    for (let a=1; a<2; a++){
-                                        if (t_source[x].Parent_Machine === pathAbschieberhor_r_reverse[a]){
-                                            let spacey = a * nodeWidth;
-                                            let spacex = (a-1) * nodeWidth;
-                                            t_source[x].X = startx - spacex;
-                                            t_source[x].Y = starty - spacey;
-                                        }
-                                    }
-                                    for (let b=2; b<pathAbschieberhor_r_reverse.length; b++){
-                                        if (t_source[x].Parent_Machine === pathAbschieberhor_r_reverse[b]){
-                                            let spacey = nodeWidth
-                                            let spacex = (b-1) * nodeWidth;
-                                            t_source[x].X = startx - spacex;
-                                            t_source[x].Y = starty - spacey;
-                                        }
-                                    }
+                pathAbschieberhor_l.push(pathAbschieber[2]);
+                pathAbschieberhor_l.push(pathAbschieber[3]);
+            }
+            // set positions
+            let startx = 0;
+            let starty = 0;
+            let pathAbschieberhor_r_reverse = [];
+            pathAbschieberhor_r_reverse = pathAbschieberhor_r.reverse(); //['TBB_EG05', 'TBB_EG04', 'Abschieber']
+            console.log(pathAbschieberhor_r_reverse);
+
+            for (let j=0; j<t_source.length; j++){
+                // check if last machine is element of the main line
+                if (t_source[j].Parent_Machine === pathAbschieberhor_r_reverse[0]){
+                    if (t_source[j].ID === '1'){
+                        // if yes, set the coordinates of this machine as the start position
+                        startx = t_source[j].X;
+                        starty = t_source[j].Y;   
+
+                        // calculate positions
+                        for (let x=0; x<t_source.length; x++){
+                            // do it only for the machine at position [1]
+                            for (let a=1; a<2; a++){
+                                if (t_source[x].Parent_Machine === pathAbschieberhor_r_reverse[a]){
+                                    let spacey = a * nodeWidth;
+                                    let spacex = (a-1) * nodeWidth;
+                                    t_source[x].X = startx - spacex;
+                                    t_source[x].Y = starty - spacey;
                                 }
                             }
-                            
-                        }                 
+                        for (let y=0; y<t_source.length; y++){
+                            for (let b=2; b<pathAbschieberhor_r_reverse.length; b++){
+                                if (t_source[y].Parent_Machine === pathAbschieberhor_r_reverse[b]){
+                                    let spacey = nodeWidth
+                                    let spacex = (b-1) * nodeWidth;
+                                    t_source[y].X = startx - spacex;
+                                    t_source[y].Y = starty - spacey;
+                                }
+                            }
+                        }
+                        }  
+                    }   
                 }
             }
-            return pathAbschiebersenkr_o;
+            let returnarray = [];
+            returnarray = [pathAbschiebersenkr_o,pathAbschieberhor_l];
+            return returnarray;
         }
-        pathAbschiebersenkr_o = findAbschieberpath_hor_r();
+        // hier liegt der fehler!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! es springt hier nicht rein
+        result = findAbschieberpath();
+        console.log(result);
+        pathAbschiebersenkr_o = result[0]; // ['Abschieber', 'TBP2_EG2']
+        pathAbschieberhor_l = result[1];  // ['Abschieber', 'TBP2_EG1']
         
-    
-
-
-        /* place other outgoing path from Abschieber above 
+        //place other outgoing path from Abschieber above 
         function placeAbschieberpath_top(){
+            pathAbschieber= findPaths(t_source, '3', 'Abschieber')
+            let pathAbschiebersenkr_o = [];
+            pathAbschiebersenkr_o.push(pathAbschieber[4]);
+            pathAbschiebersenkr_o.push(pathAbschieber[5]);
+
             let firstMachineX = null; 
             let firstMachineY = null;
             let space = nodeHeight; 
@@ -971,9 +951,43 @@
                 }
             }
         }
-        placeAbschieberpath_top(); */
+        placeAbschieberpath_top();
+        
+        
+       // place left abschieber path
+       function placeleftAbschieberpath (){
+        let firstMachineX = null; 
+        let firstMachineY = null;
+        let space = nodeWidth; 
+    
+        for (let i = 0; i <pathAbschieberhor_l.length; i++) {
+            let firstMachine = pathAbschieberhor_l[0];
+            for (let j = 0; j < t_source.length; j++) {
+                if (t_source[j].Parent_Machine === firstMachine) {
+                    firstMachineX = t_source[j].X;
+                    firstMachineY = t_source[j].Y;
+                    break;
+                }
+            }
+        }
+        for (let s=1; s<pathAbschieberhor_l.length; s++){
+            for (let l = 0; l< t_source.length; l++) {
+                let xOffset = s * space;
+                let yOffset = 0;
+                if (t_source[l].Parent_Machine === pathAbschieberhor_l[s]) {
+                    t_source[l].X = firstMachineX - xOffset;
+                    t_source[l].Y = firstMachineY + yOffset;
+                }
+            }      
+        }
+    }
+    //placeleftAbschieberpath();
 
+        
+        
+        
         console.log(t_source);
+        
     }
 
     // function that transform p_source data into input format for graph 
@@ -995,7 +1009,7 @@
             aLines = oNewStructure.lines;
 
         for(var i in aSource){
-            let oCurrentNode = aSource[i],
+            let oCurrentNode = aSource[i]
             sCurrentName = oCurrentNode.Parent_Machine,
             sCurrKey = oCurrentNode.Key,
             sCurrentChild = oCurrentNode.Children_Machine;
