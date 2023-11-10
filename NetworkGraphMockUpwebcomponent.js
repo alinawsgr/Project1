@@ -476,10 +476,7 @@
 
         // function that places path before 'Entlader'
         function getpathbeforeEntlader(){
-            xEntladerPosition
-            yEntladerPosition
             let path=[]
-
             for (let n=0; n<t_source.length; n++){
                 // find Mother Machine with Entlader as a children 
                 if (t_source.Children_Machine == 'Entlader'){
