@@ -493,7 +493,8 @@
             }
             return path;
         }
-        pathxx = getpathbeforeEntlader(); 
+        let pathxx =[];
+        pathxx =  getpathbeforeEntlader(); 
         console.log(pathxx);
           
         
