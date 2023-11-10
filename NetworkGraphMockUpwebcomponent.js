@@ -801,7 +801,6 @@
             let pathAbschieberhor_l = [];
             if (checkAbschieber() === true){
                 pathAbschieber= findPaths(t_source, '3', 'Abschieber');
-                console.log(pathAbschieber);
                 // split path in 2 seperate ones -> fehleranfällig
                 pathAbschieberhor_r.push(pathAbschieber[0]);
                 pathAbschieberhor_r.push(pathAbschieber[1]);
@@ -818,7 +817,6 @@
             let starty = 0;
             let pathAbschieberhor_r_reverse = [];
             pathAbschieberhor_r_reverse = pathAbschieberhor_r.reverse(); 
-            console.log(pathAbschieberhor_r_reverse);
 
             for (let j=0; j<t_source.length; j++){
                 // check if last machine is element of the main line
@@ -858,7 +856,6 @@
             return returnarray;
         }
         result = findAbschieberpath();
-        console.log(result);
         pathAbschiebersenkr_o = result[0];
         pathAbschieberhor_l = result[1];  
         
