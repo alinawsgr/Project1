@@ -497,6 +497,7 @@
             return path;
         }
         pathxx = getpathbeforeEntlader; 
+        console.log(pathxx);
           
         
         // function that calculates positions for external paths (paths other than priority 1 or 2)
