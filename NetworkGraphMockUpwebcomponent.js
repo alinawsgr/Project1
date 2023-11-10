@@ -496,7 +496,7 @@
             }
             return path;
         }
-        pathxx = getpathbeforeEntlader; 
+        pathxx = getpathbeforeEntlader(); 
         console.log(pathxx);
           
         
