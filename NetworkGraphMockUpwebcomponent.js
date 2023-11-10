@@ -928,6 +928,15 @@
     }
     placeleftAbschieberpath();
 
+
+    // place or delete not placed machines
+    for (let p=0; p<t_source.length; p++){
+        if (t_source[p].Parent_Machine == 'TBG_EG08'|| t_source[p].Parent_Machine == 'TBB_EG11'){
+            t_source[p].X == 1200
+            t_source[p].Y == 1200
+        }
+    }
+
         
         
         
