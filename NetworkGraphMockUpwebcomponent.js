@@ -479,11 +479,11 @@
             let path=[]
             for (let n=0; n<t_source.length; n++){
                 // find Mother Machine with Entlader as a children 
-                if (t_source.Children_Machine == 'Entlader'){
-                    path.push(t_source.Parent_Machine);
+                if (t_source[n].Children_Machine == 'Entlader'){
+                    path.push(t_source[n].Parent_Machine);
                     for (let h=0; h<path.length; h++){
-                        if (t_source.Children_Machine == path[h]){
-                            path.push(t_source.Parent_Machine);
+                        if (t_source[n].Children_Machine == path[h]){
+                            path.push(t_source[n].Parent_Machine);
                         }
 
                     }
