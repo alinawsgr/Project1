@@ -494,8 +494,30 @@
             return path;
         }
         let pathxx =[];
-        pathxx =  getpathbeforeEntlader(); 
-        console.log(pathxx);
+        pathxx =  getpathbeforeEntlader();
+        
+        // place the path machines
+        function placebeforeEntlader(){
+            for (let t=0; t<t_source.length; t++){
+                for (let p=0; p<pathxx.length; p++){
+                    if (allmothermachines.indexOf(path[p]) < 0){
+                        t_source.push( { 
+                            Parent_Machine: path[p],
+                            X: xvalue,
+                            Y: yvalue,
+                            ID: 'end',
+                            Children_Machine: '',
+                            X_dep: '',
+                            Y_dep: ''});
+                    }
+                t_source[t].Y = yEntladerPosition;
+                t_source[t].X = xEntladerPosition - p * nodeWidth;
+
+                }
+            }
+
+        }
+        
           
         
         // function that calculates positions for external paths (paths other than priority 1 or 2)
