@@ -505,7 +505,7 @@
         function placebeforeEntlader(path){
             for (let t=0; t<t_source.length; t++){
                 for (let p=0; p<pathxx.length; p++){
-                    if (allmothermachines.indexOf(path[p]) < 0){
+                    if (allmothermachines.indexOf(path[p]) <= 0){
                         t_source.push( { 
                             Parent_Machine: path[p],
                             X: xvalue,
