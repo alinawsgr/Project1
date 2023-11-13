@@ -495,17 +495,12 @@
         }
         let pathxx =[];
         pathxx =  getpathbeforeEntlader();
-        console.log(pathxx);
         
         // place the path machines
-        let allmothermachines = [];
-        for (let b=0; b< t_source.length; b++){
-            allmothermachines.push(t_source[b].Parent_Machine);
-        }
-        function placebeforeEntlader(path){
+        function placebeforeEntlader(){
             for (let t=0; t<t_source.length; t++){
                 for (let p=0; p<pathxx.length; p++){
-                    if (allmothermachines.indexOf(path[p]) <= 0){
+                    if (allmothermachines.indexOf(path[p]) < 0){
                         t_source.push( { 
                             Parent_Machine: path[p],
                             X: xvalue,
@@ -522,7 +517,6 @@
             }
 
         }
-        placebeforeEntlader(pathxx);
         
           
         
@@ -675,6 +669,10 @@
         let allchildrenmachines =  [];
         for (let i=0; i< t_source.length; i++){
             allchildrenmachines.push(t_source[i].Children_Machine);
+        }
+        let allmothermachines = [];
+        for (let b=0; b< t_source.length; b++){
+            allmothermachines.push(t_source[b].Parent_Machine);
         }
 
         // if a children machine can not be found as a parent machine -> end node
@@ -949,27 +947,16 @@
 
 
     // place or delete not placed machines
-
-    // TBG_EG08 and TBB_EG11
     for (let p=0; p<t_source.length; p++){
         if (t_source[p].Parent_Machine == 'TBG_EG08'){
-            t_source[p].X = 8000
-            t_source[p].Y = 8000
-            t_source[p].Children_Machine = ''
+            t_source[p].X = 9000
+            t_source[p].Y = 9000
         }
         if (t_source[p].Parent_Machine == 'TBB_EG11'){
-            t_source[p].X = 8500
-            t_source[p].Y = 8500
-            t_source[p].Children_Machine = ''
-        } 
-    }
-
-    // delete ends with value 0 in coordinates
-    for (let e=0; e<t_source.length; e++){
-        if (t_source[e].X == 0 && t_source[e].Y == 0){
-            t_source.splice(e, 1);
-            e--;
+            t_source[p].X = 10000
+            t_source[p].Y = 10000
         }
+        
     }
 
         
