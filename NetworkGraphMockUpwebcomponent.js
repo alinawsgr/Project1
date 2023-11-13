@@ -502,7 +502,7 @@
         for (let b=0; b< t_source.length; b++){
             allmothermachines.push(t_source[b].Parent_Machine);
         }
-        function placebeforeEntlader(){
+        function placebeforeEntlader(path){
             for (let t=0; t<t_source.length; t++){
                 for (let p=0; p<pathxx.length; p++){
                     if (allmothermachines.indexOf(path[p]) < 0){
@@ -522,7 +522,7 @@
             }
 
         }
-        placebeforeEntlader();
+        placebeforeEntlader(pathxx);
         
           
         
