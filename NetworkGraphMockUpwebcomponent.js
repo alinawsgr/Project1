@@ -673,6 +673,8 @@
         }
         calcpositionssenkr_u(path2_Auspacker, t_source, maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight, '2');
 
+        // others...   
+        
         let paths_4 = [];
         let paths_10 = [];
         let paths_20 = [];
@@ -722,7 +724,7 @@
         let endmachines = [];
         for (let j=0; j<allchildrenmachines.length; j++){
             if (allmothermachines.indexOf(allchildrenmachines[j]) === -1){
-                endmachines.push(allchildrenmachines[j]); 
+                endmachines.push(allchildrenmachines[j]); //['TBB_EG08',  'TBB_EG09', 'TBB_EG10', 'TBB_EG25','TBB_EG20', 'Extern_Abgabe_PAL']
             }  
         }
 
@@ -862,7 +864,6 @@
                 }
             }
         }
-        /*
 
         // get prior machines of Abschieber
         for (let z=0; z<t_source.length;z++){
@@ -879,31 +880,29 @@
                     }
                 }
             }
-            console.log(listbefore);
-        } */
-        
-        
+        }
 
         // gets the input and output paths from 'Abschieber'
-        function findAbschieberpath (){
+        function findAbschieberpath_hor_r (){
             let pathAbschieberhor_r = [];
             let pathAbschiebersenkr_o = [];
-            let pathAbschieberhor_l = [];
             if (checkAbschieber() === true){
                 pathAbschieber= findPaths(t_source, '3', 'Abschieber');
-                console.log(pathAbschieber);
                 // split path in 2 seperate ones -> fehleranfällig
                 pathAbschieberhor_r.push(pathAbschieber[0]);
                 pathAbschieberhor_r.push(pathAbschieber[1]);
-                pathAbschieberhor_r.push(pathAbschieber[6]);
+                pathAbschieberhor_r.push(pathAbschieber[4]);
 
-                pathAbschiebersenkr_o.push(pathAbschieber[4]);
-                pathAbschiebersenkr_o.push(pathAbschieber[5]);
-
-                pathAbschieberhor_l.push(pathAbschieber[2]);
-                pathAbschieberhor_l.push(pathAbschieber[3]);
+                pathAbschiebersenkr_o.push(pathAbschieber[2]);
+                pathAbschiebersenkr_o.push(pathAbschieber[3]);
             }
-            // set positions
+            console.log(pathAbschieberhor_r);
+            console.log(pathAbschiebersenkr_o);
+
+
+      
+
+                    // set positions
             let startx = 0;
             let starty = 0;
             let pathAbschieberhor_r_reverse = [];
@@ -943,23 +942,15 @@
                     }   
                 }
             }
-            let returnarray = [];
-            returnarray = [pathAbschiebersenkr_o,pathAbschieberhor_l];
-            return returnarray;
+            return pathAbschiebersenkr_o;
         }
-        // hier liegt der fehler!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! es springt hier nicht rein
-        result = findAbschieberpath();
-        console.log(result);
-        pathAbschiebersenkr_o = result[0]; // ['Abschieber', 'TBP2_EG2']
-        pathAbschieberhor_l = result[1];  // ['Abschieber', 'TBP2_EG1']
+        pathAbschiebersenkr_o = findAbschieberpath_hor_r();
         
-        //place other outgoing path from Abschieber above 
-        function placeAbschieberpath_top(){
-            pathAbschieber= findPaths(t_source, '3', 'Abschieber')
-            let pathAbschiebersenkr_o = [];
-            pathAbschiebersenkr_o.push(pathAbschieber[4]);
-            pathAbschiebersenkr_o.push(pathAbschieber[5]);
+    
 
+
+        /* place other outgoing path from Abschieber above 
+        function placeAbschieberpath_top(){
             let firstMachineX = null; 
             let firstMachineY = null;
             let space = nodeHeight; 
@@ -985,43 +976,9 @@
                 }
             }
         }
-        placeAbschieberpath_top();
-        
-        
-       // place left abschieber path
-       function placeleftAbschieberpath (){
-        let firstMachineX = null; 
-        let firstMachineY = null;
-        let space = nodeWidth; 
-    
-        for (let i = 0; i <pathAbschieberhor_l.length; i++) {
-            let firstMachine = pathAbschieberhor_l[0];
-            for (let j = 0; j < t_source.length; j++) {
-                if (t_source[j].Parent_Machine === firstMachine) {
-                    firstMachineX = t_source[j].X;
-                    firstMachineY = t_source[j].Y;
-                    break;
-                }
-            }
-        }
-        for (let s=1; s<pathAbschieberhor_l.length; s++){
-            for (let l = 0; l< t_source.length; l++) {
-                let xOffset = s * space;
-                let yOffset = 0;
-                if (t_source[l].Parent_Machine === pathAbschieberhor_l[s]) {
-                    t_source[l].X = firstMachineX - xOffset;
-                    t_source[l].Y = firstMachineY + yOffset;
-                }
-            }      
-        }
-    }
-    placeleftAbschieberpath();
+        placeAbschieberpath_top(); */
 
-        
-        
-        
         console.log(t_source);
-        
     }
 
     // function that transform p_source data into input format for graph 
@@ -1043,7 +1000,7 @@
             aLines = oNewStructure.lines;
 
         for(var i in aSource){
-            let oCurrentNode = aSource[i]
+            let oCurrentNode = aSource[i],
             sCurrentName = oCurrentNode.Parent_Machine,
             sCurrKey = oCurrentNode.Key,
             sCurrentChild = oCurrentNode.Children_Machine;
