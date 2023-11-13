@@ -495,6 +495,7 @@
         }
         let pathxx =[];
         pathxx =  getpathbeforeEntlader();
+        console.log(pathxx);
         
         // place the path machines
         function placebeforeEntlader(){
