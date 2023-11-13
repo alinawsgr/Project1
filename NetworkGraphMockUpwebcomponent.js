@@ -947,6 +947,8 @@
 
 
     // place or delete not placed machines
+
+    // TBG_EG08 and TBB_EG11
     for (let p=0; p<t_source.length; p++){
         if (t_source[p].Parent_Machine == 'TBG_EG08'){
             t_source[p].X = 8000
@@ -957,8 +959,15 @@
             t_source[p].X = 8500
             t_source[p].Y = 8500
             t_source[p].Children_Machine = ''
+        } 
+    }
+
+    // delete ends with value 0 in coordinates
+    for (let e=0; e<t_source.length; e++){
+        if (t_source[e].X == 0 && t_source[e].Y == 0){
+            t_source[e].Parent_Machine = '';
+
         }
-        
     }
 
         
