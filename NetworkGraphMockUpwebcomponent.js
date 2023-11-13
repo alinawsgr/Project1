@@ -504,11 +504,11 @@
         }
         function placebeforeEntlader(path){
             for (let t=0; t<t_source.length; t++){
-                for (let p=0; p<pathxx.length; p++){
+                for (let p=0; p<path.length; p++){
                     if (allmothermachines.indexOf(path[p]) <= 0){
                         t_source.push( { 
                             Parent_Machine: path[p],
-                            X: xvalue,
+                            X: xEntladerPosition - nodeWidth * p,
                             Y: yvalue,
                             ID: 'end',
                             Children_Machine: '',
