@@ -951,10 +951,12 @@
         if (t_source[p].Parent_Machine == 'TBG_EG08'){
             t_source[p].X = 9000
             t_source[p].Y = 9000
+            t_source[p].Children_Machine = ''
         }
         if (t_source[p].Parent_Machine == 'TBB_EG11'){
             t_source[p].X = 10000
             t_source[p].Y = 10000
+            t_source[p].Children_Machine = ''
         }
         
     }
