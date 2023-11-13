@@ -498,6 +498,10 @@
         console.log(pathxx);
         
         // place the path machines
+        let allmothermachines = [];
+        for (let b=0; b< t_source.length; b++){
+            allmothermachines.push(t_source[b].Parent_Machine);
+        }
         function placebeforeEntlader(){
             for (let t=0; t<t_source.length; t++){
                 for (let p=0; p<pathxx.length; p++){
@@ -671,10 +675,6 @@
         let allchildrenmachines =  [];
         for (let i=0; i< t_source.length; i++){
             allchildrenmachines.push(t_source[i].Children_Machine);
-        }
-        let allmothermachines = [];
-        for (let b=0; b< t_source.length; b++){
-            allmothermachines.push(t_source[b].Parent_Machine);
         }
 
         // if a children machine can not be found as a parent machine -> end node
