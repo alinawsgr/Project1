@@ -557,7 +557,7 @@
                         t_source[x].Y = endY;
                     } 
                 }
-            let elementsbetween = path.length - 2; 
+            let elementsbetween = path.length - 3; 
             let pathlength_X = (endX- startX) / elementsbetween  
             for (let j=2; j<(path.length)-1; j++){
                 let offset = 0;
