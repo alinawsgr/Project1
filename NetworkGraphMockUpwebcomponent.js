@@ -557,7 +557,7 @@
                         t_source[x].Y = endY;
                     } 
                 }
-            let elementsbetween = path.length - 3; 
+            let elementsbetween = path.length - 2; 
             let pathlength_X = (endX- startX) / elementsbetween  
             for (let j=2; j<(path.length)-1; j++){
                 let offset = 0;
@@ -566,7 +566,7 @@
                         offset = pathlength_X;
                         if (t_source[e].Parent_Machine === path[j]){
                             t_source[e].Y = endY;
-                            t_source[e].X = startX - 2*offset;
+                            t_source[e].X = startX - offset;
                         }
                     }
                 }
