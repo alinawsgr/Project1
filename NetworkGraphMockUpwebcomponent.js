@@ -979,12 +979,12 @@
     for (let p=0; p<t_source.length; p++){
         if (t_source[p].Parent_Machine == 'TBG_EG08'){
             t_source[p].X = 8000
-            t_source[p].Y = 5000
+            t_source[p].Y = 7000
             t_source[p].Children_Machine = ''
         }
         if (t_source[p].Parent_Machine == 'TBB_EG11'){
             t_source[p].X = 8500
-            t_source[p].Y = 5000
+            t_source[p].Y = 7000
             t_source[p].Children_Machine = ''
         } 
     }
