@@ -566,14 +566,13 @@
                         offset = (j-1) * pathlength_X - nodeWidth;
                         if (t_source[e].Parent_Machine === path[j]){
                             t_source[e].Y = endY;
-                            t_source[e].X = t_source[e].X - offset;
+                            t_source[e].X = t_source[e].X - j * offset;
                         }
                     }
                 }
             }
             for (let a=1; a<(path.length)-1; a++){
                 let offset = 0;
-                let nextMachine = path[a];
                 for (let b=0; b<t_source.length; b++){
                 if (startY === endY){
                         offset = (a) * pathlength_X - nodeWidth;
