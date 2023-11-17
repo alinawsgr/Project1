@@ -262,10 +262,9 @@
     
     
     //////////////////////////////////////////////////////// MAIN FUNCTION ///////////////////////////////////////////////////////////////////////////////////////////////
-    // main function that contains functions, that calculate the coordinates and connections for each machine in the input data 
+    // contains functions, that calculates the coordinates and connections for each machine in the input data (input: xml data)
     function setCoordinates(t_source, source){
-        // write fix 'Entlader' Positions into t_source (contains the input data) as a base machine
-        // structure of t_source: Parent_Machine(Quelle), Children_Machine(Senke),ID (priority), X( x-Coordinate), Y (y-Coordinate)
+        // write fix Entlader Positions into t_source as a base machine
         for (let i = 0; i < t_source.length; i++) {
             if (t_source[i].Parent_Machine === 'Entlader'){
                 t_source[i].X = xEntladerPosition;
@@ -277,10 +276,67 @@
             }
 
         }
-       
-        // find all paths in the graph regarding their value/priority (input: priority in string format, start machine in string format)
+        // get only fix machines in string format -> doppelte maschinen in liste (['Entlader', 'Entlader', 'Auspacker', 'Auspacker', 'Waschmaschine', 'F�ller', 'F�ller', 'Etikettiermaschine', 'Varioline', 'Belader_rechts'])
+        let fixmachinesstring = [];
+        for (let i = 0; i < t_source.length; i++) {
+            if (t_source[i].Fix_Machines != '@NullMember') {
+                fixmachinesstring.push(t_source[i].Parent_Machine);
+            }
+        }
+
+        // get all existing machines in string format 
+        let allmachinesstring = [];
+        for (let i=0; i < t_source.length; i++){
+            allmachinesstring.push(t_source[i].Parent_Machine);
+        }
+        // get all values
+        // get all existing connection values
+        let allconnectionvalues = [];
+        let allconnectionvalues_a = [];
+        for (let i=0; i<t_source.length; i++){
+            allconnectionvalues_a.push(t_source[i].ID);  
+        }
+        for (let j=0; j<allconnectionvalues_a.length; j++){
+            for (let a=0; a<allconnectionvalues.length; a++){
+                if(allconnectionvalues_a[j] != allconnectionvalues[a]){
+                    allconnectionvalues.push(allconnectionvalues_a[j]);
+                }
+            }
+            }
+        
+        // function that calculates "Ausreißer"
+        //allmachinesstring
+        let externalpaths = [];
+        for (let i=0; i<t_source.length; i++){
+            let currentM_P = t_source[i].Parent_Machine;
+            let currentM_C = t_source[i].Children_Machine;
+            var found = false;
+            for (var j=0; j<t_source.length; j++){
+                if ((i !== j && t_source[j].Parent_Machine === currentM_P) /*|| (i !== j && t_source[j].Children_Machine === currentM_C)*/){
+                    found = true;
+                    break;
+                }
+            }
+            if (found){
+                externalpaths.push(t_source[i].Parent_Machine, t_source[i].ID);
+            }
+        }
+
+
+        let t_externalpaths = [];
+        for (let a=0; a<externalpaths.length; a++){
+            if (externalpaths[a] === '1' || externalpaths[a] === '2'){
+                t_externalpaths.pop();
+            } else {
+                t_externalpaths.push(externalpaths[a]);
+            }
+        }
+
+        // calculates all paths in the graph regarding their value/priority (path priority must be given as an input and as a string in the format: 'number')
         function findPaths(t_source, priority, start){
             // calculates the row of the start machine, from where the paths start
+            // path1 contains all connections with value 1 -> Hauptlinie
+            // end nodes!
             let path = [];
             // define the start machine of the path
             for (let i=0; i<t_source.length; i++){
@@ -289,7 +345,7 @@
                     path.push(t_source[i].Children_Machine);                    
                 }
             }
-            // finf following machines
+
             for (let j=1; j<path.length; j++){
                 for (let a=0; a<t_source.length; a++){
                     if (t_source[a].ID === priority && t_source[a].Parent_Machine == path[j]){
@@ -301,27 +357,37 @@
         }
 
 
-        // run findPaths function for every priority
-
-        // ---------- main line (priority=1/ red)
+        
+        // function that calculates paths for each connection value (1,2,3,...) -> start findPaths()
+        // hier ist noch etwas manueller workaround
+        // red 
         let path1 = findPaths(t_source, '1', 'Entlader');
-        // cut path1 in parts, as it has direction changes + get length of it 
-        // path horizontal right from Entlader to Auspacker 
+        // cut the path in direction changes
+        let path1_hor_r = path1.slice(0, (path1.indexOf(directionChange[0])+1));
+        let path1_senkr_u = path1.slice((path1.indexOf(directionChange[0])), (path1.indexOf(directionChange[1]) + 1));
+        let path1_hor_l = path1.slice((path1.indexOf(directionChange[1])),( path1.length));
+        let indexVar = path1_hor_l.indexOf('Varioline');
+        let path1_hor_l_1 = path1_hor_l.slice(0, indexVar);
+        let path1_hor_l_2 = path1_hor_l.slice (indexVar, path1_hor_l.length);
+
+        // neuer Versuch
+        // cut path1 in parts
         path1_hor_r_Entlader_Auspacker = path1.slice(0, (path1.indexOf(pathChanges[1])));
         path1_hor_r_Entlader_Auspacker_length = path1_hor_r_Entlader_Auspacker.length;
-        // path horizontal right from Auspacker to Waschmachine 
+
         path1_hor_r_Auspacker_Wama = path1.slice(path1.indexOf(pathChanges[1]), (path1.indexOf(pathChanges[2])));
         path1_hor_r_Auspacker_Wama_length = path1_hor_r_Auspacker_Wama.length;
-         // path down right from Waschmaschine to Ettiketiermaschine
+
         path1_senkr_u_Wama_Etima = path1.slice(path1.indexOf(pathChanges[2]), (path1.indexOf(pathChanges[3])));
         path1_senkr_u_Wama_Etima_length = path1_senkr_u_Wama_Etima.length;
-        // path horizontal left from Ettiketiermaschine to Varioline
+
         path1_hor_l_Etima_Varioline = path1.slice(path1.indexOf(pathChanges[3]), (path1.indexOf(pathChanges[4])));
         path1_hor_l_Etima_Varioline_length = path1_hor_l_Etima_Varioline.length;
-        // path horizontal left from Varioline to Belader
+
+        
         path1_hor_l_Varioline_Belader = path1.slice(path1.indexOf(pathChanges[4]), (path1.indexOf(pathChanges[5])));
         path1_hor_l_Varioline_Belader_length = path1_hor_l_Varioline_Belader.length;
-        // path horizontal left from Belader to end
+
         path1_hor_l_Belader_ = path1.slice(path1.indexOf(pathChanges[5]))
         
         path1_hor_r_Entlader_Auspacker.push(path1_hor_r_Auspacker_Wama[0]);
@@ -330,17 +396,15 @@
         path1_hor_l_Varioline_Belader.push(pathChanges[5]);
 
         
-        //---------- 2 yellow paths (priority=2)
+        // yellow
         let path2 = [];
-        // path from Entlader to Belader-rechts
         path2_Entlader = findPaths(t_source, '2', 'Entlader');
         path2_Entlader_length = path2_Entlader.length;
-        // path from Auspacker to Varioline
         path2_Auspacker = findPaths(t_source,'2', 'Auspacker');
         path2_Auspacker_length = path2_Auspacker.length;
         
 
-        // get maximal path length for each dependent paths, so that there is space for each machine
+        // get maximal path length for each dependent paths and set path length for each path
         // dependent paths: 
         // Entlader -> Auspacker / Varioline -> Belader
         let maxLength_Entlader_Auspacker_Varioline_Belader = 0;
@@ -382,10 +446,10 @@
         }
         
 
-    
-        // functions that calculate the coordinates for each direction
         
-        // horizontal right 
+
+
+        // functions that calculate the coordinates for each direction
         function calcpositionshor_r(path, t_source,maxLength, nodeWidth, priority) {
             let firstMachineX = null; 
             let firstMachineY = null; 
@@ -413,7 +477,7 @@
             }
         }
         
-        // horizontal left
+          
         function calcpositionshor_l (path,t_source,maxLength, nodeWidth, priority){
             let firstMachineX = null; 
             let firstMachineY = null; 
@@ -443,8 +507,7 @@
             
             
           }
-        
-        // down 
+          
         function calcpositionssenkr_u(path,t_source, maxLength, nodeHeight, priority) {
             let firstMachineX = null; 
             let firstMachineY = null; 
@@ -473,60 +536,35 @@
             }
 
             }
-
-        // function that places path before 'Entlader'
-        function getpathbeforeEntlader(){
-            let path=[]
-            for (let n=0; n<t_source.length; n++){
-                // find Mother Machine with Entlader as a children 
-                if (t_source[n].Children_Machine == 'Entlader'){
-                    path.push(t_source[n].Parent_Machine);
-                    for (let h=0; h<path.length; h++){
-                        if (t_source[n].Children_Machine == path[h]){
-                            path.push(t_source[n].Parent_Machine);
-                        }
-
-                    }
-                }
-
-
-            }
-            return path;
-        }
-        let pathxx =[];
-        pathxx =  getpathbeforeEntlader();
-        console.log(pathxx);
-        
-        // place the path machines
-        let allmothermachines = [];
-        for (let b=0; b< t_source.length; b++){
-            allmothermachines.push(t_source[b].Parent_Machine);
-        }
-        function placebeforeEntlader(path){
-            for (let t=0; t<t_source.length; t++){
-                for (let p=0; p<path.length; p++){
-                    if (allmothermachines.indexOf(path[p]) <= 0){
-                        t_source.push( { 
-                            Parent_Machine: path[p],
-                            X: 0,
-                            Y: 0,
-                            ID: 'end',
-                            Children_Machine: 'Entlader',
-                            X_dep: '',
-                            Y_dep: ''});
-                    }
-                t_source[t].Y = yEntladerPosition;
-                t_source[t].X = xEntladerPosition - ((p+1) * nodeWidth);
-
-                }
-            }
-
-        }
-        placebeforeEntlader(pathxx);
-        
           
+        function calcpositionssenkr_o (path,t_source, maxLength, nodeHeight,priority){
+            let firstMachineX = null; 
+            let firstMachineY = null;
+            let space = (maxLength * nodeHeight)/ path.length; 
         
-        // function that calculates positions for external paths (paths other than priority 1 or 2)
+            for (let i = 0; i < path.length; i++) {
+                let xOffset = 0;
+                let yOffset = (i + 1) * space;
+                let firstMachine = path[0];
+        
+                for (let j = 0; j < t_source.length; j++) {
+                    if (t_source[j].Parent_Machine === firstMachine) {
+                        firstMachineX = t_source[j].X;
+                        firstMachineY = t_source[j].Y;
+                        break; 
+                    }
+                }
+        
+                for (let a = 0; a < t_source.length; a++) {
+                    if (t_source[a].Parent_Machine === path[i + 1]) {
+                        t_source[a].X = firstMachineX + xOffset;
+                        t_source[a].Y = firstMachineY - yOffset;
+                    }
+                }
+            }
+           
+          }
+        
         function calcpositionsexternal (path){
             let start = path[0];
             let startsecond = path[1];
@@ -552,9 +590,11 @@
                     } 
                 }
             let elementsbetween = path.length - 3; 
-            let pathlength_X = (endX- startX) / elementsbetween  
+            let pathlength_X = (endX- startX) / elementsbetween 
+            //let pathlength_Y = endY - endY; 
             for (let j=2; j<(path.length)-1; j++){
                 let offset = 0;
+                let nextMachine = path[j];
                 for (let e=0; e<t_source.length; e++){
                     if (startY !== endY){
                         offset = (j-1) * pathlength_X - nodeWidth;
@@ -581,13 +621,17 @@
             
         }
 
-        // run position calculation functions from above for each priority
-        // fpr paths with priority 1
+        // calculates all paths and the positions of all machines
+        // 1
+        
         calcpositionshor_r(path1_hor_r_Entlader_Auspacker, t_source,maxLength_Entlader_Auspacker_Varioline_Belader, nodeWidth,'1');
         calcpositionshor_r(path1_hor_r_Auspacker_Wama, t_source,maxLength_Auspacker_Wama_Etima_Varioline, nodeWidth, '1');
+        
         calcpositionssenkr_u(path1_senkr_u_Wama_Etima, t_source,maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight,'1');
+        
         calcpositionshor_l(path1_hor_l_Etima_Varioline,t_source,maxLength_Auspacker_Wama_Etima_Varioline, nodeWidth,'1');
         
+
         for (let a=0; a<t_source.length; a++){
             if (t_source[a].Y_dep === 'Etikettiermasschine'){
                 for (let y=0; y<t_source.length; y++){
@@ -609,7 +653,7 @@
 
 
         
-        // for paths with priority 2
+        // 2
         calcpositionssenkr_u(path2_Entlader,t_source, maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight,'2');
         for (let a=0; a<t_source.length; a++){
             if (t_source[a].Y_dep === 'Etikettiermasschine'){
@@ -629,59 +673,58 @@
         }
         calcpositionssenkr_u(path2_Auspacker, t_source, maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight, '2');
 
-         // gets Mother_Machine and Priority of t_source that do not have priority 1 or 2 (they need special calculations)
-         let externalpaths = [];
-         for (let i=0; i<t_source.length; i++){
-             let currentM_P = t_source[i].Parent_Machine;
-             var found = false;
-             for (var j=0; j<t_source.length; j++){
-                 if ((i !== j && t_source[j].Parent_Machine === currentM_P)){
-                     found = true;
-                     break;
-                 }
-             }
-             if (found){
-                 externalpaths.push(t_source[i].Parent_Machine, t_source[i].ID);
-             }
-         }
-         let t_externalpaths = [];
-         for (let a=0; a<externalpaths.length; a++){
-             if (externalpaths[a] === '1' || externalpaths[a] === '2'){
-                 t_externalpaths.pop();
-             } else {
-                 t_externalpaths.push(externalpaths[a]);
-             }
-         }
-       
+        // others...   
+        
+        let paths_4 = [];
+        let paths_10 = [];
+        let paths_20 = [];
+        let paths_3 = [];
 
-        // for paths with priority 4/ external paths outside the main line
-        let paths_4 = []; 
+        // externalpaths: 
+
         for (let i = 0; i < t_externalpaths.length; i++) {
             let index = '';
             if (t_externalpaths[i] === '4') {
                 x = i-1;
                 index = t_externalpaths[x];
                 paths_4.push(findPaths(t_source, '4', index));
+            } else if (t_externalpaths[1] === '10') {
+                x = i-1;
+                index = t_externalpaths[x];
+                paths_10.push(findPaths(t_source, '10', index));
+            } else if (t_externalpaths[i] === '20') {
+                x = i-1;
+                index = t_externalpaths[x];
+                paths_20.push(findPaths(t_source, '20', index));
+            } else if (t_externalpaths[i] === '3') {
+                x = i-1;
+                index = t_externalpaths[x];
+                paths_3.push(findPaths(t_source, '3', index));
             }
         }
+
+
         for (let p=0; p<paths_4.length; p++){
             let currentpath = paths_4[p];
             calcpositionsexternal(currentpath);
         }
 
-
-        // end nodes (machines with no children machine need special handling, because they are not in T_source included and they need to be pushed in t_source as mother_machines in order to give them x and y coordinates )
+        ///////// end nodes /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // get list with children machines
         let allchildrenmachines =  [];
         for (let i=0; i< t_source.length; i++){
             allchildrenmachines.push(t_source[i].Children_Machine);
+        }
+        let allmothermachines = [];
+        for (let b=0; b< t_source.length; b++){
+            allmothermachines.push(t_source[b].Parent_Machine);
         }
 
         // if a children machine can not be found as a parent machine -> end node
         let endmachines = [];
         for (let j=0; j<allchildrenmachines.length; j++){
             if (allmothermachines.indexOf(allchildrenmachines[j]) === -1){
-                endmachines.push(allchildrenmachines[j]); 
+                endmachines.push(allchildrenmachines[j]); //['TBB_EG08',  'TBB_EG09', 'TBB_EG10', 'TBB_EG25','TBB_EG20', 'Extern_Abgabe_PAL']
             }  
         }
 
@@ -693,11 +736,12 @@
                     let parent = t_source[j].Parent_Machine;
                     parentarray.push(parent);
                 }
+                
             }
         }
 
-        // seperate between mother machines that have one children and that have more than one children
-        // get parent machine with more than one children (they are 'multiparents' as they have more than one children)
+        
+        // get parent machine with more than one children
         const counts = {};
         parentarray.forEach(function (x) {counts[x] = (counts[x] || 0) + 1; }); // counts ocurrences of parent machines
         let multiparent = [];
@@ -741,7 +785,7 @@
             let yOffset = (mc + 1) * space;
             let yvalue = parenty + yOffset;
             let xvalue = parentx+ xOffset + 200;
-            t_source.push( { // push end machines into t_source with undefined parent machine so that the position can be stored
+            t_source.push( { // push end machines into t_source with undefined parent machine so that the psoition can be stored
                 Parent_Machine: multichilds[mc],
                 X: xvalue,
                 Y: yvalue,
@@ -752,9 +796,12 @@
         } 
         
     
-         // rule: if end node has only one parent -> place it inside (- space parent)
+         // if end node has only one parent -> place it inside (- space parent)
+
+         ///////////////////// hier weiter -> singleparent mal noch loggen lassen
+         // parent davon braucht man und dann x von parent minus dem platzhalter (nach innen)
          for (let i=0; i<endmachines.length; i++){
-            t_source.push( { // push end machines into t_source with undefined parent machine so that the position can be stored
+            t_source.push( { // push end machines into t_source with undefined parent machine so that the psoition can be stored
             Parent_Machine: endmachines[i],
             X: 0,
             Y: 0,
@@ -775,8 +822,9 @@
                 }
             }
         }
+        console.log(singleparent); // ['TBB_EG22', 'Fueller', 'TBP1_EG08']
+        console.log(singlechilds); //['TBB_EG25', 'TBB_EG20', 'Extern_Abgabe_PAL']
 
-        // function that places singlechilds
         function placesinglechilds (){
             for (let i=0; i<singleparent.length; i++){
             for (let j=0; j<singlechilds.length; j++){
@@ -805,10 +853,11 @@
             }
             }
         }
+        
         placesinglechilds();
 
 
-        // checks if "Abschieber" exists in the input data -> it is not given in every line
+        // checks if "Abschieber" exists in the line
         function checkAbschieber (){
             for (let t=0; t<t_source.length; t++){
                 if (t_source[t].Parent_Machine === 'Abschieber'){
@@ -816,88 +865,147 @@
                 }
             }
         }
-        
-        
-        // gets the input and output paths from 'Abschieber'
-        function findAbschieberpath (){
-            let pathAbschieberhor_r = [];
-            let pathAbschiebersenkr_o = [];
-            let pathAbschieberhor_l = [];
-            if (checkAbschieber() === true){
-                pathAbschieber= findPaths(t_source, '3', 'Abschieber');
-                // split path in 2 seperate ones -> fehleranfällig
-                pathAbschieberhor_r.push(pathAbschieber[0]);
-                pathAbschieberhor_r.push(pathAbschieber[1]);
-                pathAbschieberhor_r.push(pathAbschieber[6]);
 
-                pathAbschiebersenkr_o.push(pathAbschieber[4]);
-                pathAbschiebersenkr_o.push(pathAbschieber[5]);
+        // Abschienber eingehend (hor_r)
+        // Abschieber ausgehend (senkr_u) -> mündet in Pfad von Hauptlinie
+        // Abschieber ausgehend (senkr_o) -> mündet nicht in Pfad von Hauptlinie
 
-                pathAbschieberhor_l.push(pathAbschieber[2]);
-                pathAbschieberhor_l.push(pathAbschieber[3]);
+
+        // get prior machines of Abschieber
+        for (let z=0; z<t_source.length;z++){
+            let start = 'Abschieber';
+            let listbefore = [];
+            if (t_source[z].Children_Machine === start){
+                listbefore.push(t_source[z].Parent_Machine);
+                for (let l=0; l<listbefore.length; l++){
+                    if (t_source[z].Children_Machine === listbefore[l]){
+                        listbefore.push(t_source[z].Parent_Machine);
+                    }
+                    if (endmachines.indexOf(listbefore[z]) >0){
+                        break; 
+                    }
+
+                }
+
+
             }
-            // set positions
-            let startx = 0;
-            let starty = 0;
+        }
+
+        // gets the input and output paths from 'Abschieber'
+        function findAbschieberpath_hor_r (){
+            let positionAbschieber = 0;
+            let pathAbschieberhor_r = [];
             let pathAbschieberhor_r_reverse = [];
-            pathAbschieberhor_r_reverse = pathAbschieberhor_r.reverse(); 
-
-            for (let j=0; j<t_source.length; j++){
-                // check if last machine is element of the main line
-                if (t_source[j].Parent_Machine === pathAbschieberhor_r_reverse[0]){
-                    if (t_source[j].ID === '1'){
-                        // if yes, set the coordinates of this machine as the start position
-                        startx = t_source[j].X;
-                        starty = t_source[j].Y;   
-
-                        // calculate positions
-                        for (let x=0; x<t_source.length; x++){
-                            // do it only for the machine at position [1]
-                            for (let a=1; a<2; a++){
-                                if (t_source[x].Parent_Machine === pathAbschieberhor_r_reverse[a]){
-                                    let spacey = a * nodeWidth;
-                                    let spacex = (a-1) * nodeWidth;
-                                    t_source[x].X = startx - spacex;
-                                    t_source[x].Y = starty - spacey;
-                                }
-                            }
-                        for (let y=0; y<t_source.length; y++){
-                            for (let b=2; b<pathAbschieberhor_r_reverse.length; b++){
-                                if (t_source[y].Parent_Machine === pathAbschieberhor_r_reverse[b]){
-                                    let spacey = nodeWidth
-                                    let spacex = (b-1) * nodeWidth;
-                                    t_source[y].X = startx - spacex;
-                                    t_source[y].Y = starty - spacey;
-                                }
+            for (let i=0; i<t_source.length; i++){
+                if (checkAbschieber() === true){
+                    /* find paths
+                    for (let t=0; t<t_source.length; t++){
+                        if ( t_source[i].Parent_Machine == 'Abschieber'){
+                            pathAbschieberhor_r.push(t_source[i].Parent_Machine);                
+                        }
+                    }
+                    for (let o=0; o<pathAbschieberhor_r.length; o++){
+                        for (let a=0; a<t_source.length; a++){
+                            if (t_source[a].Parent_Machine == pathAbschieberhor_r[o]){
+                                pathAbschieberhor_r.push(t_source[a].Children_Machine);
                             }
                         }
-                        }  
-                    }   
+                    }
+                    */
+                    pathAbschieber= findPaths(t_source, '3', 'Abschieber');
+                    console.log(pathAbschieber); // ['Abschieber', 'TBB_EG04', 'Abschieber', 'TBP2_EG2', 'TBB_EG05', 'TBB_EG04', 'TBP2_EG2', 'TBB_EG05']
+                    let pathAbschieberhor_r = [];
+                    let pathAbschiebersenkr_o = [];
+                    // split path in 2 seperate ones -> fehleranfällig
+                    pathAbschieberhor_r.push(pathAbschieber[0]);
+                    pathAbschieberhor_r.push(pathAbschieber[1]);
+                    pathAbschieberhor_r.push(pathAbschieber[4]);
+
+                    pathAbschiebersenkr_o.push(pathAbschieber[2]);
+                    pathAbschiebersenkr_o.push(pathAbschieber[3]);
+                    console.log(pathAbschieberhor_r);
+                    console.log(pathAbschiebersenkr_o);
+
+                    for (let j=0; j<t_source.length; j++){
+                        // check if last machine is element of the main line
+                            let startx = 0;
+                            let starty = 0;
+                            pathAbschieberhor_r_reverse = pathAbschieberhor_r.reverse(); //['TBB_EG05', 'TBB_EG04', 'Abschieber']
+                            if (t_source[j].Parent_Machine === pathAbschieberhor_r_reverse[0]){
+                                startx = t_source[j].X;
+                                starty = t_source[j].Y;
+                                for (let x=0; x<t_source.length; x++){
+                                    for (let a=1; a<2; a++){
+                                        if (t_source[x].Parent_Machine === pathAbschieberhor_r_reverse[a]){
+                                            let spacey = a * nodeWidth
+                                            let spacex = (a-1) * nodeWidth;
+                                            t_source[x].X = startx - spacex;
+                                            t_source[x].Y = starty - spacey;
+                                        }
+                                    }
+                                    for (let b=2; b<pathAbschieberhor_r_reverse.length; b++){
+                                        if (t_source[x].Parent_Machine === pathAbschieberhor_r_reverse[b]){
+                                            let spacey = nodeWidth
+                                            let spacex = (b-1) * nodeWidth;
+                                            t_source[x].X = startx - spacex;
+                                            t_source[x].Y = starty - spacey;
+                                        }
+                                    }
+                                }
+                            }
+                            
+                        }                 
                 }
             }
-            let returnarray = [];
-            returnarray = [pathAbschiebersenkr_o,pathAbschieberhor_l];
-            return returnarray;
         }
-        result = findAbschieberpath();
-        pathAbschiebersenkr_o = result[0];
-        pathAbschieberhor_l = result[1];  
+        findAbschieberpath_hor_r();
         
-        //place other outgoing path from Abschieber above 
-        function placeAbschieberpath_top(){
-            pathAbschieber= findPaths(t_source, '3', 'Abschieber')
-            let pathAbschiebersenkr_o = [];
-            pathAbschiebersenkr_o.push(pathAbschieber[4]);
-            pathAbschiebersenkr_o.push(pathAbschieber[5]);
+        
+        function findAbschieberpath_top (){
+            let list=['Abschieber'];
+            for (let i=0; i<t_source.length; i++){
+                if ((t_source[i].Parent_Machine === 'Abschieber') && (t_source[i].ID === '3')){
+                    let source = t_source[i].Child_Machine;
+                    for (let x =0; x<t_source.length;x++){
+                        if(t_source[x].Parent_Machine === source){
+                            if(t_source[x].X === ''){
+                                 // und ist noch nicht positioniert 
+                                let startx = t_source[i].X;
+                                let starty = t_source[i].Y;
+                                list.push(t_source[i].Children_Machine);
+                                for (let j=0; j<t_source.length; j++){
+                                    for (let l=0; l<list.length; l++){
+                                        if (list[l] === t_source[j].Parent_Machine){
+                                            list.push(t_source[j].Children_Machine);
+                                        }
+                                        // if list[l] is a end machine (endmachines) -> new entry with the end machine in t_source -> indexof >0
+                                        if (endmachines.indexOf(list[l]) >0){
+                                            break;
+                                        }       
+                                    }
+                                }
 
+                            }
+                        }
+                    }
+                }
+            }
+            return list;
+        }
+        let list = findAbschieberpath_top();
+        console.log(list); // ['Abschieber']
+
+
+        // place other outgoing path from Abschieber above 
+        function placeAbschieberpath_top(){
             let firstMachineX = null; 
             let firstMachineY = null;
             let space = nodeHeight; 
         
-            for (let i = 0; i < pathAbschiebersenkr_o.length; i++) {
+            for (let i = 0; i < list.length; i++) {
                 let xOffset = 0;
                 let yOffset = (i + 1) * space;
-                let firstMachine = pathAbschiebersenkr_o[0];
+                let firstMachine = list[0];
         
                 for (let j = 0; j < t_source.length; j++) {
                     if (t_source[j].Parent_Machine === firstMachine) {
@@ -907,8 +1015,8 @@
                     }
                 }
         
-                for (let a = 1; a < t_source.length; a++) {
-                    if (t_source[a].Parent_Machine === pathAbschiebersenkr_o[i + 1]) {
+                for (let a = 0; a < t_source.length; a++) {
+                    if (t_source[a].Parent_Machine === list[i + 1]) {
                         t_source[a].X = firstMachineX + xOffset;
                         t_source[a].Y = firstMachineY - yOffset;
                     }
@@ -916,67 +1024,12 @@
             }
         }
         placeAbschieberpath_top();
-        
-        
-       // place path left from Abschieber
-       function placeleftAbschieberpath (){
-        let firstMachineX = null; 
-        let firstMachineY = null;
-        let space = nodeWidth; 
-    
-        for (let i = 0; i <pathAbschieberhor_l.length; i++) {
-            let firstMachine = pathAbschieberhor_l[0];
-            for (let j = 0; j < t_source.length; j++) {
-                if (t_source[j].Parent_Machine === firstMachine) {
-                    firstMachineX = t_source[j].X;
-                    firstMachineY = t_source[j].Y;
-                    break;
-                }
-            }
-        }
-        for (let s=1; s<pathAbschieberhor_l.length; s++){
-            for (let l = 0; l< t_source.length; l++) {
-                let xOffset = s * space;
-                let yOffset = 0;
-                if (t_source[l].Parent_Machine === pathAbschieberhor_l[s]) {
-                    t_source[l].X = firstMachineX - xOffset;
-                    t_source[l].Y = firstMachineY + yOffset;
-                }
-            }      
-        }
-    }
-    placeleftAbschieberpath();
 
-
-    // place or delete not placed machines
-
-    // TBG_EG08 and TBB_EG11
-    for (let p=0; p<t_source.length; p++){
-        if (t_source[p].Parent_Machine == 'TBG_EG08'){
-            t_source[p].X = 8000
-            t_source[p].Y = 8000
-            t_source[p].Children_Machine = ''
-        }
-        if (t_source[p].Parent_Machine == 'TBB_EG11'){
-            t_source[p].X = 8500
-            t_source[p].Y = 8500
-            t_source[p].Children_Machine = ''
-        } 
-    }
-
-//  delete ends with value 0 in coordinates
-    for (let e=0; e<t_source.length; e++){
-        if (t_source[e].X == 0 && t_source[e].Y == 0){
-            t_source.splice(e, 1);
-            e--;
-        }
-    }
-   
-    console.log(t_source);
-        
+        console.log(t_source);
     }
 
     // function that transform p_source data into input format for graph 
+
     function restructureNodes(aSource){
         var oNewStructure = {
             "nodes" : [],
@@ -994,7 +1047,7 @@
             aLines = oNewStructure.lines;
 
         for(var i in aSource){
-            let oCurrentNode = aSource[i]
+            let oCurrentNode = aSource[i],
             sCurrentName = oCurrentNode.Parent_Machine,
             sCurrKey = oCurrentNode.Key,
             sCurrentChild = oCurrentNode.Children_Machine;
