@@ -663,9 +663,6 @@
         // for paths with priority 4/ external paths outside the main line
 
         let paths_4 = [];
-        let paths_10 = [];
-        let paths_20 = [];
-        let paths_3 = [];
 
         // externalpaths: 
         console.log(t_externalpaths);
@@ -676,20 +673,8 @@
                 x = i-1;
                 index = t_externalpaths[x];
                 paths_4.push(findPaths(t_source, '4', index));
-            } else if (t_externalpaths[1] === '10') {
-                x = i-1;
-                index = t_externalpaths[x];
-                paths_10.push(findPaths(t_source, '10', index));
-            } else if (t_externalpaths[i] === '20') {
-                x = i-1;
-                index = t_externalpaths[x];
-                paths_20.push(findPaths(t_source, '20', index));
-            } else if (t_externalpaths[i] === '3') {
-                x = i-1;
-                index = t_externalpaths[x];
-                paths_3.push(findPaths(t_source, '3', index));
-            }
         }
+        console.log(paths_4);
         for (let p=0; p<paths_4.length; p++){
             let currentpath = paths_4[p];
             calcpositionsexternal(currentpath);
