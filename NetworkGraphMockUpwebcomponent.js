@@ -566,7 +566,7 @@
                         offset = (pathlength_X) / 2;
                         if (t_source[e].Parent_Machine === path[j]){
                             t_source[e].Y = endY;
-                            t_source[e].X = endX + offset;
+                            t_source[e].X = startX + offset;
                         }
                     }
                 }
