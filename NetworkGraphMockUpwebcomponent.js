@@ -508,8 +508,8 @@
                     if (allmothermachines.indexOf(path[p]) <= 0){
                         t_source.push( { 
                             Parent_Machine: path[p],
-                            X: xEntladerPosition - nodeWidth * p,
-                            Y: yvalue,
+                            X: xEntladerPosition - nodeWidth * p+1,
+                            Y: yEntladerPosition,
                             ID: 'end',
                             Children_Machine: '',
                             X_dep: '',
