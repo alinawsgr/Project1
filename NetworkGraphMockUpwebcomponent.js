@@ -511,7 +511,7 @@
                             X: 0,
                             Y: 0,
                             ID: 'end',
-                            Children_Machine: '',
+                            Children_Machine: 'Entlader',
                             X_dep: '',
                             Y_dep: ''});
                     }
@@ -971,10 +971,7 @@
             e--;
         }
     }
-
-        
-        
-        
+   
     console.log(t_source);
         
     }
