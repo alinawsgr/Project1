@@ -515,8 +515,11 @@
                             X_dep: '',
                             Y_dep: ''});
                     }
-                t_source[t].Y = yEntladerPosition;
-                t_source[t].X = xEntladerPosition - ((p+2) * nodeWidth);
+                    if (t_source[t].Parent_Machine == path[p]){
+                        t_source[t].Y = yEntladerPosition;
+                        t_source[t].X = xEntladerPosition - ((p+2) * nodeWidth);
+                    }
+               
 
                 }
             }
