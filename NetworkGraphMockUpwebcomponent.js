@@ -474,7 +474,57 @@
 
             }
 
-       
+        // function that places path before 'Entlader'
+        function getpathbeforeEntlader(){
+            let path=[]
+            for (let n=0; n<t_source.length; n++){
+                // find Mother Machine with Entlader as a children 
+                if (t_source[n].Children_Machine == 'Entlader'){
+                    path.push(t_source[n].Parent_Machine);
+                    for (let h=0; h<path.length; h++){
+                        if (t_source[n].Children_Machine == path[h]){
+                            path.push(t_source[n].Parent_Machine);
+                        }
+
+                    }
+                }
+
+
+            }
+            return path;
+        }
+        let pathxx =[];
+        pathxx =  getpathbeforeEntlader();
+        console.log(pathxx);
+        
+        // place the path machines
+        let allmothermachines = [];
+        for (let b=0; b< t_source.length; b++){
+            allmothermachines.push(t_source[b].Parent_Machine);
+        }
+        function placebeforeEntlader(path){
+            for (let t=0; t<t_source.length; t++){
+                for (let p=0; p<path.length; p++){
+                    if (allmothermachines.indexOf(path[p]) <= 0){
+                        t_source.push( { 
+                            Parent_Machine: path[p],
+                            X: 0,
+                            Y: 0,
+                            ID: 'end',
+                            Children_Machine: '',
+                            X_dep: '',
+                            Y_dep: ''});
+                    }
+                t_source[t].Y = yEntladerPosition;
+                t_source[t].X = xEntladerPosition - ((p+1) * nodeWidth);
+
+                }
+            }
+
+        }
+        placebeforeEntlader(pathxx);
+        
+          
         
         // function that calculates positions for external paths (paths other than priority 1 or 2)
         function calcpositionsexternal (path){
@@ -618,56 +668,6 @@
             let currentpath = paths_4[p];
             calcpositionsexternal(currentpath);
         }
-
-        // function that places path before 'Entlader'
-     function getpathbeforeEntlader(){
-        let path=[]
-        for (let n=0; n<t_source.length; n++){
-            // find Mother Machine with Entlader as a children 
-            if (t_source[n].Children_Machine == 'Entlader'){
-                path.push(t_source[n].Parent_Machine);
-                for (let h=0; h<path.length; h++){
-                    if (t_source[n].Children_Machine == path[h]){
-                        path.push(t_source[n].Parent_Machine);
-                    }
-
-                }
-            }
-
-
-        }
-        return path;
-    }
-    let pathxx =[];
-    pathxx =  getpathbeforeEntlader();
-    console.log(pathxx);
-    
-    // place the path machines
-    let allmothermachines = [];
-    for (let b=0; b< t_source.length; b++){
-        allmothermachines.push(t_source[b].Parent_Machine);
-    }
-    function placebeforeEntlader(path){
-        for (let t=0; t<t_source.length; t++){
-            for (let p=0; p<path.length; p++){
-                if (allmothermachines.indexOf(path[p]) <= 0){
-                    t_source.push( { 
-                        Parent_Machine: path[p],
-                        X: 0,
-                        Y: 0,
-                        ID: 'end',
-                        Children_Machine: 'Entlader',
-                        X_dep: '',
-                        Y_dep: ''});
-                }
-            t_source[t].Y = yEntladerPosition;
-            t_source[t].X = xEntladerPosition - ((p+1) * nodeWidth);
-
-            }
-        }
-
-    }
-    placebeforeEntlader(pathxx);
 
 
         // end nodes (machines with no children machine need special handling, because they are not in T_source included and they need to be pushed in t_source as mother_machines in order to give them x and y coordinates )
@@ -947,10 +947,6 @@
     }
     placeleftAbschieberpath();
 
-     
-    
-      
-
 
     // place or delete not placed machines
 
@@ -968,14 +964,17 @@
         } 
     }
 
-/*  delete ends with value 0 in coordinates
+//  delete ends with value 0 in coordinates
     for (let e=0; e<t_source.length; e++){
         if (t_source[e].X == 0 && t_source[e].Y == 0){
             t_source.splice(e, 1);
             e--;
         }
-    }*/
-   
+    }
+
+        
+        
+        
     console.log(t_source);
         
     }
