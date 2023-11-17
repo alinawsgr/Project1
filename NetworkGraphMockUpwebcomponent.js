@@ -668,6 +668,7 @@
         let paths_3 = [];
 
         // externalpaths: 
+        console.log(t_externalpaths);
 
         for (let i = 0; i < t_externalpaths.length; i++) {
             let index = '';
