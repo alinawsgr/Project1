@@ -77,6 +77,7 @@
                 }
                 
             }
+            console.log(t_source)
             setCoordinates(t_source,source);
 
             let oNewDataSource = restructureNodes(t_source);
@@ -251,14 +252,13 @@
 
     // fix variables that have to be declared in the beginning
     // size of the space between the machine nodes
-    const nodeWidth = 400;
-    const nodeHeight = 400;
+    const nodeWidth = 350;
+    const nodeHeight = 250;
     // fix position of "Entlader"
-    let xEntladerPosition = 1000;
-    let yEntladerPosition = 1000;
+    let xEntladerPosition = 200;
+    let yEntladerPosition = 200;
     // direction changes in the graph (in this case of the main line)
     let directionChange = ['Waschmaschine', 'Etikettiermaschine']
-    let pathChanges = ['Entlader','Auspacker','Waschmaschine','Etikettiermaschine', 'Varioline', 'Belader_rechts'];
     
     
     //////////////////////////////////////////////////////// MAIN FUNCTION ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -284,7 +284,10 @@
             }
         }
 
-        // get all existing machines in string format 
+
+
+
+        // get all existing machines in string format -> ['Abschieber', 'Linatronic', 'Belader_links', 'Gebindewascher', 'Abschrauber', 'TBB_EG01', 'TBB_EG02', 'TBB_EG02', 'TBB_EG03', 'TBB_EG04', 'TBB_EG05', 'TBB_EG06', 'TBB_EG07', 'TBB_EG07', 'TBB_EG07', 'TBB_EG07', 'TBB_EG11', 'TBB_EG12', 'TBB_EG12', 'TBB_EG14', 'TBB_EG15', 'TBB_EG16', 'TBB_EG17', 'TBB_EG18', 'TBB_EG21', 'TBB_EG22', 'TBB_EG22', 'TBB_EG24', 'TBB_EG26', 'TBG_EG01', 'TBG_EG02', 'TBG_EG05', 'TBG_EG05', 'TBG_EG06', 'TBG_EG07', 'TBG_EG08', 'TBG_EG09', 'TBG_EG09', 'TBG_EG10', 'TBG_EG12', 'TBG_EG15', 'TBP1_EG02', 'TBP1_EG03', 'TBP1_EG04', 'TBP1_EG05', 'TBP1_EG07', 'Extern_Aufgabe_PAL', 'TBG_EG04', 'Entlader', 'Entlader', 'Auspacker', 'Auspacker', 'Waschmaschine', 'F�ller', 'F�ller', 'Etikettiermaschine', 'Varioline', 'Belader_rechts', 'TBP1_EG08', 'TBB_EG23', 'TBP1_EG01', 'TBG_EG11', 'TBP1_EG06', 'TBP1_EG06', 'TBG_EG13', 'TBG_EG03', 'TBB_EG13', 'EXTERN01']
         let allmachinesstring = [];
         for (let i=0; i < t_source.length; i++){
             allmachinesstring.push(t_source[i].Parent_Machine);
@@ -294,7 +297,7 @@
         let allconnectionvalues = [];
         let allconnectionvalues_a = [];
         for (let i=0; i<t_source.length; i++){
-            allconnectionvalues_a.push(t_source[i].ID);  
+            allconnectionvalues_a.push(t_source[i].ID);   // ['3', '1', '1', '2', '4', '1', '1', '10', '1', '3', '1', '1', '20', '20', '20', '1', '10', '1', '4', '4', '1', '1', '1', '1', '1', '10', '1', '1', '1', '1', '1', '2', '3', '2', '1', '3', '1', '4', '1', '4', '2', '2', '2', '2', '2', '1', '1', '2', '1', '2', '1', '2', '1', '20', '1', '1', '1', '1', '101', '1', '1', '1', '2', '2', '4', '1', '4', '3']
         }
         for (let j=0; j<allconnectionvalues_a.length; j++){
             for (let a=0; a<allconnectionvalues.length; a++){
@@ -303,42 +306,13 @@
                 }
             }
             }
-        
-        // function that calculates "Ausreißer"
-        //allmachinesstring
-        let externalpaths = [];
-        for (let i=0; i<t_source.length; i++){
-            let currentM_P = t_source[i].Parent_Machine;
-            let currentM_C = t_source[i].Children_Machine;
-            var found = false;
-            for (var j=0; j<t_source.length; j++){
-                if ((i !== j && t_source[j].Parent_Machine === currentM_P) /*|| (i !== j && t_source[j].Children_Machine === currentM_C)*/){
-                    found = true;
-                    break;
-                }
-            }
-            if (found){
-                externalpaths.push(t_source[i].Parent_Machine, t_source[i].ID);
-            }
-        }
-
-
-        let t_externalpaths = [];
-        for (let a=0; a<externalpaths.length; a++){
-            if (externalpaths[a] === '1' || externalpaths[a] === '2'){
-                t_externalpaths.pop();
-            } else {
-                t_externalpaths.push(externalpaths[a]);
-            }
-        }
 
         // calculates all paths in the graph regarding their value/priority (path priority must be given as an input and as a string in the format: 'number')
         function findPaths(t_source, priority, start){
             // calculates the row of the start machine, from where the paths start
             // path1 contains all connections with value 1 -> Hauptlinie
-            // end nodes!
             let path = [];
-            // define the start machine of the path
+            // define "Entlader" as the start Position for the path
             for (let i=0; i<t_source.length; i++){
                 if (t_source[i].ID === priority && t_source[i].Parent_Machine == start){
                     path.push(t_source[i].Parent_Machine);
@@ -356,7 +330,25 @@
             return path;
         }
 
-
+        // calculates dependencies
+        for (let a=0; a<fixmachinesstring.length; a++){
+            for (let i=0; i<t_source.length; i++){
+                if (t_source[i].Y_dep = fixmachinesstring[a]){
+                    for (let j=0; j<t_source.length; j++){
+                        if(t_source[j].Parent_Machine = fixmachinesstring[a]){
+                            t_source[i].Y = t_source[j].Y;
+                        }      
+                    }
+                }
+                if (t_source[i].X_dep = fixmachinesstring[a]){
+                    for (let j=0; j<t_source.length; j++){
+                        if(t_source[j].Parent_Machine = fixmachinesstring[a]){
+                            t_source[i].X = t_source[j].X;
+                        }      
+                    }
+                }
+            }
+        }
         
         // function that calculates paths for each connection value (1,2,3,...) -> start findPaths()
         // hier ist noch etwas manueller workaround
@@ -366,125 +358,32 @@
         let path1_hor_r = path1.slice(0, (path1.indexOf(directionChange[0])+1));
         let path1_senkr_u = path1.slice((path1.indexOf(directionChange[0])), (path1.indexOf(directionChange[1]) + 1));
         let path1_hor_l = path1.slice((path1.indexOf(directionChange[1])),( path1.length));
-        let indexVar = path1_hor_l.indexOf('Varioline');
-        let path1_hor_l_1 = path1_hor_l.slice(0, indexVar);
-        let path1_hor_l_2 = path1_hor_l.slice (indexVar, path1_hor_l.length);
-
-        // neuer Versuch
-        // cut path1 in parts
-        path1_hor_r_Entlader_Auspacker = path1.slice(0, (path1.indexOf(pathChanges[1])));
-        path1_hor_r_Entlader_Auspacker_length = path1_hor_r_Entlader_Auspacker.length;
-
-        path1_hor_r_Auspacker_Wama = path1.slice(path1.indexOf(pathChanges[1]), (path1.indexOf(pathChanges[2])));
-        path1_hor_r_Auspacker_Wama_length = path1_hor_r_Auspacker_Wama.length;
-
-        path1_senkr_u_Wama_Etima = path1.slice(path1.indexOf(pathChanges[2]), (path1.indexOf(pathChanges[3])));
-        path1_senkr_u_Wama_Etima_length = path1_senkr_u_Wama_Etima.length;
-
-        path1_hor_l_Etima_Varioline = path1.slice(path1.indexOf(pathChanges[3]), (path1.indexOf(pathChanges[4])));
-        path1_hor_l_Etima_Varioline_length = path1_hor_l_Etima_Varioline.length;
-
-        
-        path1_hor_l_Varioline_Belader = path1.slice(path1.indexOf(pathChanges[4]), (path1.indexOf(pathChanges[5])));
-        path1_hor_l_Varioline_Belader_length = path1_hor_l_Varioline_Belader.length;
-
-        path1_hor_l_Belader_ = path1.slice(path1.indexOf(pathChanges[5]))
-        
-        path1_hor_r_Entlader_Auspacker.push(path1_hor_r_Auspacker_Wama[0]);
-        path1_hor_r_Auspacker_Wama.push(path1_senkr_u_Wama_Etima[0]);
-        path1_senkr_u_Wama_Etima.push(path1_hor_l_Etima_Varioline[0]);
-        path1_hor_l_Varioline_Belader.push(pathChanges[5]);
-
-        
+     
         // yellow
         let path2 = [];
         path2_Entlader = findPaths(t_source, '2', 'Entlader');
-        path2_Entlader_length = path2_Entlader.length;
         path2_Auspacker = findPaths(t_source,'2', 'Auspacker');
-        path2_Auspacker_length = path2_Auspacker.length;
-        
 
-
-        /* rest
+        // rest
         let path3 = [];
-        let machine3 = [];
-        for (i=0; i<t_source.length; i++){
-            if(t_source[i].ID === '3'){
-                machine3.push(t_source[i].Parent_Machine);
-            }
-        }
-        console.log(machine3); // ['Abschieber', 'TBB_EG04', 'TBG_EG05', 'TBG_EG08', 'EXTERN01']
-
-
         //path3 = findPaths(t_source, '3');
         let path4 = [];
-        //path4 = findPaths(t_source,'4',)
-        let machine4 = [];
-        for (i=0; i<t_source.length; i++){
-            if(t_source[i].ID === '4'){
-                machine4.push(t_source[i].Children_Machine);
-            }
-        }
-        console.log(machine4); 
-        // ['Abschrauber', 'TBB_EG12', 'TBB_EG14', 'TBG_EG09', 'TBG_EG12', 'TBG_EG13', 'TBB_EG13']           -> Parent
-        // ['TBB_EG14', 'TBB_EG13', 'TBB_EG16', 'TBG_EG12', 'TBG_EG13', 'Belader_links', 'Abschrauber']      -> Children
-        */
-
-
-
-        // get maximal path length for each dependent paths and set path length for each path
-        // dependent paths: 
-        // Entlader -> Auspacker / Varioline -> Belader
-        let maxLength_Entlader_Auspacker_Varioline_Belader = 0;
-        if (path1_hor_r_Entlader_Auspacker.length > path1_hor_l_Varioline_Belader.length){
-            maxLength_Entlader_Auspacker_Varioline_Belader = path1_hor_r_Entlader_Auspacker.length;
-        } else {
-            maxLength_Entlader_Auspacker_Varioline_Belader = path1_hor_l_Varioline_Belader.length;
-        }
-    
-
-        // Auspacker -> Wama / Etima -> Varioline
-        let maxLength_Auspacker_Wama_Etima_Varioline = 0;
-        if (path1_hor_r_Auspacker_Wama.length > path1_hor_l_Etima_Varioline.length){
-            maxLength_Auspacker_Wama_Etima_Varioline = path1_hor_r_Auspacker_Wama.length;
-        } else {
-            maxLength_Auspacker_Wama_Etima_Varioline = path1_hor_l_Etima_Varioline.length;
-        }
-        
-
-        // Entlader -> Belader / Auspacker -> Varioline / Wama -> Etima
-        let maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = 0;
-        if ( path2_Entlader.length > path2_Auspacker.length){
-            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima  = path2_Entlader.length;
-        }
-        if(path2_Entlader.length < path2_Auspacker.length){
-            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path2_Auspacker.length;
-        }
-        if(path2_Auspacker.length > path1_senkr_u_Wama_Etima.length){
-            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path2_Auspacker.length;
-        }
-        if(path2_Auspacker.length < path1_senkr_u_Wama_Etima.length){
-            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path1_senkr_u_Wama_Etima.length;
-        }
-        if(path1_senkr_u_Wama_Etima.length > path2_Entlader.length){
-            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path1_senkr_u_Wama_Etima.length;
-        }
-        if (path1_senkr_u_Wama_Etima.length < path2_Entlader.length){
-            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path2_Entlader.length;
-        }
-        
-
-        
+        //path4 = findPaths(t_source, '4');
+        let path10 = [];
+        //path10 = findPaths(t_source, '10');
+        let path20 = [];
+        //path20 = findPaths(t_source, '20');
+        let path101 = [];
+        //path101 = findPaths(t_source, '101');
 
 
         // functions that calculate the coordinates for each direction
-        function calcpositionshor_r(path, t_source,maxLength, nodeWidth, priority) {
+        function calcpositionshor_r(path, t_source, nodeWidth, priority) {
             let firstMachineX = null; 
             let firstMachineY = null; 
-            let space = (maxLength * nodeWidth)/ path.length;
         
             for (let i = 0; i < path.length; i++) {
-                let xOffset = (i + 1) * space;
+                let xOffset = (i + 1) * nodeWidth;
                 let yOffset = 0;
                 let firstMachine = path[0];
         
@@ -506,16 +405,15 @@
         }
         
           
-        function calcpositionshor_l (path,t_source,maxLength, nodeWidth, priority){
+          function calcpositionshor_l (path,t_source, nodeWidth, priority){
             let firstMachineX = null; 
             let firstMachineY = null; 
-            let space = (maxLength * nodeWidth)/ path.length;
-
         
             for (let i = 0; i < path.length; i++) {
-                let xOffset = (i + 1) * space;
+                let xOffset = (i + 1) * nodeWidth;
                 let yOffset = 0;
                 let firstMachine = path[0];
+        
                 for (let j = 0; j < t_source.length; j++) {
                     if (t_source[j].Parent_Machine === firstMachine) {
                         firstMachineX = t_source[j].X;
@@ -525,27 +423,24 @@
                 }
         
                 for (let a = 0; a < t_source.length; a++) {
-                    if (t_source[a].Parent_Machine === path[i + 1] && path[i + 1] !== 'Varioline') {
+                    if (t_source[a].Parent_Machine === path[i + 1]) {
                         t_source[a].X = firstMachineX - xOffset;
                         t_source[a].Y = firstMachineY + yOffset;
                     }
                 }
-                
             }
             
             
           }
           
-        function calcpositionssenkr_u(path,t_source, maxLength, nodeHeight, priority) {
+          function calcpositionssenkr_u(path,t_source, nodeHeight, priority) {
             let firstMachineX = null; 
             let firstMachineY = null; 
-            let space = (maxLength * nodeHeight)/ path.length;
         
             for (let i = 0; i < path.length; i++) {
                 let xOffset = 0;
-                let yOffset = (i + 1) * space;
+                let yOffset = (i + 1) * nodeHeight;
                 let firstMachine = path[0];
-                
         
                 for (let j = 0; j < t_source.length; j++) {
                     if (t_source[j].Parent_Machine === firstMachine) {
@@ -556,23 +451,23 @@
                 }
         
                 for (let a = 0; a < t_source.length; a++) {
-                    if (t_source[a].Parent_Machine === path[i + 1] && path[i+1] != 'Varioline') {
+                    if (t_source[a].Parent_Machine === path[i + 1]) {
                         t_source[a].X = firstMachineX + xOffset;
                         t_source[a].Y = firstMachineY + yOffset;
+
                     }
                 }
             }
 
             }
           
-        function calcpositionssenkr_o (path,t_source, maxLength, nodeHeight,priority){
+          function calcpositionssenkr_o (path,t_source, nodeHeight,priority){
             let firstMachineX = null; 
-            let firstMachineY = null;
-            let space = (maxLength * nodeHeight)/ path.length; 
+            let firstMachineY = null; 
         
             for (let i = 0; i < path.length; i++) {
                 let xOffset = 0;
-                let yOffset = (i + 1) * space;
+                let yOffset = (i + 1) * nodeHeight;
                 let firstMachine = path[0];
         
                 for (let j = 0; j < t_source.length; j++) {
@@ -592,180 +487,17 @@
             }
            
           }
-        
-        function calcpositionsexternal (path){
-            let start = path[0];
-            let startsecond = path[1];
-            let startX = 0;
-            let startY = 0;
-            let end = path[path.length - 1];
-            let endX = 0;
-            let endY = 0;
-                // get coordinates of start and end machine of the external path
-                for (let x = 0; x<t_source.length; x++){
-                    if (t_source[x].Parent_Machine === start){
-                        startX = t_source[x].X;
-                        startY = t_source[x].Y;
-                    }
-                    if (t_source[x].Parent_Machine === end){
-                        endX = t_source[x].X;
-                        endY = t_source[x].Y;
-                    }
-                    // the position of the second machine in the path is calculated with the X coordinate from the start machine and the y coordinate from the end machine
-                    if (t_source[x].Parent_Machine === startsecond){
-                        t_source[x].X = startX;
-                        t_source[x].Y = endY;
-                    } 
-                }
-            let elementsbetween = path.length - 3; 
-            let pathlength_X = (endX- startX) / elementsbetween 
-            //let pathlength_Y = endY - endY; 
-            for (let j=2; j<(path.length)-1; j++){
-                let offset = 0;
-                let nextMachine = path[j];
-                for (let e=0; e<t_source.length; e++){
-                    if (startY !== endY){
-                        offset = (j-1) * pathlength_X - nodeWidth;
-                        if (t_source[e].Parent_Machine === path[j]){
-                            t_source[e].Y = endY;
-                            t_source[e].X = t_source[e].X - offset;
-                        }
-                    }
-                }
-            }
-            for (let a=1; a<(path.length)-1; a++){
-                let offset = 0;
-                let nextMachine = path[a];
-                for (let b=0; b<t_source.length; b++){
-                if (startY === endY){
-                        offset = (a) * pathlength_X - nodeWidth;
-                        if (t_source[b].Parent_Machine === path[a]){
-                            t_source[b].Y = startY - nodeWidth;
-                            t_source[b].X = startX + offset; 
-                        }
-                    }
-                }
-            }
-            
-        }
 
         // calculates all paths and the positions of all machines
         // 1
-        
-        calcpositionshor_r(path1_hor_r_Entlader_Auspacker, t_source,maxLength_Entlader_Auspacker_Varioline_Belader, nodeWidth,'1');
-        calcpositionshor_r(path1_hor_r_Auspacker_Wama, t_source,maxLength_Auspacker_Wama_Etima_Varioline, nodeWidth, '1');
-        
-        calcpositionssenkr_u(path1_senkr_u_Wama_Etima, t_source,maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight,'1');
-        
-        calcpositionshor_l(path1_hor_l_Etima_Varioline,t_source,maxLength_Auspacker_Wama_Etima_Varioline, nodeWidth,'1');
-        
-
-        for (let a=0; a<t_source.length; a++){
-            if (t_source[a].Y_dep === 'Etikettiermasschine'){
-                for (let y=0; y<t_source.length; y++){
-                    if(t_source[y].Parent_Machine === 'Etikettiermaschine'){
-                        t_source[a].Y = t_source[y].Y;
-                    }      
-                }
-            }
-            if (t_source[a].X_dep === 'Auspacker'){
-                for (let x=0; x<t_source.length; x++){
-                    if(t_source[x].Parent_Machine === 'Auspacker'){
-                        t_source[a].X = t_source[x].X;
-                    }      
-                }
-            }
-        }
-        calcpositionshor_l(path1_hor_l_Varioline_Belader,t_source, maxLength_Entlader_Auspacker_Varioline_Belader, nodeWidth,'1');
-        calcpositionshor_l(path1_hor_l_Belader_,t_source,path1_hor_l_Belader_.length, nodeWidth,'1');
-
-
-        
+        calcpositionshor_r(path1_hor_r, t_source, nodeWidth, '1');
+        calcpositionssenkr_u(path1_senkr_u, t_source, nodeHeight,'1');
+        calcpositionshor_l (path1_hor_l,t_source,nodeWidth,'1');
         // 2
-        calcpositionssenkr_u(path2_Entlader,t_source, maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight,'2');
-        for (let a=0; a<t_source.length; a++){
-            if (t_source[a].Y_dep === 'Etikettiermasschine'){
-                for (let y=0; y<t_source.length; y++){
-                    if(t_source[y].Parent_Machine === 'Etikettiermaschine'){
-                        t_source[a].Y = t_source[y].Y;
-                    }      
-                }
-            }
-            if (t_source[a].X_dep === 'Entlader'){
-                for (let x=0; x<t_source.length; x++){
-                    if(t_source[x].Parent_Machine === 'Entlader'){
-                        t_source[a].X = t_source[x].X;
-                    }      
-                }
-            }
+        calcpositionssenkr_u(path2_Entlader,t_source,nodeHeight,'2');
+        calcpositionssenkr_u(path2_Auspacker, t_source, nodeHeight, '2');
+        // others...
         }
-        calcpositionssenkr_u(path2_Auspacker, t_source, maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight, '2');
-
-        // others...   
-        
-        let paths_4 = [];
-        let paths_10 = [];
-        let paths_20 = [];
-        let paths_3 = [];
-
-        // externalpaths: 
-
-        for (let i = 0; i < t_externalpaths.length; i++) {
-            let index = '';
-            if (t_externalpaths[i] === '4') {
-                x = i-1;
-                index = t_externalpaths[x];
-                paths_4.push(findPaths(t_source, '4', index));
-            } else if (t_externalpaths[1] === '10') {
-                x = i-1;
-                index = t_externalpaths[x];
-                paths_10.push(findPaths(t_source, '10', index));
-            } else if (t_externalpaths[i] === '20') {
-                x = i-1;
-                index = t_externalpaths[x];
-                paths_20.push(findPaths(t_source, '20', index));
-            } else if (t_externalpaths[i] === '3') {
-                x = i-1;
-                index = t_externalpaths[x];
-                paths_3.push(findPaths(t_source, '3', index));
-            }
-        }
-        console.log(paths_3);
-        console.log(paths_4); // 1: ['TBB_EG12', 'TBB_EG13', 'Abschrauber', 'TBB_EG14', 'TBB_EG16'] 2: ['TBG_EG09', 'TBG_EG12', 'TBG_EG13', 'Belader_links']
-        console.log(paths_10);
-        console.log(paths_20);
-
-        for (let p=0; p<paths_4.length; p++){
-            let currentpath = paths_4[p];
-            calcpositionsexternal(currentpath);
-        }
-
-
-        // gend end nodes
-        let helperarray = [];
-        for (let f=0; f<t_source.length; f++){
-            for ( let g=0; g< t_source.length; g++){
-                if (t_source[f].Parent_Machine !=  )
-
-            }
-            
-        }
-
-
-
-        for (let i=0; i<t_source.length; i++){
-            if (t_source[i].ID === priority && t_source[i].Parent_Machine == start){
-                path.push(t_source[i].Parent_Machine);
-                path.push(t_source[i].Children_Machine);                    
-            }
-        }
-
-        for (let j=1; j<path.length; j++){
-            for (let a=0; a<t_source.length; a++){
-                if (t_source[a].ID === priority && t_source[a].Parent_Machine == path[j]){
-                    path.push(t_source[a].Children_Machine);
-                }
-    }
 
     // function that transform p_source data into input format for graph 
 
