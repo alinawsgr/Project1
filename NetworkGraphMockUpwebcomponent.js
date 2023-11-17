@@ -516,7 +516,7 @@
                             Y_dep: ''});
                     }
                 t_source[t].Y = yEntladerPosition;
-                t_source[t].X = xEntladerPosition - ((p+1) * nodeWidth);
+                t_source[t].X = xEntladerPosition - ((p+2) * nodeWidth);
 
                 }
             }
