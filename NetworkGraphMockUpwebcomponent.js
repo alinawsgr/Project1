@@ -508,15 +508,15 @@
                     if (allmothermachines.indexOf(path[p]) <= 0){
                         t_source.push( { 
                             Parent_Machine: path[p],
-                            X: xEntladerPosition - (nodeWidth * p+1),
-                            Y: yEntladerPosition,
+                            X: 0,
+                            Y: 0,
                             ID: 'end',
                             Children_Machine: '',
                             X_dep: '',
                             Y_dep: ''});
                     }
-                //t_source[t].Y = yEntladerPosition;
-                //t_source[t].X = xEntladerPosition - p * nodeWidth;
+                t_source[t].Y = yEntladerPosition;
+                t_source[t].X = xEntladerPosition - ((p+1) * nodeWidth);
 
                 }
             }
