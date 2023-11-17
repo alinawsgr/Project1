@@ -674,6 +674,7 @@
                 index = t_externalpaths[x];
                 paths_4.push(findPaths(t_source, '4', index));
         }
+    }
         console.log(paths_4);
         for (let p=0; p<paths_4.length; p++){
             let currentpath = paths_4[p];
