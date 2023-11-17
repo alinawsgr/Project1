@@ -964,13 +964,13 @@
         } 
     }
 
-/* delete ends with value 0 in coordinates
+//  delete ends with value 0 in coordinates
     for (let e=0; e<t_source.length; e++){
         if (t_source[e].X == 0 && t_source[e].Y == 0){
             t_source.splice(e, 1);
             e--;
         }
-    }*/
+    }
 
         
         
