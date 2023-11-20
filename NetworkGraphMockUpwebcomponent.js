@@ -559,7 +559,7 @@
                 }
             let elementsbetween = path.length - 3; 
             let pathlength_X = (startX- endX) / elementsbetween
-            for (let j=2; j<path.length -1; j++){
+            for (let j=2; j<path.length; j++){
                 let offset = 0;
                 for (let e=0; e<t_source.length; e++){
                     if (startY !== endY){
