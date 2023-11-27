@@ -543,7 +543,7 @@
         for (let b=0; b< t_source.length; b++){
             allmothermachines.push(t_source[b].Parent_Machine);
         }
-        function placebeforeEntlader(path){
+        function placepathbeforeEntlader(path){
             for (let t=0; t<t_source.length; t++){
                 for (let p=0; p<path.length; p++){
                     if (allmothermachines.indexOf(path[p]) <= 0){
@@ -566,7 +566,7 @@
             }
 
         }
-        placebeforeEntlader(pathxx);
+        placepathbeforeEntlader(pathxx);
         
           
         
@@ -662,6 +662,20 @@
         }
         for (let p=0; p<paths_4.length; p++){
             let currentpath = paths_4[p];
+            calcpositionsexternal(currentpath);
+        }
+
+        let paths_3 = []
+        for (let i = 0; i < t_externalpaths.length; i++) {
+            let index = '';
+            if (t_externalpaths[i] === '3') {
+                x = i-1;
+                index = t_externalpaths[x];
+                paths_3.push(findPaths(t_source, '3', index));
+            }
+        }
+        for (let p=0; p<paths_3.length; p++){
+            let currentpath = paths_3[p];
             calcpositionsexternal(currentpath);
         }
 
