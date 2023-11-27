@@ -666,6 +666,23 @@
         }
 
 
+        // for paths with priority 10/ external paths outside the main line
+        let paths_10 = [];
+        for (let i = 0; i < t_externalpaths.length; i++) {
+            let index = '';
+            if (t_externalpaths[i] === '10') {
+                x = i-1;
+                index = t_externalpaths[x];
+                paths_10.push(findPaths(t_source, '10', index));
+            }
+        }
+        for (let p=0; p<paths_10.length; p++){
+            let currentpath = paths_10[p];
+            calcpositionsexternal(currentpath);
+        }
+
+        
+
         // end nodes (machines with no children machine need special handling, because they are not in T_source included and they need to be pushed in t_source as mother_machines in order to give them x and y coordinates )
         // get list with children machines
         let allchildrenmachines =  [];
