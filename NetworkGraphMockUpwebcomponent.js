@@ -262,7 +262,7 @@
     
     
     //////////////////////////////////////////////////////// MAIN FUNCTION ///////////////////////////////////////////////////////////////////////////////////////////////
-    // main function that contains functions, that calculate the coordinates and connections for each machine in the input data 
+    // 'setCoordinates' as main function that contains functions, that calculate the coordinates and connections for each machine in the input data 
     function setCoordinates(t_source, source){
         // write fix 'Entlader' Positions into t_source (contains the input data) as a base machine
         // structure of t_source: Parent_Machine(Quelle), Children_Machine(Senke),ID (priority), X( x-Coordinate), Y (y-Coordinate)
@@ -278,35 +278,32 @@
 
         }
 
-
-    
-       
-        // find all paths in the graph regarding their value/priority (input: priority in string format, start machine in string format)
-        function findPaths(t_source, priority, start){
-            // calculates the row of the start machine, from where the paths start
-            let path = [];
-            // define the start machine of the path
-            for (let i=0; i<t_source.length; i++){
-                if (t_source[i].ID === priority && t_source[i].Parent_Machine == start){
-                    path.push(t_source[i].Parent_Machine);
-                    path.push(t_source[i].Children_Machine);                    
-                }
+    // find all paths in the graph regarding their value/priority (input: priority in string format, start machine in string format)
+    function findPaths(t_source, priority, start){
+        // calculates the row of the start machine, from where the paths start
+        let path = [];
+        // define the start machine of the path
+        for (let i=0; i<t_source.length; i++){
+            if (t_source[i].ID === priority && t_source[i].Parent_Machine == start){
+                path.push(t_source[i].Parent_Machine);
+                path.push(t_source[i].Children_Machine);                    
             }
-            // finf following machines
-            for (let j=1; j<path.length; j++){
-                for (let a=0; a<t_source.length; a++){
-                    if (t_source[a].ID === priority && t_source[a].Parent_Machine == path[j]){
-                        path.push(t_source[a].Children_Machine);
-                    }
-                }
-            }
-            return path;
         }
+        // find following machines
+        for (let j=1; j<path.length; j++){
+            for (let a=0; a<t_source.length; a++){
+                if (t_source[a].ID === priority && t_source[a].Parent_Machine == path[j]){
+                    path.push(t_source[a].Children_Machine);
+                }
+            }
+        }
+        return path;
+    }
 
 
         // run findPaths function for every priority
 
-        // ---------- main line (priority=1/ red)
+        // ---------- main line (priority=1/ red)-----------------------------------------------------------------
         let path1 = findPaths(t_source, '1', 'Entlader');
         // cut path1 in parts, as it has direction changes + get length of it 
         // path horizontal right from Entlader to Auspacker 
@@ -352,8 +349,6 @@
         } else {
             maxLength_Entlader_Auspacker_Varioline_Belader = path1_hor_l_Varioline_Belader.length;
         }
-    
-
         // Auspacker -> Wama / Etima -> Varioline
         let maxLength_Auspacker_Wama_Etima_Varioline = 0;
         if (path1_hor_r_Auspacker_Wama.length > path1_hor_l_Etima_Varioline.length){
@@ -361,8 +356,6 @@
         } else {
             maxLength_Auspacker_Wama_Etima_Varioline = path1_hor_l_Etima_Varioline.length;
         }
-        
-
         // Entlader -> Belader / Auspacker -> Varioline / Wama -> Etima
         let maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = 0;
         if ( path2_Entlader.length > path2_Auspacker.length){
@@ -476,6 +469,52 @@
             }
 
             }
+         // run position calculation functions from above for priority 1 and 2 machines
+        // fpr paths with priority 1
+        calcpositionshor_r(path1_hor_r_Entlader_Auspacker, t_source,maxLength_Entlader_Auspacker_Varioline_Belader, nodeWidth,'1');
+        calcpositionshor_r(path1_hor_r_Auspacker_Wama, t_source,maxLength_Auspacker_Wama_Etima_Varioline, nodeWidth, '1');
+        calcpositionssenkr_u(path1_senkr_u_Wama_Etima, t_source,maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight,'1');
+        calcpositionshor_l(path1_hor_l_Etima_Varioline,t_source,maxLength_Auspacker_Wama_Etima_Varioline, nodeWidth,'1');
+        
+        for (let a=0; a<t_source.length; a++){
+            if (t_source[a].Y_dep === 'Etikettiermasschine'){
+                for (let y=0; y<t_source.length; y++){
+                    if(t_source[y].Parent_Machine === 'Etikettiermaschine'){
+                        t_source[a].Y = t_source[y].Y;
+                    }      
+                }
+            }
+            if (t_source[a].X_dep === 'Auspacker'){
+                for (let x=0; x<t_source.length; x++){
+                    if(t_source[x].Parent_Machine === 'Auspacker'){
+                        t_source[a].X = t_source[x].X;
+                    }      
+                }
+            }
+        }
+        calcpositionshor_l(path1_hor_l_Varioline_Belader,t_source, maxLength_Entlader_Auspacker_Varioline_Belader, nodeWidth,'1');
+        calcpositionshor_l(path1_hor_l_Belader_,t_source,path1_hor_l_Belader_.length, nodeWidth,'1');
+
+        // for paths with priority 2
+        calcpositionssenkr_u(path2_Entlader,t_source, maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight,'2');
+        for (let a=0; a<t_source.length; a++){
+            if (t_source[a].Y_dep === 'Etikettiermasschine'){
+                for (let y=0; y<t_source.length; y++){
+                    if(t_source[y].Parent_Machine === 'Etikettiermaschine'){
+                        t_source[a].Y = t_source[y].Y;
+                    }      
+                }
+            }
+            if (t_source[a].X_dep === 'Entlader'){
+                for (let x=0; x<t_source.length; x++){
+                    if(t_source[x].Parent_Machine === 'Entlader'){
+                        t_source[a].X = t_source[x].X;
+                    }      
+                }
+            }
+        }
+        calcpositionssenkr_u(path2_Auspacker, t_source, maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight, '2');
+
 
         // function that places path before 'Entlader'
         function getpathbeforeEntlader(){
@@ -498,7 +537,6 @@
         }
         let pathxx =[];
         pathxx =  getpathbeforeEntlader();
-        console.log(pathxx);
         
         // place the path machines
         let allmothermachines = [];
@@ -558,7 +596,7 @@
                     } 
                 }
             let elementsbetween = path.length - 3; 
-            let pathlength_X = (startX- endX) / elementsbetween
+            let pathlength_X = (endX- startX) / elementsbetween
             for (let j=2; j<path.length -1; j++){
                 let offset = 0;
                 for (let e=0; e<t_source.length; e++){
@@ -566,7 +604,7 @@
                         offset = pathlength_X / 2;
                         if (t_source[e].Parent_Machine === path[j]){
                             t_source[e].Y = endY;
-                            t_source[e].X = endX + offset;
+                            t_source[e].X = startX + offset;
                         }
                     }
                 }
@@ -586,54 +624,7 @@
             
         }
 
-        // run position calculation functions from above for each priority
-        // fpr paths with priority 1
-        calcpositionshor_r(path1_hor_r_Entlader_Auspacker, t_source,maxLength_Entlader_Auspacker_Varioline_Belader, nodeWidth,'1');
-        calcpositionshor_r(path1_hor_r_Auspacker_Wama, t_source,maxLength_Auspacker_Wama_Etima_Varioline, nodeWidth, '1');
-        calcpositionssenkr_u(path1_senkr_u_Wama_Etima, t_source,maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight,'1');
-        calcpositionshor_l(path1_hor_l_Etima_Varioline,t_source,maxLength_Auspacker_Wama_Etima_Varioline, nodeWidth,'1');
-        
-        for (let a=0; a<t_source.length; a++){
-            if (t_source[a].Y_dep === 'Etikettiermasschine'){
-                for (let y=0; y<t_source.length; y++){
-                    if(t_source[y].Parent_Machine === 'Etikettiermaschine'){
-                        t_source[a].Y = t_source[y].Y;
-                    }      
-                }
-            }
-            if (t_source[a].X_dep === 'Auspacker'){
-                for (let x=0; x<t_source.length; x++){
-                    if(t_source[x].Parent_Machine === 'Auspacker'){
-                        t_source[a].X = t_source[x].X;
-                    }      
-                }
-            }
-        }
-        calcpositionshor_l(path1_hor_l_Varioline_Belader,t_source, maxLength_Entlader_Auspacker_Varioline_Belader, nodeWidth,'1');
-        calcpositionshor_l(path1_hor_l_Belader_,t_source,path1_hor_l_Belader_.length, nodeWidth,'1');
-
-
-        
-        // for paths with priority 2
-        calcpositionssenkr_u(path2_Entlader,t_source, maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight,'2');
-        for (let a=0; a<t_source.length; a++){
-            if (t_source[a].Y_dep === 'Etikettiermasschine'){
-                for (let y=0; y<t_source.length; y++){
-                    if(t_source[y].Parent_Machine === 'Etikettiermaschine'){
-                        t_source[a].Y = t_source[y].Y;
-                    }      
-                }
-            }
-            if (t_source[a].X_dep === 'Entlader'){
-                for (let x=0; x<t_source.length; x++){
-                    if(t_source[x].Parent_Machine === 'Entlader'){
-                        t_source[a].X = t_source[x].X;
-                    }      
-                }
-            }
-        }
-        calcpositionssenkr_u(path2_Auspacker, t_source, maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight, '2');
-
+       
          // gets Mother_Machine and Priority of t_source that do not have priority 1 or 2 (they need special calculations)
          let externalpaths = [];
          for (let i=0; i<t_source.length; i++){
@@ -660,21 +651,15 @@
        
 
         // for paths with priority 4/ external paths outside the main line
-
         let paths_4 = [];
-
-        // externalpaths: 
-        console.log(t_externalpaths);
-
         for (let i = 0; i < t_externalpaths.length; i++) {
             let index = '';
             if (t_externalpaths[i] === '4') {
                 x = i-1;
                 index = t_externalpaths[x];
                 paths_4.push(findPaths(t_source, '4', index));
+            }
         }
-    }
-        console.log(paths_4);
         for (let p=0; p<paths_4.length; p++){
             let currentpath = paths_4[p];
             calcpositionsexternal(currentpath);
