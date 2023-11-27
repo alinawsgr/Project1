@@ -674,12 +674,8 @@
                 x = i-1;
                 index = t_externalpaths[x];
                 paths_10.push(findPaths(t_source, '10', index));
-            }
-        }
-        for (let p=0; p<paths_10.length; p++){
-            let currentpath = paths_10[p];
-            calcpositionsexternal(currentpath);
-        }
+                console.log(paths_10);
+            }}
 
         
 
