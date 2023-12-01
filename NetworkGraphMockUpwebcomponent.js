@@ -674,7 +674,8 @@
                 x = i-1;
                 index = t_externalpaths[x];
                 paths_10.push(findPaths(t_source, '10', index));
-                console.log(paths_10);
+                i = i+1;
+                console.log(paths_10); /////////////////////
             }}
 
         
@@ -834,7 +835,7 @@
             let pathAbschieberhor_l = [];
             if (checkAbschieber() === true){
                 pathAbschieber= findPaths(t_source, '3', 'Abschieber');
-                // split path in 2 seperate ones -> fehleranfällig
+                // split path in 2 seperate ones
                 pathAbschieberhor_r.push(pathAbschieber[0]);
                 pathAbschieberhor_r.push(pathAbschieber[1]);
                 pathAbschieberhor_r.push(pathAbschieber[6]);
