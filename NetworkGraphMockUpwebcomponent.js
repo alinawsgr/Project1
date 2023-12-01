@@ -678,6 +678,11 @@
                 console.log(paths_10); /////////////////////
             }}
 
+        for (let p=0; p<paths_10.length; p++){
+            let currentpath2 = paths_10[p];
+            calcpositionsexternal(currentpath2);
+        }
+
         
 
         // end nodes (machines with no children machine need special handling, because they are not in T_source included and they need to be pushed in t_source as mother_machines in order to give them x and y coordinates )
