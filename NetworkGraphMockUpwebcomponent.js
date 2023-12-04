@@ -690,6 +690,19 @@
             }
         }
         console.log(path10);
+
+
+        let path10_t = [];
+        for (let c=0; c<path10.length; c++){
+            for (let i=0; i<t_source.length; i++){
+                if(path10[c] === t_source[i].Parent_Machine){
+                    if (t_source[i].X === 0 && t_source[i].Y === 0){
+                        path10_t.push(t_source[i].Parent_Machine);
+                    }
+                }
+            } 
+        }
+        console.log(path10_t);
             
             
 
