@@ -692,7 +692,7 @@
         }
         
             
-        let currentpath2 = paths_10[p];
+        //let currentpath2 = paths_10[p];
             //calcpositionsexternal(currentpath2); /// hier noch problem
 
         
