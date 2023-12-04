@@ -688,8 +688,9 @@
                     }
                 }
             }
+            console.log(path10);
         }
-        console.log(path10);
+        
             
         let currentpath2 = paths_10[p];
             //calcpositionsexternal(currentpath2); /// hier noch problem
