@@ -669,6 +669,7 @@
 
         // for paths with priority 10/ external paths outside the main line
         let paths_10 = [];
+        let path10 = [];
         for (let i = 0; i < t_externalpaths.length; i++) {
             let index = '';
             if (t_externalpaths[i] === '10') {
@@ -679,7 +680,7 @@
             }}
 
         for (let p = 0; p < paths_10.length; p++) {
-            let path10 = [];
+            
             for (let j = 0; j < paths_10[p].length; j++) {
                 for (let i = 0; i < t_source.length; i++) {
                     if (paths_10[p][j] === t_source[i].Parent_Machine && t_source[i].ID === '10') {
@@ -687,8 +688,8 @@
                     }
                 }
             }
-            console.log(path10);
         }
+        console.log(path10);
             
             
 
