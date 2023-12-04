@@ -680,18 +680,13 @@
 
         for (let p=0; p<paths_10.length; p++){
             let path10 = []
-            var found = false;
             for (let i=0; i<t_source.length; i++){
                 if (paths_10[p] === t_source[i].Parent_Machine){
-                    if (t_source[i].ID === '10'){
-                        found = true; 
-                        break;  
+                    if (t_source[i].ID === '10'){ 
+                        path10.push(t_source[i].Parent_Machine);
+                        console.log(path10);
                     }
-                }  
-            }
-            if (found){
-                path10.push(t_source[i].Parent_Machine);
-                console.log(path10);
+                }
             }
         }
             
