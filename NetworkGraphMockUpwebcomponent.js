@@ -676,13 +676,25 @@
                 index = t_externalpaths[x];
                 paths_10.push(findPaths(t_source, '10', index));
                 i = i+1;
-                console.log(paths_10); /////////////////////
+                console.log(paths_10); 
             }}
 
         for (let p=0; p<paths_10.length; p++){
-            let currentpath2 = paths_10[p];
-            calcpositionsexternal(currentpath2); /// hier noch problem
+            let path10 = []
+            for (let i=0; i<t_source.length; i++){
+                if (paths_10[p] == t_source[i].Parent_Machine){
+                    if (t_source[i].ID == '10'){
+                        path10.push(t_source[i].Parent_Machine);
+                    }
+                }
+            }
         }
+        console.log(path10);
+            
+        let currentpath2 = paths_10[p];
+            //calcpositionsexternal(currentpath2); /// hier noch problem
+
+        
 
         
 
