@@ -684,10 +684,10 @@
                 for (let i = 0; i < t_source.length; i++) {
                     if (paths_10[p][j] === t_source[i].Parent_Machine && t_source[i].ID === '10') {
                         path10.push(t_source[i].Parent_Machine);
-                        console.log(path10);
                     }
                 }
             }
+            console.log(path10);
         }
             
             
