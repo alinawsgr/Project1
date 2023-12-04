@@ -648,6 +648,7 @@
                  t_externalpaths.push(externalpaths[a]);
              }
          }
+         console.log(t_externalpaths);
        
 
         // for paths with priority 4/ external paths outside the main line
@@ -680,7 +681,7 @@
 
         for (let p=0; p<paths_10.length; p++){
             let currentpath2 = paths_10[p];
-            calcpositionsexternal(currentpath2);
+            calcpositionsexternal(currentpath2); /// hier noch problem
         }
 
         
