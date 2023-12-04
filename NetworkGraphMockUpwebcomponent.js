@@ -702,7 +702,45 @@
                 }
             } 
         }
-        console.log(path10_t);
+        console.log(path10_t); // ['TBB_EG11', 'TBB_EG25', 'TBB_EG25', 'TBG_EG08']
+
+        // loop through path10_t and place them between parent and children machine
+        let children = '';
+        let parent = '';
+        let childrenx = 0;
+        let childreny = 0;
+        let parentx_ = 0;
+        let parenty_ = 0;
+        for (let p=0; p<path10_t.length; p++){
+            for (let i=0; i<t_source.length;i++){
+                // get parent and children 
+                if (t_source[i].Parent_Machine === path10_t[p]){
+                    children = t_source[i].Children_Machine;
+                    for (let x=0; x<t_source.length; x++){
+                        if (t_source[x].Parent_Machine === children)
+                        childrenx = t_source[x].X;
+                        childreny = t_source[x].Y;
+                    }
+                    for (let j=0; j<t_source.length; j++){
+                        if (t_source[j].Children_Machine === path10_t[p]){
+                            parent = t_source[j].Parent_Machine;
+                            for (let y=0; y<t_source.length; y++){
+                                parentx_ = t_source[y].X;
+                                parenty_ = t_source[y].Y;
+                            }
+                        }
+                    }
+                    t_source[i].X = childrenx;
+                    t_source[i].Y = parenty_;
+                }
+            }
+        
+        }
+
+
+
+
+
             
             
 
