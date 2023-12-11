@@ -730,10 +730,9 @@
                             }
                         }
                     }
-                    
+                    t_source[i].X = childrenx;
+                    t_source[i].Y = parenty_;
                 }
-                t_source[i].X = childrenx;
-                t_source[i].Y = parenty_;
             }
         
         }
