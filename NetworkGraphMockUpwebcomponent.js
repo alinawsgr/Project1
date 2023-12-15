@@ -666,7 +666,7 @@
             calcpositionsexternal(currentpath);
         }
 
-        /*
+        
         // for paths with priority 10/ external paths outside the main line
         let paths_10 = [];
         let path10 = [];
@@ -702,6 +702,7 @@
             } 
         }
         console.log(path10_t); // ['TBB_EG11', 'TBB_EG25', 'TBB_EG25', 'TBG_EG08']
+        /*
 
         // loop through path10_t and place them between parent and children machine
         let children = '';
