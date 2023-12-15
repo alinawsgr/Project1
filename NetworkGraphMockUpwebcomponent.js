@@ -704,6 +704,29 @@
         console.log(path10_t); // ['TBB_EG11', 'TBB_EG25', 'TBB_EG25', 'TBG_EG08']
         
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         // loop through path10_t and place them between parent and children machine
         let children = '';
         let parent = '';
@@ -719,21 +742,19 @@
                         childrenx = t_source[x].X;
                         childreny = t_source[x].Y;
                     }
-                    for (let j=0; j<t_source.length; j++){
-                        if (t_source[j].Children_Machine === path10_t[p]){
-                            parent = t_source[j].Parent_Machine;
-                            for (let y=0; y<t_source.length; y++){
-                                parentx_ = t_source[y].X;
-                                parenty_ = t_source[y].Y;
-                            }
-                        }
-                    }
-                    
                 }
-                t_source[i].X = childrenx;
-                t_source[i].Y = parenty_;
-            }
-        
+                    
+                if (t_source[i].Children_Machine === path10_t[p]){
+                    parentx_ = t_source[i].X;
+                    parenty_ = t_source[i].Y;
+                }
+                for (let u=0; u<t_source.length; u++){
+                    if (t_source[u].Parent_Machine === path10_t[p]){ 
+                        t_source[i].X = childrenx;
+                        t_source[i].Y = parenty_;
+                    }
+                }      
+            }   
         }
 
 
