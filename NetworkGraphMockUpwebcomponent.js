@@ -666,7 +666,7 @@
             calcpositionsexternal(currentpath);
         }
 
-
+        /*
         // for paths with priority 10/ external paths outside the main line
         let paths_10 = [];
         let path10 = [];
@@ -738,7 +738,7 @@
         for (let p=0; p<paths_10.length; p++){
             let currentpath2 = paths_10[p];
             calcpositionsexternal(currentpath2); /// hier noch problem
-        }
+        }*/
 
         
 
