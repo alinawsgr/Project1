@@ -716,23 +716,24 @@
                     children = t_source[i].Children_Machine;
                     for (let x=0; x<t_source.length; x++){
                         if (t_source[x].Parent_Machine === children)
-                        childrenx = t_source[x].X;
-                        childreny = t_source[x].Y;
+                            childrenx = t_source[x].X;
+                            childreny = t_source[x].Y;
                     }
+                }
+            }
             for (let j=0; j<t_source.length; j++){
                 if (t_source[j].Children_Machine === path10_t[p]){
                     parent = t_source[j].Parent_Machine;
                     for (let y=0; y<t_source.length; y++){
-                        parentx_ = t_source[y].X;
-                        parenty_ = t_source[y].Y;
+                        if (t_source[y].Parent_Machine === parent){
+                            parentx_ = t_source[y].X;
+                            parenty_ = t_source[y].Y;
+                        }
                     }
                 }
             }
-                    
-                }
-                t_source[i].X = childrenx;
-                t_source[i].Y = parenty_;
-            }
+            t_source[i].X = childrenx;
+            t_source[i].Y = parenty_;
         
         }
 
