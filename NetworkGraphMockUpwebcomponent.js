@@ -720,7 +720,7 @@
                             childreny = t_source[x].Y;
                     }
                 }
-            }
+            
             for (let j=0; j<t_source.length; j++){
                 if (t_source[j].Children_Machine === path10_t[p]){
                     parent = t_source[j].Parent_Machine;
@@ -735,6 +735,7 @@
             t_source[i].X = childrenx;
             t_source[i].Y = parenty_;
         
+            }
         }
 
 /*
