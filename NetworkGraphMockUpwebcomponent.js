@@ -689,7 +689,6 @@
                 }
             }
         }
-        console.log(path10);
 
 
         let path10_t = [];
@@ -708,8 +707,6 @@
         let children = '';
         let parent = '';
         let childrenx = 0;
-        let childreny = 0;
-        let parentx_ = 0;
         let parenty_ = 0;
         for (let p=0; p<path10_t.length; p++){
             for (let i=0; i<t_source.length;i++){
@@ -739,8 +736,8 @@
         }
 
             
-        //let currentpath2 = paths_10[p];
-            //calcpositionsexternal(currentpath2); /// hier noch problem
+        let currentpath2 = paths_10[p];
+        calcpositionsexternal(currentpath2); /// hier noch problem
 
         
 
@@ -1038,7 +1035,7 @@
             t_source[p].Y = 6000
             t_source[p].Children_Machine = ''
         } 
-    }
+    }*/
 
 //  delete ends with value 0 in coordinates
     for (let e=0; e<t_source.length; e++){
@@ -1047,7 +1044,7 @@
             e--;
         }
     }
-    */
+    
 
         
         
