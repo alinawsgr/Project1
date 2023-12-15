@@ -715,9 +715,10 @@
                 if (t_source[i].Parent_Machine === path10_t[p]){
                     children = t_source[i].Children_Machine;
                     for (let x=0; x<t_source.length; x++){
-                        if (t_source[x].Parent_Machine === children)
+                        if (t_source[x].Parent_Machine === children){
                             childrenx = t_source[x].X;
                             childreny = t_source[x].Y;
+                        }
                     }
                 }
             
