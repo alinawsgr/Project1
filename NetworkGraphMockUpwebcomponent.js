@@ -702,7 +702,7 @@
             } 
         }
         console.log(path10_t); // ['TBB_EG11', 'TBB_EG25', 'TBB_EG25', 'TBG_EG08']
-        /*
+        
 
         // loop through path10_t and place them between parent and children machine
         let children = '';
@@ -736,10 +736,11 @@
         
         }
 
+/*
         for (let p=0; p<paths_10.length; p++){
             let currentpath2 = paths_10[p];
             calcpositionsexternal(currentpath2); /// hier noch problem
-        }*/
+       */ 
 
         
 
