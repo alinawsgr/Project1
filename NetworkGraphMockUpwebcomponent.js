@@ -705,39 +705,42 @@
         
 
         // loop through path10_t and place them between parent and children machine
-        let children = '';
-        let parent = '';
-        let childrenx = 0;
-        let parenty_ = 0;
-        for (let p=0; p<path10_t.length; p++){
-            for (let i=0; i<t_source.length;i++){
+        for (let p = 0; p < path10_t.length; p++) {
+            let children = '';
+            let parent = '';
+            let childrenx = 0;
+            let parenty_ = 0;
+        
+            for (let i = 0; i < t_source.length; i++) {
                 // get parent and children 
-                if (t_source[i].Parent_Machine === path10_t[p]){
+                if (t_source[i].Parent_Machine === path10_t[p]) {
                     children = t_source[i].Children_Machine;
-                    for (let x=0; x<t_source.length; x++){
-                        if (t_source[x].Parent_Machine === children){
+                    for (let x = 0; x < t_source.length; x++) {
+                        if (t_source[x].Parent_Machine === children) {
                             childrenx = t_source[x].X;
                             childreny = t_source[x].Y;
                         }
                     }
                 }
-            
-            for (let j=0; j<t_source.length; j++){
-                if (t_source[j].Children_Machine === path10_t[p]){
-                    parent = t_source[j].Parent_Machine;
-                    for (let y=0; y<t_source.length; y++){
-                        if (t_source[y].Parent_Machine === parent){
-                            parentx_ = t_source[y].X;
-                            parenty_ = t_source[y].Y;
+        
+                for (let j = 0; j < t_source.length; j++) {
+                    if (t_source[j].Children_Machine === path10_t[p]) {
+                        parent = t_source[j].Parent_Machine;
+                        for (let y = 0; y < t_source.length; y++) {
+                            if (t_source[y].Parent_Machine === parent) {
+                                parentx_ = t_source[y].X;
+                                parenty_ = t_source[y].Y;
+                            }
                         }
                     }
                 }
-            }
-            t_source[i].X = childrenx;
-            t_source[i].Y = parenty_;
         
+                // Update the X and Y values within the inner loop
+                t_source[i].X = childrenx;
+                t_source[i].Y = parenty_;
             }
         }
+        
 
 /*
         for (let p=0; p<paths_10.length; p++){
