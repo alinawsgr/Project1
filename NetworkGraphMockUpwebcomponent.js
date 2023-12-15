@@ -712,6 +712,7 @@ for (let p = 0; p < path10_t.length; p++) {
     let parent = '';
     let childrenx = 0;
     let parenty_ = 0;
+    let conditionMet = false; // Flag to check if the condition was met
 
     // First loop to find children
     for (i = 0; i < t_source.length; i++) {
@@ -725,28 +726,33 @@ for (let p = 0; p < path10_t.length; p++) {
                     childreny = t_source[x].Y;
                 }
             }
+
+            conditionMet = true; // Set the flag to true if the condition is met
         }
     }
 
-    // Third loop to find parent
-    for (let j = 0; j < t_source.length; j++) {
-        if (t_source[j].Children_Machine === path10_t[p]) {
-            parent = t_source[j].Parent_Machine;
+    // Third loop to find parent and update coordinates
+    if (conditionMet) {
+        for (let j = 0; j < t_source.length; j++) {
+            if (t_source[j].Children_Machine === path10_t[p]) {
+                parent = t_source[j].Parent_Machine;
 
-            // Fourth loop to find parent's coordinates
-            for (let y = 0; y < t_source.length; y++) {
-                if (t_source[y].Parent_Machine === parent) {
-                    parentx_ = t_source[y].X;
-                    parenty_ = t_source[y].Y;
+                // Fourth loop to find parent's coordinates
+                for (let y = 0; y < t_source.length; y++) {
+                    if (t_source[y].Parent_Machine === parent) {
+                        parentx_ = t_source[y].X;
+                        parenty_ = t_source[y].Y;
 
-                    // Update the X and Y values within the loop
-                    t_source[i].X = childrenx;
-                    t_source[i].Y = parenty_;
+                        // Update the X and Y values within the loop
+                        t_source[i].X = childrenx;
+                        t_source[i].Y = parenty_;
+                    }
                 }
             }
         }
     }
 }
+
 
         
 
