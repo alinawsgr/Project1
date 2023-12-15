@@ -738,13 +738,6 @@
         
         }
 
-
-
-
-
-            
-            
-
             
         //let currentpath2 = paths_10[p];
             //calcpositionsexternal(currentpath2); /// hier noch problem
@@ -1045,7 +1038,7 @@
             t_source[p].Y = 6000
             t_source[p].Children_Machine = ''
         } 
-    }*/
+    }
 
 //  delete ends with value 0 in coordinates
     for (let e=0; e<t_source.length; e++){
@@ -1054,6 +1047,7 @@
             e--;
         }
     }
+    */
 
         
         
