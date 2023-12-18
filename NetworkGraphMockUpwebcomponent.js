@@ -706,30 +706,35 @@
 
 
         // loop through path10_t and place them between parent and children machine
-        let children = '';
+        let parentx_ = 0;
         let childrenx = 0;
         let parenty_ = 0;
         for (let p=0; p<path10_t.length; p++){
-            for (let i=0; i<t_source.length;i++){
-                // get parent and children 
-                if (t_source[i].Parent_Machine === path10_t[p]){
-                    children = t_source[i].Children_Machine;
+            for (let i=0; i<t_source.length;i++){ 
+                // get coordinates of mother machine
+                if (t_source[i].Children_Machine === path10_t[p]){
+                    parentx_ = t_source[i].X;
+                    parenty_ = t_source[i].Y;   
+                }
+                // get coordinates of children machine
+                else if (t_source[i].Parent_Machine === path10_t[p]){
+                    let children = t_source[i].Children_Machine;
                     for (let x=0; x<t_source.length; x++){
-                        if (t_source[x].Parent_Machine === children)
+                        if (t_source[x].Parent_Machine === children){
                             childrenx = t_source[x].X;
                             childreny = t_source[x].Y;
+                        }
                     }
-                }
-                else if (t_source[i].Children_Machine === path10_t[p]){
-                    parentx_ = t_source[i].X;
-                    parenty_ = t_source[i].Y;
-                }
-                else if (t_source[i].Parent_Machine === path10_t[p]){ 
-                    t_source[i].X = childrenx;
-                    t_source[i].Y = parenty_;
-                }
+                }     
             }
-        }         
+            for (let g=0; g<t_source.length; g++){
+                if (t_source[i].Parent_Machine === path10_t[p]){ 
+                        t_source[i].X = childrenx;
+                        t_source[i].Y = parenty_;
+                    }
+            }
+        }
+             
 
 
         
