@@ -728,9 +728,9 @@
                 }     
             }
             for (let g=0; g<t_source.length; g++){
-                if (t_source[i].Parent_Machine === path10_t[p]){ 
-                        t_source[i].X = childrenx;
-                        t_source[i].Y = parenty_;
+                if (t_source[g].Parent_Machine === path10_t[p]){ 
+                        t_source[g].X = childrenx;
+                        t_source[g].Y = parenty_;
                     }
             }
         }
