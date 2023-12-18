@@ -708,6 +708,7 @@
         // loop through path10_t and place them between parent and children machine
         let parentx_ = 0;
         let childrenx = 0;
+        let childreny = 0;
         let parenty_ = 0;
         for (let p=0; p<path10_t.length; p++){
             for (let i=0; i<t_source.length;i++){ 
@@ -728,26 +729,20 @@
                 }     
             }
             for (let g=0; g<t_source.length; g++){
-                if (t_source[g].Parent_Machine === path10_t[p]){ 
+                if (t_source[g].Parent_Machine === path10_t[p]){
                         t_source[g].X = childrenx;
                         t_source[g].Y = parenty_;
+                        // if there is alredy a machine, place it the other way round
+                        for (let c=0; c<t_source.length; c++){
+                            if (t_source[c].X === childrenx && t_source[c].Y === parenty_){
+                                t_source[g].X = childreny;
+                                t_source[g].Y = parentx_;
+                            }
+                        }
                     }
             }
         }
-             
-
-
-        
-
-/*
-        for (let p=0; p<paths_10.length; p++){
-            let currentpath2 = paths_10[p];
-            calcpositionsexternal(currentpath2); /// hier noch problem
-       */ 
-
-        
-
-        
+               
 
         // end nodes (machines with no children machine need special handling, because they are not in T_source included and they need to be pushed in t_source as mother_machines in order to give them x and y coordinates )
         // get list with children machines
