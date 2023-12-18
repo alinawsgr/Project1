@@ -724,7 +724,7 @@
                     parentx_ = t_source[i].X;
                     parenty_ = t_source[i].Y;
                 }
-                else if (t_source[u].Parent_Machine === path10_t[p]){ 
+                else if (t_source[i].Parent_Machine === path10_t[p]){ 
                     t_source[i].X = childrenx;
                     t_source[i].Y = parenty_;
                 }
