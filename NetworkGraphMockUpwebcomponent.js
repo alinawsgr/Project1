@@ -738,6 +738,10 @@
                                 t_source[g].X = parentx_;
                                 t_source[g].Y = childreny;
                             }
+                            else {
+                                t_source[g].X = childrenx;
+                                t_source[g].Y = parenty_;
+                            }
                         }
                     }
             }
