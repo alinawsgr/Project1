@@ -334,15 +334,17 @@
         }
         findPathsRed();
 
-        
+        function findPathsYellow(){
         //---------- 2 yellow paths (priority=2) --> Start Schritt 3
         let path2 = [];
         // path from Entlader to Belader-rechts 
         path2_Entlader = findPaths(t_source, '2', 'Entlader');
         path2_Entlader_length = path2_Entlader.length;
-        // path from Auspacker to Variolinen 
+        // path from Auspacker to Varioline 
         path2_Auspacker = findPaths(t_source,'2', 'Auspacker');
         path2_Auspacker_length = path2_Auspacker.length; // -> Ende Schritt 3
+        }
+        findPathsYellow();
         
 
         // get maximal path length for each dependent paths, so that there is space for each machine --> Start Schritt 2 --> Start Schritt 3
