@@ -330,7 +330,6 @@
             path1_hor_r_Auspacker_Wama.push(path1_senkr_u_Wama_Etima[0]);
             path1_senkr_u_Wama_Etima.push(path1_hor_l_Etima_Varioline[0]);
             path1_hor_l_Varioline_Belader.push(pathChanges[5]);
-            return path1, path1_hor_l_Belader_,  path1_hor_r_Entlader_Auspacker, path1_hor_r_Auspacker_Wama,path1_senkr_u_Wama_Etima, path1_hor_l_Varioline_Belader;
         }
         findPathsRed();
 
