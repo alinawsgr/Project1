@@ -267,6 +267,7 @@
     function setCoordinates(t_source, source){
         // write fix 'Entlader' Positions into t_source (contains the input data) as a base machine
         // structure of t_source: Parent_Machine(Quelle), Children_Machine(Senke),ID (priority), X( x-Coordinate), Y (y-Coordinate)
+        
         for (let i = 0; i < t_source.length; i++) {
             if (t_source[i].Parent_Machine === 'Entlader'){
                 t_source[i].X = xEntladerPosition;
@@ -305,30 +306,33 @@
         // run findPaths function for every priority
 
         // ---------- main line (priority=1/ red)-----------------------------------------------------------------
-        let path1 = findPaths(t_source, '1', 'Entlader'); //-> Schritt 2
-        // cut path1 in parts, as it has direction changes + get length of it 
-        // path horizontal right from Entlader to Auspacker  
-        path1_hor_r_Entlader_Auspacker = path1.slice(0, (path1.indexOf(pathChanges[1])));
-        path1_hor_r_Entlader_Auspacker_length = path1_hor_r_Entlader_Auspacker.length;
-        // path horizontal right from Auspacker to Waschmachine  
-        path1_hor_r_Auspacker_Wama = path1.slice(path1.indexOf(pathChanges[1]), (path1.indexOf(pathChanges[2])));
-        path1_hor_r_Auspacker_Wama_length = path1_hor_r_Auspacker_Wama.length;
-         // path down right from Waschmaschine to Ettiketiermaschine 
-        path1_senkr_u_Wama_Etima = path1.slice(path1.indexOf(pathChanges[2]), (path1.indexOf(pathChanges[3])));
-        path1_senkr_u_Wama_Etima_length = path1_senkr_u_Wama_Etima.length;
-        // path horizontal left from Ettiketiermaschine to Varioline 
-        path1_hor_l_Etima_Varioline = path1.slice(path1.indexOf(pathChanges[3]), (path1.indexOf(pathChanges[4])));
-        path1_hor_l_Etima_Varioline_length = path1_hor_l_Etima_Varioline.length;
-        // path horizontal left from Varioline to Belader
-        path1_hor_l_Varioline_Belader = path1.slice(path1.indexOf(pathChanges[4]), (path1.indexOf(pathChanges[5])));
-        path1_hor_l_Varioline_Belader_length = path1_hor_l_Varioline_Belader.length;
-        // path horizontal left from Belader to end
-        path1_hor_l_Belader_ = path1.slice(path1.indexOf(pathChanges[5]))
-        
-        path1_hor_r_Entlader_Auspacker.push(path1_hor_r_Auspacker_Wama[0]);
-        path1_hor_r_Auspacker_Wama.push(path1_senkr_u_Wama_Etima[0]);
-        path1_senkr_u_Wama_Etima.push(path1_hor_l_Etima_Varioline[0]);
-        path1_hor_l_Varioline_Belader.push(pathChanges[5]);
+        function findPathsRed (){
+            let path1 = findPaths(t_source, '1', 'Entlader'); //-> Schritt 2
+            // cut path1 in parts, as it has direction changes + get length of it 
+            // path horizontal right from Entlader to Auspacker  
+            path1_hor_r_Entlader_Auspacker = path1.slice(0, (path1.indexOf(pathChanges[1])));
+            path1_hor_r_Entlader_Auspacker_length = path1_hor_r_Entlader_Auspacker.length;
+            // path horizontal right from Auspacker to Waschmachine  
+            path1_hor_r_Auspacker_Wama = path1.slice(path1.indexOf(pathChanges[1]), (path1.indexOf(pathChanges[2])));
+            path1_hor_r_Auspacker_Wama_length = path1_hor_r_Auspacker_Wama.length;
+            // path down right from Waschmaschine to Ettiketiermaschine 
+            path1_senkr_u_Wama_Etima = path1.slice(path1.indexOf(pathChanges[2]), (path1.indexOf(pathChanges[3])));
+            path1_senkr_u_Wama_Etima_length = path1_senkr_u_Wama_Etima.length;
+            // path horizontal left from Ettiketiermaschine to Varioline 
+            path1_hor_l_Etima_Varioline = path1.slice(path1.indexOf(pathChanges[3]), (path1.indexOf(pathChanges[4])));
+            path1_hor_l_Etima_Varioline_length = path1_hor_l_Etima_Varioline.length;
+            // path horizontal left from Varioline to Belader
+            path1_hor_l_Varioline_Belader = path1.slice(path1.indexOf(pathChanges[4]), (path1.indexOf(pathChanges[5])));
+            path1_hor_l_Varioline_Belader_length = path1_hor_l_Varioline_Belader.length;
+            // path horizontal left from Belader to end
+            path1_hor_l_Belader_ = path1.slice(path1.indexOf(pathChanges[5]));
+            path1_hor_r_Entlader_Auspacker.push(path1_hor_r_Auspacker_Wama[0]);
+            path1_hor_r_Auspacker_Wama.push(path1_senkr_u_Wama_Etima[0]);
+            path1_senkr_u_Wama_Etima.push(path1_hor_l_Etima_Varioline[0]);
+            path1_hor_l_Varioline_Belader.push(pathChanges[5]);
+            return path1_hor_l_Belader_,  path1_hor_r_Entlader_Auspacker, path1_hor_r_Auspacker_Wama,path1_senkr_u_Wama_Etima, path1_hor_l_Varioline_Belader;
+        }
+        findPathsRed();
 
         
         //---------- 2 yellow paths (priority=2) --> Start Schritt 3
