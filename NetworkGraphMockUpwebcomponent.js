@@ -311,19 +311,14 @@
             // cut path1 in parts, as it has direction changes + get length of it 
             // path horizontal right from Entlader to Auspacker  
             path1_hor_r_Entlader_Auspacker = path1.slice(0, (path1.indexOf(pathChanges[1])));
-            path1_hor_r_Entlader_Auspacker_length = path1_hor_r_Entlader_Auspacker.length;
             // path horizontal right from Auspacker to Waschmachine  
             path1_hor_r_Auspacker_Wama = path1.slice(path1.indexOf(pathChanges[1]), (path1.indexOf(pathChanges[2])));
-            path1_hor_r_Auspacker_Wama_length = path1_hor_r_Auspacker_Wama.length;
             // path down right from Waschmaschine to Ettiketiermaschine 
             path1_senkr_u_Wama_Etima = path1.slice(path1.indexOf(pathChanges[2]), (path1.indexOf(pathChanges[3])));
-            path1_senkr_u_Wama_Etima_length = path1_senkr_u_Wama_Etima.length;
             // path horizontal left from Ettiketiermaschine to Varioline 
             path1_hor_l_Etima_Varioline = path1.slice(path1.indexOf(pathChanges[3]), (path1.indexOf(pathChanges[4])));
-            path1_hor_l_Etima_Varioline_length = path1_hor_l_Etima_Varioline.length;
             // path horizontal left from Varioline to Belader
             path1_hor_l_Varioline_Belader = path1.slice(path1.indexOf(pathChanges[4]), (path1.indexOf(pathChanges[5])));
-            path1_hor_l_Varioline_Belader_length = path1_hor_l_Varioline_Belader.length;
             // path horizontal left from Belader to end
             path1_hor_l_Belader_ = path1.slice(path1.indexOf(pathChanges[5]));
             path1_hor_r_Entlader_Auspacker.push(path1_hor_r_Auspacker_Wama[0]);
@@ -334,54 +329,55 @@
         findPathsRed();
 
         function findPathsYellow(){
-        //---------- 2 yellow paths (priority=2) --> Start Schritt 3
-        let path2 = [];
-        // path from Entlader to Belader-rechts 
-        path2_Entlader = findPaths(t_source, '2', 'Entlader');
-        path2_Entlader_length = path2_Entlader.length;
-        // path from Auspacker to Varioline 
-        path2_Auspacker = findPaths(t_source,'2', 'Auspacker');
-        path2_Auspacker_length = path2_Auspacker.length; // -> Ende Schritt 3
+            //---------- 2 yellow paths (priority=2) --> Start Schritt 3
+            let path2 = [];
+            // path from Entlader to Belader-rechts 
+            path2_Entlader = findPaths(t_source, '2', 'Entlader');
+            path2_Entlader_length = path2_Entlader.length;
+            // path from Auspacker to Varioline 
+            path2_Auspacker = findPaths(t_source,'2', 'Auspacker');
+            path2_Auspacker_length = path2_Auspacker.length; // -> Ende Schritt 3
         }
         findPathsYellow();
         
-
-        // get maximal path length for each dependent paths, so that there is space for each machine --> Start Schritt 2 --> Start Schritt 3
-        // dependent paths: 
-        // Entlader -> Auspacker / Varioline -> Belader
-        let maxLength_Entlader_Auspacker_Varioline_Belader = 0;
-        if (path1_hor_r_Entlader_Auspacker.length > path1_hor_l_Varioline_Belader.length){
-            maxLength_Entlader_Auspacker_Varioline_Belader = path1_hor_r_Entlader_Auspacker.length;
-        } else {
-            maxLength_Entlader_Auspacker_Varioline_Belader = path1_hor_l_Varioline_Belader.length;
-        }
-        // Auspacker -> Wama / Etima -> Varioline
-        let maxLength_Auspacker_Wama_Etima_Varioline = 0;
-        if (path1_hor_r_Auspacker_Wama.length > path1_hor_l_Etima_Varioline.length){
-            maxLength_Auspacker_Wama_Etima_Varioline = path1_hor_r_Auspacker_Wama.length;
-        } else {
-            maxLength_Auspacker_Wama_Etima_Varioline = path1_hor_l_Etima_Varioline.length;
-        }
-        // Entlader -> Belader / Auspacker -> Varioline / Wama -> Etima
-        let maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = 0;
-        if ( path2_Entlader.length > path2_Auspacker.length){
-            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima  = path2_Entlader.length;
-        }
-        if(path2_Entlader.length < path2_Auspacker.length){
-            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path2_Auspacker.length;
-        }
-        if(path2_Auspacker.length > path1_senkr_u_Wama_Etima.length){
-            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path2_Auspacker.length;
-        }
-        if(path2_Auspacker.length < path1_senkr_u_Wama_Etima.length){
-            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path1_senkr_u_Wama_Etima.length;
-        }
-        if(path1_senkr_u_Wama_Etima.length > path2_Entlader.length){
-            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path1_senkr_u_Wama_Etima.length;
-        }
-        if (path1_senkr_u_Wama_Etima.length < path2_Entlader.length){
-            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path2_Entlader.length;
-        } // --> Ende Schritt 2 --> Ende Schritt 3
+        function getMaximalPathLength(){
+            // get maximal path length for each dependent paths, so that there is space for each machine --> Start Schritt 2 --> Start Schritt 3
+            // dependent paths: 
+            // Entlader -> Auspacker / Varioline -> Belader
+            let maxLength_Entlader_Auspacker_Varioline_Belader = 0;
+            if (path1_hor_r_Entlader_Auspacker.length > path1_hor_l_Varioline_Belader.length){
+                maxLength_Entlader_Auspacker_Varioline_Belader = path1_hor_r_Entlader_Auspacker.length;
+            } else {
+                maxLength_Entlader_Auspacker_Varioline_Belader = path1_hor_l_Varioline_Belader.length;
+            }
+            // Auspacker -> Wama / Etima -> Varioline
+            let maxLength_Auspacker_Wama_Etima_Varioline = 0;
+            if (path1_hor_r_Auspacker_Wama.length > path1_hor_l_Etima_Varioline.length){
+                maxLength_Auspacker_Wama_Etima_Varioline = path1_hor_r_Auspacker_Wama.length;
+            } else {
+                maxLength_Auspacker_Wama_Etima_Varioline = path1_hor_l_Etima_Varioline.length;
+            }
+            // Entlader -> Belader / Auspacker -> Varioline / Wama -> Etima
+            let maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = 0;
+            if ( path2_Entlader.length > path2_Auspacker.length){
+                maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima  = path2_Entlader.length;
+            }
+            if(path2_Entlader.length < path2_Auspacker.length){
+                maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path2_Auspacker.length;
+            }
+            if(path2_Auspacker.length > path1_senkr_u_Wama_Etima.length){
+                maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path2_Auspacker.length;
+            }
+            if(path2_Auspacker.length < path1_senkr_u_Wama_Etima.length){
+                maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path1_senkr_u_Wama_Etima.length;
+            }
+            if(path1_senkr_u_Wama_Etima.length > path2_Entlader.length){
+                maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path1_senkr_u_Wama_Etima.length;
+            }
+            if (path1_senkr_u_Wama_Etima.length < path2_Entlader.length){
+                maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path2_Entlader.length;
+            } 
+        }  // --> Ende Schritt 2 --> Ende Schritt 3
         
 
     
@@ -522,7 +518,8 @@
         calcpositionssenkr_u(path2_Auspacker, t_source, maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight, '2'); 
 
 
-        // function that places path before 'Entlader' --> Start Schritt 4.1
+        // functions that places path before 'Entlader' --> Start Schritt 4.1
+        // function, that gets path before Entlader 
         function getpathbeforeEntlader(){
             let path=[]
             for (let n=0; n<t_source.length; n++){
@@ -545,11 +542,12 @@
         pathxx =  getpathbeforeEntlader();
         
         // place the path machines
-        let allmothermachines = [];
-        for (let b=0; b< t_source.length; b++){
-            allmothermachines.push(t_source[b].Parent_Machine);
-        }
+        
         function placebeforeEntlader(path){
+            let allmothermachines = [];
+            for (let b=0; b< t_source.length; b++){
+                allmothermachines.push(t_source[b].Parent_Machine);
+            }
             for (let t=0; t<t_source.length; t++){
                 for (let p=0; p<path.length; p++){
                     if (allmothermachines.indexOf(path[p]) <= 0){
