@@ -378,6 +378,7 @@
                 maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path2_Entlader.length;
             } 
         }  // --> Ende Schritt 2 --> Ende Schritt 3
+        getMaximalPathLength();
         
 
     
@@ -630,32 +631,35 @@
 
        
          // gets Mother_Machine and Priority of t_source that do not have priority 1 or 2 (they need special calculations) --> Start Schritt 5.1
-         let externalpaths = [];
-         for (let i=0; i<t_source.length; i++){
-             let currentM_P = t_source[i].Parent_Machine;
-             var found = false;
-             for (var j=0; j<t_source.length; j++){
-                 if ((i !== j && t_source[j].Parent_Machine === currentM_P)){
-                     found = true;
-                     break;
-                 }
-             }
-             if (found){
-                 externalpaths.push(t_source[i].Parent_Machine, t_source[i].ID);
-             }
-         }
-         let t_externalpaths = [];
-         for (let a=0; a<externalpaths.length; a++){
-             if (externalpaths[a] === '1' || externalpaths[a] === '2'){
-                 t_externalpaths.pop();
-             } else {
-                 t_externalpaths.push(externalpaths[a]);
-             }
-         }
+         function getOtherPrioritys(){
+            let externalpaths = [];
+            for (let i=0; i<t_source.length; i++){
+                let currentM_P = t_source[i].Parent_Machine;
+                var found = false;
+                for (var j=0; j<t_source.length; j++){
+                    if ((i !== j && t_source[j].Parent_Machine === currentM_P)){
+                        found = true;
+                        break;
+                    }
+                }
+                if (found){
+                    externalpaths.push(t_source[i].Parent_Machine, t_source[i].ID);
+                }
+            }
+            let t_externalpaths = [];
+            for (let a=0; a<externalpaths.length; a++){
+                if (externalpaths[a] === '1' || externalpaths[a] === '2'){
+                    t_externalpaths.pop();
+                } else {
+                    t_externalpaths.push(externalpaths[a]);
+                }
+            }
+        }
          console.log(t_externalpaths); // --> Ende Schritt 5.1
        
 
         // for paths with priority 4/ external paths outside the main line --> Schritt 5.2
+        
         let paths_4 = [];
         for (let i = 0; i < t_externalpaths.length; i++) {
             let index = '';
@@ -684,7 +688,6 @@
             }}
 
         for (let p = 0; p < paths_10.length; p++) {
-            
             for (let j = 0; j < paths_10[p].length; j++) {
                 for (let i = 0; i < t_source.length; i++) {
                     if (paths_10[p][j] === t_source[i].Parent_Machine && t_source[i].ID === '10') {
