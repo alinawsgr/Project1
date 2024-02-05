@@ -377,6 +377,7 @@
             if (path1_senkr_u_Wama_Etima.length < path2_Entlader.length){
                 maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path2_Entlader.length;
             } 
+            return maxLength_Entlader_Auspacker_Varioline_Belader, maxLength_Auspacker_Wama_Etima_Varioline, maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima
         }  // --> Ende Schritt 2 --> Ende Schritt 3
         getMaximalPathLength();
         
