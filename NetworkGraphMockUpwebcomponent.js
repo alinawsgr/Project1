@@ -382,7 +382,6 @@
         const maxpathlength = getMaximalPathLength();
         
         
-        getMaximalPathLength() = maxLength_Entlader_Auspacker_Varioline_Belader,maxLength_Auspacker_Wama_Etima_Varioline,maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima;
         
 
     
