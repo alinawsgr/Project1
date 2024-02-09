@@ -660,7 +660,7 @@
                     t_externalpaths.push(externalpaths[a]);
                 }
             }
-            return [externalpaths,t_externalpaths]
+            return t_externalpaths;
         }
         const otherprios = getOtherPrioritys(); // --> Ende Schritt 5.1
        
@@ -668,11 +668,11 @@
         // for paths with priority 4/ external paths outside the main line --> Schritt 5.2
         
         let paths_4 = [];
-        for (let i = 0; i < [otherprios.t_externalpaths].length; i++) {
+        for (let i = 0; i < otherprios.length; i++) {
             let index = '';
-            if ([otherprios.t_externalpaths][i] === '4') {
+            if (otherprios[i] === '4') {
                 x = i-1;
-                index = [otherprios.t_externalpaths][x];
+                index = otherprios[x];
                 paths_4.push(findPaths(t_source, '4', index));
             }
         }
@@ -685,11 +685,11 @@
         // for paths with priority 10/ external paths outside the main line --> Start Schritt 8
         let paths_10 = [];
         let path10 = [];
-        for (let i = 0; i < [otherprios.t_externalpaths].length; i++) {
+        for (let i = 0; i < otherprios.length; i++) {
             let index = '';
-            if ([otherprios.t_externalpaths][i] === '10') {
+            if (otherprios[i] === '10') {
                 x = i-1;
-                index = [otherprios.t_externalpaths][x];
+                index = otherprios[x];
                 paths_10.push(findPaths(t_source, '10', index));
                 i = i+1; 
             }}
