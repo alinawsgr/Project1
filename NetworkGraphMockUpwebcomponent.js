@@ -572,9 +572,10 @@
 
                 }
             }
+            return allmothermachines
 
         }
-        placebeforeEntlader(pathxx); // --> Ende Schritt 4.1
+        const beforentlader = placebeforeEntlader(pathxx);  // --> Ende Schritt 4.1
         
           
         
@@ -772,7 +773,7 @@
         // if a children machine can not be found as a parent machine -> end node
         let endmachines = [];
         for (let j=0; j<allchildrenmachines.length; j++){
-            if (allmothermachines.indexOf(allchildrenmachines[j]) === -1){
+            if (beforentlader.indexOf(allchildrenmachines[j]) === -1){
                 endmachines.push(allchildrenmachines[j]); 
             }  
         }
