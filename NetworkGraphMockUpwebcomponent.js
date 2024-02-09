@@ -667,7 +667,7 @@
         // for paths with priority 4/ external paths outside the main line --> Schritt 5.2
         
         let paths_4 = [];
-        for (let i = 0; i < otherprios.t_externalpaths.length; i++) {
+        for (let i = 0; i < [otherprios.t_externalpaths].length; i++) {
             let index = '';
             if (otherprios.t_externalpaths[i] === '4') {
                 x = i-1;
@@ -684,7 +684,7 @@
         // for paths with priority 10/ external paths outside the main line --> Start Schritt 8
         let paths_10 = [];
         let path10 = [];
-        for (let i = 0; i < otherprios.t_externalpaths.length; i++) {
+        for (let i = 0; i < [otherprios.t_externalpaths].length; i++) {
             let index = '';
             if (otherprios.t_externalpaths[i] === '10') {
                 x = i-1;
