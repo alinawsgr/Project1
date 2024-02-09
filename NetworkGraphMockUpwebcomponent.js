@@ -258,7 +258,6 @@
     let xEntladerPosition = 2000;
     let yEntladerPosition = 2000;
     // direction changes in the graph (in this case of the main line)
-    let directionChange = ['Waschmaschine', 'Etikettiermaschine']
     let pathChanges = ['Entlader','Auspacker','Waschmaschine','Etikettiermaschine', 'Varioline', 'Belader_rechts'];
     
     
@@ -666,101 +665,106 @@
        
 
         // for paths with priority 4/ external paths outside the main line --> Schritt 5.2
-        
-        let paths_4 = [];
-        for (let i = 0; i < otherprios.length; i++) {
-            let index = '';
-            if (otherprios[i] === '4') {
-                x = i-1;
-                index = otherprios[x];
-                paths_4.push(findPaths(t_source, '4', index));
+        function placeexternalpaths(){
+            let paths_4 = [];
+            for (let i = 0; i < otherprios.length; i++) {
+                let index = '';
+                if (otherprios[i] === '4') {
+                    x = i-1;
+                    index = otherprios[x];
+                    paths_4.push(findPaths(t_source, '4', index));
+                }
             }
-        }
-        for (let p=0; p<paths_4.length; p++){
-            let currentpath = paths_4[p];
-            calcpositionsexternal(currentpath);
+            for (let p=0; p<paths_4.length; p++){
+                let currentpath = paths_4[p];
+                calcpositionsexternal(currentpath);
+            }
         } // Ende Schritt 5.2
+        placeexternalpaths();
 
         
         // for paths with priority 10/ external paths outside the main line --> Start Schritt 8
-        let paths_10 = [];
-        let path10 = [];
-        for (let i = 0; i < otherprios.length; i++) {
-            let index = '';
-            if (otherprios[i] === '10') {
-                x = i-1;
-                index = otherprios[x];
-                paths_10.push(findPaths(t_source, '10', index));
-                i = i+1; 
-            }}
+        function placeothermachines(){
+            let paths_10 = [];
+            let path10 = [];
+            for (let i = 0; i < otherprios.length; i++) {
+                let index = '';
+                if (otherprios[i] === '10') {
+                    x = i-1;
+                    index = otherprios[x];
+                    paths_10.push(findPaths(t_source, '10', index));
+                    i = i+1; 
+                }}
 
-        for (let p = 0; p < paths_10.length; p++) {
-            for (let j = 0; j < paths_10[p].length; j++) {
-                for (let i = 0; i < t_source.length; i++) {
-                    if (paths_10[p][j] === t_source[i].Parent_Machine && t_source[i].ID === '10') {
-                        path10.push(t_source[i].Parent_Machine);
+            for (let p = 0; p < paths_10.length; p++) {
+                for (let j = 0; j < paths_10[p].length; j++) {
+                    for (let i = 0; i < t_source.length; i++) {
+                        if (paths_10[p][j] === t_source[i].Parent_Machine && t_source[i].ID === '10') {
+                            path10.push(t_source[i].Parent_Machine);
+                        }
                     }
                 }
             }
-        }
 
 
-        let path10_t = [];
-        for (let c=0; c<path10.length; c++){
-            for (let i=0; i<t_source.length; i++){
-                if(path10[c] === t_source[i].Parent_Machine){
-                    if (t_source[i].X === 0 && t_source[i].Y === 0){
-                        path10_t.push(t_source[i].Parent_Machine);
+            let path10_t = [];
+            for (let c=0; c<path10.length; c++){
+                for (let i=0; i<t_source.length; i++){
+                    if(path10[c] === t_source[i].Parent_Machine){
+                        if (t_source[i].X === 0 && t_source[i].Y === 0){
+                            path10_t.push(t_source[i].Parent_Machine);
+                        }
+                    }
+                } 
+            }
+            console.log(path10_t); // ['TBB_EG11', 'TBB_EG25', 'TBB_EG25', 'TBG_EG08'] 
+            
+
+
+            // loop through path10_t and place them between parent and children machine
+            let parentx_ = 0;
+            let childrenx = 0;
+            let childreny = 0;
+            let parenty_ = 0;
+            for (let p=0; p<path10_t.length; p++){
+                for (let i=0; i<t_source.length;i++){ 
+                    // get coordinates of mother machine
+                    if (t_source[i].Children_Machine === path10_t[p]){
+                        parentx_ = t_source[i].X;
+                        parenty_ = t_source[i].Y;   
+                    }
+                    // get coordinates of children machine
+                    else if (t_source[i].Parent_Machine === path10_t[p]){
+                        let children = t_source[i].Children_Machine;
+                        for (let x=0; x<t_source.length; x++){
+                            if (t_source[x].Parent_Machine === children){
+                                childrenx = t_source[x].X;
+                                childreny = t_source[x].Y;
+                            }
+                        }
+                    }     
+                }
+                for (let g=0; g<t_source.length; g++){
+                    if (t_source[g].Parent_Machine === path10_t[p]){
+                            // if there is already a machine, place it the other way round
+                        for (let c=0; c<t_source.length; c++){
+                            if ((t_source[c].X === t_source[g].X) && (t_source[c].Y === t_source[g].Y)){
+                                t_source[g].X = parentx_;
+                                t_source[g].Y = childreny;
+                                break;
+                            }
+                            else if ((t_source[c].X !== t_source[g].X) || (t_source[c].Y !== t_source[g].Y)){
+                                t_source[g].X = childrenx;
+                                t_source[g].Y = parenty_;
+                                break;
+                            }
+                        }
+                            
                     }
                 }
             } 
         }
-        console.log(path10_t); // ['TBB_EG11', 'TBB_EG25', 'TBB_EG25', 'TBG_EG08'] 
-        
-
-
-        // loop through path10_t and place them between parent and children machine
-        let parentx_ = 0;
-        let childrenx = 0;
-        let childreny = 0;
-        let parenty_ = 0;
-        for (let p=0; p<path10_t.length; p++){
-            for (let i=0; i<t_source.length;i++){ 
-                // get coordinates of mother machine
-                if (t_source[i].Children_Machine === path10_t[p]){
-                    parentx_ = t_source[i].X;
-                    parenty_ = t_source[i].Y;   
-                }
-                // get coordinates of children machine
-                else if (t_source[i].Parent_Machine === path10_t[p]){
-                    let children = t_source[i].Children_Machine;
-                    for (let x=0; x<t_source.length; x++){
-                        if (t_source[x].Parent_Machine === children){
-                            childrenx = t_source[x].X;
-                            childreny = t_source[x].Y;
-                        }
-                    }
-                }     
-            }
-            for (let g=0; g<t_source.length; g++){
-                if (t_source[g].Parent_Machine === path10_t[p]){
-                        // if there is already a machine, place it the other way round
-                    for (let c=0; c<t_source.length; c++){
-                        if ((t_source[c].X === t_source[g].X) && (t_source[c].Y === t_source[g].Y)){
-                            t_source[g].X = parentx_;
-                            t_source[g].Y = childreny;
-                            break;
-                        }
-                        else if ((t_source[c].X !== t_source[g].X) || (t_source[c].Y !== t_source[g].Y)){
-                            t_source[g].X = childrenx;
-                            t_source[g].Y = parenty_;
-                            break;
-                        }
-                    }
-                        
-                }
-            }
-        } // --> Ende Schritt 8
+        placeothermachines();// --> Ende Schritt 8
                
 
         // end nodes (machines with no children machine need special handling, because they are not in T_source included and they need to be pushed in t_source as mother_machines in order to give them x and y coordinates ) --> Schritt 6
