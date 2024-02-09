@@ -768,114 +768,123 @@
                
 
         // end nodes (machines with no children machine need special handling, because they are not in T_source included and they need to be pushed in t_source as mother_machines in order to give them x and y coordinates ) --> Schritt 6
-        // get list with children machines
-        let allchildrenmachines =  [];
-        for (let i=0; i< t_source.length; i++){
-            allchildrenmachines.push(t_source[i].Children_Machine);
-        }
+        
+        function getendnodes(){
+            // get list with children machines
+            let allchildrenmachines =  [];
+            for (let i=0; i< t_source.length; i++){
+                allchildrenmachines.push(t_source[i].Children_Machine);
+            }
 
-        // if a children machine can not be found as a parent machine -> end node
-        let endmachines = [];
-        for (let j=0; j<allchildrenmachines.length; j++){
-            if (beforentlader.indexOf(allchildrenmachines[j]) === -1){
-                endmachines.push(allchildrenmachines[j]); 
-            }  
-        }
+            // if a children machine can not be found as a parent machine -> end node
+            let endmachines = [];
+            for (let j=0; j<allchildrenmachines.length; j++){
+                if (beforentlader.indexOf(allchildrenmachines[j]) === -1){
+                    endmachines.push(allchildrenmachines[j]); 
+                }  
+            }
 
-        // get parent machines of end nodes
-        let parentarray = [];
-        for (let i=0; i<endmachines.length; i++){
-            for (let j=0; j<t_source.length; j++){
-                if (t_source[j].Children_Machine === endmachines[i]){
-                    let parent = t_source[j].Parent_Machine;
-                    parentarray.push(parent);
+            // get parent machines of end nodes
+            let parentarray = [];
+            for (let i=0; i<endmachines.length; i++){
+                for (let j=0; j<t_source.length; j++){
+                    if (t_source[j].Children_Machine === endmachines[i]){
+                        let parent = t_source[j].Parent_Machine;
+                        parentarray.push(parent);
+                    }
                 }
             }
+            return [allchildrenmachines,endmachines,parentarray]
         }
+        const getendnodes = getendnodes();
+        
 
         // seperate between mother machines that have one children and that have more than one children
         // get parent machine with more than one children (they are 'multiparents' as they have more than one children) --> Schritt 6.2
-        const counts = {};
-        parentarray.forEach(function (x) {counts[x] = (counts[x] || 0) + 1; }); // counts ocurrences of parent machines
-        let multiparent = [];
-        let singleparent = [];
-        for (const [key, value] of Object.entries(counts)) {
-            if(value > 1){
-                multiparent.push(key);
+        function placemultichildrens(){
+            const counts = {};
+            parentarray.forEach(function (x) {counts[x] = (counts[x] || 0) + 1; }); // counts ocurrences of parent machines
+            let multiparent = [];
+            let singleparent = [];
+            for (const [key, value] of Object.entries(counts)) {
+                if(value > 1){
+                    multiparent.push(key);
+                }
+                if (value === 1){
+                    singleparent.push(key);
+                }
             }
-            if (value === 1){
-                singleparent.push(key);
-            }
-        }
 
-        // get children of multiparent
-        let multichilds = []
-        for (let m=0; m<multiparent.length; m++){
-            for (let x=0; x<t_source.length; x++){
-                if (t_source[x].Parent_Machine === multiparent[m]){
-                    if (endmachines.indexOf(t_source[x].Children_Machine) >= 0){
-                        multichilds.push(t_source[x].Children_Machine);
+            // get children of multiparent
+            let multichilds = []
+            for (let m=0; m<multiparent.length; m++){
+                for (let x=0; x<t_source.length; x++){
+                    if (t_source[x].Parent_Machine === multiparent[m]){
+                        if (endmachines.indexOf(t_source[x].Children_Machine) >= 0){
+                            multichilds.push(t_source[x].Children_Machine);
+                        }
                     }
                 }
             }
-        }
-    
+        
 
-        // calculate positions of multichilds
-        let parenty = 0;
-        let parentx = 0;
-        for (let mp = 0; mp<multiparent.length; mp++){
-            for (let i=0; i<t_source.length; i++){
-                if(t_source[i].Parent_Machine === multiparent[mp]){
-                    parenty = t_source[i].Y;
-                    parentx = t_source[i].X;
+            // calculate positions of multichilds
+            let parenty = 0;
+            let parentx = 0;
+            for (let mp = 0; mp<multiparent.length; mp++){
+                for (let i=0; i<t_source.length; i++){
+                    if(t_source[i].Parent_Machine === multiparent[mp]){
+                        parenty = t_source[i].Y;
+                        parentx = t_source[i].X;
+                    }
                 }
             }
+            //Änderung
+            for (let mc = 0; mc<multichilds.length; mc++){
+                let space = nodeHeight/ multichilds.length;
+                let xOffset = 0;
+                let yOffset = (mc + 1) * space;
+                let yvalue = parenty + yOffset;
+                let xvalue = parentx+ xOffset + 200;
+                t_source.push( { // push end machines into t_source with undefined parent machine so that the position can be stored
+                    Parent_Machine: multichilds[mc],
+                    X: xvalue,
+                    Y: yvalue,
+                    ID: 'multiend',
+                    Children_Machine: '',
+                    X_dep: '',
+                    Y_dep: ''});
+            }
+            return [multiparent,singleparent,multichilds] 
         }
-        //Änderung
-        for (let mc = 0; mc<multichilds.length; mc++){
-            let space = nodeHeight/ multichilds.length;
-            let xOffset = 0;
-            let yOffset = (mc + 1) * space;
-            let yvalue = parenty + yOffset;
-            let xvalue = parentx+ xOffset + 200;
-            t_source.push( { // push end machines into t_source with undefined parent machine so that the position can be stored
-                Parent_Machine: multichilds[mc],
-                X: xvalue,
-                Y: yvalue,
-                ID: 'multiend',
-                Children_Machine: '',
-                X_dep: '',
-                Y_dep: ''});
-        } 
+        const placemultichildrens = placemultichildrens();
         
     
          // rule: if end node has only one parent -> place it inside (- space parent) --> Schritt 6.1
-         for (let i=0; i<endmachines.length; i++){
-            t_source.push( { // push end machines into t_source with undefined parent machine so that the position can be stored
-            Parent_Machine: endmachines[i],
-            X: 0,
-            Y: 0,
-            ID: 'end',
-            Children_Machine: '',
-            X_dep: '',
-            Y_dep: ''});
-        }
+        function placesinglechilds (){
+            for (let i=0; i<endmachines.length; i++){
+                t_source.push( { // push end machines into t_source with undefined parent machine so that the position can be stored
+                Parent_Machine: endmachines[i],
+                X: 0,
+                Y: 0,
+                ID: 'end',
+                Children_Machine: '',
+                X_dep: '',
+                Y_dep: ''});
+            }
 
-        // get children of singleparent
-        let singlechilds = []
-        for (let s=0; s<singleparent.length; s++){
-            for (let x=0; x<t_source.length; x++){
-                if (t_source[x].Parent_Machine === singleparent[s]){
-                    if (endmachines.indexOf(t_source[x].Children_Machine) >= 0){
-                        singlechilds.push(t_source[x].Children_Machine);
+            // get children of singleparent
+            let singlechilds = []
+            for (let s=0; s<singleparent.length; s++){
+                for (let x=0; x<t_source.length; x++){
+                    if (t_source[x].Parent_Machine === singleparent[s]){
+                        if (endmachines.indexOf(t_source[x].Children_Machine) >= 0){
+                            singlechilds.push(t_source[x].Children_Machine);
+                        }
                     }
                 }
             }
-        }
 
-        // function that places singlechilds
-        function placesinglechilds (){
             for (let i=0; i<singleparent.length; i++){
             for (let j=0; j<singlechilds.length; j++){
                 let parentsy = 0;
