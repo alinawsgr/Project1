@@ -502,7 +502,7 @@
         calcpositionshor_l(path1_hor_l_Belader_,t_source,[maxpathlength.path1_hor_l_Belader_].length, nodeWidth,'1');
 
         // for paths with priority 2
-        calcpositionssenkr_u(path2_Entlader,t_source, maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight,'2'); // --> Schritt 3.1
+        calcpositionssenkr_u(path2_Entlader,t_source, maxpathlength.maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight,'2'); // --> Schritt 3.1
         for (let a=0; a<t_source.length; a++){ // --> Schritt 3.2   
             if (t_source[a].Y_dep === 'Etikettiermasschine'){
                 for (let y=0; y<t_source.length; y++){
@@ -519,7 +519,7 @@
                 }
             }
         }
-        calcpositionssenkr_u(path2_Auspacker, t_source, maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight, '2'); 
+        calcpositionssenkr_u(path2_Auspacker, t_source, maxpathlength.maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight, '2'); 
 
 
         // functions that places path before 'Entlader' --> Start Schritt 4.1
