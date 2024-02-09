@@ -669,9 +669,9 @@
         let paths_4 = [];
         for (let i = 0; i < [otherprios.t_externalpaths].length; i++) {
             let index = '';
-            if (otherprios.t_externalpaths[i] === '4') {
+            if ([otherprios.t_externalpaths][i] === '4') {
                 x = i-1;
-                index = otherprios.t_externalpaths[x];
+                index = [otherprios.t_externalpaths][x];
                 paths_4.push(findPaths(t_source, '4', index));
             }
         }
@@ -686,9 +686,9 @@
         let path10 = [];
         for (let i = 0; i < [otherprios.t_externalpaths].length; i++) {
             let index = '';
-            if (otherprios.t_externalpaths[i] === '10') {
+            if ([otherprios.t_externalpaths][i] === '10') {
                 x = i-1;
-                index = otherprios.t_externalpaths[x];
+                index = [otherprios.t_externalpaths][x];
                 paths_10.push(findPaths(t_source, '10', index));
                 i = i+1; 
             }}
