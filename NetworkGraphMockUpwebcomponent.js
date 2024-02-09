@@ -377,8 +377,11 @@
             if (path1_senkr_u_Wama_Etima.length < path2_Entlader.length){
                 maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path2_Entlader.length;
             } 
-            return maxLength_Entlader_Auspacker_Varioline_Belader, maxLength_Auspacker_Wama_Etima_Varioline, maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima
+            return  {maxLength_Entlader_Auspacker_Varioline_Belader, maxLength_Auspacker_Wama_Etima_Varioline, maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima}
         }  // --> Ende Schritt 2 --> Ende Schritt 3
+        const maxpathlength = getMaximalPathLength();
+        
+        
         getMaximalPathLength() = maxLength_Entlader_Auspacker_Varioline_Belader,maxLength_Auspacker_Wama_Etima_Varioline,maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima;
         
 
@@ -475,10 +478,10 @@
             }
          // run position calculation functions from above for priority 1 and 2 machines
         // fpr paths with priority 1
-        calcpositionshor_r(path1_hor_r_Entlader_Auspacker, t_source,maxLength_Entlader_Auspacker_Varioline_Belader, nodeWidth,'1'); // Schritt 2.1
-        calcpositionshor_r(path1_hor_r_Auspacker_Wama, t_source,maxLength_Auspacker_Wama_Etima_Varioline, nodeWidth, '1'); // Schritt 2.2
-        calcpositionssenkr_u(path1_senkr_u_Wama_Etima, t_source,maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight,'1'); // Schritt 2.3
-        calcpositionshor_l(path1_hor_l_Etima_Varioline,t_source,maxLength_Auspacker_Wama_Etima_Varioline, nodeWidth,'1'); // Schritt 2.4
+        calcpositionshor_r(path1_hor_r_Entlader_Auspacker, t_source,maxpathlength.maxLength_Entlader_Auspacker_Varioline_Belader, nodeWidth,'1'); // Schritt 2.1
+        calcpositionshor_r(path1_hor_r_Auspacker_Wama, t_source,maxpathlength.maxLength_Auspacker_Wama_Etima_Varioline, nodeWidth, '1'); // Schritt 2.2
+        calcpositionssenkr_u(path1_senkr_u_Wama_Etima, t_source,maxpathlength.maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight,'1'); // Schritt 2.3
+        calcpositionshor_l(path1_hor_l_Etima_Varioline,t_source,maxpathlength.maxLength_Auspacker_Wama_Etima_Varioline, nodeWidth,'1'); // Schritt 2.4
         
         for (let a=0; a<t_source.length; a++){
             if (t_source[a].Y_dep === 'Etikettiermasschine'){
