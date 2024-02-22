@@ -993,7 +993,7 @@
         pathAbschieberhor_l = result[1];  //--> Ende Schritt 7.2 
         
         //place other outgoing path from Abschieber above  --> Start Schritt 7.3
-        function placeAbschieberpath_top(){
+        function placeAbschieberpath_top(pathAbschiebersenkr_o,pathAbschieberhor_l){
             pathAbschieber= findPaths(t_source, '3', 'Abschieber')
             let pathAbschiebersenkr_o = [];
             pathAbschiebersenkr_o.push(pathAbschieber[4]);
@@ -1024,7 +1024,7 @@
                 }
             }
         }
-        placeAbschieberpath_top(); // --> Ende Schritt 7.3
+        placeAbschieberpath_top(pathAbschiebersenkr_o,pathAbschieberhor_l); // --> Ende Schritt 7.3
         
         
        // place path left from Abschieber --> Start Schritt 7.4
