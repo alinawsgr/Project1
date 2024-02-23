@@ -987,10 +987,12 @@
             return returnarray;
         }
         result = findAbschieberpath();
-
+        console.log(result);
 
         pathAbschiebersenkr_o = result[0];
+        console.log(pathAbschiebersenkr_o);
         pathAbschieberhor_l = result[1];  //--> Ende Schritt 7.2 
+        console.log(pathAbschieberhor_l);
         
         //place other outgoing path from Abschieber above  --> Start Schritt 7.3
         function placeAbschieberpath_top(){
