@@ -695,7 +695,7 @@
             for (let i=0; i<t_source.length; i++){
                 if(path10[c] === t_source[i].Parent_Machine){
                     if (t_source[i].X === 0 && t_source[i].Y === 0){
-                        path10_t.push(t_source[i].Parent_Machine);
+                        path10_t_.push(t_source[i].Parent_Machine);
                     }
                 }
             } 
