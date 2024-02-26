@@ -753,9 +753,7 @@
                             t_source[g].Y = parenty_;
                             break;
                         }
-                    }
-                    continue;
-                        
+                    }      
                 }
             }
             /*for (let g=0; g<t_source.length; g++){
