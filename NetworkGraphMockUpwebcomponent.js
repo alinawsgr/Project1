@@ -764,6 +764,7 @@
                         if ((t_source[c].X === t_source[g].X) && (t_source[c].Y === t_source[g].Y)){
                             t_source[g].X = parentx_;
                             t_source[g].Y = childreny;
+                            continue;
                         }
                         else if ((t_source[c].X !== t_source[g].X) || (t_source[c].Y !== t_source[g].Y)) {
                             t_source[g].X = childrenx;
