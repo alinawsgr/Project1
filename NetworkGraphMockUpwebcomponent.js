@@ -750,6 +750,7 @@
                         if ((t_source[c].X !== t_source[g].X) || (t_source[c].Y !== t_source[g].Y)){
                             t_source[g].X = childrenx;
                             t_source[g].Y = parenty_;
+                            continue;
                             
                         }
                     }
