@@ -762,32 +762,19 @@
                         // if there is already a machine, place it the other way round
                     for (let c=0; c<t_source.length; c++){
                         if ((t_source[c].X === t_source[g].X) && (t_source[c].Y === t_source[g].Y)){
-                            t_source[g].X = parentx_;
-                            t_source[g].Y = childreny;
-                            //continue;
+                            t_source[g].X = childreny;
+                            t_source[g].Y = parentx_;
+                            continue;
                         }
-                        /*else if ((t_source[c].X !== t_source[g].X) || (t_source[c].Y !== t_source[g].Y)) {
+                        else if ((t_source[c].X !== t_source[g].X) || (t_source[c].Y !== t_source[g].Y)) {
                             t_source[g].X = childrenx;
                             t_source[g].Y = parenty_;
 
-                        }*/
+                        }
                     }
                         
                 }
             }
-            for (let j=0; j<t_source.length; j++){
-                if (t_source[j].Parent_Machine === path10_t[p]){
-                    for (let c=0; c<t_source.length; c++){
-                        if ((t_source[c].X !== t_source[j].X) && (t_source[c].Y !== t_source[j].Y)) {
-                            t_source[j].X = childrenx;
-                            t_source[j].Y = parenty_;
-                        }
-
-
-            }
-        }
-            
-        }
     }
                
 
