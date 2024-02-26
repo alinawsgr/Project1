@@ -700,7 +700,7 @@
                 }
             } 
         }
-        console.log(path10_t_); // ['TBB_EG11', 'TBB_EG25', 'TBB_EG25', 'TBG_EG08']
+        // ['TBB_EG11', 'TBB_EG25', 'TBB_EG25', 'TBG_EG08']
 
         const path10_t = [];
 
@@ -709,6 +709,7 @@
                 path10_t.push(item);
             }
         }
+        console.log(path10_t);
 
 
         
