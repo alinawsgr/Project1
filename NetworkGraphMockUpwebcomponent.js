@@ -737,25 +737,27 @@
                     }
                 }     
             }
-            for (let g = 0; g < t_source.length; g++) {
-                if (t_source[g].Parent_Machine === path10_t[p]) {
-                    let foundMatch = false; // Flag to track if a match was found
-                    for (let c = 0; c < t_source.length; c++) {
-                        if ((t_source[c].X === t_source[g].X) && (t_source[c].Y === t_source[g].Y)) {
+            for (let g=0; g<t_source.length; g++){
+                if (t_source[g].Parent_Machine === path10_t[p]){
+                        // if there is already a machine, place it the other way round
+                    for (let c=0; c<t_source.length; c++){
+                        if ((t_source[c].X === t_source[g].X) && (t_source[c].Y === t_source[g].Y)){
                             t_source[g].X = parentx_;
                             t_source[g].Y = childreny;
-                            foundMatch = true; // Set the flag to true
-                            break; // Exit the inner loop
+                        }
+                        else if ((t_source[c].X !== t_source[g].X) || (t_source[c].Y !== t_source[g].Y)){
+                            t_source[g].X = childrenx;
+                            t_source[g].Y = parenty_;
+                            continue;
+                           
+                            
                         }
                     }
-                    if (!foundMatch) {
-                        t_source[g].X = childrenx;
-                        t_source[g].Y = parenty_;
-                    }
+                        
                 }
             }
         }
-             
+               
 
         // end nodes (machines with no children machine need special handling, because they are not in T_source included and they need to be pushed in t_source as mother_machines in order to give them x and y coordinates )
         // get list with children machines
