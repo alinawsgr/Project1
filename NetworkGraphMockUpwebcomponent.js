@@ -732,8 +732,8 @@
                         // if there is already a machine, place it the other way round
                     for (let c=0; c<t_source.length; c++){
                         if ((t_source[c].X === t_source[g].X) && (t_source[c].Y === t_source[g].Y)){
-                            t_source[g].X = childreny;
-                            t_source[g].Y = parentx_;
+                            t_source[g].X = parentx_;
+                            t_source[g].Y = childreny;
                             break;
                         }
                         if ((t_source[c].X !== t_source[g].X) || (t_source[c].Y !== t_source[g].Y)){
