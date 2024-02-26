@@ -700,7 +700,7 @@
                 }
             } 
         }
-        // ['TBB_EG11', 'TBB_EG25', 'TBB_EG25', 'TBG_EG08']
+        
 
         const path10_t = [];
 
@@ -710,6 +710,7 @@
             }
         }
         console.log(path10_t);
+        // ['TBB_EG11', 'TBB_EG25', 'TBG_EG08']
 
 
         
@@ -745,8 +746,9 @@
                         if ((t_source[c].X === t_source[g].X) && (t_source[c].Y === t_source[g].Y)){
                             t_source[g].X = parentx_;
                             t_source[g].Y = childreny;
+                            continue;
                         }
-                        else if ((t_source[c].X !== t_source[g].X) && (t_source[c].Y !== t_source[g].Y)) {
+                        else if ((t_source[c].X !== t_source[g].X) || (t_source[c].Y !== t_source[g].Y)) {
                             t_source[g].X = childrenx;
                             t_source[g].Y = parenty_;
                         }
