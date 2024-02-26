@@ -775,8 +775,18 @@
                         
                 }
             }
+            for (let j=0; j<t_source.length; j++){
+                if (t_source[j].Parent_Machine === path10_t[p]){
+                    if ((t_source[c].X !== t_source[j].X) || (t_source[c].Y !== t_source[j].Y)) {
+                        t_source[j].X = childrenx;
+                        t_source[j].Y = parenty_;
+                    }
+
+
+            }
             
         }
+    }
                
 
         // end nodes (machines with no children machine need special handling, because they are not in T_source included and they need to be pushed in t_source as mother_machines in order to give them x and y coordinates )
