@@ -690,7 +690,7 @@
         }
 
 
-        let path10_t = [];
+        let path10_t_ = [];
         for (let c=0; c<path10.length; c++){
             for (let i=0; i<t_source.length; i++){
                 if(path10[c] === t_source[i].Parent_Machine){
@@ -700,7 +700,17 @@
                 }
             } 
         }
-        console.log(path10_t); // ['TBB_EG11', 'TBB_EG25', 'TBB_EG25', 'TBG_EG08']
+        console.log(path10_t_); // ['TBB_EG11', 'TBB_EG25', 'TBB_EG25', 'TBG_EG08']
+
+        const path10_t = [];
+
+        for (const item of path10_t_) {
+            if (!path10_t.includes(item)) {
+                path10_t.push(item);
+            }
+        }
+
+
         
 
 
