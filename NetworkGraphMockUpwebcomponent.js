@@ -778,7 +778,7 @@
             for (let j=0; j<t_source.length; j++){
                 if (t_source[j].Parent_Machine === path10_t[p]){
                     for (let c=0; c<t_source.length; c++){
-                        if ((t_source[c].X !== t_source[j].X) || (t_source[c].Y !== t_source[j].Y)) {
+                        if ((t_source[c].X !== t_source[j].X) && (t_source[c].Y !== t_source[j].Y)) {
                             t_source[j].X = childrenx;
                             t_source[j].Y = parenty_;
                         }
