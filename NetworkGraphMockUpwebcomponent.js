@@ -745,7 +745,7 @@
                     for (let c=0; c<t_source.length; c++){
                         if ((t_source[c].X === t_source[g].X) && (t_source[c].Y === t_source[g].Y)){
                             t_source[g].X = parentx_ + 100;
-                            t_source[g].Y = childreny;
+                            t_source[g].Y = childreny + 100;
                         }
                         else if ((t_source[c].X !== t_source[g].X) || (t_source[c].Y !== t_source[g].Y)) {
                             t_source[g].X = childrenx;
