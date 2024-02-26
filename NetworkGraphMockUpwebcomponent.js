@@ -739,7 +739,7 @@
                     }
                 }     
             }
-            /*for (let g=0; g<t_source.length; g++){
+            for (let g=0; g<t_source.length; g++){
                 if (t_source[g].Parent_Machine === path10_t[p]){
                         // if there is already a machine, place it the other way round
                     for (let c=0; c<t_source.length; c++){
@@ -756,15 +756,15 @@
                     }
                         
                 }
-            }*/
-            for (let g=0; g<t_source.length; g++){
+            }
+            /*for (let g=0; g<t_source.length; g++){
                 if (t_source[g].Parent_Machine === path10_t[p]){
                         // if there is already a machine, place it the other way round
                     for (let c=0; c<t_source.length; c++){
                         /*if ((t_source[c].X === t_source[g].X) && (t_source[c].Y === t_source[g].Y)){
                             t_source[g].X = childrenx;
                             t_source[g].Y = parenty_;
-                        }*/
+                        }
                         if ((t_source[c].X !== t_source[g].X) || (t_source[c].Y !== t_source[g].Y)) {
                             t_source[g].X = childrenx;
                             t_source[g].Y = parenty_;
@@ -772,9 +772,9 @@
                         }
                     }
                         
-                }
+                }*/
             }
-    }
+    
                
 
         // end nodes (machines with no children machine need special handling, because they are not in T_source included and they need to be pushed in t_source as mother_machines in order to give them x and y coordinates )
