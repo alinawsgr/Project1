@@ -753,6 +753,7 @@
                             t_source[g].Y = parenty_;
                             break;
                         }
+                        continue;
                     }
                         
                 }
