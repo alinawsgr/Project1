@@ -848,7 +848,7 @@
          // rule: if end node has only one parent -> place it inside (- space parent)
          for (let i=0; i<[getendnodes_.endmachines].length; i++){
             t_source.push( { // push end machines into t_source with undefined parent machine so that the position can be stored
-            Parent_Machine: getendnodes_.endmachines[i],
+            Parent_Machine: [getendnodes_.endmachines][i],
             X: 0,
             Y: 0,
             ID: 'end',
@@ -862,7 +862,7 @@
         for (let s=0; s<singleparent.length; s++){
             for (let x=0; x<t_source.length; x++){
                 if (t_source[x].Parent_Machine === singleparent[s]){
-                    if (getendnodes_.endmachines.indexOf(t_source[x].Children_Machine) >= 0){
+                    if ([getendnodes_.endmachines].indexOf(t_source[x].Children_Machine) >= 0){
                         singlechilds.push(t_source[x].Children_Machine);
                     }
                 }
