@@ -846,7 +846,7 @@
         
     
          // rule: if end node has only one parent -> place it inside (- space parent)
-         for (let i=0; i<getendnodes_.endmachines.length; i++){
+         for (let i=0; i<[getendnodes_.endmachines].length; i++){
             t_source.push( { // push end machines into t_source with undefined parent machine so that the position can be stored
             Parent_Machine: getendnodes_.endmachines[i],
             X: 0,
