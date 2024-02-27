@@ -792,7 +792,7 @@
         // seperate between mother machines that have one children and that have more than one children
         // get parent machine with more than one children (they are 'multiparents' as they have more than one children)
         const counts = {};
-        getendnodes_.parentarray.forEach(function (x) {counts[x] = (counts[x] || 0) + 1; }); // counts ocurrences of parent machines
+        [getendnodes_.parentarray].forEach(function (x) {counts[x] = (counts[x] || 0) + 1; }); // counts ocurrences of parent machines
         let multiparent = [];
         let singleparent = [];
         for (const [key, value] of Object.entries(counts)) {
