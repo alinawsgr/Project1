@@ -625,31 +625,33 @@
             
         }
 
-       
-         // gets Mother_Machine and Priority of t_source that do not have priority 1 or 2 (they need special calculations)
-         let externalpaths = [];
-         for (let i=0; i<t_source.length; i++){
-             let currentM_P = t_source[i].Parent_Machine;
-             var found = false;
-             for (var j=0; j<t_source.length; j++){
-                 if ((i !== j && t_source[j].Parent_Machine === currentM_P)){
-                     found = true;
-                     break;
-                 }
-             }
-             if (found){
-                 externalpaths.push(t_source[i].Parent_Machine, t_source[i].ID);
-             }
-         }
-         let t_externalpaths = [];
-         for (let a=0; a<externalpaths.length; a++){
-             if (externalpaths[a] === '1' || externalpaths[a] === '2'){
-                 t_externalpaths.pop();
-             } else {
-                 t_externalpaths.push(externalpaths[a]);
-             }
-         }
-         console.log(t_externalpaths);
+        function getOtherPrioritys(){
+            // gets Mother_Machine and Priority of t_source that do not have priority 1 or 2 (they need special calculations)
+            let externalpaths = [];
+            for (let i=0; i<t_source.length; i++){
+                let currentM_P = t_source[i].Parent_Machine;
+                var found = false;
+                for (var j=0; j<t_source.length; j++){
+                    if ((i !== j && t_source[j].Parent_Machine === currentM_P)){
+                        found = true;
+                        break;
+                    }
+                }
+                if (found){
+                    externalpaths.push(t_source[i].Parent_Machine, t_source[i].ID);
+                }
+            }
+            let t_externalpaths = [];
+            for (let a=0; a<externalpaths.length; a++){
+                if (externalpaths[a] === '1' || externalpaths[a] === '2'){
+                    t_externalpaths.pop();
+                } else {
+                    t_externalpaths.push(externalpaths[a]);
+                }
+            }
+            return t_externalpaths;
+        }
+        const t_externalpaths = getOtherPrioritys();
        
 
         // for paths with priority 4/ external paths outside the main line
