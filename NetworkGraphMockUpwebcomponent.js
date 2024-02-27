@@ -337,43 +337,46 @@
             path2_Auspacker_length = path2_Auspacker.length; // -> Ende Schritt 3
         }
         findPathsYellow();
-
-        // get maximal path length for each dependent paths, so that there is space for each machine
-        // dependent paths: 
-        // Entlader -> Auspacker / Varioline -> Belader
-        let maxLength_Entlader_Auspacker_Varioline_Belader = 0;
-        if (path1_hor_r_Entlader_Auspacker.length > path1_hor_l_Varioline_Belader.length){
-            maxLength_Entlader_Auspacker_Varioline_Belader = path1_hor_r_Entlader_Auspacker.length;
-        } else {
-            maxLength_Entlader_Auspacker_Varioline_Belader = path1_hor_l_Varioline_Belader.length;
-        }
-        // Auspacker -> Wama / Etima -> Varioline
-        let maxLength_Auspacker_Wama_Etima_Varioline = 0;
-        if (path1_hor_r_Auspacker_Wama.length > path1_hor_l_Etima_Varioline.length){
-            maxLength_Auspacker_Wama_Etima_Varioline = path1_hor_r_Auspacker_Wama.length;
-        } else {
-            maxLength_Auspacker_Wama_Etima_Varioline = path1_hor_l_Etima_Varioline.length;
-        }
-        // Entlader -> Belader / Auspacker -> Varioline / Wama -> Etima
-        let maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = 0;
-        if ( path2_Entlader.length > path2_Auspacker.length){
-            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima  = path2_Entlader.length;
-        }
-        if(path2_Entlader.length < path2_Auspacker.length){
-            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path2_Auspacker.length;
-        }
-        if(path2_Auspacker.length > path1_senkr_u_Wama_Etima.length){
-            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path2_Auspacker.length;
-        }
-        if(path2_Auspacker.length < path1_senkr_u_Wama_Etima.length){
-            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path1_senkr_u_Wama_Etima.length;
-        }
-        if(path1_senkr_u_Wama_Etima.length > path2_Entlader.length){
-            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path1_senkr_u_Wama_Etima.length;
-        }
-        if (path1_senkr_u_Wama_Etima.length < path2_Entlader.length){
-            maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path2_Entlader.length;
-        }
+        function getMaximalPathLength(){
+            // get maximal path length for each dependent paths, so that there is space for each machine --> Start Schritt 2 --> Start Schritt 3
+            // dependent paths: 
+            // Entlader -> Auspacker / Varioline -> Belader
+            let maxLength_Entlader_Auspacker_Varioline_Belader = 0;
+            if (path1_hor_r_Entlader_Auspacker.length > path1_hor_l_Varioline_Belader.length){
+                maxLength_Entlader_Auspacker_Varioline_Belader = path1_hor_r_Entlader_Auspacker.length;
+            } else {
+                maxLength_Entlader_Auspacker_Varioline_Belader = path1_hor_l_Varioline_Belader.length;
+            }
+            // Auspacker -> Wama / Etima -> Varioline
+            let maxLength_Auspacker_Wama_Etima_Varioline = 0;
+            if (path1_hor_r_Auspacker_Wama.length > path1_hor_l_Etima_Varioline.length){
+                maxLength_Auspacker_Wama_Etima_Varioline = path1_hor_r_Auspacker_Wama.length;
+            } else {
+                maxLength_Auspacker_Wama_Etima_Varioline = path1_hor_l_Etima_Varioline.length;
+            }
+            // Entlader -> Belader / Auspacker -> Varioline / Wama -> Etima
+            let maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = 0;
+            if ( path2_Entlader.length > path2_Auspacker.length){
+                maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima  = path2_Entlader.length;
+            }
+            if(path2_Entlader.length < path2_Auspacker.length){
+                maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path2_Auspacker.length;
+            }
+            if(path2_Auspacker.length > path1_senkr_u_Wama_Etima.length){
+                maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path2_Auspacker.length;
+            }
+            if(path2_Auspacker.length < path1_senkr_u_Wama_Etima.length){
+                maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path1_senkr_u_Wama_Etima.length;
+            }
+            if(path1_senkr_u_Wama_Etima.length > path2_Entlader.length){
+                maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path1_senkr_u_Wama_Etima.length;
+            }
+            if (path1_senkr_u_Wama_Etima.length < path2_Entlader.length){
+                maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima = path2_Entlader.length;
+            } 
+            return  {maxLength_Entlader_Auspacker_Varioline_Belader, maxLength_Auspacker_Wama_Etima_Varioline, maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima}
+        }  // --> Ende Schritt 2 --> Ende Schritt 3
+        const maxpathlength = getMaximalPathLength();
         
 
     
@@ -469,10 +472,10 @@
             }
          // run position calculation functions from above for priority 1 and 2 machines
         // fpr paths with priority 1
-        calcpositionshor_r(path1_hor_r_Entlader_Auspacker, t_source,maxLength_Entlader_Auspacker_Varioline_Belader, nodeWidth,'1');
-        calcpositionshor_r(path1_hor_r_Auspacker_Wama, t_source,maxLength_Auspacker_Wama_Etima_Varioline, nodeWidth, '1');
-        calcpositionssenkr_u(path1_senkr_u_Wama_Etima, t_source,maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight,'1');
-        calcpositionshor_l(path1_hor_l_Etima_Varioline,t_source,maxLength_Auspacker_Wama_Etima_Varioline, nodeWidth,'1');
+        calcpositionshor_r(path1_hor_r_Entlader_Auspacker, t_source,maxpathlength.maxLength_Entlader_Auspacker_Varioline_Belader, nodeWidth,'1');
+        calcpositionshor_r(path1_hor_r_Auspacker_Wama, t_source,maxpathlength.maxLength_Auspacker_Wama_Etima_Varioline, nodeWidth, '1');
+        calcpositionssenkr_u(path1_senkr_u_Wama_Etima, t_source,maxpathlength.maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight,'1');
+        calcpositionshor_l(path1_hor_l_Etima_Varioline,t_source,maxpathlength.maxLength_Auspacker_Wama_Etima_Varioline, nodeWidth,'1');
         
         for (let a=0; a<t_source.length; a++){
             if (t_source[a].Y_dep === 'Etikettiermasschine'){
@@ -490,11 +493,11 @@
                 }
             }
         }
-        calcpositionshor_l(path1_hor_l_Varioline_Belader,t_source, maxLength_Entlader_Auspacker_Varioline_Belader, nodeWidth,'1');
+        calcpositionshor_l(path1_hor_l_Varioline_Belader,t_source, maxpathlength.maxLength_Entlader_Auspacker_Varioline_Belader, nodeWidth,'1');
         calcpositionshor_l(path1_hor_l_Belader_,t_source,path1_hor_l_Belader_.length, nodeWidth,'1');
 
         // for paths with priority 2
-        calcpositionssenkr_u(path2_Entlader,t_source, maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight,'2');
+        calcpositionssenkr_u(path2_Entlader,t_source, maxpathlength.maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight,'2');
         for (let a=0; a<t_source.length; a++){
             if (t_source[a].Y_dep === 'Etikettiermasschine'){
                 for (let y=0; y<t_source.length; y++){
@@ -511,7 +514,7 @@
                 }
             }
         }
-        calcpositionssenkr_u(path2_Auspacker, t_source, maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight, '2');
+        calcpositionssenkr_u(path2_Auspacker, t_source, maxpathlength.maxLength_Entlader_Belader_Auspacker_Varioline_Wama_Etima, nodeHeight, '2');
 
 
         // function that places path before 'Entlader'
