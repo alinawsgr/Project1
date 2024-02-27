@@ -741,6 +741,20 @@
             }
             for (let g=0; g<t_source.length; g++){
                 if (t_source[g].Parent_Machine === path10_t[p]){
+                    t_source[g].X = childrenx;
+                    t_source[g].Y = parenty_;
+                }
+            }
+
+
+
+
+
+
+
+
+            /*for (let g=0; g<t_source.length; g++){
+                if (t_source[g].Parent_Machine === path10_t[p]){
                         // if there is already a machine, place it the other way round
                     let loop = false;
                     for (let c=0; c<t_source.length; c++){
@@ -749,6 +763,8 @@
                             t_source[g].Y = childreny;
                             loop = true;
                         }
+                    }
+                    for (let c=0; c<t_source.length; c++){
                         if (loop== false){
                             if ((t_source[c].X !== t_source[g].X) || (t_source[c].Y !== t_source[g].Y)){
                                 t_source[g].X = childrenx;
@@ -758,7 +774,7 @@
                         }
                         loop =false;
                     }      
-                }
+            }
             }
             /*for (let g=0; g<t_source.length; g++){
                 if (t_source[g].Parent_Machine === path10_t[p]){
