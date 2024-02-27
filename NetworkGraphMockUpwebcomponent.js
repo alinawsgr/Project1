@@ -788,11 +788,13 @@
             return [endmachines,parentarray]
         }
         const getendnodes_ = getendnodes();
+        const endmachines = getendnodes_[0];
+        const parentarray =  getendnodes_[1];
 
         // seperate between mother machines that have one children and that have more than one children
         // get parent machine with more than one children (they are 'multiparents' as they have more than one children)
         const counts = {};
-        [getendnodes_.parentarray].forEach(function (x) {counts[x] = (counts[x] || 0) + 1; }); // counts ocurrences of parent machines
+        parentarray.forEach(function (x) {counts[x] = (counts[x] || 0) + 1; }); // counts ocurrences of parent machines
         let multiparent = [];
         let singleparent = [];
         for (const [key, value] of Object.entries(counts)) {
@@ -809,7 +811,7 @@
         for (let m=0; m<multiparent.length; m++){
             for (let x=0; x<t_source.length; x++){
                 if (t_source[x].Parent_Machine === multiparent[m]){
-                    if ([getendnodes_.endmachines].indexOf(t_source[x].Children_Machine) >= 0){
+                    if (endmachines.indexOf(t_source[x].Children_Machine) >= 0){
                         multichilds.push(t_source[x].Children_Machine);
                     }
                 }
@@ -846,9 +848,9 @@
         
     
          // rule: if end node has only one parent -> place it inside (- space parent)
-         for (let i=0; i<[getendnodes_.endmachines].length; i++){
+         for (let i=0; i<endmachines.length; i++){
             t_source.push( { // push end machines into t_source with undefined parent machine so that the position can be stored
-            Parent_Machine: [getendnodes_.endmachines][i],
+            Parent_Machine: endmachines[i],
             X: 0,
             Y: 0,
             ID: 'end',
@@ -862,7 +864,7 @@
         for (let s=0; s<singleparent.length; s++){
             for (let x=0; x<t_source.length; x++){
                 if (t_source[x].Parent_Machine === singleparent[s]){
-                    if ([getendnodes_.endmachines].indexOf(t_source[x].Children_Machine) >= 0){
+                    if (endmachines.indexOf(t_source[x].Children_Machine) >= 0){
                         singlechilds.push(t_source[x].Children_Machine);
                     }
                 }
