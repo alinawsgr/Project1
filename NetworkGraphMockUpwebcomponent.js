@@ -1051,7 +1051,7 @@
 
 
    //  delete ends with value 0 in coordinates
-   /* function deletezeroends(){
+   function deletezeroends(){
         for (let e=0; e<t_source.length; e++){
             if (t_source[e].X == 0 && t_source[e].Y == 0){
                 t_source.splice(e, 1);
@@ -1060,7 +1060,7 @@
         }
     }
     deletezeroends();
-    console.log(t_source);*/
+    console.log(t_source);
         
     }
 
