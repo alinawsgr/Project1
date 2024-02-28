@@ -854,8 +854,8 @@
 
             
             
-        
-            // rule: if end node has only one parent -> place it inside (- space parent)
+        function placesinglechilds (){
+        // rule: if end node has only one parent -> place it inside (- space parent)
             for (let i=0; i<endmachines.length; i++){
                 t_source.push( { // push end machines into t_source with undefined parent machine so that the position can be stored
                 Parent_Machine: endmachines[i],
@@ -880,7 +880,6 @@
             }
 
             // function that places singlechilds
-            function placesinglechilds (){
                 for (let i=0; i<singleparent.length; i++){
                 for (let j=0; j<singlechilds.length; j++){
                     let parentsy = 0;
@@ -907,7 +906,7 @@
                     }
                 }
                 }
-        }
+            }
         placesinglechilds();
 
 
